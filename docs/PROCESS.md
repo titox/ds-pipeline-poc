@@ -51,9 +51,17 @@ Done so far:
 
 Still to do for the pilot: re-run RubyLint (manual, in Figma) to regenerate the handoff text, then update Code Connect and Storybook.
 
+## Tooling upgrades
+
+- Storybook upgraded from 8.6 to 10.6.8 (`npx storybook@latest upgrade`), with `@storybook/addon-mcp` added. Leftover v8 packages removed. Build passes.
+- MCP endpoint: `http://localhost:6006/mcp`, only while `npm run storybook` runs. Not registered in Claude Code yet (`claude mcp add --transport http storybook http://localhost:6006/mcp`).
+- Playwright installed (`@playwright/test`, `playwright.config.ts`, example spec in `tests/`). Not used yet. Plan: add `@storybook/addon-vitest` (peer of the MCP addon) and axe checks once Button and Input stories have the new states.
+- Registry note: always install with `npm_config_registry=https://registry.npmjs.org/`, otherwise a corporate registry URL ends up in `package-lock.json`.
+
 ## Next session
 
-1. Commit state is saved; review open questions below.
+1. Check the Pages deploy for the Storybook 10 build; re-run it if it fails with "No artifacts named github-pages".
+1b. Register the Storybook MCP in Claude Code (needs user consent) and add `@storybook/addon-vitest`.
 2. Decide what to do with `brand_b_light` (use it as the base of the second brand, or drop it) and do the full token re-export.
 3. Code Connect for the new states (Button Loading, Input Hover/Focus) and repoint URLs in `figma.config.json` to the modified Figma file.
 4. Storybook stories for the new states; token lint; contract check script; fix `Button.tsx` and `Tag.figma.ts` type errors.
