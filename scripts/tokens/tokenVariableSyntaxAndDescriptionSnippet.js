@@ -40,6 +40,7 @@ Promise.all([
   ["VariableID:2002:7455", "var(--sds-color-text-positive-on-positive-tertiary)", ""],
   ["VariableID:2142:11243", "var(--sds-color-background-utilities-blanket)", "Bg/Utilities/Blanket"],
   ["VariableID:280:16549", "var(--sds-color-icon-utilities-icon-on-measurement)", ""],
+  ["VariableID:3065:15749", "var(--sds-color-border-focus-default)", "Focus ring colour for interactive components (keyboard focus). Separate from status colours."],
   ["VariableID:315:32841", "var(--sds-color-border-utilities-swatch)", ""],
   ["VariableID:320:298", "var(--sds-color-icon-utilities-icon)", ""],
   ["VariableID:3919:36423", "var(--sds-color-background-default-default)", "Bg/Default/Default"],

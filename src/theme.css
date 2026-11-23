@@ -147,6 +147,7 @@
   --sds-color-border-default-secondary: var(--sds-color-gray-500);
   --sds-color-border-default-tertiary: var(--sds-color-gray-700);
   --sds-color-border-disabled-default: var(--sds-color-brand-400);
+  --sds-color-border-focus-default: var(--sds-color-red-500);
   --sds-color-border-neutral-default: var(--sds-color-slate-900);
   --sds-color-border-neutral-secondary: var(--sds-color-slate-600);
   --sds-color-border-neutral-tertiary: var(--sds-color-slate-400);
@@ -287,6 +288,7 @@
     --sds-color-border-default-secondary: var(--sds-color-gray-500);
     --sds-color-border-default-tertiary: var(--sds-color-gray-400);
     --sds-color-border-disabled-default: var(--sds-color-brand-600);
+    --sds-color-border-focus-default: var(--sds-color-red-500);
     --sds-color-border-neutral-default: var(--sds-color-slate-100);
     --sds-color-border-neutral-secondary: var(--sds-color-slate-500);
     --sds-color-border-neutral-tertiary: var(--sds-color-slate-600);

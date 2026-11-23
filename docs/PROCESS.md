@@ -27,7 +27,50 @@ Figma → tokens → documentation (RubyLint plugin) → Storybook → Code Conn
 | 9 | Fix type errors (`Button.tsx`, `Tag.figma.ts`) | Planned |
 | 10 | Multi-theming: Brand collection, `data-brand` + `data-theme`, Storybook switches | Planned |
 | 11 | RubyLint documentation export | Planned (destination TODO) |
-| 12 | Supernova as source of truth | Blocked: workspace not set up |
+| 12 | Contract check: RubyLint JSON vs code props and tokens, run in CI | Planned |
+| 13 | Demo scenarios: update an existing component and create a new one | Planned |
+| 14 | Record the demo as a video (no live demo) | Planned |
+| 15 | Supernova as source of truth | Blocked: workspace not set up; position in the flow undecided |
+
+| 5b | Improve the Figma file first: audit every component with RubyLint, add missing states, regenerate documentation | In progress |
+| 16 | Later, once everything else is done: improve Figma, Storybook, Code Connect and add interactive prototyping | Parked |
+
+## Figma improvement pilot (Button, Input Field)
+
+State standard for interactive components: Default, Hover, Focus, Disabled, plus Error for form fields and Loading for buttons.
+Pressed and Active are out of scope. Selected states such as Tab "Active" stay.
+
+Done so far:
+- Button: added `State=Loading` (spinner icon before the label, end icon hidden), 6 variants.
+- Input Field: added `State=Hover` (`Border/Default/Secondary`) and `State=Focus`, 2 variants each.
+- New token `Border/Focus/Default` (Color collection, Light and Dark, stroke scope, code syntax `--sds-color-border-focus-default`).
+  Reason: Button Focus used `Icon/Danger/Tertiary`, an icon status token, as a ring colour. Button Focus and Input Focus now use the new token; the look is unchanged.
+
+- `theme.css` regenerated: `border.focus.default` was added to `scripts/tokens/tokens.json` by a targeted edit, then `node app.mjs --skip-rest-api` (run from `scripts/tokens`, with `FIGMA_FILE_KEY` set) produced `--sds-color-border-focus-default`.
+  Caveat: the committed `tokens.json` has a third Color mode (`brand_b_light`) that the Figma copy lacks, so it is out of sync. A full re-export with `scripts/tokens/figma-plugin-token-json` is needed to resync.
+
+Still to do for the pilot: re-run RubyLint (manual, in Figma) to regenerate the handoff text, then update Code Connect and Storybook.
+
+## Next session
+
+1. Commit state is saved; review open questions below.
+2. Decide what to do with `brand_b_light` (use it as the base of the second brand, or drop it) and do the full token re-export.
+3. Code Connect for the new states (Button Loading, Input Hover/Focus) and repoint URLs in `figma.config.json` to the modified Figma file.
+4. Storybook stories for the new states; token lint; contract check script; fix `Button.tsx` and `Tag.figma.ts` type errors.
+5. Roll the state standard out to the remaining interactive components, then re-run RubyLint (manual).
+6. Open questions: Supernova position and access; where RubyLint exports live; focus ring colour is still the same red as error (distinct colour wanted).
+
+## Target demo flow
+
+1. Create or update a component in Figma.
+2. Audit with RubyLint: documentation in Figma, a JSON contract, and a specification for Jira.
+3. Handoff: the specification goes to Jira (pasted manually in the PoC).
+4. Code is generated from the specification, following the existing repo conventions.
+5. Contract check, token lint and tests pass in CI.
+6. Storybook is updated and published.
+7. Supernova (position still to be decided).
+
+Known risks: Supernova is untested and on the critical path; tokens must flow alongside components; deploys can need a re-run.
 
 ## 1. Clone SDS and publish to own GitHub
 
@@ -112,3 +155,7 @@ A Figma plugin that audits components (tokens, states, accessibility, naming) an
 | Theme structure | Separate Brand collection | Adding brands does not multiply modes |
 | Verification | Heavy (rubric + critics) once real screens exist; token lint first | Objective checks before subjective review |
 | Ambiguity | Stop and ask | RubyLint and Supernova details are not visible to the assistant |
+| Supernova position | Decide later | Build up to Storybook first; keep it an explicit open decision |
+| Demo scenarios | Update an existing component and create a new one | Update shows drift and change propagation; create shows the full path |
+| Contract check | Script in CI comparing RubyLint JSON to code | Otherwise "tested" only means "it renders" |
+| Demo format | Recorded video, not live | Avoids dependence on plugin, AI generation, Jira and deploy timing |
