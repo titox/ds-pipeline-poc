@@ -15,53 +15,70 @@ const meta: Meta<typeof HTMLIFrameElement> = {
 };
 export default meta;
 
+const redSurface: React.CSSProperties = {
+  background: "var(--sds-color-background-danger-default)",
+  color: "var(--sds-color-text-danger-on-danger)",
+  minHeight: "100vh",
+};
+
 export const StoryHello: StoryObj<{}> = {
   name: "Hello",
   render: () => (
-    <Section>
-      <Flex container type="third" alignPrimary="center">
-        <FlexItem size="major">
-          <Flex direction="column" gap="300">
-            <Logo />
-            <TextHeading>Figma Simple Design System</TextHeading>
-            <Text>
-              Simple Design System (SDS) is a base design system that shows how
-              Figma’s Variables, Styles, Components, and Code Connect can be
-              used alongside a React and CSS codebase to form a complete picture
-              of a responsive web design system.
-            </Text>
+    <div style={redSurface} className="poc-welcome">
+      <style>{`
+        .poc-welcome, .poc-welcome * { color: var(--sds-color-text-danger-on-danger) !important; }
+        .poc-welcome svg, .poc-welcome svg path { fill: var(--sds-color-text-danger-on-danger) !important; }
+      `}</style>
+      <Section>
+        <Flex container type="third" alignPrimary="center">
+          <FlexItem size="major">
+            <Flex direction="column" gap="300">
+              <Logo />
+              <TextHeading>Design System Pipeline PoC</TextHeading>
+              <Text>
+                This proof of concept demonstrates an end-to-end design system
+                pipeline: Figma as the design source, design tokens, documentation
+                generated with our RubyLint plugin, Storybook, Code Connect, and
+                Supernova as the source of truth.
+              </Text>
 
-            <Text>
-              SDS is not just another design system. There are still many gaps
-              between design and development, and SDS provides some best
-              practices for how to bridge them. SDS attempts to remain honest
-              about its implications in code, while also offering
-              customizability in design beyond a simple theming layer that is
-              typical of many code-first component libraries.
-            </Text>
+              <Text>
+                The target design system covers Web (React), iOS and Android, and
+                other devices, with multi-theming. For this PoC, only React is in
+                scope, with Light and Dark themes.
+              </Text>
 
-            <Text>
-              Whether you’re looking to use SDS to start a new project, or are
-              looking for examples of some common design systems best practices,
-              you'll find tools inside this codebase and Figma file to steer you
-              in the right direction.
-            </Text>
+              <Text>
+                The PoC is built on a modified version of Figma’s Simple Design
+                System (SDS) with Code Connect.
+              </Text>
 
-            <TextLinkList density="tight">
-              <TextListItem>
-                <TextLink href="https://github.com/figma/sds">
-                  GitHub SDS Repo
-                </TextLink>
-              </TextListItem>
-              <TextListItem>
-                <TextLink href="https://www.figma.com/community/file/1380235722331273046">
-                  Figma Community File
-                </TextLink>
-              </TextListItem>
-            </TextLinkList>
-          </Flex>
-        </FlexItem>
-      </Flex>
-    </Section>
+              <TextLinkList density="tight">
+                <TextListItem>
+                  <TextLink href="https://github.com/titox/ds-pipeline-poc">
+                    PoC GitHub Repo
+                  </TextLink>
+                </TextListItem>
+                <TextListItem>
+                  <TextLink href="https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/Local-%E2%80%93-Simple-Design-System?node-id=128-10284">
+                    Figma Design File
+                  </TextLink>
+                </TextListItem>
+                <TextListItem>
+                  <TextLink href="https://github.com/figma/sds">
+                    Upstream Figma SDS Repo
+                  </TextLink>
+                </TextListItem>
+                <TextListItem>
+                  <TextLink href="https://www.figma.com/community/file/1380235722331273046">
+                    Figma SDS Community File
+                  </TextLink>
+                </TextListItem>
+              </TextLinkList>
+            </Flex>
+          </FlexItem>
+        </Flex>
+      </Section>
+    </div>
   ),
 };
