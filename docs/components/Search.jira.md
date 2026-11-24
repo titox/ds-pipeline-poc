@@ -49,7 +49,7 @@ _No description set on this component in Figma._
 | Colors | `Text/Default/Default` | #1e1e1e | fills | Variable |
 | Colors | `Icon/Default/Default` | #1e1e1e | strokes | Variable |
 | Colors | `Background/Disabled/Default` | #d9d9d9 | fills | Variable |
-| Colors | `border/disabled/secondary` | #b2b2b2 | strokes | Variable |
+| Colors | `Border/Disabled/default` | #b3b3b3 | strokes | Variable |
 | Colors | `Text/Disabled/On Disabled` | #b3b3b3 | fills | Variable |
 | Colors | `Icon/Disabled/On Disabled` | #b3b3b3 | strokes | Variable |
 | Colors | `Text/Default/Tertiary` | #b3b3b3 | fills | Variable |

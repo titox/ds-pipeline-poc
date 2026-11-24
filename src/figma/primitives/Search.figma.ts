@@ -8,10 +8,10 @@ const instance = figma.selectedInstance;
 const rp = figma.helpers.react.renderProp;
 
 const value = instance.getEnum("Value Type", {
-  Default: instance.getString("Value"),
+  Filled: instance.getString("Value"),
 });
 const placeholder = instance.getEnum("Value Type", {
-  Default: "Placeholder here...",
+  Filled: "Placeholder here...",
   Placeholder: instance.getString("Value"),
 });
 const disabled = instance.getEnum("State", { Disabled: true });

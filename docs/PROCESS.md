@@ -113,7 +113,7 @@ Repeat this for every new or changed component. Names in `<>` are placeholders.
    - Changed component: update the property mappings (`getEnum`, `getBoolean`, `getString`, `getInstanceSwap`) to match renamed, added or removed Figma properties.
    - Point the `source=` header at this repository, not the upstream one (to do: the existing templates still reference upstream).
 6. **Update Storybook** in `src/stories/primitives/<Component>.stories.tsx`: one story per variant and state, so the stories are the visual contract.
-7. **Check.** Token lint, contract check (RubyLint JSON against the component's props and tokens) and tests must pass. Both scripts are planned, not built yet.
+7. **Check.** `npm run lint:tokens` and `npm run check:contracts` must pass (both run in CI). The contract check compares each `docs/components/*.contract.json` with its Code Connect mapping, the React component props (TypeScript) and `src/theme.css`. Errors: Code Connect maps a Figma property or option that no longer exists, writes a prop the component does not accept, or a Figma token is missing from `theme.css`. Warnings: unmapped Figma properties, no Code Connect file, hard-coded values in Figma.
 8. **Publish Code Connect:** `npx figma connect publish` (needs a Figma API token with the Code Connect write scope; set it locally, never commit it). Verify in Figma Dev Mode that the code snippet shows for the component.
 9. **Update component descriptions in Figma if needed** with `scripts/component-metadata` (descriptions only) and dev resources with `npm run script:dev-resources` (REST API only).
 10. **Commit and push** with the neutral identity (`DS PoC`), then check the Pages deploy. Re-run it if it fails with "No artifacts named github-pages".
@@ -131,7 +131,7 @@ Remap status: all 97 URLs in `figma.config.json` now point at the local Figma fi
 ## Next session
 
 1. RubyLint: run `npm run rubylint` on Input Field and Button, fix the Button description (still says 24 variants). Input Field audit flags a missing Filled state and 1.5:1 contrast.
-2. Build the contract check script on the JSON contracts in `docs/components/` (Inputs page exported, 12 components).
+2. Review the 11 contract check warnings (unmapped Has Error / Has Label / Open / Value Type, Date fields without Code Connect, hard-coded strokes in Date Picker and Select). Export the other pages with `npm run rubylint`.
 3. Roll the state standard out to the remaining interactive components.
 4. Distinct focus colour: `Border/Focus/Default` is still the same red as error.
 5. Brand collection in Figma for the second brand; Supernova role in the flow.

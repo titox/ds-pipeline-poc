@@ -63,7 +63,7 @@
         "Text/Default/Default",
         "Icon/Default/Default",
         "Background/Disabled/Default",
-        "border/disabled/secondary",
+        "Border/Disabled/default",
         "Text/Disabled/On Disabled",
         "Icon/Disabled/On Disabled",
         "Text/Default/Tertiary"
@@ -164,14 +164,14 @@
         "recommendation": "Using Background/Disabled/Default token"
       },
       {
-        "name": "border/disabled/secondary",
-        "value": "#b2b2b2",
+        "name": "Border/Disabled/default",
+        "value": "#b3b3b3",
         "unit": "hex",
         "type": "strokes-variable",
         "isToken": true,
         "isActualToken": true,
         "source": "figma-variable",
-        "recommendation": "Using border/disabled/secondary token"
+        "recommendation": "Using Border/Disabled/default token"
       },
       {
         "name": "Text/Disabled/On Disabled",
@@ -853,5 +853,5 @@
     "reason": "no API key saved"
   },
   "figmaUrl": "https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=2236-14989",
-  "exportedAt": "2026-11-24T11:47:13.035Z"
+  "exportedAt": "2026-11-24T11:53:08.306Z"
 }

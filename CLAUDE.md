@@ -31,7 +31,8 @@ Code Connect, with Supernova as source of truth. Based on figma/sds (remote: `up
 
 - Demo flow: Figma → RubyLint (Figma docs, JSON contract, Jira spec) → code from spec →
   CI (contract check, token lint, tests) → Storybook → Supernova. Recorded video, not live.
-- Contract check: CI script compares the RubyLint JSON to component props and tokens.
+- Contract check: `npm run check:contracts` (scripts/contract-check.mjs, runs in CI) compares the
+  RubyLint JSON to Code Connect, component props and theme.css tokens.
 - Supernova position in the flow: undecided, don't assume.
 
 - When a component is created or updated in Figma, follow the 11-step workflow in
