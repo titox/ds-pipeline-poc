@@ -17,6 +17,7 @@ export function Footer({ className, ...props }: FooterProps) {
   const listDensity = isTabletDown ? "tight" : "default";
   return (
     <Section
+      className={className}
       elementType="footer"
       variant="brand"
       paddingTop="1600"

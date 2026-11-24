@@ -187,7 +187,7 @@ export type HeaderProps = Omit<SectionProps, "variant" | "padding" | "src">;
 export function Header({ className, ...props }: HeaderProps) {
   return (
     <Section
-      className="header"
+      className={clsx(className, "header")}
       elementType="header"
       variant="stroke"
       padding={"800"}

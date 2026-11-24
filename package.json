@@ -14,7 +14,7 @@
     "script:dev-resources": "cd scripts/dev-resources; node --env-file=../../.env app.mjs; cd -;",
     "script:icons": "cd scripts/icons; node --env-file=../../.env app.mjs --skip-rest-api; cd -;",
     "script:icons:rest": "cd scripts/icons; node --env-file=../../.env app.mjs; cd -;",
-    "lint": "npm run -s lint:tokens && npm run -s check:contracts",
+    "lint": "npm run -s app:lint && npm run -s lint:tokens && npm run -s check:contracts",
     "lint:tokens": "node scripts/lint-tokens.mjs",
     "check:contracts": "node scripts/contract-check.mjs",
     "rubylint": "node scripts/rubylint/run.mjs",

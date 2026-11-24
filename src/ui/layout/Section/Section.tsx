@@ -36,7 +36,7 @@ export function Section({
   const classNames = clsx(
     className,
     "section",
-    `section-variant-${props.variant}`,
+    `section-variant-${variant}`,
     `section-padding-top-${paddingTop || padding}`,
     `section-padding-bottom-${paddingBottom || padding}`,
   );

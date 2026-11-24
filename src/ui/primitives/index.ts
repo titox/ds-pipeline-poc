@@ -4,6 +4,7 @@ export * from "./Button/Button";
 export * from "./Checkbox/Checkbox";
 export * from "./Dialog/Dialog";
 export * from "./Fieldset/Fieldset";
+export * from "./Fieldset/formData";
 export * from "./Icon/Icon";
 export * from "./IconButton/IconButton";
 export * from "./Image/Image";

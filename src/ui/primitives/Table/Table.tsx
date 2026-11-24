@@ -83,7 +83,7 @@ export function TableBody<T extends object>({
   className,
   ...props
 }: TableBodyProps<T>) {
-  return <RACTableBody {...props} />;
+  return <RACTableBody className={className} {...props} />;
 }
 
 export type TableHeadProps<T> = RACTableHeaderProps<T>;

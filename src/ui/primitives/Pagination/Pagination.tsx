@@ -11,7 +11,7 @@ export function Pagination({
   className,
   ...props
 }: PaginationProps) {
-  const classNames = clsx("pagination");
+  const classNames = clsx(className, "pagination");
   return <nav aria-label={ariaLabel} {...props} className={classNames} />;
 }
 
