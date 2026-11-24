@@ -130,13 +130,13 @@ Remap status: all 97 URLs in `figma.config.json` now point at the local Figma fi
 
 ## Next session
 
-1. Check the Pages deploy for the Storybook 10 build; re-run it if it fails with "No artifacts named github-pages".
-1b. Register the Storybook MCP in Claude Code (needs user consent) and add `@storybook/addon-vitest`.
-2. Decide what to do with `brand_b_light` (use it as the base of the second brand, or drop it) and do the full token re-export.
-3. Code Connect for the new states (Button Loading, Input Hover/Focus) and repoint URLs in `figma.config.json` to the modified Figma file.
-4. Storybook stories for the new states; token lint; contract check script; fix `Button.tsx` and `Tag.figma.ts` type errors.
-5. Roll the state standard out to the remaining interactive components, then re-run RubyLint (manual).
-6. Open questions: Supernova position and access; where RubyLint exports live; focus ring colour is still the same red as error (distinct colour wanted).
+1. RubyLint (manual, in Figma): audit Input Field and Button, fix the Button description (still says 24 variants), export Markdown, JSON contract and Jira spec.
+2. Decide where RubyLint exports live (`docs/components/` or Storybook MDX), then build the contract check script on the JSON.
+3. Roll the state standard out to the remaining interactive components.
+4. Distinct focus colour: `Border/Focus/Default` is still the same red as error.
+5. Brand collection in Figma for the second brand; Supernova role in the flow.
+
+Done: Input Hover and Focus in code (`input.css`), "Input States" story, Code Connect maps State=Error to `isInvalid` (published). Text input uses `--sds-font-body-base` (to confirm).
 
 ## 1. Clone SDS and publish to own GitHub
 

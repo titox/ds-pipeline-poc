@@ -7,7 +7,9 @@ import figma from "figma";
 const instance = figma.selectedInstance;
 const hasLabel = instance.getPropertyValue("Has Label");
 
+// Hover and Focus are interaction states: same code as Default.
 const isDisabled = instance.getEnum("State", { Disabled: true });
+const isInvalid = instance.getEnum("State", { Error: true });
 const value = instance.getEnum("Value Type", {
   Default: instance.getString("Value"),
 });
@@ -36,6 +38,7 @@ export default {
   imports,
   example: figma.code`<${hasLabel ? "InputField" : "Input"}
       ${rp("isDisabled", isDisabled)}
+      ${rp("isInvalid", isInvalid)}
       ${rp("errorMessage", errorMessage)}
       ${rp("label", label)}
       ${rp("description", description)}
