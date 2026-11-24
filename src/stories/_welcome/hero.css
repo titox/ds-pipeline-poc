@@ -62,8 +62,8 @@
 }
 .hero a.hero-link {
   align-items: center;
-  background: rgb(255 255 255 / 0.12);
-  border: 1px solid rgb(255 255 255 / 0.55);
+  background: var(--sds-color-white-200);
+  border: 1px solid var(--sds-color-white-500);
   border-radius: var(--sds-size-radius-200);
   display: flex;
   gap: var(--sds-size-space-300);
@@ -71,7 +71,7 @@
   transition: background-color 150ms linear;
 }
 .hero a.hero-link:hover {
-  background: rgb(255 255 255 / 0.22);
+  background: var(--sds-color-white-300);
 }
 .hero a.hero-link:focus-visible {
   outline: 3px solid var(--hero-ink);
