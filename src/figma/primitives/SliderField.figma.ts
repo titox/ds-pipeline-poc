@@ -1,5 +1,5 @@
 // url=<FIGMA_INPUTS_SLIDER_FIELD>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Slider/Slider.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Slider/Slider.tsx
 // component=SliderField
 
 import figma from "figma";

@@ -1,5 +1,5 @@
 // url=<FIGMA_INPUTS_CHECKBOX_FIELD>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Checkbox/Checkbox.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Checkbox/Checkbox.tsx
 // component=CheckboxField
 
 import figma from "figma";

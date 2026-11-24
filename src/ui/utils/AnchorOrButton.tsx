@@ -31,22 +31,22 @@ export const AnchorOrButton = forwardRef(function AnchorOrButton(
   props: AnchorOrButtonProps,
   ref: ForwardedRef<HTMLElement>,
 ) {
-  const { style, ...sharedProps } = props;
+  const { style: _style, ...sharedProps } = props;
   return isAnchorProps(props) ? (
     <RACLink
-      {...sharedProps}
+      {...(sharedProps as ComponentPropsWithoutRef<typeof RACLink>)}
       className={props.className}
       ref={ref as React.ForwardedRef<HTMLAnchorElement>}
     >
-      {props.children}
+      {props.children as React.ReactNode}
     </RACLink>
   ) : (
     <RACButton
-      {...sharedProps}
+      {...(sharedProps as RACButtonProps)}
       className={props.className}
       ref={ref as React.ForwardedRef<HTMLButtonElement>}
     >
-      {props.children}
+      {props.children as React.ReactNode}
     </RACButton>
   );
 });

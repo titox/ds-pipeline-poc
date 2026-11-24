@@ -1,5 +1,5 @@
 // url=<FIGMA_INPUTS_RADIO_FIELD>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Radio/Radio.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Radio/Radio.tsx
 // component=RadioField
 
 import figma from "figma";

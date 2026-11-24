@@ -1,5 +1,5 @@
 // url=<FIGMA_INPUTS_TEXTAREA_FIELD>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Textarea/Textarea.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Textarea/Textarea.tsx
 // component=TextareaField
 
 import figma from "figma";

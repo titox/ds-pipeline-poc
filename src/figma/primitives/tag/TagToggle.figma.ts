@@ -1,5 +1,5 @@
 // url=<FIGMA_TAGS_TAG_TOGGLE>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Tag/Tag.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Tag/Tag.tsx
 // component=TagToggle
 
 import figma from "figma"

@@ -1,5 +1,5 @@
 // url=<FIGMA_TABS_TABS>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Tab/Tab.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Tab/Tab.tsx
 // component=Tabs
 
 import figma from "figma"

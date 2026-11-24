@@ -1,5 +1,5 @@
 // url=<FIGMA_CARDS_CARD>
-// source=https://github.com/figma/sds/blob/main/src/ui/compositions/Cards/Cards.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/compositions/Cards/Cards.tsx
 // component=Card
 
 import figma from "figma"

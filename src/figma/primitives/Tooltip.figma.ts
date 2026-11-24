@@ -1,5 +1,5 @@
 // url=<FIGMA_TOOLTIP_TOOLTIP>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Tooltip/Tooltip.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Tooltip/Tooltip.tsx
 // component=Tooltip
 
 import figma from "figma"

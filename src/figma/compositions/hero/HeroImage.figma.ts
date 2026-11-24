@@ -1,5 +1,5 @@
 // url=<FIGMA_SECTIONS_HERO_IMAGE>
-// source=https://github.com/figma/sds/blob/main/src/ui/compositions/Sections/Heroes.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/compositions/Sections/Heroes.tsx
 // component=Hero
 
 import figma from "figma"

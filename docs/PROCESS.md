@@ -51,6 +51,27 @@ Done so far:
 
 Still to do for the pilot: re-run RubyLint (manual, in Figma) to regenerate the handoff text, then update Code Connect and Storybook.
 
+## Workflow: a component is created or updated in Figma
+
+Repeat this for every new or changed component. Names in `<>` are placeholders.
+
+1. **Design in Figma.** Use token variables only (no raw colours or sizes). Follow the state standard: Default, Hover, Focus, Disabled, plus Error for form fields and Loading for buttons.
+2. **Audit with RubyLint** (manual, in Figma). Fix what it flags, then export the Markdown spec, the JSON contract and the Jira specification. Commit the exports (location still to be decided).
+3. **Sync tokens if any variable changed.** Re-export the tokens with the plugin in `scripts/tokens/figma-plugin-token-json` into `scripts/tokens/tokens.json`, then run `npm run script:tokens` (add `--skip-rest-api` when using the plugin JSON). Review the `src/theme.css` diff.
+4. **Build or update the React component** in `src/ui/primitives/<Component>/`, following `src/AGENTS.md`. Props must match the Figma component properties. States map to CSS pseudo-classes, `disabled` and `aria-*`, not to extra components.
+5. **Update Code Connect** in `src/figma/primitives/<component>/<Component>.figma.ts`:
+   - New component: add a `<FIGMA_..._...>` entry with the Figma URL and node ID in `figma.config.json`, and reference it in the template header (`url=`).
+   - Changed component: update the property mappings (`getEnum`, `getBoolean`, `getString`, `getInstanceSwap`) to match renamed, added or removed Figma properties.
+   - Point the `source=` header at this repository, not the upstream one (to do: the existing templates still reference upstream).
+6. **Update Storybook** in `src/stories/primitives/<Component>.stories.tsx`: one story per variant and state, so the stories are the visual contract.
+7. **Check.** Token lint, contract check (RubyLint JSON against the component's props and tokens) and tests must pass. Both scripts are planned, not built yet.
+8. **Publish Code Connect:** `npx figma connect publish` (needs a Figma API token with the Code Connect write scope; set it locally, never commit it). Verify in Figma Dev Mode that the code snippet shows for the component.
+9. **Update component descriptions in Figma if needed** with `scripts/component-metadata` (descriptions only) and dev resources with `npm run script:dev-resources` (REST API only).
+10. **Commit and push** with the neutral identity (`DS PoC`), then check the Pages deploy. Re-run it if it fails with "No artifacts named github-pages".
+11. **Update this runbook** if the process changed, and record the component in the status table.
+
+Remap status: all 97 URLs in `figma.config.json` now point at the local Figma file. Verifying that every node ID exists in that file is pending (needs the Figma bridge).
+
 ## Tooling upgrades
 
 - Storybook upgraded from 8.6 to 10.6.8 (`npx storybook@latest upgrade`), with `@storybook/addon-mcp` added. Leftover v8 packages removed. Build passes.

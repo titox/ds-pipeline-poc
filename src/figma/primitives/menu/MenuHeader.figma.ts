@@ -1,5 +1,5 @@
 // url=<FIGMA_MENU_MENU_HEADER>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Menu/Menu.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Menu/Menu.tsx
 // component=MenuHeader
 
 import figma from "figma"

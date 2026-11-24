@@ -1,5 +1,5 @@
 // url=<FIGMA_AVATARS_AVATAR_BLOCK>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Avatar/Avatar.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Avatar/Avatar.tsx
 // component=AvatarBlock
 
 import figma from "figma"

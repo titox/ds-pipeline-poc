@@ -1,5 +1,5 @@
 // url=<FIGMA_ACCORDION_ACCORDION_ITEM>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Accordion/Accordion.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Accordion/Accordion.tsx
 // component=AccordionItem
 
 import figma from "figma";

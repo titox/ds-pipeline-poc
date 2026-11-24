@@ -1,5 +1,5 @@
 // url=<FIGMA_NAVIGATION_NAVIGATION_BUTTON_LIST>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Navigation/Navigation.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Navigation/Navigation.tsx
 // component=Navigation
 
 import figma from "figma"

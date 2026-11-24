@@ -1,5 +1,5 @@
 // url=<FIGMA_INPUTS_SWITCH_FIELD>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Switch/Switch.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Switch/Switch.tsx
 // component=SwitchField
 
 import figma from "figma";

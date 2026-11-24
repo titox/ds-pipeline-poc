@@ -1,5 +1,5 @@
 // url=<FIGMA_DIALOG_DIALOG_BODY>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Dialog/Dialog.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Dialog/Dialog.tsx
 // component=Dialog
 
 import figma from "figma"

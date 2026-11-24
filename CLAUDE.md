@@ -33,6 +33,9 @@ Code Connect, with Supernova as source of truth. Based on figma/sds (remote: `up
 - Contract check: CI script compares the RubyLint JSON to component props and tokens.
 - Supernova position in the flow: undecided, don't assume.
 
+- When a component is created or updated in Figma, follow the 11-step workflow in
+  `docs/PROCESS.md` (tokens, component, Code Connect, Storybook, checks, publish, deploy).
+
 ## Pointers
 - Component rules: `src/AGENTS.md`
 - Token pipeline: `scripts/tokens/README.md`

@@ -5,7 +5,7 @@
 
 :root {
   --global-focus-ring-size: var(--sds-size-stroke-focus-ring);
-  --global-focus-ring-color: rgb(0, 106, 255);
+  --global-focus-ring-color: var(--sds-color-border-focus-default);
   --global-line-height-paragraph: 1.4;
   --global-stack-top: 999;
   --global-stack-focus: 999;
@@ -26,7 +26,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --global-focus-ring-color: rgb(0, 106, 255);
+    --global-focus-ring-color: var(--sds-color-border-focus-default);
   }
 }
 

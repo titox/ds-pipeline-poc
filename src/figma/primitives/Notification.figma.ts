@@ -1,5 +1,5 @@
 // url=<FIGMA_NOTIFICATION_NOTIFICATION>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Notification/Notification.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Notification/Notification.tsx
 // component=Notification
 
 import figma from "figma";

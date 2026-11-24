@@ -1,5 +1,5 @@
 // url=<FIGMA_FORMS_FORM_REGISTER>
-// source=https://github.com/figma/sds/blob/main/src/ui/compositions/Forms/Forms.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/compositions/Forms/Forms.tsx
 // component=FormBox
 
 import figma from "figma"

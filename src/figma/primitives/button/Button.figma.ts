@@ -1,5 +1,5 @@
 // url=<FIGMA_BUTTONS_BUTTON>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Button/Button.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Button/Button.tsx
 // component=Button
 
 import figma from "figma";
@@ -26,6 +26,9 @@ const size = instance.getEnum("Size", {
 const isDisabled = instance.getEnum("State", {
   Disabled: true,
 });
+const isLoading = instance.getEnum("State", {
+  Loading: true,
+});
 
 export default {
   id: "Button",
@@ -35,6 +38,7 @@ export default {
       ${rp("variant", variant)}
       ${rp("size", size)}
       ${rp("isDisabled", isDisabled)}
+      ${rp("isLoading", isLoading)}
     >
       ${iconStart}
       ${label}

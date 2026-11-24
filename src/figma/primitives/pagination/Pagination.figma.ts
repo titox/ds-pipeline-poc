@@ -1,5 +1,5 @@
 // url=<FIGMA_PAGINATION_PAGINATION>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Pagination/Pagination.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Pagination/Pagination.tsx
 // component=Pagination
 
 import figma from "figma"

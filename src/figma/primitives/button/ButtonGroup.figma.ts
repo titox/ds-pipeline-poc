@@ -1,5 +1,5 @@
 // url=<FIGMA_BUTTONS_BUTTON_GROUP>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Button/Button.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Button/Button.tsx
 // component=ButtonGroup
 
 import figma from "figma";

@@ -1,5 +1,5 @@
 // url=<FIGMA_INPUTS_INPUT_FIELD>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Input/Input.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Input/Input.tsx
 // component=InputField
 
 import figma from "figma";

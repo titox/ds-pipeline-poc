@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import React from "react";
 import { IconActivity, IconArrowLeft } from "icons";
 import { Button, ButtonDanger, ButtonGroup } from "primitives";
 
@@ -33,6 +34,36 @@ export const StoryButton: StoryObj<typeof Button> = {
       {children}
       <IconActivity />
     </Button>
+  ),
+};
+
+export const StoryButtonStates: StoryObj<typeof Button> = {
+  name: "Button States",
+  parameters: { layout: "padded" },
+  render: () => (
+    <div
+      style={{
+        display: "grid",
+        gap: "var(--sds-size-space-400)",
+        gridTemplateColumns: "repeat(4, max-content)",
+        alignItems: "center",
+      }}
+    >
+      {(["primary", "neutral", "subtle"] as const).map((variant) => (
+        <React.Fragment key={variant}>
+          <Button variant={variant}>Default</Button>
+          <Button variant={variant} isDisabled>
+            Disabled
+          </Button>
+          <Button variant={variant} isLoading>
+            Loading
+          </Button>
+          <Button variant={variant} size="small" isLoading>
+            Loading small
+          </Button>
+        </React.Fragment>
+      ))}
+    </div>
   ),
 };
 

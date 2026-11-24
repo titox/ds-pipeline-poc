@@ -1,5 +1,5 @@
 // url=<FIGMA_SECTIONS_PANEL_IMAGE>
-// source=https://github.com/figma/sds/blob/main/src/ui/compositions/Sections/Panels.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/compositions/Sections/Panels.tsx
 // component=Panel
 
 import figma from "figma"

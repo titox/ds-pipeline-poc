@@ -1,5 +1,5 @@
 // url=<FIGMA_TAGS_TAG>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Tag/Tag.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Tag/Tag.tsx
 // component=Tag
 
 import figma from "figma";
@@ -26,7 +26,7 @@ export default {
   id: "Tag",
   imports: ['import { Tag } from "primitives";'],
   example: figma.code`<Tag
-      ${rp("onRemove", "onRemove={() => {}}")}
+      ${rp("onRemove", onRemove)}
       ${rp("variant", variant)}
       ${rp("scheme", scheme)}
     >

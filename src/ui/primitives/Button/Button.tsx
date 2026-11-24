@@ -1,6 +1,11 @@
 import { clsx } from "clsx";
 import React, { ComponentPropsWithoutRef } from "react";
-import { Button as RACButton, Link as RACLink } from "react-aria-components";
+import {
+  Button as RACButton,
+  Link as RACLink,
+  type ButtonProps as RACButtonProps,
+} from "react-aria-components";
+import { IconLoader } from "icons";
 import { type AnchorOrButtonProps } from "utils";
 import "./button.css";
 
@@ -21,25 +26,7 @@ export const Button = React.forwardRef(function Button(
     `button-variant-${variant}`,
   );
 
-  const { style, ...sharedProps } = props;
-
-  return isAnchorProps(props) ? (
-    <RACLink
-      {...sharedProps}
-      className={classNames}
-      ref={ref as React.ForwardedRef<HTMLAnchorElement>}
-    >
-      {props.children}
-    </RACLink>
-  ) : (
-    <RACButton
-      {...sharedProps}
-      className={classNames}
-      ref={ref as React.ForwardedRef<HTMLButtonElement>}
-    >
-      {props.children}
-    </RACButton>
-  );
+  return renderButton(props as ButtonBaseProps, classNames, ref);
 });
 
 export type ButtonDangerProps = Omit<ButtonBaseProps, "variant"> & {
@@ -67,25 +54,7 @@ export const ButtonDanger = React.forwardRef(function Button(
     `button-variant-${variant}`,
   );
 
-  const { style, ...sharedProps } = props;
-
-  return isAnchorProps(props) ? (
-    <RACLink
-      {...sharedProps}
-      className={classNames}
-      ref={ref as React.ForwardedRef<HTMLAnchorElement>}
-    >
-      {props.children}
-    </RACLink>
-  ) : (
-    <RACButton
-      {...sharedProps}
-      className={classNames}
-      ref={ref as React.ForwardedRef<HTMLButtonElement>}
-    >
-      {props.children}
-    </RACButton>
-  );
+  return renderButton(props as ButtonBaseProps, classNames, ref);
 });
 
 type ButtonBaseProps = {
@@ -97,7 +66,49 @@ type ButtonBaseProps = {
     | "subtle"
     | "danger-primary"
     | "danger-subtle";
+  /** Shows a spinner before the label and blocks presses (Figma State=Loading). */
+  isLoading?: boolean;
 } & AnchorOrButtonProps;
+
+function renderButton(
+  { isLoading, children, style: _style, ...props }: ButtonBaseProps,
+  className: string,
+  ref: React.ForwardedRef<HTMLElement>,
+) {
+  // children may be a render function (react-aria); pass it through untouched.
+  const content = (
+    typeof children === "function" ? (
+      children
+    ) : (
+      <>
+        {isLoading ? <IconLoader /> : null}
+        {children}
+      </>
+    )
+  ) as React.ReactNode;
+
+  if (isAnchorProps(props)) {
+    return (
+      <RACLink
+        {...props}
+        className={className}
+        ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+      >
+        {content}
+      </RACLink>
+    );
+  }
+  return (
+    <RACButton
+      {...(props as RACButtonProps)}
+      className={className}
+      isPending={isLoading}
+      ref={ref as React.ForwardedRef<HTMLButtonElement>}
+    >
+      {content}
+    </RACButton>
+  );
+}
 
 function isAnchorProps(
   props: ButtonBaseProps | ButtonDangerProps,

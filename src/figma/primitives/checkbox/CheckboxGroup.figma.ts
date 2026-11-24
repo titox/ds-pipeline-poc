@@ -1,5 +1,5 @@
 // url=<FIGMA_INPUTS_CHECKBOX_GROUP>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Checkbox/Checkbox.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Checkbox/Checkbox.tsx
 // component=CheckboxGroup
 
 import figma from "figma";

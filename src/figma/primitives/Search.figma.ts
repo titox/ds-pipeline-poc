@@ -1,5 +1,5 @@
 // url=<FIGMA_INPUTS_SEARCH>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Search/Search.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Search/Search.tsx
 // component=Search
 
 import figma from "figma";

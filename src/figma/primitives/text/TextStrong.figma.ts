@@ -1,5 +1,5 @@
 // url=<FIGMA_TEXT_TEXT_STRONG>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Text/Text.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Text/Text.tsx
 // component=TextStrong
 
 import figma from "figma"

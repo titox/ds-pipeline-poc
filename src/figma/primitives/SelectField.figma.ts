@@ -1,5 +1,5 @@
 // url=<FIGMA_INPUTS_SELECT_FIELD>
-// source=https://github.com/figma/sds/blob/main/src/ui/primitives/Select/Select.tsx
+// source=https://github.com/titox/ds-pipeline-poc/blob/main/src/ui/primitives/Select/Select.tsx
 // component=SelectField
 
 import figma from "figma";
