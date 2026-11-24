@@ -30,7 +30,7 @@
   content: "";
 }
 .hero ul.hero-links {
-  margin-bottom: var(--sds-size-space-600) !important;
+  margin-bottom: 0 !important;
 }
 .hero .hero-kicker {
   font-size: 0.8125rem;
@@ -89,8 +89,4 @@
 .hero-link-note {
   display: block;
   font-size: 0.875rem;
-}
-.hero p.hero-next {
-  font-size: 0.9375rem;
-  margin: 0;
 }

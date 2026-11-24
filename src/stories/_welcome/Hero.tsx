@@ -20,12 +20,6 @@ const LINKS: { label: string; note: string; href: string; logo: keyof typeof LOG
     href: "https://app.supernova.io/832944-acme-ltd-u7pckvnl/897722-my-design-system/948367-shared-draft",
     logo: "supernova",
   },
-  {
-    label: "Upstream Figma SDS",
-    note: "The open-source starting point",
-    href: "https://github.com/figma/sds",
-    logo: "github",
-  },
 ];
 
 export function Hero() {
@@ -56,7 +50,6 @@ export function Hero() {
           );
         })}
       </ul>
-      <p className="hero-next">The flow below shows how a component travels from design to code.</p>
     </header>
   );
 }
