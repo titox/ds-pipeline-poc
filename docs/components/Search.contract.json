@@ -1,12 +1,29 @@
 {
   "component": "Search",
-  "description": "Component with 3 properties",
-  "readinessScore": 78,
-  "adoption": null,
+  "description": "A single-line search field with a leading search icon, offered in eight variants across four states and two value types. The Value Type property switches between placeholder text and an entered value, and the State property covers Default, Hover, Focus and Disabled. PURPOSE: Lets people type a query to filter or find content. The pill shape (Radius/Full) and the icon mark it as a search field rather than a general text input. BEHAVIOUR: Hover changes the field's surface and border. Focus applies the Stroke/Focus Ring border and Border/Focus/Default colour. Disabled swaps background, border, text and icon to the disabled token set and blocks input. Value Type=Placeholder uses Text/Default/Tertiary for the prompt text; Value Type=Filled uses Text/Default/Default for real content. COMPOSITION: Two nested instances carry the icon. Placeholder variants use an instance named 'Search'; filled variants use an instance named 'container'. Both wrap a single Vector icon layer. AI code generators should look for these icon sub-components in the development codebase before building new ones. USAGE: Use this for query entry in toolbars, page headers, list filters and pickers. Use a standard text field when the input is not a search, and a select or combobox when the user picks from a fixed set. CODE GENERATION NOTES: Render as input[type=search] with an accessible name, since there is no visible label layer. The Value text layer maps to the value or placeholder attribute depending on Value Type. Hover and Focus are browser states, not separate components, so build one element with :hover and :focus-visible rather than four. The focus ring should sit outside the border so it stays visible on coloured backgrounds. Two icon instance names exist for the same role, so consolidate to one in code. Debounce input before firing a query, and wire Enter to submit.",
+  "readinessScore": 88,
+  "adoption": {
+    "scores": {
+      "reuse": 3,
+      "patternStrength": 3,
+      "systemFit": 3,
+      "value": 3,
+      "evidence": 3
+    },
+    "sources": {
+      "reuse": "manual",
+      "patternStrength": "suggested",
+      "systemFit": "suggested",
+      "value": "manual",
+      "evidence": "manual"
+    },
+    "total": 15,
+    "decision": "Add to the design system"
+  },
   "mcpScore": 97,
   "metadata": {
     "component": "Search",
-    "description": "Component with 3 properties",
+    "description": "A single-line search field with a leading search icon, offered in eight variants across four states and two value types. The Value Type property switches between placeholder text and an entered value, and the State property covers Default, Hover, Focus and Disabled. PURPOSE: Lets people type a query to filter or find content. The pill shape (Radius/Full) and the icon mark it as a search field rather than a general text input. BEHAVIOUR: Hover changes the field's surface and border. Focus applies the Stroke/Focus Ring border and Border/Focus/Default colour. Disabled swaps background, border, text and icon to the disabled token set and blocks input. Value Type=Placeholder uses Text/Default/Tertiary for the prompt text; Value Type=Filled uses Text/Default/Default for real content. COMPOSITION: Two nested instances carry the icon. Placeholder variants use an instance named 'Search'; filled variants use an instance named 'container'. Both wrap a single Vector icon layer. AI code generators should look for these icon sub-components in the development codebase before building new ones. USAGE: Use this for query entry in toolbars, page headers, list filters and pickers. Use a standard text field when the input is not a search, and a select or combobox when the user picks from a fixed set. CODE GENERATION NOTES: Render as input[type=search] with an accessible name, since there is no visible label layer. The Value text layer maps to the value or placeholder attribute depending on Value Type. Hover and Focus are browser states, not separate components, so build one element with :hover and :focus-visible rather than four. The focus ring should sit outside the border so it stays visible on coloured backgrounds. Two icon instance names exist for the same role, so consolidate to one in code. Debounce input before firing a query, and wire Enter to submit.",
     "props": [
       {
         "name": "Value",
@@ -16,6 +33,7 @@
         ],
         "default": "Value",
         "defaultValue": "Value",
+        "description": "The text shown in the field, used as either placeholder copy or an entered query depending on Value Type.",
         "required": false
       },
       {
@@ -23,10 +41,13 @@
         "type": "VARIANT",
         "values": [
           "Default",
-          "Disabled"
+          "Disabled",
+          "Hover",
+          "Focus"
         ],
         "default": "Default",
         "defaultValue": "Default",
+        "description": "Interaction state of the field, driving background, border, text and icon colours.",
         "required": false
       },
       {
@@ -38,17 +59,22 @@
         ],
         "default": "Placeholder",
         "defaultValue": "Placeholder",
+        "description": "Whether the field shows tertiary placeholder text or a filled-in value in default text colour.",
         "required": false
       }
     ],
     "states": [
       "Default",
-      "Disabled"
+      "Disabled",
+      "Hover",
+      "Focus"
     ],
     "variants": {
       "State": [
         "Default",
-        "Disabled"
+        "Disabled",
+        "Hover",
+        "Focus"
       ],
       "Value Type": [
         "Filled",
@@ -66,7 +92,8 @@
         "Border/Disabled/default",
         "Text/Disabled/On Disabled",
         "Icon/Disabled/On Disabled",
-        "Text/Default/Tertiary"
+        "Text/Default/Tertiary",
+        "Border/Focus/Default"
       ],
       "spacing": [
         "Space/300",
@@ -82,10 +109,14 @@
       "effects": [],
       "borders": [
         "Stroke/Border",
-        "Radius/Full"
+        "Radius/Full",
+        "Stroke/Focus Ring"
       ]
     },
-    "accessibility": {},
+    "accessibility": {
+      "keyboardNavigation": "Standard keyboard navigation support",
+      "screenReader": "Screen reader accessible"
+    },
     "audit": {
       "designIssues": [],
       "tokenOpportunities": [],
@@ -95,7 +126,7 @@
     },
     "propertyCheatSheet": [
       "🎨 Variants: Value Type(2)",
-      "🔄 States: Default/Disabled",
+      "🔄 States: Default/Disabled/Hover/Focus",
       "⚙️ Other: Value: Value"
     ],
     "mcpReadiness": {
@@ -202,6 +233,16 @@
         "isActualToken": true,
         "source": "figma-variable",
         "recommendation": "Using Text/Default/Tertiary token"
+      },
+      {
+        "name": "Border/Focus/Default",
+        "value": "#ec221f",
+        "unit": "hex",
+        "type": "strokes-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Border/Focus/Default token"
       }
     ],
     "spacing": [
@@ -296,17 +337,27 @@
         "isActualToken": true,
         "source": "figma-variable",
         "recommendation": "Using Radius/Full token"
+      },
+      {
+        "name": "Stroke/Focus Ring",
+        "value": "2px",
+        "unit": "px",
+        "type": "strokeTopWeight-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Stroke/Focus Ring token"
       }
     ],
     "summary": {
-      "totalTokens": 18,
-      "actualTokens": 18,
+      "totalTokens": 20,
+      "actualTokens": 20,
       "hardCodedValues": 0,
       "aiSuggestions": 0,
       "byCategory": {
         "colors": {
-          "total": 9,
-          "tokens": 9,
+          "total": 10,
+          "tokens": 10,
           "hardCoded": 0,
           "suggestions": 0
         },
@@ -329,8 +380,8 @@
           "suggestions": 0
         },
         "borders": {
-          "total": 2,
-          "tokens": 2,
+          "total": 3,
+          "tokens": 3,
           "hardCoded": 0,
           "suggestions": 0
         }
@@ -345,6 +396,14 @@
       },
       {
         "name": "Disabled",
+        "found": true
+      },
+      {
+        "name": "Hover",
+        "found": true
+      },
+      {
+        "name": "Focus",
         "found": true
       }
     ],
@@ -368,8 +427,8 @@
       },
       {
         "check": "Focus state",
-        "status": "warning",
-        "suggestion": "Add a visible focus state to support keyboard navigation (WCAG 2.4.7)"
+        "status": "pass",
+        "suggestion": "Component has a focus state for keyboard navigation"
       },
       {
         "check": "Minimum font size",
@@ -395,7 +454,7 @@
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "hig.contrast",
             "status": "fail",
-            "suggestion": "3 text layers below contrast minimum: 'Value' 1.49:1, 'Value' 2.1:1, 'Value' 1.49:1",
+            "suggestion": "5 text layers below contrast minimum: 'Value' 1.49:1, 'Value' 2.1:1, 'Value' 1.49:1, …",
             "source": "local",
             "nodeId": "2236:14995",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
@@ -422,7 +481,7 @@
             "check": "Uses SF Pro (system font)",
             "ruleId": "hig.font",
             "status": "warning",
-            "suggestion": "4 text layers not using SF Pro: 'Value' Inter, 'Value' Inter, 'Value' Inter, …",
+            "suggestion": "8 text layers not using SF Pro: 'Value' Inter, 'Value' Inter, 'Value' Inter, …",
             "source": "local",
             "nodeId": "2236:14991",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
@@ -443,7 +502,7 @@
             "check": "Icons 17–28pt (SF Symbols range)",
             "ruleId": "hig.icon-size",
             "status": "warning",
-            "suggestion": "4 icons outside 17–28pt: 'X' 16×16, 'X' 16×16, 'Search' 16×16, …",
+            "suggestion": "8 icons outside 17–28pt: 'container' 16×16, 'container' 16×16, 'Search' 16×16, …",
             "source": "local",
             "nodeId": "2236:15002",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/sf-symbols"
@@ -495,13 +554,41 @@
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/buttons",
             "status": "na",
             "suggestion": "Not a button, nav bar or tab bar"
+          },
+          {
+            "check": "Uses iOS patterns",
+            "ruleId": "hig.ai.native-patterns",
+            "status": "warning",
+            "suggestion": "Add a trailing clear control to the filled variants, as iOS search fields always offer one.",
+            "source": "ai"
+          },
+          {
+            "check": "Clear visual hierarchy",
+            "ruleId": "hig.ai.hierarchy",
+            "status": "pass",
+            "suggestion": "The query text leads and the icon stays secondary, which reads correctly.",
+            "source": "ai"
+          },
+          {
+            "check": "Content-first, minimal chrome",
+            "ruleId": "hig.ai.deference",
+            "status": "pass",
+            "suggestion": "Decoration is limited to a border and pill radius, so the content stays in front.",
+            "source": "ai"
+          },
+          {
+            "check": "Right control for the job",
+            "ruleId": "hig.ai.control-choice",
+            "status": "pass",
+            "suggestion": "A rounded single-line field with a leading magnifier is the right control for query entry.",
+            "source": "ai"
           }
         ]
       },
       "m3": {
         "platform": "m3",
         "score": {
-          "passed": 9,
+          "passed": 9.5,
           "total": 12
         },
         "checks": [
@@ -509,24 +596,10 @@
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "m3.contrast",
             "status": "fail",
-            "suggestion": "3 text layers below contrast minimum: 'Value' 1.49:1, 'Value' 2.1:1, 'Value' 1.49:1",
+            "suggestion": "5 text layers below contrast minimum: 'Value' 1.49:1, 'Value' 2.1:1, 'Value' 1.49:1, …",
             "source": "local",
             "nodeId": "2236:14995",
             "guidelineUrl": "https://m3.material.io/foundations/designing/color-contrast"
-          },
-          {
-            "check": "Hover, Focused, Pressed, Disabled states",
-            "ruleId": "m3.states",
-            "status": "fail",
-            "suggestion": "Missing state: Hover, Focused, Pressed",
-            "source": "local",
-            "nodeId": "2236:14989",
-            "missingStates": [
-              "Hover",
-              "Focus",
-              "Pressed"
-            ],
-            "guidelineUrl": "https://m3.material.io/foundations/interaction/states"
           },
           {
             "check": "Touch target ≥ 48×48dp",
@@ -538,10 +611,22 @@
             "guidelineUrl": "https://m3.material.io/foundations/designing/structure"
           },
           {
+            "check": "Hover, Focused, Pressed, Disabled states",
+            "ruleId": "m3.states",
+            "status": "warning",
+            "suggestion": "Missing state: Pressed",
+            "source": "local",
+            "nodeId": "2236:14989",
+            "missingStates": [
+              "Pressed"
+            ],
+            "guidelineUrl": "https://m3.material.io/foundations/interaction/states"
+          },
+          {
             "check": "Icons 24dp",
             "ruleId": "m3.icon-size",
             "status": "warning",
-            "suggestion": "4 icons not 24dp: 'X' 16×16, 'X' 16×16, 'Search' 16×16, …",
+            "suggestion": "8 icons not 24dp: 'container' 16×16, 'container' 16×16, 'Search' 16×16, …",
             "source": "local",
             "nodeId": "2236:15002",
             "guidelineUrl": "https://m3.material.io/styles/icons/designing-icons"
@@ -609,13 +694,41 @@
             "suggestion": "Corner radii follow the M3 shape scale",
             "source": "local",
             "guidelineUrl": "https://m3.material.io/styles/shape/corner-radius-scale"
+          },
+          {
+            "check": "Button emphasis hierarchy",
+            "ruleId": "m3.ai.emphasis",
+            "status": "pass",
+            "suggestion": "The outlined treatment suits a search field and keeps it below primary actions.",
+            "source": "ai"
+          },
+          {
+            "check": "Colour roles used correctly",
+            "ruleId": "m3.ai.color-roles",
+            "status": "pass",
+            "suggestion": "Surface, outline and on-surface equivalents are applied to the right parts.",
+            "source": "ai"
+          },
+          {
+            "check": "Uses Android/M3 patterns",
+            "ruleId": "m3.ai.native-patterns",
+            "status": "pass",
+            "suggestion": "The full-radius search bar with leading icon matches the M3 search pattern.",
+            "source": "ai"
+          },
+          {
+            "check": "Clear visual hierarchy",
+            "ruleId": "m3.ai.hierarchy",
+            "status": "pass",
+            "suggestion": "Placeholder text uses a tertiary colour so real values stand out.",
+            "source": "ai"
           }
         ]
       },
       "web": {
         "platform": "web",
         "score": {
-          "passed": 10.5,
+          "passed": 11.5,
           "total": 14
         },
         "checks": [
@@ -623,23 +736,10 @@
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "web.contrast",
             "status": "fail",
-            "suggestion": "3 text layers below contrast minimum: 'Value' 1.49:1, 'Value' 2.1:1, 'Value' 1.49:1",
+            "suggestion": "5 text layers below contrast minimum: 'Value' 1.49:1, 'Value' 2.1:1, 'Value' 1.49:1, …",
             "source": "local",
             "nodeId": "2236:14995",
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
-          },
-          {
-            "check": "Hover, Focus and Disabled states",
-            "ruleId": "web.states",
-            "status": "fail",
-            "suggestion": "Missing state: Hover, Focus — a visible focus state is required (WCAG 2.4.7)",
-            "source": "local",
-            "nodeId": "2236:14989",
-            "missingStates": [
-              "Hover",
-              "Focus"
-            ],
-            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
           },
           {
             "check": "Target size ≥ 24×24px (44 preferred)",
@@ -654,7 +754,7 @@
             "check": "Ruby font (Fira Sans)",
             "ruleId": "web.font",
             "status": "warning",
-            "suggestion": "4 text layers not using Fira Sans: 'Value' Inter, 'Value' Inter, 'Value' Inter, …",
+            "suggestion": "8 text layers not using Fira Sans: 'Value' Inter, 'Value' Inter, 'Value' Inter, …",
             "source": "local",
             "nodeId": "2236:14991",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -663,7 +763,7 @@
             "check": "Real copy, not placeholders",
             "ruleId": "web.real-content",
             "status": "warning",
-            "suggestion": "4 text layers use placeholder copy ('Value'). Use real words such as \"Save profile\" so examples read like the product",
+            "suggestion": "8 text layers use placeholder copy ('Value'). Use real words such as \"Save profile\" so examples read like the product",
             "source": "local",
             "nodeId": "2236:14991",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -675,6 +775,14 @@
             "suggestion": "Text sizes are readable",
             "source": "local",
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html"
+          },
+          {
+            "check": "Hover, Focus and Disabled states",
+            "ruleId": "web.states",
+            "status": "pass",
+            "suggestion": "Hover, Focus and Disabled states present",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
           },
           {
             "check": "Dark mode",
@@ -739,6 +847,34 @@
             "suggestion": "Visible text can be the accessible name",
             "source": "local",
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+          },
+          {
+            "check": "Clear headings and structure",
+            "ruleId": "web.ai.structure",
+            "status": "warning",
+            "suggestion": "There is no label layer, so pair the field with a visible or visually hidden label for reading order and naming.",
+            "source": "ai"
+          },
+          {
+            "check": "Works at narrow widths",
+            "ruleId": "web.ai.responsive",
+            "status": "warning",
+            "suggestion": "Let the field fill its container width so long placeholder text does not clip at 320px.",
+            "source": "ai"
+          },
+          {
+            "check": "Not colour alone",
+            "ruleId": "web.ai.color-only",
+            "status": "warning",
+            "suggestion": "Disabled is signalled by colour alone, so also convey it through the disabled attribute and non-interactive cursor.",
+            "source": "ai"
+          },
+          {
+            "check": "Links vs buttons",
+            "ruleId": "web.ai.link-vs-button",
+            "status": "pass",
+            "suggestion": "The field reads as an input and the icon is decorative, so nothing is mistaken for a link.",
+            "source": "ai"
           }
         ]
       }
@@ -750,24 +886,22 @@
         "kind": "generic",
         "kindLabel": "Interactive element",
         "found": [
+          "Hover",
+          "Focus",
           "Disabled"
         ],
         "designed": [
           "Default",
-          "Disabled"
+          "Disabled",
+          "Hover",
+          "Focus"
         ],
         "canonical": {
-          "Disabled": "Disabled"
+          "Disabled": "Disabled",
+          "Hover": "Hover",
+          "Focus": "Focus"
         },
         "missing": [
-          {
-            "state": "Hover",
-            "why": "Pointer is over it (web, iPad, desktop) — a subtle fill or underline change shows it is clickable."
-          },
-          {
-            "state": "Focus",
-            "why": "Reached by keyboard or switch control — needs a clearly visible focus ring (WCAG 2.4.7)."
-          },
           {
             "state": "Pressed",
             "why": "While tapped or clicked — immediate feedback that the press registered (HIG Pressed, M3 Pressed)."
@@ -810,7 +944,9 @@
       "name": "State",
       "values": [
         "Default",
-        "Disabled"
+        "Disabled",
+        "Hover",
+        "Focus"
       ],
       "default": "Default"
     },
@@ -823,35 +959,11 @@
       "default": "Placeholder"
     }
   ],
-  "namingIssues": [
-    {
-      "nodeId": "2236:15002",
-      "nodeName": "X",
-      "currentName": "X",
-      "suggestedName": "container",
-      "severity": "error",
-      "reason": "Generic layer name detected",
-      "layerType": "container",
-      "depth": 2,
-      "path": "Search > State=Default, Value Type=Filled > X"
-    },
-    {
-      "nodeId": "2236:15004",
-      "nodeName": "X",
-      "currentName": "X",
-      "suggestedName": "container",
-      "severity": "error",
-      "reason": "Generic layer name detected",
-      "layerType": "container",
-      "depth": 2,
-      "path": "Search > State=Disabled, Value Type=Filled > X"
-    }
-  ],
+  "namingIssues": null,
   "existingDescription": null,
   "aiOpinions": {
-    "available": false,
-    "reason": "no API key saved"
+    "available": true
   },
   "figmaUrl": "https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=2236-14989",
-  "exportedAt": "2026-11-24T11:53:08.306Z"
+  "exportedAt": "2026-11-24T20:30:13.585Z"
 }

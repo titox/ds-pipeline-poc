@@ -8,12 +8,14 @@ Only complete components get a description: all states of the state standard des
 
 ## Input Field
 
-Single-line text entry with an optional label, description and error message.
+Single-line text field with an optional label, description and error message. It has five states (Default, Hover, Focus, Error, Disabled) and shows either a value or a placeholder.
 
-Use for short free text such as a name, email address or postcode. For several lines of text use Textarea Field. For a fixed list of options use Select Field.
+PURPOSE: Lets a person type one line of free text, such as a name, an email address or a postcode. The label says what to enter, the description gives extra help and the error message says what to fix.
 
-States: Default, Hover, Focus, Error, Disabled.
+BEHAVIOUR: Hover changes the border to `Border/Default/Secondary`. Focus draws a 2px border in `Border/Focus/Default` and takes priority over Hover and Error. Error changes the border to `Border/Danger/Default`. Disabled uses the disabled background, text and border colours and does not react to Hover or Focus. `Value Type` switches the text between an entered value and a placeholder. `State=Error` and `Has Error` are separate controls: the first sets the error border, the second shows the error message.
 
-Accessibility: the label is linked to the input. The error message is announced when the field is invalid. Keep a visible label; a placeholder alone is not a label.
+COMPOSITION: A label, the input, a description and an error message, stacked in that order. In code these are `Label`, `Input`, `Description` and `FieldError` from `primitives`. Reuse them, do not create new ones.
 
-Code: `<InputField>` from primitives (`<Input>` when there is no label).
+USAGE: Use for short free text. For several lines use Textarea Field. For a fixed list of options use Select Field. For a search query use Search. Keep a visible label; a placeholder alone is not a label.
+
+CODE GENERATION NOTES: Use `<InputField>` from `primitives`, or `<Input>` when `Has Label` is false. Both are built on React Aria Components. `State=Error` maps to `isInvalid` plus `errorMessage`, `State=Disabled` maps to `isDisabled`, and `Value Type=Placeholder` maps `Value` to `placeholder`. Hover and Focus are interaction states and need no props: the CSS reads `data-hovered` and `data-focused`. Focus shows on any focus, pointer or keyboard. `Has Error` has no Code Connect mapping; pass `errorMessage` instead. React Aria links the label, description and error message to the input and announces the error when the field is invalid.

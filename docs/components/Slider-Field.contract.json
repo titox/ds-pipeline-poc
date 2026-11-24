@@ -1,12 +1,29 @@
 {
   "component": "Slider Field",
-  "description": "input with 5 properties",
-  "readinessScore": 86,
-  "adoption": null,
+  "description": "A form field that pairs a range slider with a label, a numeric output value and helper text. Four state variants cover Default, Hover, Focus and Disabled, and the label and description can each be switched off. PURPOSE: Lets a user pick a value along a continuous track, with the current value shown next to the label and guidance shown below the track. BEHAVIOUR: The Hover variant responds to pointer-over on the track or handle. The Focus variant adds a focus ring using Stroke/Focus Ring and Border/Focus/Default, which is what keyboard users see when the handle is tabbed to. The Disabled variant swaps the track and handle to Background/Disabled/Default and Border/Disabled/default and should block pointer and keyboard input. The filled portion of the track uses Background/Brand/Default and the remaining track uses Background/Brand/Secondary. COMPOSITION: No nested component instances were detected. Every part is a local frame: a Label frame holding the label text and a Slider Output frame, a Slider frame holding the Block (track and handle), and a Description text layer. If the code base already has a slider primitive, a form label or a helper text component, AI code generators should reuse those rather than rebuild them here. USAGE: Use when the value is approximate and the range matters more than precision, for example volume, opacity or a price filter. Use a number input when an exact figure is required, and a segmented control or radio group when the choices are discrete and few. The Slider Output should stay visible when the user needs to read back the exact number. CODE GENERATION NOTES: Render as input type=range or a div with role=slider carrying aria-valuemin, aria-valuemax, aria-valuenow and aria-valuetext. Tie the label to the control with a for or aria-labelledby reference, and the description with aria-describedby. Support Arrow keys for single steps, Page Up and Page Down for larger jumps, and Home and End for the bounds. State variants are visual only and should be driven by :hover, :focus-visible and the disabled attribute, not by separate components. Label and Description text are editable properties, so expose them as props rather than hard-coded strings.",
+  "readinessScore": 91,
+  "adoption": {
+    "scores": {
+      "reuse": 3,
+      "patternStrength": 3,
+      "systemFit": 3,
+      "value": 3,
+      "evidence": 3
+    },
+    "sources": {
+      "reuse": "manual",
+      "patternStrength": "manual",
+      "systemFit": "suggested",
+      "value": "manual",
+      "evidence": "manual"
+    },
+    "total": 15,
+    "decision": "Add to the design system"
+  },
   "mcpScore": 97,
   "metadata": {
     "component": "Slider Field",
-    "description": "input with 5 properties",
+    "description": "A form field that pairs a range slider with a label, a numeric output value and helper text. Four state variants cover Default, Hover, Focus and Disabled, and the label and description can each be switched off. PURPOSE: Lets a user pick a value along a continuous track, with the current value shown next to the label and guidance shown below the track. BEHAVIOUR: The Hover variant responds to pointer-over on the track or handle. The Focus variant adds a focus ring using Stroke/Focus Ring and Border/Focus/Default, which is what keyboard users see when the handle is tabbed to. The Disabled variant swaps the track and handle to Background/Disabled/Default and Border/Disabled/default and should block pointer and keyboard input. The filled portion of the track uses Background/Brand/Default and the remaining track uses Background/Brand/Secondary. COMPOSITION: No nested component instances were detected. Every part is a local frame: a Label frame holding the label text and a Slider Output frame, a Slider frame holding the Block (track and handle), and a Description text layer. If the code base already has a slider primitive, a form label or a helper text component, AI code generators should reuse those rather than rebuild them here. USAGE: Use when the value is approximate and the range matters more than precision, for example volume, opacity or a price filter. Use a number input when an exact figure is required, and a segmented control or radio group when the choices are discrete and few. The Slider Output should stay visible when the user needs to read back the exact number. CODE GENERATION NOTES: Render as input type=range or a div with role=slider carrying aria-valuemin, aria-valuemax, aria-valuenow and aria-valuetext. Tie the label to the control with a for or aria-labelledby reference, and the description with aria-describedby. Support Arrow keys for single steps, Page Up and Page Down for larger jumps, and Home and End for the bounds. State variants are visual only and should be driven by :hover, :focus-visible and the disabled attribute, not by separate components. Label and Description text are editable properties, so expose them as props rather than hard-coded strings.",
     "props": [
       {
         "name": "Label",
@@ -16,6 +33,7 @@
         ],
         "default": "Label",
         "defaultValue": "Label",
+        "description": "Text of the field label shown above the track.",
         "required": false
       },
       {
@@ -26,6 +44,7 @@
         ],
         "default": "Description",
         "defaultValue": "Description",
+        "description": "Helper text shown below the track.",
         "required": false
       },
       {
@@ -37,6 +56,7 @@
         ],
         "default": "true",
         "defaultValue": "true",
+        "description": "Shows or hides the label row, including the slider output value.",
         "required": false
       },
       {
@@ -48,6 +68,7 @@
         ],
         "default": "true",
         "defaultValue": "true",
+        "description": "Shows or hides the helper text below the track.",
         "required": false
       },
       {
@@ -55,21 +76,28 @@
         "type": "VARIANT",
         "values": [
           "Default",
-          "Disabled"
+          "Disabled",
+          "Hover",
+          "Focus"
         ],
         "default": "Default",
         "defaultValue": "Default",
+        "description": "Visual state of the slider track and handle.",
         "required": false
       }
     ],
     "states": [
       "Default",
-      "Disabled"
+      "Disabled",
+      "Hover",
+      "Focus"
     ],
     "variants": {
       "State": [
         "Default",
-        "Disabled"
+        "Disabled",
+        "Hover",
+        "Focus"
       ]
     },
     "slots": [],
@@ -80,7 +108,8 @@
         "Background/Brand/Default",
         "Text/Default/Secondary",
         "Background/Disabled/Default",
-        "Border/Disabled/default"
+        "Border/Disabled/default",
+        "Border/Focus/Default"
       ],
       "spacing": [
         "Space/300"
@@ -96,10 +125,14 @@
       "effects": [],
       "borders": [
         "Radius/Full",
-        "Stroke/Border"
+        "Stroke/Border",
+        "Stroke/Focus Ring"
       ]
     },
-    "accessibility": {},
+    "accessibility": {
+      "keyboardNavigation": "Standard keyboard navigation support",
+      "screenReader": "Screen reader accessible"
+    },
     "audit": {
       "designIssues": [],
       "tokenOpportunities": [],
@@ -108,7 +141,7 @@
       ]
     },
     "propertyCheatSheet": [
-      "🔄 States: Default/Disabled",
+      "🔄 States: Default/Disabled/Hover/Focus",
       "⚙️ Other: Label: Label, Description: Description, Has Label: true/false"
     ],
     "mcpReadiness": {
@@ -185,6 +218,16 @@
         "isActualToken": true,
         "source": "figma-variable",
         "recommendation": "Using Border/Disabled/default token"
+      },
+      {
+        "name": "Border/Focus/Default",
+        "value": "#ec221f",
+        "unit": "hex",
+        "type": "strokes-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Border/Focus/Default token"
       }
     ],
     "spacing": [
@@ -278,17 +321,27 @@
         "isActualToken": true,
         "source": "figma-variable",
         "recommendation": "Using Stroke/Border token"
+      },
+      {
+        "name": "Stroke/Focus Ring",
+        "value": "2px",
+        "unit": "px",
+        "type": "strokeTopWeight-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Stroke/Focus Ring token"
       }
     ],
     "summary": {
-      "totalTokens": 15,
-      "actualTokens": 15,
+      "totalTokens": 17,
+      "actualTokens": 17,
       "hardCodedValues": 0,
       "aiSuggestions": 0,
       "byCategory": {
         "colors": {
-          "total": 6,
-          "tokens": 6,
+          "total": 7,
+          "tokens": 7,
           "hardCoded": 0,
           "suggestions": 0
         },
@@ -311,8 +364,8 @@
           "suggestions": 0
         },
         "borders": {
-          "total": 2,
-          "tokens": 2,
+          "total": 3,
+          "tokens": 3,
           "hardCoded": 0,
           "suggestions": 0
         }
@@ -327,6 +380,14 @@
       },
       {
         "name": "Disabled",
+        "found": true
+      },
+      {
+        "name": "Hover",
+        "found": true
+      },
+      {
+        "name": "Focus",
         "found": true
       }
     ],
@@ -350,8 +411,8 @@
       },
       {
         "check": "Focus state",
-        "status": "warning",
-        "suggestion": "Add a visible focus state to support keyboard navigation (WCAG 2.4.7)"
+        "status": "pass",
+        "suggestion": "Component has a focus state for keyboard navigation"
       },
       {
         "check": "Minimum font size",
@@ -361,7 +422,7 @@
       {
         "check": "Color contrast",
         "status": "warning",
-        "suggestion": "8 text layers not measurable: \"Label\" (no solid fill behind the text), \"Prefix\" (no solid fill behind the text), \"Value\" (no solid fill behind the text), …. Check manually"
+        "suggestion": "16 text layers not measurable: \"Label\" (no solid fill behind the text), \"Prefix\" (no solid fill behind the text), \"Value\" (no solid fill behind the text), …. Check manually"
       }
     ],
     "detachedInstances": [],
@@ -377,7 +438,7 @@
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "hig.contrast",
             "status": "warning",
-            "suggestion": "8 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Prefix' (no solid fill behind the text), 'Value' (no solid fill behind the text), … — not measurable, check manually",
+            "suggestion": "16 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Prefix' (no solid fill behind the text), 'Value' (no solid fill behind the text), … — not measurable, check manually",
             "source": "local",
             "nodeId": "280:14082",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
@@ -386,7 +447,7 @@
             "check": "Font sizes on Dynamic Type scale",
             "ruleId": "hig.type-scale",
             "status": "warning",
-            "suggestion": "4 text layers off the Dynamic Type scale: 'Prefix' 14pt, 'Value' 14pt, 'Prefix' 14pt, …",
+            "suggestion": "8 text layers off the Dynamic Type scale: 'Prefix' 14pt, 'Value' 14pt, 'Prefix' 14pt, …",
             "source": "local",
             "nodeId": "589:17703",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
@@ -404,7 +465,7 @@
             "check": "Uses SF Pro (system font)",
             "ruleId": "hig.font",
             "status": "warning",
-            "suggestion": "8 text layers not using SF Pro: 'Label' Inter, 'Prefix' Inter, 'Value' Inter, …",
+            "suggestion": "16 text layers not using SF Pro: 'Label' Inter, 'Prefix' Inter, 'Value' Inter, …",
             "source": "local",
             "nodeId": "280:14082",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
@@ -476,38 +537,64 @@
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/buttons",
             "status": "na",
             "suggestion": "Not a button, nav bar or tab bar"
+          },
+          {
+            "check": "Clear visual hierarchy",
+            "ruleId": "hig.ai.hierarchy",
+            "status": "pass",
+            "suggestion": "The track and handle carry the brand fill while label and description sit in text colours, so the control reads first.",
+            "source": "ai"
+          },
+          {
+            "check": "Uses iOS patterns",
+            "ruleId": "hig.ai.native-patterns",
+            "status": "pass",
+            "suggestion": "A labelled track with a round handle matches the iOS slider idiom and avoids Android-only ripple or FAB patterns.",
+            "source": "ai"
+          },
+          {
+            "check": "Content-first, minimal chrome",
+            "ruleId": "hig.ai.deference",
+            "status": "pass",
+            "suggestion": "Decoration is limited to the filled track and focus ring, which keeps attention on the value.",
+            "source": "ai"
+          },
+          {
+            "check": "Right control for the job",
+            "ruleId": "hig.ai.control-choice",
+            "status": "pass",
+            "suggestion": "A slider suits continuous values; switch to a stepper or picker if the range only has a handful of valid stops.",
+            "source": "ai"
           }
         ]
       },
       "m3": {
         "platform": "m3",
         "score": {
-          "passed": 9.5,
+          "passed": 10,
           "total": 11
         },
         "checks": [
           {
-            "check": "Hover, Focused, Pressed, Disabled states",
-            "ruleId": "m3.states",
-            "status": "fail",
-            "suggestion": "Missing state: Hover, Focused, Pressed",
-            "source": "local",
-            "nodeId": "589:17676",
-            "missingStates": [
-              "Hover",
-              "Focus",
-              "Pressed"
-            ],
-            "guidelineUrl": "https://m3.material.io/foundations/interaction/states"
-          },
-          {
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "m3.contrast",
             "status": "warning",
-            "suggestion": "8 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Prefix' (no solid fill behind the text), 'Value' (no solid fill behind the text), … — not measurable, check manually",
+            "suggestion": "16 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Prefix' (no solid fill behind the text), 'Value' (no solid fill behind the text), … — not measurable, check manually",
             "source": "local",
             "nodeId": "280:14082",
             "guidelineUrl": "https://m3.material.io/foundations/designing/color-contrast"
+          },
+          {
+            "check": "Hover, Focused, Pressed, Disabled states",
+            "ruleId": "m3.states",
+            "status": "warning",
+            "suggestion": "Missing state: Pressed",
+            "source": "local",
+            "nodeId": "589:17676",
+            "missingStates": [
+              "Pressed"
+            ],
+            "guidelineUrl": "https://m3.material.io/foundations/interaction/states"
           },
           {
             "check": "Touch target ≥ 48×48dp",
@@ -588,34 +675,49 @@
             "guidelineUrl": "https://m3.material.io/styles/icons/designing-icons",
             "status": "na",
             "suggestion": "No icons"
+          },
+          {
+            "check": "Button emphasis hierarchy",
+            "ruleId": "m3.ai.emphasis",
+            "status": "pass",
+            "suggestion": "The active track uses the stronger brand fill and the inactive track the secondary one, which reads as correct emphasis.",
+            "source": "ai"
+          },
+          {
+            "check": "Colour roles used correctly",
+            "ruleId": "m3.ai.color-roles",
+            "status": "pass",
+            "suggestion": "Brand default for the active track and brand secondary for the remainder map cleanly to primary and container roles.",
+            "source": "ai"
+          },
+          {
+            "check": "Uses Android/M3 patterns",
+            "ruleId": "m3.ai.native-patterns",
+            "status": "pass",
+            "suggestion": "The value readout above the track is an accepted M3 slider pattern; keep any dragged-value display as a label bubble, not an iOS-style popover.",
+            "source": "ai"
+          },
+          {
+            "check": "Clear visual hierarchy",
+            "ruleId": "m3.ai.hierarchy",
+            "status": "pass",
+            "suggestion": "Label, value and description are clearly ranked around the track.",
+            "source": "ai"
           }
         ]
       },
       "web": {
         "platform": "web",
         "score": {
-          "passed": 11,
+          "passed": 12,
           "total": 14
         },
         "checks": [
           {
-            "check": "Hover, Focus and Disabled states",
-            "ruleId": "web.states",
-            "status": "fail",
-            "suggestion": "Missing state: Hover, Focus — a visible focus state is required (WCAG 2.4.7)",
-            "source": "local",
-            "nodeId": "589:17676",
-            "missingStates": [
-              "Hover",
-              "Focus"
-            ],
-            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
-          },
-          {
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "web.contrast",
             "status": "warning",
-            "suggestion": "8 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Prefix' (no solid fill behind the text), 'Value' (no solid fill behind the text), … — not measurable, check manually",
+            "suggestion": "16 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Prefix' (no solid fill behind the text), 'Value' (no solid fill behind the text), … — not measurable, check manually",
             "source": "local",
             "nodeId": "280:14082",
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
@@ -624,7 +726,7 @@
             "check": "Ruby font (Fira Sans)",
             "ruleId": "web.font",
             "status": "warning",
-            "suggestion": "8 text layers not using Fira Sans: 'Label' Inter, 'Prefix' Inter, 'Value' Inter, …",
+            "suggestion": "16 text layers not using Fira Sans: 'Label' Inter, 'Prefix' Inter, 'Value' Inter, …",
             "source": "local",
             "nodeId": "280:14082",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -633,7 +735,7 @@
             "check": "Icon and control sizes on Ruby size scale",
             "ruleId": "web.size",
             "status": "warning",
-            "suggestion": "2 sizes off the Ruby size scale: 'Block' height 8, 'Block' height 8",
+            "suggestion": "4 sizes off the Ruby size scale: 'Block' height 8, 'Block' height 8, 'Block' height 8, …",
             "source": "local",
             "nodeId": "565:15436",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -642,7 +744,7 @@
             "check": "Real copy, not placeholders",
             "ruleId": "web.real-content",
             "status": "warning",
-            "suggestion": "2 text layers use placeholder copy ('Label'). Use real words such as \"Save profile\" so examples read like the product",
+            "suggestion": "4 text layers use placeholder copy ('Label'). Use real words such as \"Save profile\" so examples read like the product",
             "source": "local",
             "nodeId": "280:14082",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -662,6 +764,14 @@
             "suggestion": "Text sizes are readable",
             "source": "local",
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html"
+          },
+          {
+            "check": "Hover, Focus and Disabled states",
+            "ruleId": "web.states",
+            "status": "pass",
+            "suggestion": "Hover, Focus and Disabled states present",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
           },
           {
             "check": "Dark mode",
@@ -718,6 +828,34 @@
             "suggestion": "Visible text can be the accessible name",
             "source": "local",
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+          },
+          {
+            "check": "Works at narrow widths",
+            "ruleId": "web.ai.responsive",
+            "status": "warning",
+            "suggestion": "Confirm the label and value row wraps rather than squeezing the track at 320px wide.",
+            "source": "ai"
+          },
+          {
+            "check": "Not colour alone",
+            "ruleId": "web.ai.color-only",
+            "status": "warning",
+            "suggestion": "Disabled is signalled by greyed fill alone, so add a non-colour cue such as the disabled attribute and a dimmed handle outline.",
+            "source": "ai"
+          },
+          {
+            "check": "Clear headings and structure",
+            "ruleId": "web.ai.structure",
+            "status": "pass",
+            "suggestion": "Keep the order label, value, track, description so the reading order matches the visual one.",
+            "source": "ai"
+          },
+          {
+            "check": "Links vs buttons",
+            "ruleId": "web.ai.link-vs-button",
+            "status": "pass",
+            "suggestion": "No links or buttons are present, so there is nothing to confuse with navigation.",
+            "source": "ai"
           }
         ]
       }
@@ -729,24 +867,22 @@
         "kind": "generic",
         "kindLabel": "Interactive element",
         "found": [
+          "Hover",
+          "Focus",
           "Disabled"
         ],
         "designed": [
           "Default",
-          "Disabled"
+          "Disabled",
+          "Hover",
+          "Focus"
         ],
         "canonical": {
-          "Disabled": "Disabled"
+          "Disabled": "Disabled",
+          "Hover": "Hover",
+          "Focus": "Focus"
         },
         "missing": [
-          {
-            "state": "Hover",
-            "why": "Pointer is over it (web, iPad, desktop) — a subtle fill or underline change shows it is clickable."
-          },
-          {
-            "state": "Focus",
-            "why": "Reached by keyboard or switch control — needs a clearly visible focus ring (WCAG 2.4.7)."
-          },
           {
             "state": "Pressed",
             "why": "While tapped or clicked — immediate feedback that the press registered (HIG Pressed, M3 Pressed)."
@@ -812,7 +948,9 @@
       "name": "State",
       "values": [
         "Default",
-        "Disabled"
+        "Disabled",
+        "Hover",
+        "Focus"
       ],
       "default": "Default"
     }
@@ -820,9 +958,8 @@
   "namingIssues": null,
   "existingDescription": null,
   "aiOpinions": {
-    "available": false,
-    "reason": "no API key saved"
+    "available": true
   },
   "figmaUrl": "https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=589-17676",
-  "exportedAt": "2026-11-24T11:47:13.041Z"
+  "exportedAt": "2026-11-24T20:31:27.848Z"
 }

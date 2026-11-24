@@ -44,5 +44,8 @@ Code Connect, with Supernova as source of truth. Based on figma/sds (remote: `up
 - Storybook: `npm run storybook`; published by `.github/workflows/main.yml` (GitHub Pages)
 
 ## Verification
-Token lint runs before any review. TODO: critic panel and `eval/rubric.md` once real
-screens exist.
+Token lint runs before any review. After building or changing a component, score it with
+`eval/rubric.md`: a fresh subagent with no build context follows `eval/reviewer-brief.md`
+and writes `eval/scorecards/<Name>.md`. Fix, re-score, stop after three rounds.
+RubyLint audits are exported by hand from the Figma plugin; do not run the headless runner
+on components unless asked. TODO: critic panel once real screens exist.

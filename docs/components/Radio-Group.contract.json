@@ -1,17 +1,63 @@
 {
   "component": "Radio Group",
-  "description": "container with 0 properties",
-  "readinessScore": 86,
-  "adoption": null,
-  "mcpScore": 75,
+  "description": "A labelled set of five Radio Field instances, available in horizontal and vertical layouts. The group label is editable text and each option carries a label row and a description row. PURPOSE: Lets a person pick one option from a short list of mutually exclusive choices under a shared heading such as \"Delivery speed\". BEHAVIOUR: Selection is single-choice, so picking one option clears the previous one. The group label names the question. Keyboard users move between options with arrow keys and the whole group takes one tab stop. COMPOSITION: Five instances of Radio Field per variant. Each Radio Field holds a \"Checkbox and Label\" frame and a \"Description Row\" frame. Code generators should look for an existing Radio Field or radio input in the codebase before building a new one, and reuse the group wrapper if one already exists. USAGE: Use when every option should be visible at once and only one answer is allowed. Use a select or dropdown when the list is long. Use checkboxes when more than one answer is allowed. The horizontal variant suits two or three short labels. The vertical variant suits longer labels or options with descriptions. CODE GENERATION NOTES: Render as a fieldset with the group label as the legend, and give every input the same name attribute so the browser handles single selection. The count of five is a Figma convenience, so treat options as data and map over them rather than hard-coding five items. Orientation should be a layout prop, not a separate component. Error, disabled and required handling sits on the group or the individual field and is not expressed as a Figma property here.",
+  "readinessScore": 90,
+  "adoption": {
+    "scores": {
+      "reuse": 2,
+      "patternStrength": 2,
+      "systemFit": 2,
+      "value": 2,
+      "evidence": 2
+    },
+    "sources": {
+      "reuse": "manual",
+      "patternStrength": "suggested",
+      "systemFit": "manual",
+      "value": "manual",
+      "evidence": "manual"
+    },
+    "total": 10,
+    "decision": "Refine or extend an existing component"
+  },
+  "mcpScore": 100,
   "metadata": {
     "component": "Radio Group",
-    "description": "container with 0 properties",
-    "props": [],
+    "description": "A labelled set of five Radio Field instances, available in horizontal and vertical layouts. The group label is editable text and each option carries a label row and a description row. PURPOSE: Lets a person pick one option from a short list of mutually exclusive choices under a shared heading such as \"Delivery speed\". BEHAVIOUR: Selection is single-choice, so picking one option clears the previous one. The group label names the question. Keyboard users move between options with arrow keys and the whole group takes one tab stop. COMPOSITION: Five instances of Radio Field per variant. Each Radio Field holds a \"Checkbox and Label\" frame and a \"Description Row\" frame. Code generators should look for an existing Radio Field or radio input in the codebase before building a new one, and reuse the group wrapper if one already exists. USAGE: Use when every option should be visible at once and only one answer is allowed. Use a select or dropdown when the list is long. Use checkboxes when more than one answer is allowed. The horizontal variant suits two or three short labels. The vertical variant suits longer labels or options with descriptions. CODE GENERATION NOTES: Render as a fieldset with the group label as the legend, and give every input the same name attribute so the browser handles single selection. The count of five is a Figma convenience, so treat options as data and map over them rather than hard-coding five items. Orientation should be a layout prop, not a separate component. Error, disabled and required handling sits on the group or the individual field and is not expressed as a Figma property here.",
+    "props": [
+      {
+        "name": "Group Label",
+        "type": "TEXT",
+        "values": [
+          "Delivery speed"
+        ],
+        "default": "Delivery speed",
+        "defaultValue": "Delivery speed",
+        "description": "The heading that names the question the options answer.",
+        "required": false
+      },
+      {
+        "name": "orientation",
+        "type": "VARIANT",
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal",
+        "defaultValue": "horizontal",
+        "description": "Lays the Radio Field instances out in a row or a column.",
+        "required": false
+      }
+    ],
     "states": [
       "default"
     ],
-    "variants": {},
+    "variants": {
+      "orientation": [
+        "horizontal",
+        "vertical"
+      ]
+    },
     "slots": [],
     "tokens": {
       "colors": [
@@ -39,27 +85,26 @@
         "Radius/Full"
       ]
     },
-    "accessibility": {},
+    "accessibility": {
+      "keyboardNavigation": "Standard keyboard navigation support",
+      "screenReader": "Screen reader accessible"
+    },
     "audit": {
       "designIssues": [],
       "tokenOpportunities": [],
-      "structureIssues": [
-        "Component lacks description - Add a description in component properties to help MCP and AI understand the component's purpose and usage"
-      ]
+      "structureIssues": []
     },
-    "propertyCheatSheet": [],
+    "propertyCheatSheet": [
+      "⚙️ Other: Group Label: Delivery speed, orientation: horizontal/vertical"
+    ],
     "mcpReadiness": {
       "strengths": [
+        "Has component description for better MCP/AI context",
+        "Has 2 configurable properties",
         "Uses design tokens for consistency"
       ],
-      "gaps": [
-        "Missing component description - AI cannot understand component purpose and intent",
-        "No configurable properties - component lacks flexibility for different use cases"
-      ],
-      "recommendations": [
-        "Add component properties for customization and reuse"
-      ],
-      "implementationNotes": "Define component properties to enable customization without code changes."
+      "gaps": [],
+      "recommendations": []
     }
   },
   "tokens": {
@@ -263,20 +308,20 @@
     "componentReadiness": [
       {
         "check": "Property configuration",
-        "status": "warning",
-        "suggestion": "Consider adding properties for component customization"
+        "status": "pass",
+        "suggestion": "Component has configurable properties"
       },
       {
         "check": "Component description",
-        "status": "warning",
-        "suggestion": "Add a component description to help MCP and AI understand the component purpose and usage"
+        "status": "pass",
+        "suggestion": "Component has description for MCP/AI context"
       }
     ],
     "accessibility": [
       {
         "check": "Touch target size",
         "status": "pass",
-        "suggestion": "Target size 240×156px meets recommended 44px minimum"
+        "suggestion": "Target size 648×44px meets recommended 44px minimum (smallest variant: \"orientation=horizontal\")"
       },
       {
         "check": "Focus state",
@@ -290,8 +335,8 @@
       },
       {
         "check": "Color contrast",
-        "status": "pass",
-        "suggestion": "Lowest contrast ratio is 4.6:1, meets WCAG AA (4.5:1)"
+        "status": "warning",
+        "suggestion": "20 text layers not measurable: \"Label\" (no solid fill behind the text), \"Description\" (no solid fill behind the text), \"Label\" (no solid fill behind the text), …. Check manually"
       }
     ],
     "detachedInstances": [],
@@ -300,7 +345,7 @@
         "platform": "hig",
         "score": {
           "passed": 7,
-          "total": 9
+          "total": 10
         },
         "checks": [
           {
@@ -309,12 +354,21 @@
             "status": "fail",
             "suggestion": "Missing state: Pressed, Disabled",
             "source": "local",
-            "nodeId": "624:23642",
+            "nodeId": "3119:10470",
             "missingStates": [
               "Pressed",
               "Disabled"
             ],
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/buttons"
+          },
+          {
+            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
+            "ruleId": "hig.contrast",
+            "status": "warning",
+            "suggestion": "20 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "source": "local",
+            "nodeId": "I624:23614;280:13742",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
           },
           {
             "check": "Body ≥ 17pt, nothing < 11pt",
@@ -329,24 +383,25 @@
             "check": "Uses SF Pro (system font)",
             "ruleId": "hig.font",
             "status": "warning",
-            "suggestion": "6 text layers not using SF Pro: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
+            "suggestion": "20 text layers not using SF Pro: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
             "source": "local",
             "nodeId": "I624:23614;280:13742",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
           },
           {
+            "check": "Layout margins ≥ 16pt",
+            "ruleId": "hig.margins",
+            "status": "warning",
+            "suggestion": "1 containers with side margins below 16pt: 'orientation=horizontal' 0/0pt",
+            "source": "local",
+            "nodeId": "624:23642",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/layout"
+          },
+          {
             "check": "Touch target ≥ 44×44pt",
             "ruleId": "hig.touch-target",
             "status": "pass",
-            "suggestion": "Hit area 240×156pt",
-            "source": "local",
-            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
-          },
-          {
-            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
-            "ruleId": "hig.contrast",
-            "status": "pass",
-            "suggestion": "All text meets contrast minimums",
+            "suggestion": "Hit area 648×44pt",
             "source": "local",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
           },
@@ -383,14 +438,6 @@
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/color"
           },
           {
-            "check": "Layout margins ≥ 16pt",
-            "ruleId": "hig.margins",
-            "source": "local",
-            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/layout",
-            "status": "na",
-            "suggestion": "No container ≥ 320pt wide"
-          },
-          {
             "check": "Icons 17–28pt (SF Symbols range)",
             "ruleId": "hig.icon-size",
             "source": "local",
@@ -405,13 +452,41 @@
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/buttons",
             "status": "na",
             "suggestion": "Not a button, nav bar or tab bar"
+          },
+          {
+            "check": "Right control for the job",
+            "ruleId": "hig.ai.control-choice",
+            "status": "warning",
+            "suggestion": "On iOS a short set of two or three plain labels is usually a segmented control, so reserve the horizontal variant for cases where descriptions are needed.",
+            "source": "ai"
+          },
+          {
+            "check": "Clear visual hierarchy",
+            "ruleId": "hig.ai.hierarchy",
+            "status": "pass",
+            "suggestion": "The group label reads as the heading and the option labels sit above their secondary descriptions.",
+            "source": "ai"
+          },
+          {
+            "check": "Uses iOS patterns",
+            "ruleId": "hig.ai.native-patterns",
+            "status": "pass",
+            "suggestion": "No Android-only patterns appear; keep the selected dot style rather than adding a ripple.",
+            "source": "ai"
+          },
+          {
+            "check": "Content-first, minimal chrome",
+            "ruleId": "hig.ai.deference",
+            "status": "pass",
+            "suggestion": "Decoration is limited to the control itself, so leave the group without a surrounding card or fill.",
+            "source": "ai"
           }
         ]
       },
       "m3": {
         "platform": "m3",
         "score": {
-          "passed": 10,
+          "passed": 9,
           "total": 11
         },
         "checks": [
@@ -421,7 +496,7 @@
             "status": "fail",
             "suggestion": "Missing state: Hover, Focused, Pressed, Disabled",
             "source": "local",
-            "nodeId": "624:23642",
+            "nodeId": "3119:10470",
             "missingStates": [
               "Hover",
               "Focus",
@@ -433,17 +508,19 @@
           {
             "check": "Touch target ≥ 48×48dp",
             "ruleId": "m3.touch-target",
-            "status": "pass",
-            "suggestion": "Hit area 240×156dp",
+            "status": "warning",
+            "suggestion": "Hit area 648×44dp is below 48×48dp",
             "source": "local",
+            "nodeId": "624:23642",
             "guidelineUrl": "https://m3.material.io/foundations/designing/structure"
           },
           {
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "m3.contrast",
-            "status": "pass",
-            "suggestion": "All text meets contrast minimums",
+            "status": "warning",
+            "suggestion": "20 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
             "source": "local",
+            "nodeId": "I624:23614;280:13742",
             "guidelineUrl": "https://m3.material.io/foundations/designing/color-contrast"
           },
           {
@@ -517,13 +594,41 @@
             "guidelineUrl": "https://m3.material.io/styles/icons/designing-icons",
             "status": "na",
             "suggestion": "No icons"
+          },
+          {
+            "check": "Button emphasis hierarchy",
+            "ruleId": "m3.ai.emphasis",
+            "status": "pass",
+            "suggestion": "The selected option is the only emphasised element, which suits a radio group.",
+            "source": "ai"
+          },
+          {
+            "check": "Colour roles used correctly",
+            "ruleId": "m3.ai.color-roles",
+            "status": "pass",
+            "suggestion": "Brand background and border tokens mark selection while text uses default roles, which matches M3 intent.",
+            "source": "ai"
+          },
+          {
+            "check": "Uses Android/M3 patterns",
+            "ruleId": "m3.ai.native-patterns",
+            "status": "pass",
+            "suggestion": "The group behaves as an M3 radio list; keep selection to the dot and avoid iOS switch styling.",
+            "source": "ai"
+          },
+          {
+            "check": "Clear visual hierarchy",
+            "ruleId": "m3.ai.hierarchy",
+            "status": "pass",
+            "suggestion": "Label, option label and description form a readable order down the group.",
+            "source": "ai"
           }
         ]
       },
       "web": {
         "platform": "web",
         "score": {
-          "passed": 12,
+          "passed": 11.5,
           "total": 14
         },
         "checks": [
@@ -533,7 +638,7 @@
             "status": "fail",
             "suggestion": "Missing state: Hover, Focus, Disabled — a visible focus state is required (WCAG 2.4.7)",
             "source": "local",
-            "nodeId": "624:23642",
+            "nodeId": "3119:10470",
             "missingStates": [
               "Hover",
               "Focus",
@@ -542,10 +647,19 @@
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
           },
           {
+            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
+            "ruleId": "web.contrast",
+            "status": "warning",
+            "suggestion": "20 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "source": "local",
+            "nodeId": "I624:23614;280:13742",
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
+          },
+          {
             "check": "Ruby font (Fira Sans)",
             "ruleId": "web.font",
             "status": "warning",
-            "suggestion": "6 text layers not using Fira Sans: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
+            "suggestion": "20 text layers not using Fira Sans: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
             "source": "local",
             "nodeId": "I624:23614;280:13742",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -554,7 +668,7 @@
             "check": "Real copy, not placeholders",
             "ruleId": "web.real-content",
             "status": "warning",
-            "suggestion": "3 text layers use placeholder copy ('Label'). Use real words such as \"Save profile\" so examples read like the product",
+            "suggestion": "10 text layers use placeholder copy ('Label'). Use real words such as \"Save profile\" so examples read like the product",
             "source": "local",
             "nodeId": "I624:23614;280:13742",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -563,17 +677,9 @@
             "check": "Target size ≥ 24×24px (44 preferred)",
             "ruleId": "web.target-size",
             "status": "pass",
-            "suggestion": "Target 240×156px",
+            "suggestion": "Target 648×44px",
             "source": "local",
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html"
-          },
-          {
-            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
-            "ruleId": "web.contrast",
-            "status": "pass",
-            "suggestion": "All text meets contrast minimums",
-            "source": "local",
-            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
           },
           {
             "check": "Body ≥ 16px, nothing < 12px",
@@ -646,13 +752,41 @@
             "suggestion": "Visible text can be the accessible name",
             "source": "local",
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+          },
+          {
+            "check": "Works at narrow widths",
+            "ruleId": "web.ai.responsive",
+            "status": "warning",
+            "suggestion": "Design how the horizontal variant stacks at 320px, since five options with descriptions will not fit in a row.",
+            "source": "ai"
+          },
+          {
+            "check": "Clear headings and structure",
+            "ruleId": "web.ai.structure",
+            "status": "pass",
+            "suggestion": "Treat the group label as the legend so the question is announced before each option.",
+            "source": "ai"
+          },
+          {
+            "check": "Links vs buttons",
+            "ruleId": "web.ai.link-vs-button",
+            "status": "pass",
+            "suggestion": "No links or buttons sit inside the group, so option labels should stay plain text tied to their input.",
+            "source": "ai"
+          },
+          {
+            "check": "Not colour alone",
+            "ruleId": "web.ai.color-only",
+            "status": "pass",
+            "suggestion": "Selection shows as a filled dot as well as a colour change, so keep the dot when adding any error styling.",
+            "source": "ai"
           }
         ]
       }
     },
     "interactiveItems": [
       {
-        "nodeId": "624:23642",
+        "nodeId": "3119:10470",
         "name": "Radio Group",
         "kind": "selection",
         "kindLabel": "Checkbox / radio / switch",
@@ -714,24 +848,22 @@
         "kind": "selection",
         "kindLabel": "Checkbox / radio / switch",
         "found": [
+          "Hover",
+          "Focus",
           "Disabled"
         ],
         "designed": [
           "Default",
-          "Disabled"
+          "Disabled",
+          "Hover",
+          "Focus"
         ],
         "canonical": {
-          "Disabled": "Disabled"
+          "Disabled": "Disabled",
+          "Hover": "Hover",
+          "Focus": "Focus"
         },
         "missing": [
-          {
-            "state": "Hover",
-            "why": "Pointer is over it (web, iPad, desktop) — a subtle fill or underline change shows it is clickable."
-          },
-          {
-            "state": "Focus",
-            "why": "Reached by keyboard or switch control — needs a clearly visible focus ring (WCAG 2.4.7)."
-          },
           {
             "state": "Pressed",
             "why": "While tapped or clicked — immediate feedback that the press registered (HIG Pressed, M3 Pressed)."
@@ -770,13 +902,28 @@
       }
     ]
   },
-  "properties": [],
+  "properties": [
+    {
+      "name": "Group Label",
+      "values": [
+        "Delivery speed"
+      ],
+      "default": "Delivery speed"
+    },
+    {
+      "name": "orientation",
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal"
+    }
+  ],
   "namingIssues": null,
-  "existingDescription": null,
+  "existingDescription": "A labelled set of five Radio Field instances, offered in horizontal and vertical layouts. The group label is editable text and each option carries its own label and description row. PURPOSE: Lets a person pick one option from a short list of mutually exclusive choices, under a shared heading such as \"Delivery speed\". BEHAVIOUR: Selection is single-choice, so picking one option clears the previous one. The group label names the question. Keyboard users move between options with arrow keys and the whole group takes one tab stop. COMPOSITION: Five instances of Radio Field per variant. Each Radio Field holds a \"Checkbox and Label\" frame and a \"Description Row\" frame. Code generators should look for an existing Radio Field or radio input in the codebase before building a new one, and reuse the group wrapper if one already exists. USAGE: Use when every option should be visible at once and only one can be chosen. Use a select or dropdown when the list is long. Use checkboxes when more than one answer is allowed. The horizontal variant suits two or three short labels. The vertical variant suits longer labels or options with descriptions. CODE GENERATION NOTES: Render as a fieldset with the group label as the legend, and give every input the same name attribute so the browser handles single selection. The count of five is a Figma convenience, so treat options as data and map over them rather than hard-coding five items. Orientation should be a layout prop, not a separate component. Error, disabled and required handling sits on the group or the individual field and is not expressed as a Figma property here.\n\nNotes.\n\nThe list item  will inherit its properties from  the Checkbox Field component",
   "aiOpinions": {
-    "available": false,
-    "reason": "no API key saved"
+    "available": true
   },
-  "figmaUrl": "https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=624-23642",
-  "exportedAt": "2026-11-24T11:47:13.062Z"
+  "figmaUrl": "https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=3119-10470",
+  "exportedAt": "2026-11-24T20:29:30.385Z"
 }

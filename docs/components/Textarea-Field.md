@@ -1,15 +1,47 @@
 # Textarea Field
 
-> **Design System Readiness: 89%**
+> **Design System Readiness: 93%**
 
-_No description set on this component in Figma._
+A multi-line text input with an optional label, description and hint line, plus a drag handle for resizing. Ten variants cover five states (Default, Hover, Focus, Error, Disabled) crossed with two value types (Default and Placeholder).
+
+### Purpose
+
+Collects longer free-form text such as comments, notes or addresses, with supporting copy above and below the field. The Label, Description, Value and Error strings are all editable text properties, and Has Label, Has Description and Has Error toggle each element independently.
+
+### Behaviour
+
+Hover and Focus are separate variants, so pointer and keyboard states are handled distinctly. Focus uses the Stroke/Focus Ring and Border/Focus/Default tokens. Error swaps the border to Border/Danger/Default and the hint text to Text/Danger/Default. Disabled greys the background, border, text and drag icon using the Disabled token set. Value Type switches the Value text between real content (Text/Default/Default) and placeholder copy (Text/Default/Tertiary).
+
+### Composition
+
+No nested component instances. Children are plain text layers (Label, Description, Value, Hint), a Textarea frame and a Drag vector. Code generators should still check the codebase for an existing field wrapper, label and helper-text component before building new ones.
+
+### Usage
+
+Use for input longer than one line. For single-line entry use the text input component instead. Keep Description for persistent guidance and Error for validation feedback.
+
+### Code Generation Notes
+
+Render as a label element bound to a textarea, with the description and error text linked by aria-describedby and aria-invalid set when Has Error is true. Hover and Focus should be CSS states, not separate markup. The Drag vector represents the native resize affordance, so map it to CSS resize rather than drawing a custom icon. Disabled should set the disabled attribute, and placeholder text should use the placeholder attribute rather than a prefilled value.
+
+## Design System Adoption
+
+| Criterion | Score | Basis |
+|-----------|-------|-------|
+| Reuse | 3/3 — Needed across teams or products | set manually |
+| Pattern Strength | 3/3 — Clear, reusable pattern with variants | suggested: 2 variant axes and 7 component properties. |
+| System Fit | 3/3 — Clearly extends and improves the system | suggested: No overlap with the 11 other local components. Library components aren't checked. |
+| Value | 3/3 — Saves time, reduces duplication, or solves a clear problem | set manually |
+| Evidence | 3/3 — Proven need (multiple teams or repeated implementations) | set manually |
+
+**Total: 15/15** (13–15) — Add to the design system
 
 ## Variants
 
 <table>
 <thead><tr><th>Variant group</th><th>Options</th></tr></thead>
 <tbody>
-<tr><td>State</td><td><code>Default</code> <code>Error</code> <code>Disabled</code></td></tr>
+<tr><td>State</td><td><code>Default</code> <code>Error</code> <code>Disabled</code> <code>Hover</code> <code>Focus</code></td></tr>
 <tr><td>Value Type</td><td><code>Default</code> <code>Placeholder</code></td></tr>
 </tbody>
 </table>
@@ -19,15 +51,15 @@ _No description set on this component in Figma._
 <table>
 <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Required</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td>Has Label</td><td><code>BOOLEAN</code></td><td><code>true</code></td><td>No</td><td>-</td></tr>
-<tr><td>Has Error</td><td><code>BOOLEAN</code></td><td><code>false</code></td><td>No</td><td>-</td></tr>
-<tr><td>Label</td><td><code>TEXT</code></td><td><code>Label</code></td><td>No</td><td>-</td></tr>
-<tr><td>Error</td><td><code>TEXT</code></td><td><code>Hint</code></td><td>No</td><td>-</td></tr>
-<tr><td>Description</td><td><code>TEXT</code></td><td><code>Description</code></td><td>No</td><td>-</td></tr>
-<tr><td>Has Description</td><td><code>BOOLEAN</code></td><td><code>false</code></td><td>No</td><td>-</td></tr>
-<tr><td>Value</td><td><code>TEXT</code></td><td><code>Value</code></td><td>No</td><td>-</td></tr>
-<tr><td>State</td><td><code>VARIANT</code></td><td><code>Default</code></td><td>No</td><td>-</td></tr>
-<tr><td>Value Type</td><td><code>VARIANT</code></td><td><code>Default</code></td><td>No</td><td>-</td></tr>
+<tr><td>Has Label</td><td><code>BOOLEAN</code></td><td><code>true</code></td><td>No</td><td>Shows or hides the label above the field.</td></tr>
+<tr><td>Has Error</td><td><code>BOOLEAN</code></td><td><code>false</code></td><td>No</td><td>Shows or hides the hint line used for validation messages.</td></tr>
+<tr><td>Label</td><td><code>TEXT</code></td><td><code>Label</code></td><td>No</td><td>Label text content.</td></tr>
+<tr><td>Error</td><td><code>TEXT</code></td><td><code>Hint</code></td><td>No</td><td>Hint or error message shown below the field.</td></tr>
+<tr><td>Description</td><td><code>TEXT</code></td><td><code>Description</code></td><td>No</td><td>Supporting text content under the label.</td></tr>
+<tr><td>Has Description</td><td><code>BOOLEAN</code></td><td><code>false</code></td><td>No</td><td>Shows or hides the supporting description under the label.</td></tr>
+<tr><td>Value</td><td><code>TEXT</code></td><td><code>Value</code></td><td>No</td><td>Text inside the textarea, used for both content and placeholder.</td></tr>
+<tr><td>State</td><td><code>VARIANT</code></td><td><code>Default</code></td><td>No</td><td>Visual state of the field, driving border, text, background and icon colour.</td></tr>
+<tr><td>Value Type</td><td><code>VARIANT</code></td><td><code>Default</code></td><td>No</td><td>Whether the field shows entered content or placeholder text.</td></tr>
 </tbody>
 </table>
 
@@ -43,7 +75,7 @@ _No description set on this component in Figma._
 <tr><td>Description</td><td><code>Description</code></td><td><code>Description</code></td></tr>
 <tr><td>Has Description</td><td><code>true</code> <code>false</code></td><td><code>false</code></td></tr>
 <tr><td>Value</td><td><code>Value</code></td><td><code>Value</code></td></tr>
-<tr><td>State</td><td><code>Default</code> <code>Error</code> <code>Disabled</code></td><td><code>Default</code></td></tr>
+<tr><td>State</td><td><code>Default</code> <code>Error</code> <code>Disabled</code> <code>Hover</code> <code>Focus</code></td><td><code>Default</code></td></tr>
 <tr><td>Value Type</td><td><code>Default</code> <code>Placeholder</code></td><td><code>Default</code></td></tr>
 </tbody>
 </table>
@@ -53,13 +85,15 @@ _No description set on this component in Figma._
 - ✅ `Default`
 - ✅ `Error`
 - ✅ `Disabled`
+- ✅ `Hover`
+- ✅ `Focus`
 
 ## Design Tokens
 
 | Metric | Count |
 |--------|-------|
-| Total items | 21 |
-| Design tokens | 21 |
+| Total items | 23 |
+| Design tokens | 23 |
 | Hard-coded values | 0 |
 
 ### Colors
@@ -77,6 +111,7 @@ _No description set on this component in Figma._
 - <span class="swatch" style="background:#d9d9d9"></span>`Background/Disabled/Default` → #d9d9d9 — Using Background/Disabled/Default token
 - <span class="swatch" style="background:#b3b3b3"></span>`Border/Disabled/default` → #b3b3b3 — Using Border/Disabled/default token
 - <span class="swatch" style="background:#b3b3b3"></span>`Icon/Disabled/On Disabled` → #b3b3b3 — Using Icon/Disabled/On Disabled token
+- <span class="swatch" style="background:#ec221f"></span>`Border/Focus/Default` → #ec221f — Using Border/Focus/Default token
 
 ### Spacing
 
@@ -98,6 +133,7 @@ _No description set on this component in Figma._
 **Tokens in use:**
 - `Stroke/Border` → 1px — Using Stroke/Border token
 - `Radius/200` → 8px — Using Radius/200 token
+- `Stroke/Focus Ring` → 2px — Using Stroke/Focus Ring token
 
 ## Accessibility · ARIA
 
@@ -117,23 +153,27 @@ Patterns: [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/pattern
 | Check | Status | Details |
 |-------|--------|---------|
 | Touch target size | ✅ Pass | Target size 120×110px meets recommended 44px minimum (smallest variant: "State=Default, Value Type=Placeholder") |
-| Focus state | ⚠️ Warning | Add a visible focus state to support keyboard navigation (WCAG 2.4.7) |
+| Focus state | ✅ Pass | Component has a focus state for keyboard navigation |
 | Minimum font size | ✅ Pass | Smallest text is 16px, meets readability guidelines |
-| Color contrast | ❌ Fail | "Value" has 1.5:1 contrast, below WCAG AA minimum of 3:1. 18 text layers not measurable: "Label" (no solid fill behind the text), "Description" (no solid fill behind the text), "Hint" (no solid fill behind the text), …. Check manually |
+| Color contrast | ❌ Fail | "Value" has 1.5:1 contrast, below WCAG AA minimum of 3:1. 30 text layers not measurable: "Label" (no solid fill behind the text), "Description" (no solid fill behind the text), "Hint" (no solid fill behind the text), …. Check manually |
 
 ## Web · WCAG 2.2 + Ruby DS review
 
-**Score:** 10.5/14 (75%)
+**Score:** 11.5/14 (82%)
 
 | Rule | Status | Details |
 |------|--------|---------|
-| Text contrast ≥ 4.5:1 (3:1 large) | ❌ Fail | 4 text layers below contrast minimum: 'Value' 2.1:1, 'Value' 2.1:1, 'Value' 1.49:1, … |
-| Hover, Focus and Disabled states | ❌ Fail | Missing state: Hover, Focus — a visible focus state is required (WCAG 2.4.7) |
-| Ruby font (Fira Sans) | ⚠️ Warning | 12 text layers not using Fira Sans: 'Label' Inter, 'Value' Inter, 'Label' Inter, … |
-| Icon and control sizes on Ruby size scale | ⚠️ Warning | 6 sizes off the Ruby size scale: 'Drag' icon 7×7, 'Drag' icon 7×7, 'Drag' icon 7×7, … |
-| Real copy, not placeholders | ⚠️ Warning | 12 text layers use placeholder copy ('Label', 'Value'). Use real words such as "Save profile" so examples read like the product |
+| Text contrast ≥ 4.5:1 (3:1 large) | ❌ Fail | 6 text layers below contrast minimum: 'Value' 2.1:1, 'Value' 2.1:1, 'Value' 1.49:1, … |
+| Ruby font (Fira Sans) | ⚠️ Warning | 20 text layers not using Fira Sans: 'Label' Inter, 'Value' Inter, 'Label' Inter, … |
+| Icon and control sizes on Ruby size scale | ⚠️ Warning | 10 sizes off the Ruby size scale: 'Drag' icon 7×7, 'Drag' icon 7×7, 'Drag' icon 7×7, … |
+| Real copy, not placeholders | ⚠️ Warning | 20 text layers use placeholder copy ('Label', 'Value'). Use real words such as "Save profile" so examples read like the product |
 
-> AI opinions not available: no API key saved
+### AI opinion (not scored)
+
+- **Works at narrow widths** (warning): Confirm the textarea fills its container width and the hint wraps rather than truncating at 320px.
+- **Not colour alone** (warning): The error state changes border and text colour only; add an error icon or prefix so it does not rely on red alone.
+- **Clear headings and structure** (pass): Label, description, field and hint sit in a logical order; bind them with for and aria-describedby.
+- **Links vs buttons** (pass): No links or buttons are present, so there is nothing to confuse.
 
 ## Component Readiness
 
@@ -142,7 +182,7 @@ Patterns: [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/pattern
 | Property configuration | ✅ Pass | Component has configurable properties |
 | Component description | ⚠️ Warning | Add a component description to help MCP and AI understand the component purpose and usage |
 
-## AI Interpretation (Readiness score: 89%)
+## AI Interpretation (Readiness score: 93%)
 
 **What AI Reads Well:**
 - Has 9 configurable properties

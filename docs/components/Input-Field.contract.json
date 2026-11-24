@@ -1,12 +1,29 @@
 {
   "component": "Input Field",
-  "description": "input with 9 properties",
+  "description": "A single-line text entry built as a variant set of ten combinations: five states crossed with two value types. Label, description and error message are each optional through boolean properties.\n\nPURPOSE: Collects short free text such as a name, email address or postcode. The field groups a label, an optional description, the input box itself and an optional error message in one vertical stack.\n\nBEHAVIOUR: The State property covers Default, Hover, Focus, Error and Disabled. Hover and Focus change the border treatment, Focus adds a focus ring, Error switches the border and message text to the danger colours, and Disabled uses the disabled background, border and text tokens. Value Type switches the input text between real content (Default) and placeholder styling (Placeholder), which uses the tertiary text colour. Note that State=Error and Has Error are separate controls, so both need setting for a complete error presentation.\n\nCOMPOSITION: No nested component instances. The structure is plain text layers for Label, Description and Error, plus an Input frame containing the Value text. AI code generators should still check the development codebase for an existing input primitive before building a new one.\n\nUSAGE: Use for short single-line text. Use Textarea Field for multi-line input and Select Field for a fixed list of options. Keep the visible label on; a placeholder is not a substitute for a label. Add the description when the user needs guidance before typing, and the error message only when the field is invalid.\n\nCODE GENERATION NOTES: Map to <InputField> from primitives, or <Input> when Has Label is false. Hover and Focus are browser-driven, so do not encode them as props; expose state through disabled, invalid or similar flags. The label must be tied to the input with a for/id pair, the description and error linked by aria-describedby, and the input marked aria-invalid when in error. The error message needs a live region so it is announced. Placeholder styling comes from the ::placeholder selector, not a separate text layer.",
   "readinessScore": 97,
-  "adoption": null,
+  "adoption": {
+    "scores": {
+      "reuse": 3,
+      "patternStrength": 3,
+      "systemFit": 3,
+      "value": 3,
+      "evidence": 3
+    },
+    "sources": {
+      "reuse": "manual",
+      "patternStrength": "suggested",
+      "systemFit": "manual",
+      "value": "manual",
+      "evidence": "manual"
+    },
+    "total": 15,
+    "decision": "Add to the design system"
+  },
   "mcpScore": 100,
   "metadata": {
     "component": "Input Field",
-    "description": "input with 9 properties",
+    "description": "A single-line text entry built as a variant set of ten combinations: five states crossed with two value types. Label, description and error message are each optional through boolean properties.\n\nPURPOSE: Collects short free text such as a name, email address or postcode. The field groups a label, an optional description, the input box itself and an optional error message in one vertical stack.\n\nBEHAVIOUR: The State property covers Default, Hover, Focus, Error and Disabled. Hover and Focus change the border treatment, Focus adds a focus ring, Error switches the border and message text to the danger colours, and Disabled uses the disabled background, border and text tokens. Value Type switches the input text between real content (Default) and placeholder styling (Placeholder), which uses the tertiary text colour. Note that State=Error and Has Error are separate controls, so both need setting for a complete error presentation.\n\nCOMPOSITION: No nested component instances. The structure is plain text layers for Label, Description and Error, plus an Input frame containing the Value text. AI code generators should still check the development codebase for an existing input primitive before building a new one.\n\nUSAGE: Use for short single-line text. Use Textarea Field for multi-line input and Select Field for a fixed list of options. Keep the visible label on; a placeholder is not a substitute for a label. Add the description when the user needs guidance before typing, and the error message only when the field is invalid.\n\nCODE GENERATION NOTES: Map to <InputField> from primitives, or <Input> when Has Label is false. Hover and Focus are browser-driven, so do not encode them as props; expose state through disabled, invalid or similar flags. The label must be tied to the input with a for/id pair, the description and error linked by aria-describedby, and the input marked aria-invalid when in error. The error message needs a live region so it is announced. Placeholder styling comes from the ::placeholder selector, not a separate text layer.",
     "props": [
       {
         "name": "Has Label",
@@ -17,6 +34,7 @@
         ],
         "default": "true",
         "defaultValue": "true",
+        "description": "Shows or hides the label above the input.",
         "required": false
       },
       {
@@ -28,6 +46,7 @@
         ],
         "default": "false",
         "defaultValue": "false",
+        "description": "Shows or hides the error message below the input.",
         "required": false
       },
       {
@@ -38,6 +57,7 @@
         ],
         "default": "Label",
         "defaultValue": "Label",
+        "description": "Label text for the field.",
         "required": false
       },
       {
@@ -48,6 +68,7 @@
         ],
         "default": "Error",
         "defaultValue": "Error",
+        "description": "Error message text shown when the field is invalid.",
         "required": false
       },
       {
@@ -59,6 +80,7 @@
         ],
         "default": "false",
         "defaultValue": "false",
+        "description": "Shows or hides the helper description between the label and the input.",
         "required": false
       },
       {
@@ -69,6 +91,7 @@
         ],
         "default": "Description",
         "defaultValue": "Description",
+        "description": "Helper text that explains what to enter.",
         "required": false
       },
       {
@@ -79,6 +102,7 @@
         ],
         "default": "Value",
         "defaultValue": "Value",
+        "description": "Text inside the input, used for both entered content and placeholder copy.",
         "required": false
       },
       {
@@ -93,6 +117,7 @@
         ],
         "default": "Default",
         "defaultValue": "Default",
+        "description": "Visual state of the input box and its text.",
         "required": false
       },
       {
@@ -104,15 +129,16 @@
         ],
         "default": "Default",
         "defaultValue": "Default",
+        "description": "Switches the input text between entered content and placeholder styling.",
         "required": false
       }
     ],
     "states": [
-      "Disabled",
       "Default",
-      "Error",
       "Hover",
-      "Focus"
+      "Focus",
+      "Error",
+      "Disabled"
     ],
     "variants": {
       "State": [
@@ -163,7 +189,10 @@
         "Stroke/Focus Ring"
       ]
     },
-    "accessibility": {},
+    "accessibility": {
+      "keyboardNavigation": "Standard keyboard navigation support",
+      "screenReader": "Screen reader accessible"
+    },
     "audit": {
       "designIssues": [],
       "tokenOpportunities": [],
@@ -637,6 +666,34 @@
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/buttons",
             "status": "na",
             "suggestion": "Not a button, nav bar or tab bar"
+          },
+          {
+            "check": "Clear visual hierarchy",
+            "ruleId": "hig.ai.hierarchy",
+            "status": "pass",
+            "suggestion": "The label and input box read as the primary elements, with description and error text set in secondary and danger colours.",
+            "source": "ai"
+          },
+          {
+            "check": "Uses iOS patterns",
+            "ruleId": "hig.ai.native-patterns",
+            "status": "pass",
+            "suggestion": "No Android-only patterns appear; the bordered box with an external label works on iOS forms.",
+            "source": "ai"
+          },
+          {
+            "check": "Content-first, minimal chrome",
+            "ruleId": "hig.ai.deference",
+            "status": "pass",
+            "suggestion": "Decoration is limited to a border and radius, so the entered text stays the focus.",
+            "source": "ai"
+          },
+          {
+            "check": "Right control for the job",
+            "ruleId": "hig.ai.control-choice",
+            "status": "pass",
+            "suggestion": "A single-line text field is the right control for short free text; keep Select Field for fixed option lists.",
+            "source": "ai"
           }
         ]
       },
@@ -747,6 +804,34 @@
             "guidelineUrl": "https://m3.material.io/styles/icons/designing-icons",
             "status": "na",
             "suggestion": "No icons"
+          },
+          {
+            "check": "Button emphasis hierarchy",
+            "ruleId": "m3.ai.emphasis",
+            "status": "pass",
+            "suggestion": "The outlined treatment matches M3's outlined text field, so keep the border visible in every state rather than switching to a filled look.",
+            "source": "ai"
+          },
+          {
+            "check": "Colour roles used correctly",
+            "ruleId": "m3.ai.color-roles",
+            "status": "pass",
+            "suggestion": "Danger tokens drive the error state and disabled tokens drive the disabled state, which matches M3 role usage.",
+            "source": "ai"
+          },
+          {
+            "check": "Uses Android/M3 patterns",
+            "ruleId": "m3.ai.native-patterns",
+            "status": "pass",
+            "suggestion": "Nothing iOS-specific is used; supporting text sits below the field as M3 expects.",
+            "source": "ai"
+          },
+          {
+            "check": "Clear visual hierarchy",
+            "ruleId": "m3.ai.hierarchy",
+            "status": "pass",
+            "suggestion": "Focus uses a distinct ring token, so the active field stands out from the rest of a form.",
+            "source": "ai"
           }
         ]
       },
@@ -871,6 +956,34 @@
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/",
             "status": "na",
             "suggestion": "No icons or fixed-height controls"
+          },
+          {
+            "check": "Works at narrow widths",
+            "ruleId": "web.ai.responsive",
+            "status": "warning",
+            "suggestion": "Confirm the label, description and error text wrap rather than truncate when the field is 320px wide.",
+            "source": "ai"
+          },
+          {
+            "check": "Clear headings and structure",
+            "ruleId": "web.ai.structure",
+            "status": "pass",
+            "suggestion": "Label, description, input and error follow a logical top-to-bottom order; link the description and error to the input so screen readers pick them up.",
+            "source": "ai"
+          },
+          {
+            "check": "Links vs buttons",
+            "ruleId": "web.ai.link-vs-button",
+            "status": "pass",
+            "suggestion": "No links or buttons are present in the field, so nothing is mistaken for a control.",
+            "source": "ai"
+          },
+          {
+            "check": "Not colour alone",
+            "ruleId": "web.ai.color-only",
+            "status": "pass",
+            "suggestion": "The error state pairs the danger border with a text message, so meaning is not carried by colour alone.",
+            "source": "ai"
           }
         ]
       }
@@ -1019,9 +1132,8 @@
   "namingIssues": null,
   "existingDescription": "Single-line text entry with an optional label, description and error message.\n\nUse for short free text such as a name, email address or postcode. For several lines of text use Textarea Field. For a fixed list of options use Select Field.\n\nStates: Default, Hover, Focus, Error, Disabled.\n\nAccessibility: the label is linked to the input. The error message is announced when the field is invalid. Keep a visible label; a placeholder alone is not a label.\n\nCode: <InputField> from primitives (<Input> when there is no label).",
   "aiOpinions": {
-    "available": false,
-    "reason": "no API key saved"
+    "available": true
   },
   "figmaUrl": "https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=2136-2263",
-  "exportedAt": "2026-11-24T12:01:24.331Z"
+  "exportedAt": "2026-11-24T20:31:12.681Z"
 }

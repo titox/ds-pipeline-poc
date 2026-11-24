@@ -1,17 +1,47 @@
 {
   "component": "Checkbox Group",
-  "description": "container with 0 properties",
+  "description": "A container that lays out five Checkbox Field instances in a single arrangement, switchable between horizontal and vertical. It carries no label, legend or validation of its own, so those must come from the surrounding form layout. PURPOSE: Groups related checkboxes so a user can pick any number of options from a set. The group itself handles arrangement and spacing only; each option's checkbox, label and description live inside the nested Checkbox Field. BEHAVIOUR: The orientation property switches the stacking direction. Horizontal places fields in a row, vertical stacks them in a column. Both variants use Space/300 between fields. Selection state, focus and disabling are handled per field, not at group level, so the group has no states of its own. COMPOSITION: Five instances of Checkbox Field, each containing a Checkbox and Label frame and a Description Row frame. A Check instance supplies the tick mark inside the box. AI code generators should look for existing Checkbox Field and Check implementations in the development codebase before building new ones. USAGE: Use when several checkbox options belong to one question and multiple answers are allowed. Use a Radio Group instead when only one answer is allowed, and a Switch when the control toggles a setting immediately. Keep the horizontal variant for two or three short labels; longer labels or descriptions read better vertically. CODE GENERATION NOTES: Render as a fieldset with a legend, or an element with role=\"group\" and an accessible name, and let the child fields own their input elements. The number of options is fixed at five in Figma, so treat the children as a repeatable slot and map them from data. Shared name, change handlers, required state and error messaging belong on the group in code even though they are not modelled in the design. Flex direction should follow the orientation prop, and the horizontal variant should be allowed to wrap on narrow viewports.",
   "readinessScore": 82,
-  "adoption": null,
-  "mcpScore": 75,
+  "adoption": {
+    "scores": {
+      "reuse": 1,
+      "patternStrength": 2,
+      "systemFit": 3
+    },
+    "sources": {
+      "reuse": "suggested",
+      "patternStrength": "suggested",
+      "systemFit": "suggested"
+    },
+    "total": null,
+    "decision": null
+  },
+  "mcpScore": 97,
   "metadata": {
     "component": "Checkbox Group",
-    "description": "container with 0 properties",
-    "props": [],
+    "description": "A container that lays out five Checkbox Field instances in a single arrangement, switchable between horizontal and vertical. It carries no label, legend or validation of its own, so those must come from the surrounding form layout. PURPOSE: Groups related checkboxes so a user can pick any number of options from a set. The group itself handles arrangement and spacing only; each option's checkbox, label and description live inside the nested Checkbox Field. BEHAVIOUR: The orientation property switches the stacking direction. Horizontal places fields in a row, vertical stacks them in a column. Both variants use Space/300 between fields. Selection state, focus and disabling are handled per field, not at group level, so the group has no states of its own. COMPOSITION: Five instances of Checkbox Field, each containing a Checkbox and Label frame and a Description Row frame. A Check instance supplies the tick mark inside the box. AI code generators should look for existing Checkbox Field and Check implementations in the development codebase before building new ones. USAGE: Use when several checkbox options belong to one question and multiple answers are allowed. Use a Radio Group instead when only one answer is allowed, and a Switch when the control toggles a setting immediately. Keep the horizontal variant for two or three short labels; longer labels or descriptions read better vertically. CODE GENERATION NOTES: Render as a fieldset with a legend, or an element with role=\"group\" and an accessible name, and let the child fields own their input elements. The number of options is fixed at five in Figma, so treat the children as a repeatable slot and map them from data. Shared name, change handlers, required state and error messaging belong on the group in code even though they are not modelled in the design. Flex direction should follow the orientation prop, and the horizontal variant should be allowed to wrap on narrow viewports.",
+    "props": [
+      {
+        "name": "orientation",
+        "type": "VARIANT",
+        "values": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal",
+        "defaultValue": "horizontal",
+        "required": false
+      }
+    ],
     "states": [
       "default"
     ],
-    "variants": {},
+    "variants": {
+      "orientation": [
+        "horizontal",
+        "vertical"
+      ]
+    },
     "slots": [],
     "tokens": {
       "colors": [
@@ -35,7 +65,10 @@
         "Radius/100"
       ]
     },
-    "accessibility": {},
+    "accessibility": {
+      "keyboardNavigation": "Standard keyboard navigation support",
+      "screenReader": "Screen reader accessible"
+    },
     "audit": {
       "designIssues": [],
       "tokenOpportunities": [],
@@ -43,19 +76,22 @@
         "Component lacks description - Add a description in component properties to help MCP and AI understand the component's purpose and usage"
       ]
     },
-    "propertyCheatSheet": [],
+    "propertyCheatSheet": [
+      "⚙️ Other: orientation: horizontal/vertical"
+    ],
     "mcpReadiness": {
       "strengths": [
+        "Has 1 configurable properties",
         "Uses design tokens for consistency"
       ],
       "gaps": [
         "Missing component description - AI cannot understand component purpose and intent",
-        "No configurable properties - component lacks flexibility for different use cases"
+        "Limited customization options - consider adding more properties for flexibility"
       ],
       "recommendations": [
-        "Add component properties for customization and reuse"
+        "Add a descriptive explanation in component properties to help AI understand the component's purpose, behavior, and usage patterns"
       ],
-      "implementationNotes": "Define component properties to enable customization without code changes."
+      "implementationNotes": "Consider additional properties for greater flexibility."
     }
   },
   "tokens": {
@@ -219,8 +255,8 @@
     "componentReadiness": [
       {
         "check": "Property configuration",
-        "status": "warning",
-        "suggestion": "Consider adding properties for component customization"
+        "status": "pass",
+        "suggestion": "Component has configurable properties"
       },
       {
         "check": "Component description",
@@ -232,7 +268,7 @@
       {
         "check": "Touch target size",
         "status": "pass",
-        "suggestion": "Target size 240×156px meets recommended 44px minimum"
+        "suggestion": "Target size 648×44px meets recommended 44px minimum (smallest variant: \"orientation=horizontal\")"
       },
       {
         "check": "Focus state",
@@ -246,8 +282,8 @@
       },
       {
         "check": "Color contrast",
-        "status": "pass",
-        "suggestion": "Lowest contrast ratio is 4.6:1, meets WCAG AA (4.5:1)"
+        "status": "warning",
+        "suggestion": "20 text layers not measurable: \"Label\" (no solid fill behind the text), \"Description\" (no solid fill behind the text), \"Label\" (no solid fill behind the text), …. Check manually"
       }
     ],
     "detachedInstances": [],
@@ -256,7 +292,7 @@
         "platform": "hig",
         "score": {
           "passed": 7.5,
-          "total": 10
+          "total": 11
         },
         "checks": [
           {
@@ -265,12 +301,21 @@
             "status": "fail",
             "suggestion": "Missing state: Pressed, Disabled",
             "source": "local",
-            "nodeId": "9762:1426",
+            "nodeId": "3119:10423",
             "missingStates": [
               "Pressed",
               "Disabled"
             ],
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/buttons"
+          },
+          {
+            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
+            "ruleId": "hig.contrast",
+            "status": "warning",
+            "suggestion": "20 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "source": "local",
+            "nodeId": "I9762:1427;280:12941",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
           },
           {
             "check": "Body ≥ 17pt, nothing < 11pt",
@@ -285,16 +330,25 @@
             "check": "Uses SF Pro (system font)",
             "ruleId": "hig.font",
             "status": "warning",
-            "suggestion": "6 text layers not using SF Pro: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
+            "suggestion": "20 text layers not using SF Pro: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
             "source": "local",
             "nodeId": "I9762:1427;280:12941",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
           },
           {
+            "check": "Layout margins ≥ 16pt",
+            "ruleId": "hig.margins",
+            "status": "warning",
+            "suggestion": "1 containers with side margins below 16pt: 'orientation=horizontal' 0/0pt",
+            "source": "local",
+            "nodeId": "9762:1426",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/layout"
+          },
+          {
             "check": "Icons 17–28pt (SF Symbols range)",
             "ruleId": "hig.icon-size",
             "status": "warning",
-            "suggestion": "3 icons outside 17–28pt: 'Check' 16×16, 'Check' 16×16, 'Check' 16×16",
+            "suggestion": "10 icons outside 17–28pt: 'Check' 16×16, 'Check' 16×16, 'Check' 16×16, …",
             "source": "local",
             "nodeId": "I9762:1427;565:14467",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/sf-symbols"
@@ -303,15 +357,7 @@
             "check": "Touch target ≥ 44×44pt",
             "ruleId": "hig.touch-target",
             "status": "pass",
-            "suggestion": "Hit area 240×156pt",
-            "source": "local",
-            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
-          },
-          {
-            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
-            "ruleId": "hig.contrast",
-            "status": "pass",
-            "suggestion": "All text meets contrast minimums",
+            "suggestion": "Hit area 648×44pt",
             "source": "local",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
           },
@@ -348,14 +394,6 @@
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/color"
           },
           {
-            "check": "Layout margins ≥ 16pt",
-            "ruleId": "hig.margins",
-            "source": "local",
-            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/layout",
-            "status": "na",
-            "suggestion": "No container ≥ 320pt wide"
-          },
-          {
             "check": "Standard control heights",
             "ruleId": "hig.control-height",
             "source": "local",
@@ -368,7 +406,7 @@
       "m3": {
         "platform": "m3",
         "score": {
-          "passed": 10,
+          "passed": 9,
           "total": 12
         },
         "checks": [
@@ -378,7 +416,7 @@
             "status": "fail",
             "suggestion": "Missing state: Hover, Focused, Pressed, Disabled",
             "source": "local",
-            "nodeId": "9762:1426",
+            "nodeId": "3119:10423",
             "missingStates": [
               "Hover",
               "Focus",
@@ -388,10 +426,28 @@
             "guidelineUrl": "https://m3.material.io/foundations/interaction/states"
           },
           {
+            "check": "Touch target ≥ 48×48dp",
+            "ruleId": "m3.touch-target",
+            "status": "warning",
+            "suggestion": "Hit area 648×44dp is below 48×48dp",
+            "source": "local",
+            "nodeId": "9762:1426",
+            "guidelineUrl": "https://m3.material.io/foundations/designing/structure"
+          },
+          {
+            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
+            "ruleId": "m3.contrast",
+            "status": "warning",
+            "suggestion": "20 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "source": "local",
+            "nodeId": "I9762:1427;280:12941",
+            "guidelineUrl": "https://m3.material.io/foundations/designing/color-contrast"
+          },
+          {
             "check": "Spacing and sizes on 4dp grid",
             "ruleId": "m3.spacing-grid",
             "status": "warning",
-            "suggestion": "3 layers off the 4dp grid: 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10",
+            "suggestion": "10 layers off the 4dp grid: 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10, …",
             "source": "local",
             "nodeId": "I9762:1427;565:14466",
             "guidelineUrl": "https://m3.material.io/foundations/designing/structure"
@@ -400,26 +456,10 @@
             "check": "Icons 24dp",
             "ruleId": "m3.icon-size",
             "status": "warning",
-            "suggestion": "3 icons not 24dp: 'Check' 16×16, 'Check' 16×16, 'Check' 16×16",
+            "suggestion": "10 icons not 24dp: 'Check' 16×16, 'Check' 16×16, 'Check' 16×16, …",
             "source": "local",
             "nodeId": "I9762:1427;565:14467",
             "guidelineUrl": "https://m3.material.io/styles/icons/designing-icons"
-          },
-          {
-            "check": "Touch target ≥ 48×48dp",
-            "ruleId": "m3.touch-target",
-            "status": "pass",
-            "suggestion": "Hit area 240×156dp",
-            "source": "local",
-            "guidelineUrl": "https://m3.material.io/foundations/designing/structure"
-          },
-          {
-            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
-            "ruleId": "m3.contrast",
-            "status": "pass",
-            "suggestion": "All text meets contrast minimums",
-            "source": "local",
-            "guidelineUrl": "https://m3.material.io/foundations/designing/color-contrast"
           },
           {
             "check": "Font sizes on M3 type scale",
@@ -482,7 +522,7 @@
       "web": {
         "platform": "web",
         "score": {
-          "passed": 11.5,
+          "passed": 11,
           "total": 14
         },
         "checks": [
@@ -492,7 +532,7 @@
             "status": "fail",
             "suggestion": "Missing state: Hover, Focus, Disabled — a visible focus state is required (WCAG 2.4.7)",
             "source": "local",
-            "nodeId": "9762:1426",
+            "nodeId": "3119:10423",
             "missingStates": [
               "Hover",
               "Focus",
@@ -501,10 +541,19 @@
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
           },
           {
+            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
+            "ruleId": "web.contrast",
+            "status": "warning",
+            "suggestion": "20 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "source": "local",
+            "nodeId": "I9762:1427;280:12941",
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
+          },
+          {
             "check": "Ruby font (Fira Sans)",
             "ruleId": "web.font",
             "status": "warning",
-            "suggestion": "6 text layers not using Fira Sans: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
+            "suggestion": "20 text layers not using Fira Sans: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
             "source": "local",
             "nodeId": "I9762:1427;280:12941",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -513,7 +562,7 @@
             "check": "Spacing on Ruby spacing scale",
             "ruleId": "web.spacing",
             "status": "warning",
-            "suggestion": "3 layers off the Ruby spacing scale: 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10",
+            "suggestion": "10 layers off the Ruby spacing scale: 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10, …",
             "source": "local",
             "nodeId": "I9762:1427;565:14466",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -522,7 +571,7 @@
             "check": "Real copy, not placeholders",
             "ruleId": "web.real-content",
             "status": "warning",
-            "suggestion": "3 text layers use placeholder copy ('Label'). Use real words such as \"Save profile\" so examples read like the product",
+            "suggestion": "10 text layers use placeholder copy ('Label'). Use real words such as \"Save profile\" so examples read like the product",
             "source": "local",
             "nodeId": "I9762:1427;280:12941",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -531,17 +580,9 @@
             "check": "Target size ≥ 24×24px (44 preferred)",
             "ruleId": "web.target-size",
             "status": "pass",
-            "suggestion": "Target 240×156px",
+            "suggestion": "Target 648×44px",
             "source": "local",
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html"
-          },
-          {
-            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
-            "ruleId": "web.contrast",
-            "status": "pass",
-            "suggestion": "All text meets contrast minimums",
-            "source": "local",
-            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
           },
           {
             "check": "Body ≥ 16px, nothing < 12px",
@@ -612,7 +653,7 @@
     },
     "interactiveItems": [
       {
-        "nodeId": "9762:1426",
+        "nodeId": "3119:10423",
         "name": "Checkbox Group",
         "kind": "selection",
         "kindLabel": "Checkbox / radio / switch",
@@ -674,24 +715,22 @@
         "kind": "selection",
         "kindLabel": "Checkbox / radio / switch",
         "found": [
+          "Hover",
+          "Focus",
           "Disabled"
         ],
         "designed": [
           "Default",
-          "Disabled"
+          "Disabled",
+          "Hover",
+          "Focus"
         ],
         "canonical": {
-          "Disabled": "Disabled"
+          "Disabled": "Disabled",
+          "Hover": "Hover",
+          "Focus": "Focus"
         },
         "missing": [
-          {
-            "state": "Hover",
-            "why": "Pointer is over it (web, iPad, desktop) — a subtle fill or underline change shows it is clickable."
-          },
-          {
-            "state": "Focus",
-            "why": "Reached by keyboard or switch control — needs a clearly visible focus ring (WCAG 2.4.7)."
-          },
           {
             "state": "Pressed",
             "why": "While tapped or clicked — immediate feedback that the press registered (HIG Pressed, M3 Pressed)."
@@ -730,13 +769,22 @@
       }
     ]
   },
-  "properties": [],
+  "properties": [
+    {
+      "name": "orientation",
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal"
+    }
+  ],
   "namingIssues": null,
   "existingDescription": null,
   "aiOpinions": {
     "available": false,
-    "reason": "no API key saved"
+    "reason": "the AI response had no platform opinions"
   },
-  "figmaUrl": "https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=9762-1426",
-  "exportedAt": "2026-11-24T11:47:13.068Z"
+  "figmaUrl": "https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=3119-10423",
+  "exportedAt": "2026-11-24T20:29:49.802Z"
 }

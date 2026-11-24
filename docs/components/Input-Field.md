@@ -2,15 +2,39 @@
 
 > **Design System Readiness: 97%**
 
-Single-line text entry with an optional label, description and error message.
+A single-line text entry built as a variant set of ten combinations: five states crossed with two value types. Label, description and error message are each optional through boolean properties.
 
-Use for short free text such as a name, email address or postcode. For several lines of text use Textarea Field. For a fixed list of options use Select Field.
+### Purpose
 
-States: Default, Hover, Focus, Error, Disabled.
+Collects short free text such as a name, email address or postcode. The field groups a label, an optional description, the input box itself and an optional error message in one vertical stack.
 
-Accessibility: the label is linked to the input. The error message is announced when the field is invalid. Keep a visible label; a placeholder alone is not a label.
+### Behaviour
 
-Code: <InputField> from primitives (<Input> when there is no label).
+The State property covers Default, Hover, Focus, Error and Disabled. Hover and Focus change the border treatment, Focus adds a focus ring, Error switches the border and message text to the danger colours, and Disabled uses the disabled background, border and text tokens. Value Type switches the input text between real content (Default) and placeholder styling (Placeholder), which uses the tertiary text colour. Note that State=Error and Has Error are separate controls, so both need setting for a complete error presentation.
+
+### Composition
+
+No nested component instances. The structure is plain text layers for Label, Description and Error, plus an Input frame containing the Value text. AI code generators should still check the development codebase for an existing input primitive before building a new one.
+
+### Usage
+
+Use for short single-line text. Use Textarea Field for multi-line input and Select Field for a fixed list of options. Keep the visible label on; a placeholder is not a substitute for a label. Add the description when the user needs guidance before typing, and the error message only when the field is invalid.
+
+### Code Generation Notes
+
+Map to <InputField> from primitives, or <Input> when Has Label is false. Hover and Focus are browser-driven, so do not encode them as props; expose state through disabled, invalid or similar flags. The label must be tied to the input with a for/id pair, the description and error linked by aria-describedby, and the input marked aria-invalid when in error. The error message needs a live region so it is announced. Placeholder styling comes from the ::placeholder selector, not a separate text layer.
+
+## Design System Adoption
+
+| Criterion | Score | Basis |
+|-----------|-------|-------|
+| Reuse | 3/3 — Needed across teams or products | set manually |
+| Pattern Strength | 3/3 — Clear, reusable pattern with variants | suggested: 2 variant axes and 7 component properties. |
+| System Fit | 3/3 — Clearly extends and improves the system | set manually |
+| Value | 3/3 — Saves time, reduces duplication, or solves a clear problem | set manually |
+| Evidence | 3/3 — Proven need (multiple teams or repeated implementations) | set manually |
+
+**Total: 15/15** (13–15) — Add to the design system
 
 ## Variants
 
@@ -27,15 +51,15 @@ Code: <InputField> from primitives (<Input> when there is no label).
 <table>
 <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Required</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td>Has Label</td><td><code>BOOLEAN</code></td><td><code>true</code></td><td>No</td><td>-</td></tr>
-<tr><td>Has Error</td><td><code>BOOLEAN</code></td><td><code>false</code></td><td>No</td><td>-</td></tr>
-<tr><td>Label</td><td><code>TEXT</code></td><td><code>Label</code></td><td>No</td><td>-</td></tr>
-<tr><td>Error</td><td><code>TEXT</code></td><td><code>Error</code></td><td>No</td><td>-</td></tr>
-<tr><td>Has Description</td><td><code>BOOLEAN</code></td><td><code>false</code></td><td>No</td><td>-</td></tr>
-<tr><td>Description</td><td><code>TEXT</code></td><td><code>Description</code></td><td>No</td><td>-</td></tr>
-<tr><td>Value</td><td><code>TEXT</code></td><td><code>Value</code></td><td>No</td><td>-</td></tr>
-<tr><td>State</td><td><code>VARIANT</code></td><td><code>Default</code></td><td>No</td><td>-</td></tr>
-<tr><td>Value Type</td><td><code>VARIANT</code></td><td><code>Default</code></td><td>No</td><td>-</td></tr>
+<tr><td>Has Label</td><td><code>BOOLEAN</code></td><td><code>true</code></td><td>No</td><td>Shows or hides the label above the input.</td></tr>
+<tr><td>Has Error</td><td><code>BOOLEAN</code></td><td><code>false</code></td><td>No</td><td>Shows or hides the error message below the input.</td></tr>
+<tr><td>Label</td><td><code>TEXT</code></td><td><code>Label</code></td><td>No</td><td>Label text for the field.</td></tr>
+<tr><td>Error</td><td><code>TEXT</code></td><td><code>Error</code></td><td>No</td><td>Error message text shown when the field is invalid.</td></tr>
+<tr><td>Has Description</td><td><code>BOOLEAN</code></td><td><code>false</code></td><td>No</td><td>Shows or hides the helper description between the label and the input.</td></tr>
+<tr><td>Description</td><td><code>TEXT</code></td><td><code>Description</code></td><td>No</td><td>Helper text that explains what to enter.</td></tr>
+<tr><td>Value</td><td><code>TEXT</code></td><td><code>Value</code></td><td>No</td><td>Text inside the input, used for both entered content and placeholder copy.</td></tr>
+<tr><td>State</td><td><code>VARIANT</code></td><td><code>Default</code></td><td>No</td><td>Visual state of the input box and its text.</td></tr>
+<tr><td>Value Type</td><td><code>VARIANT</code></td><td><code>Default</code></td><td>No</td><td>Switches the input text between entered content and placeholder styling.</td></tr>
 </tbody>
 </table>
 
@@ -144,7 +168,12 @@ Patterns: [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/pattern
 | Ruby font (Fira Sans) | ⚠️ Warning | 20 text layers not using Fira Sans: 'Label' Inter, 'Value' Inter, 'Label' Inter, … |
 | Real copy, not placeholders | ⚠️ Warning | 20 text layers use placeholder copy ('Label', 'Value'). Use real words such as "Save profile" so examples read like the product |
 
-> AI opinions not available: no API key saved
+### AI opinion (not scored)
+
+- **Works at narrow widths** (warning): Confirm the label, description and error text wrap rather than truncate when the field is 320px wide.
+- **Clear headings and structure** (pass): Label, description, input and error follow a logical top-to-bottom order; link the description and error to the input so screen readers pick them up.
+- **Links vs buttons** (pass): No links or buttons are present in the field, so nothing is mistaken for a control.
+- **Not colour alone** (pass): The error state pairs the danger border with a text message, so meaning is not carried by colour alone.
 
 ## Component Readiness
 

@@ -1,12 +1,29 @@
 {
   "component": "Radio Field",
-  "description": "input with 5 properties",
-  "readinessScore": 92,
-  "adoption": null,
+  "description": "A single radio choice with a label and an optional description line, built as eight variants covering four states and two value types. Checked and Unchecked exist as a design-file property only; in code the state comes from the group value.\n\nPURPOSE: Lets a person pick one option from a set of mutually exclusive choices. Each instance is one option, with supporting description text underneath the label for extra context.\n\nBEHAVIOUR: Four states are drawn: Default, Hover, Focus and Disabled. Hover signals pointer targeting, Focus adds a focus ring using Stroke/Focus Ring and Border/Focus/Default, and Disabled swaps all fills, borders, icon and text to the disabled token set. Selection is not toggled by the component itself. Radio fields are grouped in code and the group value decides which one renders as checked.\n\nCOMPOSITION: No nested component instances were detected. Each variant is built from plain frames and text layers: a \"Checkbox and Label\" row holding the \"Radio\" frame and the \"Label\" text, then a \"Description Row\" holding a \"Space\" spacer frame and the \"Description\" text. AI code generators should still check the development codebase for an existing radio input, label and helper text primitive before writing new ones.\n\nUSAGE: Use for one-of-many selection where all options should be visible at once. Use a checkbox field when more than one choice can be selected, and a select or dropdown when the list is long. Turn Has Description off when the label alone is clear enough, so the spacer row does not add dead space.\n\nCODE GENERATION NOTES: Render a native input of type radio with a shared name attribute per group, and bind the label with a for or wrapping label element. Attach the description with aria-describedby. Do not model Checked as a prop on the field itself; derive it from the group value. Hover and Focus should come from CSS pseudo-classes rather than separate components, and Focus should use :focus-visible so the ring only shows for keyboard users. Disabled must set the disabled attribute, not just the disabled colour tokens. Arrow key roving focus within the group is standard radio behaviour and is not visible in the design file.",
+  "readinessScore": 96,
+  "adoption": {
+    "scores": {
+      "reuse": 3,
+      "patternStrength": 3,
+      "systemFit": 3,
+      "value": 3,
+      "evidence": 3
+    },
+    "sources": {
+      "reuse": "manual",
+      "patternStrength": "suggested",
+      "systemFit": "suggested",
+      "value": "manual",
+      "evidence": "manual"
+    },
+    "total": 15,
+    "decision": "Add to the design system"
+  },
   "mcpScore": 100,
   "metadata": {
     "component": "Radio Field",
-    "description": "input with 5 properties",
+    "description": "A single radio choice with a label and an optional description line, built as eight variants covering four states and two value types. Checked and Unchecked exist as a design-file property only; in code the state comes from the group value.\n\nPURPOSE: Lets a person pick one option from a set of mutually exclusive choices. Each instance is one option, with supporting description text underneath the label for extra context.\n\nBEHAVIOUR: Four states are drawn: Default, Hover, Focus and Disabled. Hover signals pointer targeting, Focus adds a focus ring using Stroke/Focus Ring and Border/Focus/Default, and Disabled swaps all fills, borders, icon and text to the disabled token set. Selection is not toggled by the component itself. Radio fields are grouped in code and the group value decides which one renders as checked.\n\nCOMPOSITION: No nested component instances were detected. Each variant is built from plain frames and text layers: a \"Checkbox and Label\" row holding the \"Radio\" frame and the \"Label\" text, then a \"Description Row\" holding a \"Space\" spacer frame and the \"Description\" text. AI code generators should still check the development codebase for an existing radio input, label and helper text primitive before writing new ones.\n\nUSAGE: Use for one-of-many selection where all options should be visible at once. Use a checkbox field when more than one choice can be selected, and a select or dropdown when the list is long. Turn Has Description off when the label alone is clear enough, so the spacer row does not add dead space.\n\nCODE GENERATION NOTES: Render a native input of type radio with a shared name attribute per group, and bind the label with a for or wrapping label element. Attach the description with aria-describedby. Do not model Checked as a prop on the field itself; derive it from the group value. Hover and Focus should come from CSS pseudo-classes rather than separate components, and Focus should use :focus-visible so the ring only shows for keyboard users. Disabled must set the disabled attribute, not just the disabled colour tokens. Arrow key roving focus within the group is standard radio behaviour and is not visible in the design file.",
     "props": [
       {
         "name": "Has Description",
@@ -17,6 +34,7 @@
         ],
         "default": "true",
         "defaultValue": "true",
+        "description": "Shows or hides the description row beneath the label.",
         "required": false
       },
       {
@@ -27,6 +45,7 @@
         ],
         "default": "Description",
         "defaultValue": "Description",
+        "description": "Supporting text under the label, indented to align past the radio.",
         "required": false
       },
       {
@@ -37,6 +56,7 @@
         ],
         "default": "Label",
         "defaultValue": "Label",
+        "description": "The option text sat beside the radio.",
         "required": false
       },
       {
@@ -44,10 +64,13 @@
         "type": "VARIANT",
         "values": [
           "Default",
-          "Disabled"
+          "Disabled",
+          "Hover",
+          "Focus"
         ],
         "default": "Default",
         "defaultValue": "Default",
+        "description": "Visual state of the field, including the focus ring and the disabled colour set.",
         "required": false
       },
       {
@@ -59,17 +82,22 @@
         ],
         "default": "Checked",
         "defaultValue": "Checked",
+        "description": "Whether the radio is drawn filled with the inner dot or empty. Design-file only; code derives this from the group value.",
         "required": false
       }
     ],
     "states": [
       "Default",
-      "Disabled"
+      "Disabled",
+      "Hover",
+      "Focus"
     ],
     "variants": {
       "State": [
         "Default",
-        "Disabled"
+        "Disabled",
+        "Hover",
+        "Focus"
       ],
       "Value Type": [
         "Unchecked",
@@ -90,7 +118,8 @@
         "Background/Disabled/Default",
         "Border/Disabled/default",
         "Icon/Disabled/Default",
-        "Text/Disabled/Default"
+        "Text/Disabled/Default",
+        "Border/Focus/Default"
       ],
       "spacing": [
         "Space/300"
@@ -104,10 +133,14 @@
       "effects": [],
       "borders": [
         "Stroke/Border",
-        "Radius/Full"
+        "Radius/Full",
+        "Stroke/Focus Ring"
       ]
     },
-    "accessibility": {},
+    "accessibility": {
+      "keyboardNavigation": "Standard keyboard navigation support",
+      "screenReader": "Screen reader accessible"
+    },
     "audit": {
       "designIssues": [],
       "tokenOpportunities": [],
@@ -115,7 +148,7 @@
     },
     "propertyCheatSheet": [
       "🎨 Variants: Value Type(2)",
-      "🔄 States: Default/Disabled",
+      "🔄 States: Default/Disabled/Hover/Focus",
       "⚙️ Other: Has Description: true/false, Description: Description, Label: Label"
     ],
     "mcpReadiness": {
@@ -249,6 +282,16 @@
         "isActualToken": true,
         "source": "figma-variable",
         "recommendation": "Using Text/Disabled/Default token"
+      },
+      {
+        "name": "Border/Focus/Default",
+        "value": "#ec221f",
+        "unit": "hex",
+        "type": "strokes-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Border/Focus/Default token"
       }
     ],
     "spacing": [
@@ -323,17 +366,27 @@
         "isActualToken": true,
         "source": "figma-variable",
         "recommendation": "Using Radius/Full token"
+      },
+      {
+        "name": "Stroke/Focus Ring",
+        "value": "2px",
+        "unit": "px",
+        "type": "strokeTopWeight-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Stroke/Focus Ring token"
       }
     ],
     "summary": {
-      "totalTokens": 19,
-      "actualTokens": 19,
+      "totalTokens": 21,
+      "actualTokens": 21,
       "hardCodedValues": 0,
       "aiSuggestions": 0,
       "byCategory": {
         "colors": {
-          "total": 12,
-          "tokens": 12,
+          "total": 13,
+          "tokens": 13,
           "hardCoded": 0,
           "suggestions": 0
         },
@@ -356,8 +409,8 @@
           "suggestions": 0
         },
         "borders": {
-          "total": 2,
-          "tokens": 2,
+          "total": 3,
+          "tokens": 3,
           "hardCoded": 0,
           "suggestions": 0
         }
@@ -372,6 +425,14 @@
       },
       {
         "name": "Disabled",
+        "found": true
+      },
+      {
+        "name": "Hover",
+        "found": true
+      },
+      {
+        "name": "Focus",
         "found": true
       }
     ],
@@ -395,8 +456,8 @@
       },
       {
         "check": "Focus state",
-        "status": "warning",
-        "suggestion": "Add a visible focus state to support keyboard navigation (WCAG 2.4.7)"
+        "status": "pass",
+        "suggestion": "Component has a focus state for keyboard navigation"
       },
       {
         "check": "Minimum font size",
@@ -406,7 +467,7 @@
       {
         "check": "Color contrast",
         "status": "warning",
-        "suggestion": "8 text layers not measurable: \"Label\" (no solid fill behind the text), \"Description\" (no solid fill behind the text), \"Label\" (no solid fill behind the text), …. Check manually"
+        "suggestion": "16 text layers not measurable: \"Label\" (no solid fill behind the text), \"Description\" (no solid fill behind the text), \"Label\" (no solid fill behind the text), …. Check manually"
       }
     ],
     "detachedInstances": [],
@@ -422,7 +483,7 @@
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "hig.contrast",
             "status": "warning",
-            "suggestion": "8 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "suggestion": "16 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
             "source": "local",
             "nodeId": "280:13742",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
@@ -440,7 +501,7 @@
             "check": "Uses SF Pro (system font)",
             "ruleId": "hig.font",
             "status": "warning",
-            "suggestion": "8 text layers not using SF Pro: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
+            "suggestion": "16 text layers not using SF Pro: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
             "source": "local",
             "nodeId": "280:13742",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
@@ -520,30 +581,44 @@
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/buttons",
             "status": "na",
             "suggestion": "Not a button, nav bar or tab bar"
+          },
+          {
+            "check": "Uses iOS patterns",
+            "ruleId": "hig.ai.native-patterns",
+            "status": "warning",
+            "suggestion": "On iOS, present one-of-many choices as a grouped list with a trailing checkmark rather than a circular radio dot.",
+            "source": "ai"
+          },
+          {
+            "check": "Right control for the job",
+            "ruleId": "hig.ai.control-choice",
+            "status": "warning",
+            "suggestion": "For a short iOS option set, consider a segmented control or checkmark list; keep the radio for web and cross-platform screens.",
+            "source": "ai"
+          },
+          {
+            "check": "Clear visual hierarchy",
+            "ruleId": "hig.ai.hierarchy",
+            "status": "pass",
+            "suggestion": "The label uses default text colour and the description uses secondary, so the choice itself leads.",
+            "source": "ai"
+          },
+          {
+            "check": "Content-first, minimal chrome",
+            "ruleId": "hig.ai.deference",
+            "status": "pass",
+            "suggestion": "Decoration is limited to the radio fill, border and focus ring, which keeps attention on the option text.",
+            "source": "ai"
           }
         ]
       },
       "m3": {
         "platform": "m3",
         "score": {
-          "passed": 9,
+          "passed": 9.5,
           "total": 11
         },
         "checks": [
-          {
-            "check": "Hover, Focused, Pressed, Disabled states",
-            "ruleId": "m3.states",
-            "status": "fail",
-            "suggestion": "Missing state: Hover, Focused, Pressed",
-            "source": "local",
-            "nodeId": "9762:1412",
-            "missingStates": [
-              "Hover",
-              "Focus",
-              "Pressed"
-            ],
-            "guidelineUrl": "https://m3.material.io/foundations/interaction/states"
-          },
           {
             "check": "Touch target ≥ 48×48dp",
             "ruleId": "m3.touch-target",
@@ -557,10 +632,22 @@
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "m3.contrast",
             "status": "warning",
-            "suggestion": "8 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "suggestion": "16 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
             "source": "local",
             "nodeId": "280:13742",
             "guidelineUrl": "https://m3.material.io/foundations/designing/color-contrast"
+          },
+          {
+            "check": "Hover, Focused, Pressed, Disabled states",
+            "ruleId": "m3.states",
+            "status": "warning",
+            "suggestion": "Missing state: Pressed",
+            "source": "local",
+            "nodeId": "9762:1412",
+            "missingStates": [
+              "Pressed"
+            ],
+            "guidelineUrl": "https://m3.material.io/foundations/interaction/states"
           },
           {
             "check": "Font sizes on M3 type scale",
@@ -633,34 +720,49 @@
             "guidelineUrl": "https://m3.material.io/styles/icons/designing-icons",
             "status": "na",
             "suggestion": "No icons"
+          },
+          {
+            "check": "Button emphasis hierarchy",
+            "ruleId": "m3.ai.emphasis",
+            "status": "pass",
+            "suggestion": "Selected uses a filled brand treatment and unselected an outline, which matches M3 selection emphasis.",
+            "source": "ai"
+          },
+          {
+            "check": "Colour roles used correctly",
+            "ruleId": "m3.ai.color-roles",
+            "status": "pass",
+            "suggestion": "Brand background and border for selection, default text for the label and secondary for the description all map sensibly.",
+            "source": "ai"
+          },
+          {
+            "check": "Uses Android/M3 patterns",
+            "ruleId": "m3.ai.native-patterns",
+            "status": "pass",
+            "suggestion": "The circular radio with supporting text follows M3 list-and-radio conventions.",
+            "source": "ai"
+          },
+          {
+            "check": "Clear visual hierarchy",
+            "ruleId": "m3.ai.hierarchy",
+            "status": "pass",
+            "suggestion": "The selected dot plus brand border makes the chosen option the clear focal point in a group.",
+            "source": "ai"
           }
         ]
       },
       "web": {
         "platform": "web",
         "score": {
-          "passed": 11.5,
+          "passed": 12.5,
           "total": 14
         },
         "checks": [
           {
-            "check": "Hover, Focus and Disabled states",
-            "ruleId": "web.states",
-            "status": "fail",
-            "suggestion": "Missing state: Hover, Focus — a visible focus state is required (WCAG 2.4.7)",
-            "source": "local",
-            "nodeId": "9762:1412",
-            "missingStates": [
-              "Hover",
-              "Focus"
-            ],
-            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
-          },
-          {
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "web.contrast",
             "status": "warning",
-            "suggestion": "8 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "suggestion": "16 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
             "source": "local",
             "nodeId": "280:13742",
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
@@ -669,7 +771,7 @@
             "check": "Ruby font (Fira Sans)",
             "ruleId": "web.font",
             "status": "warning",
-            "suggestion": "8 text layers not using Fira Sans: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
+            "suggestion": "16 text layers not using Fira Sans: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
             "source": "local",
             "nodeId": "280:13742",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -678,7 +780,7 @@
             "check": "Real copy, not placeholders",
             "ruleId": "web.real-content",
             "status": "warning",
-            "suggestion": "4 text layers use placeholder copy ('Label'). Use real words such as \"Save profile\" so examples read like the product",
+            "suggestion": "8 text layers use placeholder copy ('Label'). Use real words such as \"Save profile\" so examples read like the product",
             "source": "local",
             "nodeId": "280:13742",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -698,6 +800,14 @@
             "suggestion": "Text sizes are readable",
             "source": "local",
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html"
+          },
+          {
+            "check": "Hover, Focus and Disabled states",
+            "ruleId": "web.states",
+            "status": "pass",
+            "suggestion": "Hover, Focus and Disabled states present",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
           },
           {
             "check": "Dark mode",
@@ -762,6 +872,34 @@
             "suggestion": "Visible text can be the accessible name",
             "source": "local",
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+          },
+          {
+            "check": "Clear headings and structure",
+            "ruleId": "web.ai.structure",
+            "status": "warning",
+            "suggestion": "Document that these fields must sit inside a fieldset with a legend so the group question is announced before the options.",
+            "source": "ai"
+          },
+          {
+            "check": "Works at narrow widths",
+            "ruleId": "web.ai.responsive",
+            "status": "warning",
+            "suggestion": "Confirm the label and description wrap over multiple lines at 320px while staying aligned past the radio.",
+            "source": "ai"
+          },
+          {
+            "check": "Links vs buttons",
+            "ruleId": "web.ai.link-vs-button",
+            "status": "pass",
+            "suggestion": "This is a form control rather than a link or button, and the label text names the choice directly.",
+            "source": "ai"
+          },
+          {
+            "check": "Not colour alone",
+            "ruleId": "web.ai.color-only",
+            "status": "pass",
+            "suggestion": "Selection is shown by the inner dot and focus by a visible ring, not by colour alone.",
+            "source": "ai"
           }
         ]
       }
@@ -773,24 +911,22 @@
         "kind": "selection",
         "kindLabel": "Checkbox / radio / switch",
         "found": [
+          "Hover",
+          "Focus",
           "Disabled"
         ],
         "designed": [
           "Default",
-          "Disabled"
+          "Disabled",
+          "Hover",
+          "Focus"
         ],
         "canonical": {
-          "Disabled": "Disabled"
+          "Disabled": "Disabled",
+          "Hover": "Hover",
+          "Focus": "Focus"
         },
         "missing": [
-          {
-            "state": "Hover",
-            "why": "Pointer is over it (web, iPad, desktop) — a subtle fill or underline change shows it is clickable."
-          },
-          {
-            "state": "Focus",
-            "why": "Reached by keyboard or switch control — needs a clearly visible focus ring (WCAG 2.4.7)."
-          },
           {
             "state": "Pressed",
             "why": "While tapped or clicked — immediate feedback that the press registered (HIG Pressed, M3 Pressed)."
@@ -856,7 +992,9 @@
       "name": "State",
       "values": [
         "Default",
-        "Disabled"
+        "Disabled",
+        "Hover",
+        "Focus"
       ],
       "default": "Default"
     },
@@ -872,9 +1010,8 @@
   "namingIssues": null,
   "existingDescription": "Checked / Unchecked is a property within the design file only. Coded Radio Fields are grouped and the value of the field indicates its state.",
   "aiOpinions": {
-    "available": false,
-    "reason": "no API key saved"
+    "available": true
   },
   "figmaUrl": "https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=9762-1412",
-  "exportedAt": "2026-11-24T11:47:13.019Z"
+  "exportedAt": "2026-11-24T20:30:26.231Z"
 }

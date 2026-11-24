@@ -17,22 +17,28 @@
   white-space: nowrap;
 
   > .icon {
-    --icon-color: var(--button-color);
+    --icon-color: var(--button-icon-color, var(--button-color));
   }
 }
 
+/* Figma State=Loading: the spinner takes the start icon slot, other icons hide. */
+.button[data-pending] > .icon:not(.button-spinner) {
+  display: none;
+}
+
+/* Both sizes use Single Line/Body Base and a 16px icon in Figma; only padding differs. */
 .button-size-small {
-  --button-font: var(--sds-font-body-small);
+  --button-font: var(--sds-font-single-line-body-base);
   --button-padding-x: var(--sds-size-space-200);
   --button-padding-y: var(--sds-size-space-200);
 
   > .icon {
-    --icon-diameter: var(--sds-typography-scale-02);
+    --icon-diameter: var(--sds-typography-scale-03);
   }
 }
 
 .button-size-medium {
-  --button-font: var(--sds-font-body-base);
+  --button-font: var(--sds-font-single-line-body-base);
 
   --button-padding-x: var(--sds-size-space-300);
   --button-padding-y: var(--sds-size-space-300);
@@ -42,49 +48,35 @@
   }
 }
 
-.button[data-focus-visible] {
-  outline: none;
-  --offset: calc(var(--sds-size-stroke-border) * 2);
-  &::before {
-    content: "";
-    border-radius: calc(var(--border-radius) + var(--offset));
-    bottom: calc(-1 * var(--offset));
-    box-shadow: 0 0 0 var(--global-focus-ring-size)
-      var(--global-focus-ring-color);
-    left: calc(-1 * var(--offset));
-    position: absolute;
-    right: calc(-1 * var(--offset));
-    top: calc(-1 * var(--offset));
-  }
-}
-
 .button-variant-primary {
   --button-background-color: var(--sds-color-background-brand-default);
   --button-border-color: var(--sds-color-border-brand-default);
   --button-color: var(--sds-color-text-brand-on-brand);
+  --button-icon-color: var(--sds-color-icon-brand-on-brand);
   &[data-hovered]:not([data-disabled]) {
     --button-background-color: var(--sds-color-background-brand-hover);
     --button-border-color: var(--sds-color-border-brand-default);
   }
 }
 .button-variant-neutral {
-  --button-background-color: var(--sds-color-background-default-secondary);
-  --button-border-color: var(--sds-color-border-default-default);
+  --button-background-color: var(--sds-color-background-neutral-tertiary);
+  --button-border-color: var(--sds-color-border-neutral-secondary);
   --button-color: var(--sds-color-text-default-default);
+  --button-icon-color: var(--sds-color-icon-default-default);
   &[data-hovered]:not([data-disabled]) {
     --button-background-color: var(
-      --sds-color-background-default-secondary-hover
+      --sds-color-background-neutral-tertiary-hover
     );
   }
 }
 .button-variant-subtle {
   --button-background-color: transparent;
   --button-border-color: transparent;
-  --button-color: var(--sds-color-text-brand-default);
+  --button-color: var(--sds-color-text-neutral-default);
+  --button-icon-color: var(--sds-color-icon-default-default);
   &[data-hovered]:not([data-disabled]) {
-    --button-background-color: var(
-      --sds-color-background-default-default-hover
-    );
+    --button-border-color: var(--sds-color-border-default-default);
+    --button-color: var(--sds-color-text-default-default);
   }
 }
 
@@ -111,9 +103,20 @@
 .button[data-disabled] {
   cursor: default;
   pointer-events: none;
+}
+/* A loading link is disabled for behaviour only; it keeps the Loading look. */
+.button[data-disabled]:not([data-link-pending]) {
   --button-background-color: var(--sds-color-background-disabled-default);
   --button-border-color: var(--sds-color-border-disabled-default);
-  --button-color: var(--sds-color-text-disabled-default);
+  --button-color: var(--sds-color-text-disabled-on-disabled);
+  --button-icon-color: var(--sds-color-icon-disabled-on-disabled);
+}
+
+/* Figma State=Focus: a Stroke/Focus Ring outside the edge replaces the border. */
+.button[data-focus-visible] {
+  outline: var(--global-focus-ring-size) solid var(--global-focus-ring-color);
+  outline-offset: 0;
+  --button-border-color: transparent;
 }
 
 .button-group {

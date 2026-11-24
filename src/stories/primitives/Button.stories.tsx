@@ -47,23 +47,41 @@ export const StoryButtonStates: StoryObj<typeof Button> = {
         gap: "var(--sds-size-space-400)",
         gridTemplateColumns: "repeat(4, max-content)",
         alignItems: "center",
+        justifyItems: "start",
       }}
     >
-      {(["primary", "neutral", "subtle"] as const).map((variant) => (
-        <React.Fragment key={variant}>
-          <Button variant={variant}>Default</Button>
-          <Button variant={variant} isDisabled>
-            Disabled
-          </Button>
-          <Button variant={variant} isLoading>
-            Loading
-          </Button>
-          <Button variant={variant} size="small" isLoading>
-            Loading small
-          </Button>
-        </React.Fragment>
-      ))}
+      {(["medium", "small"] as const).map((size) =>
+        (["primary", "neutral", "subtle"] as const).map((variant) => (
+          <React.Fragment key={`${size}-${variant}`}>
+            <Button variant={variant} size={size}>
+              Button
+            </Button>
+            <Button variant={variant} size={size}>
+              <IconArrowLeft />
+              Button
+              <IconActivity />
+            </Button>
+            <Button variant={variant} size={size} isDisabled>
+              Button
+            </Button>
+            <Button variant={variant} size={size} isLoading>
+              Button
+              <IconActivity />
+            </Button>
+          </React.Fragment>
+        )),
+      )}
     </div>
+  ),
+};
+
+export const StoryButtonLinkLoading: StoryObj<typeof Button> = {
+  name: "Button Link Loading",
+  render: () => (
+    <Button href="#navigated" isLoading>
+      Button
+      <IconActivity />
+    </Button>
   ),
 };
 

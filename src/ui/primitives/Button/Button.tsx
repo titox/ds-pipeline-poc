@@ -81,17 +81,23 @@ function renderButton(
       children
     ) : (
       <>
-        {isLoading ? <IconLoader /> : null}
+        {isLoading ? <IconLoader className="button-spinner" /> : null}
         {children}
       </>
     )
   ) as React.ReactNode;
 
   if (isAnchorProps(props)) {
+    // A link has no pending state in react-aria, so a loading link is disabled
+    // (no navigation, no press) and keeps the loading look through CSS.
+    const isLinkLoading = Boolean(isLoading) && !props.isDisabled;
     return (
       <RACLink
         {...props}
         className={className}
+        isDisabled={props.isDisabled || isLoading}
+        data-pending={isLoading || undefined}
+        data-link-pending={isLinkLoading || undefined}
         ref={ref as React.ForwardedRef<HTMLAnchorElement>}
       >
         {content}

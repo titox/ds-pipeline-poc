@@ -1,8 +1,69 @@
 # Radio Group
 
-> **Design System Readiness: 86%**
+> **Design System Readiness: 90%**
 
-_No description set on this component in Figma._
+A labelled set of five Radio Field instances, available in horizontal and vertical layouts. The group label is editable text and each option carries a label row and a description row.
+
+### Purpose
+
+Lets a person pick one option from a short list of mutually exclusive choices under a shared heading such as "Delivery speed".
+
+### Behaviour
+
+Selection is single-choice, so picking one option clears the previous one. The group label names the question. Keyboard users move between options with arrow keys and the whole group takes one tab stop.
+
+### Composition
+
+Five instances of Radio Field per variant. Each Radio Field holds a "Checkbox and Label" frame and a "Description Row" frame. Code generators should look for an existing Radio Field or radio input in the codebase before building a new one, and reuse the group wrapper if one already exists.
+
+### Usage
+
+Use when every option should be visible at once and only one answer is allowed. Use a select or dropdown when the list is long. Use checkboxes when more than one answer is allowed. The horizontal variant suits two or three short labels. The vertical variant suits longer labels or options with descriptions.
+
+### Code Generation Notes
+
+Render as a fieldset with the group label as the legend, and give every input the same name attribute so the browser handles single selection. The count of five is a Figma convenience, so treat options as data and map over them rather than hard-coding five items. Orientation should be a layout prop, not a separate component. Error, disabled and required handling sits on the group or the individual field and is not expressed as a Figma property here.
+
+## Design System Adoption
+
+| Criterion | Score | Basis |
+|-----------|-------|-------|
+| Reuse | 2/3 — Used in a few places | set manually |
+| Pattern Strength | 2/3 — Some flexibility | suggested: 1 variant axis and 1 component property. |
+| System Fit | 2/3 — Could fit with some adjustments | set manually |
+| Value | 2/3 — Moderate benefit | set manually |
+| Evidence | 2/3 — Some examples | set manually |
+
+**Total: 10/15** (10–12) — Refine or extend an existing component
+
+## Variants
+
+<table>
+<thead><tr><th>Variant group</th><th>Options</th></tr></thead>
+<tbody>
+<tr><td>orientation</td><td><code>horizontal</code> <code>vertical</code></td></tr>
+</tbody>
+</table>
+
+## Properties
+
+<table>
+<thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Required</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>Group Label</td><td><code>TEXT</code></td><td><code>Delivery speed</code></td><td>No</td><td>The heading that names the question the options answer.</td></tr>
+<tr><td>orientation</td><td><code>VARIANT</code></td><td><code>horizontal</code></td><td>No</td><td>Lays the Radio Field instances out in a row or a column.</td></tr>
+</tbody>
+</table>
+
+## Property Quick Reference
+
+<table>
+<thead><tr><th>Property</th><th>Values</th><th>Default</th></tr></thead>
+<tbody>
+<tr><td>Group Label</td><td><code>Delivery speed</code></td><td><code>Delivery speed</code></td></tr>
+<tr><td>orientation</td><td><code>horizontal</code> <code>vertical</code></td><td><code>horizontal</code></td></tr>
+</tbody>
+</table>
 
 ## States
 
@@ -65,44 +126,42 @@ Patterns: [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/pattern
 
 | Check | Status | Details |
 |-------|--------|---------|
-| Touch target size | ✅ Pass | Target size 240×156px meets recommended 44px minimum |
+| Touch target size | ✅ Pass | Target size 648×44px meets recommended 44px minimum (smallest variant: "orientation=horizontal") |
 | Focus state | ⚠️ Warning | Add a visible focus state to support keyboard navigation (WCAG 2.4.7) |
 | Minimum font size | ✅ Pass | Smallest text is 16px, meets readability guidelines |
-| Color contrast | ✅ Pass | Lowest contrast ratio is 4.6:1, meets WCAG AA (4.5:1) |
+| Color contrast | ⚠️ Warning | 20 text layers not measurable: "Label" (no solid fill behind the text), "Description" (no solid fill behind the text), "Label" (no solid fill behind the text), …. Check manually |
 
 ## Web · WCAG 2.2 + Ruby DS review
 
-**Score:** 12/14 (86%)
+**Score:** 11.5/14 (82%)
 
 | Rule | Status | Details |
 |------|--------|---------|
 | Hover, Focus and Disabled states | ❌ Fail | Missing state: Hover, Focus, Disabled — a visible focus state is required (WCAG 2.4.7) |
-| Ruby font (Fira Sans) | ⚠️ Warning | 6 text layers not using Fira Sans: 'Label' Inter, 'Description' Inter, 'Label' Inter, … |
-| Real copy, not placeholders | ⚠️ Warning | 3 text layers use placeholder copy ('Label'). Use real words such as "Save profile" so examples read like the product |
+| Text contrast ≥ 4.5:1 (3:1 large) | ⚠️ Warning | 20 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually |
+| Ruby font (Fira Sans) | ⚠️ Warning | 20 text layers not using Fira Sans: 'Label' Inter, 'Description' Inter, 'Label' Inter, … |
+| Real copy, not placeholders | ⚠️ Warning | 10 text layers use placeholder copy ('Label'). Use real words such as "Save profile" so examples read like the product |
 
-> AI opinions not available: no API key saved
+### AI opinion (not scored)
+
+- **Works at narrow widths** (warning): Design how the horizontal variant stacks at 320px, since five options with descriptions will not fit in a row.
+- **Clear headings and structure** (pass): Treat the group label as the legend so the question is announced before each option.
+- **Links vs buttons** (pass): No links or buttons sit inside the group, so option labels should stay plain text tied to their input.
+- **Not colour alone** (pass): Selection shows as a filled dot as well as a colour change, so keep the dot when adding any error styling.
 
 ## Component Readiness
 
 | Check | Status | Details |
 |-------|--------|---------|
-| Property configuration | ⚠️ Warning | Consider adding properties for component customization |
-| Component description | ⚠️ Warning | Add a component description to help MCP and AI understand the component purpose and usage |
+| Property configuration | ✅ Pass | Component has configurable properties |
+| Component description | ✅ Pass | Component has description for MCP/AI context |
 
-## AI Interpretation (Readiness score: 86%)
+## AI Interpretation (Readiness score: 90%)
 
 **What AI Reads Well:**
+- Has component description for better MCP/AI context
+- Has 2 configurable properties
 - Uses design tokens for consistency
-
-**Where AI Gets Confused:**
-- Missing component description - AI cannot understand component purpose and intent
-- No configurable properties - component lacks flexibility for different use cases
-
-**How to Improve AI Understanding:**
-- Add component properties for customization and reuse
-
-**What AI Would Generate:**
-Define component properties to enable customization without code changes.
 
 ---
 

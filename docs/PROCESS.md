@@ -31,8 +31,9 @@ Click a step in the diagram above, or press Play to walk through it. The table h
 | Code Connect links | Done | All 96 component links point at our Figma file, and each target was checked. They are not published to Figma yet. |
 | Storybook 10 with AI support | Done | The upgrade works and an assistant can now read and preview stories. |
 | Other components | In progress | The same set of states still has to be added to the rest of the interactive components. |
-| RubyLint documentation | In progress | Runs by hand in Figma. It must be run again after the new states. |
-| Automated checks | Planned | A token check and a contract check will compare the code with the Figma specification. |
+| RubyLint documentation | Done for Buttons and Inputs | The designer audits each component by hand in the Figma plugin. The exports for all 16 components on the Buttons and Inputs pages are in the repository. |
+| Automated checks | Done | A token check, a contract check and code quality rules run on every change and compare the code with the Figma specification. |
+| Component review (rubric) | In progress | An independent reviewer scores each coded component against six criteria. Button passed in the third round. The other components are next. |
 | Supernova | Planned | Our account is connected, but Supernova is not linked to the Figma file yet. |
 | iOS and Android | Out of scope | Not part of this test. |
 
@@ -43,6 +44,9 @@ Click a step in the diagram above, or press Play to walk through it. The table h
 - **Brand lives in its own Figma collection.** Light and dark are separate from brand, so adding a brand later does not touch the existing modes.
 - **Every interactive component gets the same states.** Default, Hover, Focus and Disabled. Form fields also get Error. Buttons also get Loading. Pressed and Active are left out.
 - **The code is checked against the Figma contract.** A script in the build will compare what the code offers with what the RubyLint contract says. Without it, "tested" would only mean "it displays".
+- **The audit is done by hand.** The designer runs RubyLint in the Figma plugin, looks at the component and reads the result. This gives more judgement and precision than an unattended run.
+- **Finished code is scored by someone who did not write it.** A reviewer with no knowledge of the build conversation scores each component against a written rubric. It needs evidence for every pass.
+- **The Figma file belongs to the designer.** Nothing is changed in Figma without a clear yes for that specific change.
 - **Supernova's place is still open.** It could read from Figma and feed the code, or it could sit at the end as a publishing portal. We have not chosen yet.
 - **The repository is public and anonymous.** No client or personal names appear in the code, the history or these pages.
 
@@ -105,7 +109,7 @@ Still to do for the pilot: re-run RubyLint (manual, in Figma) to regenerate the 
 Repeat this for every new or changed component. Names in `<>` are placeholders.
 
 1. **Design in Figma.** Use token variables only (no raw colours or sizes). Follow the state standard: Default, Hover, Focus, Disabled, plus Error for form fields and Loading for buttons.
-2. **Audit with RubyLint.** Either in the Figma plugin, or from the terminal with `npm run rubylint -- "<component link>"` (see `scripts/rubylint/README.md`; no AI or REST API calls). Fix what it flags. Both give the Markdown spec, the JSON contract and the Jira specification. Commit the exports in `docs/components/`.
+2. **Audit with RubyLint, by hand.** The designer runs the plugin in Figma, reviews the result and fixes what it flags. Export the Markdown spec and the JSON contract for each component into one folder (file names `<component-name>-markdown.md` and `<component-name>-json.json`). They are then copied into `docs/components/` as `<Name>.md` and `<Name>.contract.json` and committed. A terminal runner exists (`npm run rubylint`, see `scripts/rubylint/README.md`) but it is not used for audits: the manual run is the standard.
 3. **Sync tokens if any variable changed.** Re-export the tokens with the plugin in `scripts/tokens/figma-plugin-token-json` into `scripts/tokens/tokens.json`, then run `npm run script:tokens` (add `--skip-rest-api` when using the plugin JSON). Review the `src/theme.css` diff.
 4. **Build or update the React component** in `src/ui/primitives/<Component>/`, following `src/AGENTS.md`. Props must match the Figma component properties. States map to CSS pseudo-classes, `disabled` and `aria-*`, not to extra components.
 5. **Update Code Connect** in `src/figma/primitives/<component>/<Component>.figma.ts`:
@@ -114,6 +118,7 @@ Repeat this for every new or changed component. Names in `<>` are placeholders.
    - Point the `source=` header at this repository, not the upstream one (to do: the existing templates still reference upstream).
 6. **Update Storybook** in `src/stories/primitives/<Component>.stories.tsx`: one story per variant and state, so the stories are the visual contract.
 7. **Check.** `npm run lint:tokens` and `npm run check:contracts` must pass (both run in CI). The contract check compares each `docs/components/*.contract.json` with its Code Connect mapping, the React component props (TypeScript) and `src/theme.css`. Errors: Code Connect maps a Figma property or option that no longer exists, writes a prop the component does not accept, or a Figma token is missing from `theme.css`. Warnings: unmapped Figma properties, no Code Connect file, hard-coded values in Figma.
+7b. **Score the component with the rubric** (`eval/rubric.md`). A fresh reviewer that has not seen the build follows `eval/reviewer-brief.md`, measures the six criteria in a real browser (checks, properties, states, visual match, accessibility, themes) and writes `eval/scorecards/<Name>.md` with screenshots. Fix what fails and score again, three rounds at most. If the code matches Figma but the design itself fails, it goes back to the designer.
 8. **Publish Code Connect:** `npx figma connect publish` (needs a Figma API token with the Code Connect write scope; set it locally, never commit it). Verify in Figma Dev Mode that the code snippet shows for the component.
 9. **Write the component description, only once the component is complete** (all states of the standard, React component, Code Connect). Add a `## <Figma name>` section to `docs/components/DESCRIPTIONS.md`, run `npm run descriptions -- <figma file link>` to write it to Figma, then re-run `npm run rubylint` so the Markdown and Jira specs show it. Incomplete components keep no description. Dev resources: `npm run script:dev-resources` (REST API only).
 10. **Commit and push** with the neutral identity (`DS PoC`), then check the Pages deploy. Re-run it if it fails with "No artifacts named github-pages".
@@ -130,17 +135,28 @@ Remap status: all 97 URLs in `figma.config.json` now point at the local Figma fi
 
 ## Next session
 
-Start: reopen the Desktop Bridge plugin in the Figma file, then `npm run rubylint -- <link>` and `npm run check:contracts` to see the current state.
+Start: reopen the Desktop Bridge plugin in the Figma file, start Storybook (`npm run storybook`), then `npm run lint` to see the current state.
 
-1. Rewrite the Input Field description in RubyLint's AI format: a 1 to 2 sentence summary, then `PURPOSE:`, `BEHAVIOUR:`, `COMPOSITION:`, `USAGE:`, `CODE GENERATION NOTES:` (same labels the plugin's prompt uses, see `src/core/component-analyzer.ts` in RubyLint). Check it against the code, Code Connect and Figma (Focus is a 2px border; State=Error and Has Error are separate Figma controls). Save in `docs/components/DESCRIPTIONS.md`, run `npm run descriptions`, then `npm run rubylint`. The exports split the labels into sections, so the Jira Summary matches the plugin without an API key. Use the same format for every component once it is complete.
-2. Roll the state standard out to the 11 incomplete components on the Inputs page, lowest score first (Select Field 65%, Search 78%). Per component: design missing states in Figma, update CSS, story, Code Connect, then write its description in `docs/components/DESCRIPTIONS.md` and run `npm run descriptions` and `npm run rubylint`.
-3. Review the 11 contract check warnings (unmapped Has Error / Has Label / Open / Value Type, Date fields without code or Code Connect, hard-coded strokes in Date Picker and Select).
-4. Export the other Figma pages with `npm run rubylint` (Buttons next; its description still says 24 variants).
-5. Contrast: 6 Inputs components have a lowest contrast of 1.5:1 (placeholder or disabled text, to check).
-6. Distinct focus colour: `Border/Focus/Default` is still the same red as error.
-7. Brand collection in Figma for the second brand; Supernova role in the flow; Jira connection to create tickets from the `.jira.md` specs.
+0. Button passed the rubric in round 3 (`eval/scorecards/Button.md`). Still to do: commit, publish Code Connect, check the Pages deploy. Open items that need a design decision: how Loading is announced and whether the spinner moves, whether a Button should accept a link (`href`) at all, the faint Subtle hover border (1.4:1), disabled text contrast in light (1.49:1), the stale description (says 24 variants, there are 30), the Focus and Loading variants not connected to the component properties, and Button Danger focus still using `Icon/Danger/Tertiary`.
 
-Done on 2026-11-24: Input Hover and Focus (code, story, Code Connect). Headless RubyLint runner (`npm run rubylint`), exports in `docs/components/`. Contract check in CI (`npm run check:contracts`). Description sync (`npm run descriptions`), Input Field described. Search Code Connect and Disabled border variable fixed. ESLint clean and in `npm run lint` and CI (fixed 7 dropped-prop bugs). `npm run lint` exists for the oneds plugin's Stop hook.
+1. Roll the state standard out to the 11 incomplete components on the Inputs page, lowest score first (Select Field 65%, Search 78%). Per component: design missing states in Figma, update CSS, story, Code Connect, then write its description in `docs/components/DESCRIPTIONS.md` (same labelled format as Input Field: summary, then `PURPOSE:`, `BEHAVIOUR:`, `COMPOSITION:`, `USAGE:`, `CODE GENERATION NOTES:`). When adding variants in Figma, bind their layers to the component properties (copy `componentPropertyReferences` from the Default variant) and run `npm run descriptions` and `npm run rubylint`.
+2. Review the 11 contract check warnings (unmapped Has Error / Has Label / Open / Value Type, Date fields without code or Code Connect, hard-coded strokes in Date Picker and Select).
+3. Other Figma pages: the designer audits and exports them by hand, as done for Buttons and Inputs. The Jira specifications in `docs/components/` are older than the manual exports and need exporting again.
+4. Contrast: 6 Inputs components have a lowest contrast of 1.5:1 (placeholder or disabled text, to check).
+5. Distinct focus colour: `Border/Focus/Default` is still the same red as error.
+6. Brand collection in Figma for the second brand; Supernova role in the flow; Jira connection to create tickets from the `.jira.md` specs.
+7. Once Button and the Inputs components are through the workflow, package the whole workflow as a reusable skill, so the next component runs the same steps with one command. The manual audit and the yes before any Figma change stay as fixed steps.
+
+Done on 2026-11-24 (evening):
+- Manual RubyLint exports for all 16 components on the Buttons and Inputs pages imported into `docs/components/` (Markdown and JSON contract). Scores: 82% to 97%, lowest Checkbox Group 82%, Button Group 86%, Search 88%. Contract check: 16 contracts, 0 errors, 13 warnings.
+- Rubric (`eval/rubric.md`) and reviewer brief (`eval/reviewer-brief.md`) written. `@axe-core/playwright` installed for the accessibility scan.
+- Button aligned with the Figma variants (`button.css`, `Button.tsx`, story): Neutral uses the Neutral tokens, Subtle text and hover follow Figma, Disabled uses the On Disabled tokens, Small uses 16px text and icon, Focus is a 2px ring on the edge, Loading hides other icons.
+- Button review round 1: Fail on one item. Subtle text used `Text/Neutral/Default` in Medium and `Text/Default/Default` in Small in Figma. Decision: `Text/Neutral/Default` for both. The three Small variants (Default, Focus, Loading) were rebound in Figma.
+- Button review round 2: 5 of 6 criteria pass. Visual match and themes now pass with 0 mismatches in light and dark, and the axe scan finds 0 violations. The one fail: a Button used as a link could still be activated while Loading. Fixed in `Button.tsx` and `button.css` (a loading link is now disabled and keeps the Loading look), with a new story "Button Link Loading".
+- Button review round 3: Pass, all six criteria. 0 token mismatches in light and dark across the 30 Figma variants, axe 0 serious or critical violations, keyboard and link behaviour correct. Scorecard and screenshots in `eval/scorecards/`. Measured on the local Storybook server, not on a fresh build. Screen reader output was not tested.
+- Connections checked: Figma bridge, GitHub, Pages and local Storybook work. Supernova still needs a sign-in.
+
+Done on 2026-11-24 (day): Input Hover and Focus (code, story, Code Connect). Headless RubyLint runner (`npm run rubylint`), exports in `docs/components/`. Contract check in CI (`npm run check:contracts`). Description sync (`npm run descriptions`), Input Field described. Search Code Connect and Disabled border variable fixed. ESLint clean and in `npm run lint` and CI (fixed 7 dropped-prop bugs). `npm run lint` exists for the oneds plugin's Stop hook. Input Field description rewritten in RubyLint's labelled format and synced; Input Field Hover and Focus variants bound to the component properties in Figma.
 
 ## 1. Clone SDS and publish to own GitHub
 
@@ -233,4 +249,8 @@ A Figma plugin that audits components (tokens, states, accessibility, naming) an
 | Supernova position | Decide later | Build up to Storybook first; keep it an explicit open decision |
 | Demo scenarios | Update an existing component and create a new one | Update shows drift and change propagation; create shows the full path |
 | Contract check | Script in CI comparing RubyLint JSON to code | Otherwise "tested" only means "it renders" |
+| Audit | Manual, in the Figma plugin | The designer sees the component and reads the result; more judgement and precision than an unattended run |
+| Component review | Written rubric scored by a fresh reviewer | The builder does not mark its own work; every pass needs evidence |
+| Changes in Figma | Only after a clear yes for that change | The file belongs to the designer |
+| Subtle button text | `Text/Neutral/Default` in both sizes | Medium and Small differed; with this the label darkens on hover in both |
 | Demo format | Recorded video, not live | Avoids dependence on plugin, AI generation, Jira and deploy timing |
