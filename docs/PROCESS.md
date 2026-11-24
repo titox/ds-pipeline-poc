@@ -34,7 +34,7 @@ Click a step in the diagram above, or press Play to walk through it. The table h
 | RubyLint documentation | Done for Buttons and Inputs | The designer audits each component by hand in the Figma plugin. The exports for all 16 components on the Buttons and Inputs pages are in the repository. |
 | Automated checks | Done | A token check, a contract check and code quality rules run on every change and compare the code with the Figma specification. |
 | Component review (rubric) | In progress | An independent reviewer scores each coded component against six criteria. Button passed in the third round. The other components are next. |
-| Supernova | Planned | Our account is connected, but Supernova is not linked to the Figma file yet. |
+| Supernova | In progress | Connected. It is linked to the Figma file and to the Storybook, and now holds the Figma variables with their Light and Dark values. Its data is current as of 24 November. It has no documented components yet. Its place in the flow is still undecided. |
 | iOS and Android | Out of scope | Not part of this test. |
 
 ## What we decided and why
@@ -83,7 +83,7 @@ The rest of this page is for designers and developers who need to repeat or exte
 | 12 | Contract check: RubyLint JSON vs code props and tokens, run in CI | Planned |
 | 13 | Demo scenarios: update an existing component and create a new one | Planned |
 | 14 | Record the demo as a video (no live demo) | Planned |
-| 15 | Supernova as source of truth | Blocked: workspace not set up; position in the flow undecided |
+| 15 | Supernova as source of truth | In progress: workspace connected and linked to Figma and Storybook; token import incomplete; position in the flow undecided |
 
 | 5b | Improve the Figma file first: audit every component with RubyLint, add missing states, regenerate documentation | In progress |
 | 16 | Later, once everything else is done: improve Figma, Storybook, Code Connect and add interactive prototyping | Parked |
@@ -144,8 +144,8 @@ Start: reopen the Desktop Bridge plugin in the Figma file, start Storybook (`npm
 3. Other Figma pages: the designer audits and exports them by hand, as done for Buttons and Inputs. The Jira specifications in `docs/components/` are older than the manual exports and need exporting again.
 4. Contrast: 6 Inputs components have a lowest contrast of 1.5:1 (placeholder or disabled text, to check).
 5. Distinct focus colour: `Border/Focus/Default` is still the same red as error.
-6. Brand collection in Figma for the second brand; Supernova role in the flow; Jira connection to create tickets from the `.jira.md` specs.
-7. Once Button and the Inputs components are through the workflow, package the whole workflow as a reusable skill, so the next component runs the same steps with one command. The manual audit and the yes before any Figma change stay as fixed steps.
+6. Supernova tokens: the variables are in. Still to do: remove the old empty "Dark" theme, and run the plugin again after every variable change in Figma (it is a manual push). Brand collection in Figma for the second brand; Supernova role in the flow; Jira connection to create tickets from the `.jira.md` specs.
+7. Once Button and the Inputs components are through the workflow, package the whole workflow as a reusable skill, so the next component runs the same steps with one command. The manual audit and the yes before any Figma change stay as fixed steps. Planned shape, not built yet: the designer sends the Figma link of the component; the skill asks for the three manual exports (JSON contract, Markdown, Jira request); it runs the workflow and sends short progress notes on what it is doing; it ends with a summary of every change and links to Storybook, GitHub and Supernova.
 
 Done on 2026-11-24 (evening):
 - Manual RubyLint exports for all 16 components on the Buttons and Inputs pages imported into `docs/components/` (Markdown and JSON contract). Scores: 82% to 97%, lowest Checkbox Group 82%, Button Group 86%, Search 88%. Contract check: 16 contracts, 0 errors, 13 warnings.
@@ -154,6 +154,11 @@ Done on 2026-11-24 (evening):
 - Button review round 1: Fail on one item. Subtle text used `Text/Neutral/Default` in Medium and `Text/Default/Default` in Small in Figma. Decision: `Text/Neutral/Default` for both. The three Small variants (Default, Focus, Loading) were rebound in Figma.
 - Button review round 2: 5 of 6 criteria pass. Visual match and themes now pass with 0 mismatches in light and dark, and the axe scan finds 0 violations. The one fail: a Button used as a link could still be activated while Loading. Fixed in `Button.tsx` and `button.css` (a loading link is now disabled and keeps the Loading look), with a new story "Button Link Loading".
 - Button review round 3: Pass, all six criteria. 0 token mismatches in light and dark across the 30 Figma variants, axe 0 serious or critical violations, keyboard and link behaviour correct. Scorecard and screenshots in `eval/scorecards/`. Measured on the local Storybook server, not on a fresh build. Screen reader output was not tested.
+- Supernova connected and read (nothing changed in it). One design system, one brand ("Default"), one theme ("Dark") with no token overrides. Sources: the Figma file (last import 2026-11-23, 29 tokens and 2,134 components, automatic import off) and the Storybook (last import 2026-11-24, 62 stories, without the newest Button story). No canonical components are defined.
+- Supernova design system renamed by the designer to "SDS Design PoC" (was "My Design System").
+- Why Supernova has only 29 tokens: its normal Figma import reads styles only, not variables. The 29 tokens are exactly the 14 text styles and 15 effect styles of the file. The 347 variables, their collections and the Light and Dark modes need the Supernova Figma Variables Sync plugin, run from inside Figma by the designer. That is also why the Dark theme in Supernova is empty.
+- Variables pushed to Supernova by the designer with the Variables Sync plugin (free plan, default settings). Checked from here: a new source for the plugin exists; themes "SDS Light" and "SDS Dark" each carry 137 colour values; sample tokens resolve to different values in dark (for example `Background/Default/Default` is #FFFFFF in light and #1E1E1E in dark), keep their link to the primitive colour and carry the web code name (`var(--sds-color-...)`). The plugin also created themes "Default", "Desktop", "Mobile" and "Tablet". The Supernova app shows all four data sources as healthy (Figma, Figma Variables Sync, Storybook); an error flag reported through the connection did not show in the app. Open point: the old empty "Dark" theme is still there. Token count confirmed in the Supernova app: Color 137, Color Primitives 100, Size 41, Typography 35, Typography Primitives 31, Responsive 4, which is all 348 Figma variables, plus the 29 style tokens.
+- Supernova Storybook source refreshed (2026-11-24 21:54 UTC): it now includes the new "Button Link Loading" story. The Figma source was re-imported by the designer at 21:56 UTC: 2,134 components updated, none added or removed. Supernova is now current with Figma components, Figma variables and Storybook.
 - Connections checked: Figma bridge, GitHub, Pages and local Storybook work. Supernova still needs a sign-in.
 
 Done on 2026-11-24 (day): Input Hover and Focus (code, story, Code Connect). Headless RubyLint runner (`npm run rubylint`), exports in `docs/components/`. Contract check in CI (`npm run check:contracts`). Description sync (`npm run descriptions`), Input Field described. Search Code Connect and Disabled border variable fixed. ESLint clean and in `npm run lint` and CI (fixed 7 dropped-prop bugs). `npm run lint` exists for the oneds plugin's Stop hook. Input Field description rewritten in RubyLint's labelled format and synced; Input Field Hover and Focus variants bound to the component properties in Figma.
