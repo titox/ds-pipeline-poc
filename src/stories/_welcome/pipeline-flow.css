@@ -1,0 +1,371 @@
+/* Motion profile: documentation. Fast and informative; transform, opacity and stroke only. */
+.pf {
+  --pf-fast: 150ms;
+  --pf-base: 250ms;
+  --pf-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --pf-radius: var(--sds-size-radius-200);
+  --pf-ink: var(--sds-color-text-default-default);
+  --pf-muted: var(--sds-color-text-default-secondary);
+  --pf-line: var(--sds-color-border-default-default);
+  --pf-accent: var(--sds-color-text-default-default);
+  --pf-token: var(--sds-color-yellow-600);
+  --pf-token-ink: var(--sds-color-yellow-800);
+  background: var(--sds-color-background-default-default);
+  border: 1px solid var(--sds-color-border-default-default);
+  border-radius: calc(var(--pf-radius) * 2);
+  color: var(--pf-ink);
+  margin: var(--sds-size-space-600) 0;
+  padding: var(--sds-size-space-600);
+}
+
+.pf-bar {
+  align-items: center;
+  display: flex;
+  gap: var(--sds-size-space-400);
+  justify-content: space-between;
+  margin-bottom: var(--sds-size-space-400);
+}
+.pf p.pf-hint {
+  color: var(--pf-ink);
+  margin: 0;
+}
+.pf-play {
+  background: var(--sds-color-background-brand-default);
+  border: 0;
+  border-radius: var(--pf-radius);
+  color: var(--sds-color-text-brand-on-brand);
+  cursor: pointer;
+  font: inherit;
+  padding: var(--sds-size-space-200) var(--sds-size-space-600);
+  transition: transform var(--pf-fast) var(--pf-ease);
+}
+.pf-play:hover {
+  background: var(--sds-color-background-brand-hover);
+}
+.pf-play:active {
+  transform: scale(0.97);
+}
+.pf-play:focus-visible,
+.pf-head:focus-visible {
+  outline: 2px solid var(--global-focus-ring-color);
+  outline-offset: 2px;
+}
+
+/* Wide diagram scrolls sideways on small screens instead of shrinking the text. */
+.pf-scroll {
+  overflow-x: auto;
+}
+.pf-canvas {
+  min-width: 780px;
+}
+
+/* Stage headers, aligned with the six columns of the drawing */
+.pf-heads {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin-bottom: var(--sds-size-space-200);
+}
+.pf-head {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: var(--pf-radius);
+  color: var(--pf-ink);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  gap: var(--sds-size-space-100);
+  letter-spacing: 0.12em;
+  padding: var(--sds-size-space-200) var(--sds-size-space-100);
+  text-align: center;
+  text-transform: uppercase;
+  transition: color var(--pf-base) linear;
+}
+.pf-head-num {
+  align-items: center;
+  background: var(--sds-color-background-default-secondary);
+  border: 2px solid var(--pf-line);
+  border-radius: 50%;
+  color: var(--pf-ink);
+  display: inline-flex;
+  font-size: 0.8125rem;
+  height: 28px;
+  justify-content: center;
+  transition:
+    transform var(--pf-base) var(--pf-ease),
+    background-color var(--pf-base) linear,
+    border-color var(--pf-base) linear;
+  width: 28px;
+}
+.pf-head[data-reached="true"] .pf-head-num {
+  background: var(--sds-color-background-brand-default);
+  border-color: var(--sds-color-background-brand-default);
+  color: var(--sds-color-text-brand-on-brand);
+}
+.pf-head[data-active="true"] .pf-head-num {
+  transform: scale(1.15);
+}
+
+.pf-svg {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+/* Lane columns */
+.pf-lane {
+  fill: var(--sds-color-background-default-secondary);
+  opacity: 0.35;
+  transition: opacity var(--pf-base) linear;
+}
+.pf-lane[data-active="true"] {
+  opacity: 1;
+}
+
+/* Connections */
+.pf-edge {
+  fill: none;
+  opacity: 0.45;
+  stroke: var(--pf-line);
+  stroke-linecap: round;
+  stroke-width: 2.5;
+  transition:
+    opacity var(--pf-base) linear,
+    stroke var(--pf-base) linear;
+}
+.pf-edge[data-reached="true"] {
+  opacity: 1;
+  stroke: var(--pf-accent);
+}
+.pf-edge[data-kind="flow"][data-reached="true"] {
+  animation: pf-draw var(--pf-base) var(--pf-ease) both;
+  stroke-dasharray: 1;
+}
+@keyframes pf-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.pf-edge[data-kind="token"] {
+  stroke-dasharray: 8 7;
+}
+.pf-edge[data-kind="token"][data-reached="true"] {
+  stroke: var(--pf-token);
+}
+.pf-edge[data-kind="code"],
+.pf-edge[data-kind="undecided"] {
+  stroke-dasharray: 3 7;
+}
+.pf-edge[data-kind="code"][data-reached="true"],
+.pf-edge[data-kind="undecided"][data-reached="true"] {
+  stroke: var(--pf-muted);
+}
+
+.pf-arrow-default,
+.pf-arrow-muted {
+  fill: var(--pf-line);
+}
+.pf-arrow-active {
+  fill: var(--pf-accent);
+}
+.pf-arrow-token {
+  fill: var(--pf-token);
+}
+
+.pf-edge-label {
+  fill: var(--pf-ink);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+.pf-edge-label-token {
+  fill: var(--pf-token-ink);
+}
+
+/* Nodes */
+.pf-node {
+  color: var(--pf-ink);
+}
+.pf-node-inner {
+  opacity: 0.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity var(--pf-base) linear,
+    transform var(--pf-base) var(--pf-ease);
+}
+.pf-node[data-reached="true"] .pf-node-inner {
+  opacity: 1;
+}
+.pf-node[data-lane-active="true"] .pf-node-inner {
+  transform: scale(1.08);
+}
+.pf-tile {
+  fill: var(--sds-color-background-default-default);
+  stroke: var(--pf-line);
+  stroke-width: 1.5;
+}
+.pf-node[data-lane-active="true"] .pf-tile {
+  stroke: var(--pf-accent);
+  stroke-width: 2.5;
+}
+.pf-label {
+  fill: var(--pf-ink);
+  font-size: 15px;
+  font-weight: 700;
+}
+.pf-sub {
+  fill: var(--pf-ink);
+  font-size: 13px;
+}
+
+/* Status colours: shapes and text always carry the label too, so colour is never the only cue. */
+.pf-dot {
+  stroke: var(--sds-color-background-default-default);
+  stroke-width: 2;
+}
+[data-status="done"].pf-dot {
+  fill: var(--sds-color-background-positive-default);
+}
+[data-status="progress"].pf-dot {
+  fill: var(--sds-color-background-warning-default);
+}
+[data-status="planned"].pf-dot {
+  fill: var(--sds-color-border-neutral-default);
+}
+[data-status="done"].pf-legend-dot {
+  background: var(--sds-color-background-positive-default);
+}
+[data-status="progress"].pf-legend-dot {
+  background: var(--sds-color-background-warning-default);
+}
+[data-status="planned"].pf-legend-dot {
+  background: var(--sds-color-border-neutral-default);
+}
+
+.pf ul.pf-legend {
+  padding-left: 0 !important;
+  color: var(--pf-ink);
+  display: flex;
+  font-size: 0.875rem;
+  gap: var(--sds-size-space-600);
+  list-style: none;
+  margin: var(--sds-size-space-300) 0 0;
+  padding: 0;
+}
+.pf ul.pf-legend li {
+  color: var(--pf-ink);
+  margin: 0 !important;
+  align-items: center;
+  display: inline-flex;
+  gap: var(--sds-size-space-200);
+}
+.pf-legend-dot {
+  border: 2px solid var(--sds-color-background-default-default);
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+}
+
+/* Detail panel */
+.pf-detail {
+  animation: pf-enter var(--pf-base) var(--pf-ease) both;
+  background: var(--sds-color-background-default-secondary);
+  border-radius: var(--pf-radius);
+  margin-top: var(--sds-size-space-600);
+  padding: var(--sds-size-space-600);
+}
+@keyframes pf-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.pf h3.pf-detail-title {
+  color: var(--pf-ink);
+  font-family: inherit;
+  align-items: center;
+  display: flex;
+  font-size: 1.125rem;
+  gap: var(--sds-size-space-300);
+  margin: 0 0 var(--sds-size-space-400);
+}
+.pf-chip {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  padding: 2px var(--sds-size-space-300);
+}
+.pf-chip[data-status="done"] {
+  background: var(--sds-color-background-positive-secondary);
+  border-color: var(--sds-color-border-positive-default);
+  color: var(--sds-color-text-positive-default);
+}
+.pf-chip[data-status="progress"] {
+  background: var(--sds-color-background-warning-secondary);
+  border-color: var(--sds-color-border-warning-default);
+  color: var(--sds-color-text-warning-default);
+}
+.pf-chip[data-status="planned"] {
+  background: var(--sds-color-background-neutral-secondary);
+  border-color: var(--sds-color-border-neutral-default);
+  color: var(--sds-color-text-neutral-default);
+}
+.pf-facts {
+  display: grid;
+  gap: var(--sds-size-space-400);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+.pf .pf-facts dt {
+  font-style: normal;
+  color: var(--pf-ink);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--sds-size-space-100);
+  text-transform: uppercase;
+}
+.pf .pf-facts dd {
+  color: var(--pf-ink);
+  margin: 0 !important;
+  padding: 0 !important;
+}
+@media (max-width: 760px) {
+  .pf-facts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .pf {
+    --pf-token-ink: var(--sds-color-yellow-300);
+  }
+}
+
+/* Reduced motion: no movement, state changes are instant. */
+@media (prefers-reduced-motion: reduce) {
+  .pf *,
+  .pf *::before,
+  .pf *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .pf-node[data-lane-active="true"] .pf-node-inner,
+  .pf-head[data-active="true"] .pf-head-num {
+    transform: none;
+  }
+}

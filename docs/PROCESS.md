@@ -1,18 +1,67 @@
-# Design System Pipeline PoC: Process Runbook
+# Design system pipeline PoC
 
-Living document. Each step records what we did, why, how to repeat it, and how to verify it.
-Placeholders: `<account>` = GitHub account, `<repo>` = repository name, `<FIGMA_FILE_KEY>` = Figma file key.
+## In one minute
 
-## Goal and scope
+We are testing whether a design system can move from a Figma file to working code without anyone copying things by hand. A designer changes a component in Figma. A check scores it. Developers get a clear specification. The code is built, tested and shown in this Storybook. A tool called Supernova is meant to hold the official version of everything.
 
-Demonstrate an end-to-end design system pipeline:
-Figma → tokens → documentation (RubyLint plugin) → Storybook → Code Connect, with Supernova as source of truth.
+The test covers web only, built with React. It uses two brands, each with a light and a dark mode, so four looks in total. It starts from Figma's open Simple Design System, which we have changed to suit the demo.
 
-- Target (long term): Web React, iOS, Android and other devices, multi-themed.
-- This PoC: **Web React only**, 2 brands × 2 modes (Light, Dark) = 4 theme combinations.
-- Base: Figma's open-source Simple Design System (SDS), modified, with Code Connect.
+The demo will be a recorded video, not a live run. Several steps depend on plugins and external tools, and a recording avoids surprises on the day.
 
-## Status
+## How a component travels
+
+Click a step in the diagram above, or press Play to walk through it. The table has the same information in text.
+
+| Step | What happens | Who does it | What comes out |
+|---|---|---|---|
+| 1. Planning | Work starts in the backlog: a new component, or a change to an existing one. The backlog can be Jira or any other project management tool. | Product owner | A backlog item |
+| 2. Design | A component is created or changed in Figma, using shared colour and size tokens instead of loose values. | Designer | A Figma component with all its states |
+| 3. Audit and hand-off | RubyLint audits the component for tokens, states, accessibility and naming, and generates the documentation automatically. | Designer | Markdown documentation, a JSON contract and a Jira ticket |
+| 4. Build | The React component is written to match the specification and the existing code style. Tokens come from Figma and Code Connect links the code to the design. | Developer | Code in the GitHub repository |
+| 5. Check and review | Automated checks run, then Storybook is rebuilt and published. | Automated | A live Storybook page for the component |
+| 6. Source of truth | Supernova keeps the official record of tokens and components. | Design system team | One place everyone can trust |
+
+## Where we are
+
+| Area | Status | In plain words |
+|---|---|---|
+| Repository and published Storybook | Done | The code lives on GitHub and this Storybook updates automatically. |
+| Reading the Figma file | Done | We know what is in it: 347 variables, 78 component sets and 1,772 components, mostly icons. |
+| Button and Input Field states | Done | Button now has a Loading state. Input Field now has Hover and Focus. A new focus colour token ties Figma to the code. |
+| Code Connect links | Done | All 96 component links point at our Figma file, and each target was checked. They are not published to Figma yet. |
+| Storybook 10 with AI support | Done | The upgrade works and an assistant can now read and preview stories. |
+| Other components | In progress | The same set of states still has to be added to the rest of the interactive components. |
+| RubyLint documentation | In progress | Runs by hand in Figma. It must be run again after the new states. |
+| Automated checks | Planned | A token check and a contract check will compare the code with the Figma specification. |
+| Supernova | Planned | Our account is connected, but Supernova is not linked to the Figma file yet. |
+| iOS and Android | Out of scope | Not part of this test. |
+
+## What we decided and why
+
+- **React only for now.** One platform is enough to prove the pipeline. Other platforms can follow once it works.
+- **Two brands, each with light and dark.** One extra brand shows that theming works without multiplying the effort for every new brand. The second brand uses a made-up colour palette with no real branding.
+- **Brand lives in its own Figma collection.** Light and dark are separate from brand, so adding a brand later does not touch the existing modes.
+- **Every interactive component gets the same states.** Default, Hover, Focus and Disabled. Form fields also get Error. Buttons also get Loading. Pressed and Active are left out.
+- **The code is checked against the Figma contract.** A script in the build will compare what the code offers with what the RubyLint contract says. Without it, "tested" would only mean "it displays".
+- **Supernova's place is still open.** It could read from Figma and feed the code, or it could sit at the end as a publishing portal. We have not chosen yet.
+- **The repository is public and anonymous.** No client or personal names appear in the code, the history or these pages.
+
+## Risks and open questions
+
+- **Supernova is the least tested link.** It is the final step of the demo and the one we know least about.
+- **Tokens and components have to move together.** A new component often needs new tokens, so the token sync needs its own step in the demo.
+- **The focus colour is the same red as error states.** A focused field and an invalid field look alike. A separate colour is worth choosing.
+- **The token file is out of date.** It contains a third colour mode that the Figma copy does not have. A full export will bring them back in line.
+- **Where the RubyLint documents are stored is undecided.** They could sit in the repository or in Storybook pages.
+- **Publishing is occasionally flaky.** The deploy step sometimes fails with an "artifact not found" error. Running it again fixes it.
+
+---
+
+## Technical runbook
+
+The rest of this page is for designers and developers who need to repeat or extend the work. Each section says what we did, how to repeat it and how to check it. Placeholders: `<account>` is the GitHub account, `<repo>` the repository name, `<FIGMA_FILE_KEY>` the Figma file key.
+
+## Detailed status
 
 | # | Step | Status |
 |---|------|--------|
@@ -89,18 +138,6 @@ Remap status: all 97 URLs in `figma.config.json` now point at the local Figma fi
 5. Roll the state standard out to the remaining interactive components, then re-run RubyLint (manual).
 6. Open questions: Supernova position and access; where RubyLint exports live; focus ring colour is still the same red as error (distinct colour wanted).
 
-## Target demo flow
-
-1. Create or update a component in Figma.
-2. Audit with RubyLint: documentation in Figma, a JSON contract, and a specification for Jira.
-3. Handoff: the specification goes to Jira (pasted manually in the PoC).
-4. Code is generated from the specification, following the existing repo conventions.
-5. Contract check, token lint and tests pass in CI.
-6. Storybook is updated and published.
-7. Supernova (position still to be decided).
-
-Known risks: Supernova is untested and on the critical path; tokens must flow alongside components; deploys can need a re-run.
-
 ## 1. Clone SDS and publish to own GitHub
 
 Why: start from a maintained React + Code Connect + Storybook reference.
@@ -140,10 +177,15 @@ Why: the PoC is public, so it must not expose client or personal details.
 - Search the repo for client, company and personal names before every push.
 - Limit: GitHub Pages URLs always contain the account name. A neutral org or a private repo is the only way around it.
 
-## 4. Welcome story
+## 4. Overview page
 
-`src/stories/_welcome/Hello.stories.tsx` describes the PoC, with white text on the red `danger` token
-(`--sds-color-background-danger-default` and `--sds-color-text-danger-on-danger`).
+`src/stories/_welcome/Overview.mdx` is the single front page of the Storybook (SDS/Overview). It replaces the earlier Hello and Process pages and has three parts:
+- **Hero** (`Hero.tsx`, `hero.css`): the starting point, with the project links. White text on `--sds-color-red-600`, a contrast of 6.3:1 (the semantic danger token in light mode only reached 3.7:1, below the 4.5:1 needed for body text).
+- **Workflow diagram** (`PipelineFlow.tsx`, `pipeline-flow.css`, `logos.ts`): six swim-lane stages with service logos, a dashed design-token line and a dashed Code Connect line. To change a stage, edit `LANES`, `NODES` and `EDGES` in `PipelineFlow.tsx`.
+- **This document**, rendered from `docs/PROCESS.md`.
+
+The diagram is user-triggered (Play), animates only `transform`, `opacity` and stroke, and honours `prefers-reduced-motion`.
+Logos for Figma, Jira, GitHub, Storybook, React and GitHub Actions come from the Simple Icons set (CC0). RubyLint and Supernova use simple custom marks, because they are not in that set. Replace the Supernova mark with the official SVG when available.
 
 ## 5. Read the Figma system
 

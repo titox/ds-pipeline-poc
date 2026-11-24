@@ -1,0 +1,96 @@
+/* Red 600 with white text is 6.3:1 (WCAG AA needs 4.5:1 for body text). */
+.hero {
+  --hero-bg: var(--sds-color-red-600);
+  --hero-ink: var(--sds-color-white-1000);
+  background: var(--hero-bg);
+  border-radius: var(--sds-size-radius-400);
+  color: var(--hero-ink);
+  margin: 0 0 var(--sds-size-space-600);
+  padding: var(--sds-size-space-1200) var(--sds-size-space-600);
+}
+.hero,
+.hero * {
+  color: var(--hero-ink) !important;
+  text-decoration: none !important;
+}
+.hero h1,
+.hero p,
+.hero ul,
+.hero li {
+  font-family: inherit;
+  letter-spacing: normal;
+}
+.hero ul.hero-links,
+.hero ul.hero-links > li {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.hero ul.hero-links > li::marker {
+  content: "";
+}
+.hero ul.hero-links {
+  margin-bottom: var(--sds-size-space-600) !important;
+}
+.hero .hero-kicker {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  margin: 0 0 var(--sds-size-space-300);
+  text-transform: uppercase;
+}
+.hero h1.hero-title {
+  border: 0;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  margin: 0 0 var(--sds-size-space-400);
+  padding: 0;
+}
+.hero p.hero-lead {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  margin: 0 0 var(--sds-size-space-600);
+  max-width: 46rem;
+}
+.hero-links {
+  display: grid;
+  gap: var(--sds-size-space-300);
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  list-style: none;
+  margin: 0 0 var(--sds-size-space-600);
+  padding: 0;
+}
+.hero a.hero-link {
+  align-items: center;
+  background: rgb(255 255 255 / 0.12);
+  border: 1px solid rgb(255 255 255 / 0.55);
+  border-radius: var(--sds-size-radius-200);
+  display: flex;
+  gap: var(--sds-size-space-300);
+  padding: var(--sds-size-space-300) var(--sds-size-space-400);
+  transition: background-color 150ms linear;
+}
+.hero a.hero-link:hover {
+  background: rgb(255 255 255 / 0.22);
+}
+.hero a.hero-link:focus-visible {
+  outline: 3px solid var(--hero-ink);
+  outline-offset: 2px;
+}
+.hero-link-icon {
+  flex: none;
+  height: 28px;
+  width: 28px;
+}
+.hero-link-label {
+  display: block;
+  font-weight: 700;
+}
+.hero-link-note {
+  display: block;
+  font-size: 0.875rem;
+}
+.hero p.hero-next {
+  font-size: 0.9375rem;
+  margin: 0;
+}
