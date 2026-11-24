@@ -1,8 +1,16 @@
 # Input Field
 
-> **Design System Readiness: 93%**
+> **Design System Readiness: 97%**
 
-_No description set on this component in Figma._
+Single-line text entry with an optional label, description and error message.
+
+Use for short free text such as a name, email address or postcode. For several lines of text use Textarea Field. For a fixed list of options use Select Field.
+
+States: Default, Hover, Focus, Error, Disabled.
+
+Accessibility: the label is linked to the input. The error message is announced when the field is invalid. Keep a visible label; a placeholder alone is not a label.
+
+Code: <InputField> from primitives (<Input> when there is no label).
 
 ## Variants
 
@@ -143,19 +151,14 @@ Patterns: [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/pattern
 | Check | Status | Details |
 |-------|--------|---------|
 | Property configuration | ✅ Pass | Component has configurable properties |
-| Component description | ⚠️ Warning | Add a component description to help MCP and AI understand the component purpose and usage |
+| Component description | ✅ Pass | Component has description for MCP/AI context |
 
-## AI Interpretation (Readiness score: 93%)
+## AI Interpretation (Readiness score: 97%)
 
 **What AI Reads Well:**
+- Has component description for better MCP/AI context
 - Has 9 configurable properties
 - Uses design tokens for consistency
-
-**Where AI Gets Confused:**
-- Missing component description - AI cannot understand component purpose and intent
-
-**How to Improve AI Understanding:**
-- Add a descriptive explanation in component properties to help AI understand the component's purpose, behavior, and usage patterns
 
 ---
 

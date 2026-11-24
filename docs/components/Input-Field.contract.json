@@ -1,9 +1,9 @@
 {
   "component": "Input Field",
   "description": "input with 9 properties",
-  "readinessScore": 93,
+  "readinessScore": 97,
   "adoption": null,
-  "mcpScore": 97,
+  "mcpScore": 100,
   "metadata": {
     "component": "Input Field",
     "description": "input with 9 properties",
@@ -167,9 +167,7 @@
     "audit": {
       "designIssues": [],
       "tokenOpportunities": [],
-      "structureIssues": [
-        "Component lacks description - Add a description in component properties to help MCP and AI understand the component's purpose and usage"
-      ]
+      "structureIssues": []
     },
     "propertyCheatSheet": [
       "🎨 Variants: Value Type(2)",
@@ -178,15 +176,12 @@
     ],
     "mcpReadiness": {
       "strengths": [
+        "Has component description for better MCP/AI context",
         "Has 9 configurable properties",
         "Uses design tokens for consistency"
       ],
-      "gaps": [
-        "Missing component description - AI cannot understand component purpose and intent"
-      ],
-      "recommendations": [
-        "Add a descriptive explanation in component properties to help AI understand the component's purpose, behavior, and usage patterns"
-      ]
+      "gaps": [],
+      "recommendations": []
     }
   },
   "tokens": {
@@ -505,8 +500,8 @@
       },
       {
         "check": "Component description",
-        "status": "warning",
-        "suggestion": "Add a component description to help MCP and AI understand the component purpose and usage"
+        "status": "pass",
+        "suggestion": "Component has description for MCP/AI context"
       }
     ],
     "accessibility": [
@@ -1022,11 +1017,11 @@
     }
   ],
   "namingIssues": null,
-  "existingDescription": null,
+  "existingDescription": "Single-line text entry with an optional label, description and error message.\n\nUse for short free text such as a name, email address or postcode. For several lines of text use Textarea Field. For a fixed list of options use Select Field.\n\nStates: Default, Hover, Focus, Error, Disabled.\n\nAccessibility: the label is linked to the input. The error message is announced when the field is invalid. Keep a visible label; a placeholder alone is not a label.\n\nCode: <InputField> from primitives (<Input> when there is no label).",
   "aiOpinions": {
     "available": false,
     "reason": "no API key saved"
   },
   "figmaUrl": "https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=2136-2263",
-  "exportedAt": "2026-11-24T11:47:13.010Z"
+  "exportedAt": "2026-11-24T12:01:24.331Z"
 }

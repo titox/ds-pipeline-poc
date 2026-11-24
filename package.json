@@ -17,6 +17,7 @@
     "lint:tokens": "node scripts/lint-tokens.mjs",
     "check:contracts": "node scripts/contract-check.mjs",
     "rubylint": "node scripts/rubylint/run.mjs",
+    "descriptions": "node scripts/rubylint/descriptions.mjs",
     "script:tokens": "cd scripts/tokens; node --env-file=../../.env app.mjs --skip-rest-api; cd -;",
     "script:tokens:rest": "cd scripts/tokens; node --env-file=../../.env app.mjs; cd -;"
   },

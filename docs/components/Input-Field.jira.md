@@ -2,11 +2,19 @@
 
 Open in Figma: https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=2136-2263
 
-**Design system readiness:** 93%
+**Design system readiness:** 97%
 
 ## Summary
 
-_No description set on this component in Figma._
+Single-line text entry with an optional label, description and error message.
+
+Use for short free text such as a name, email address or postcode. For several lines of text use Textarea Field. For a fixed list of options use Select Field.
+
+States: Default, Hover, Focus, Error, Disabled.
+
+Accessibility: the label is linked to the input. The error message is announced when the field is invalid. Keep a visible label; a placeholder alone is not a label.
+
+Code: <InputField> from primitives (<Input> when there is no label).
 
 ## Acceptance criteria
 

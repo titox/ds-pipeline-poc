@@ -34,3 +34,9 @@ Output for a component named "Input Field": `Input-Field.md`, `Input-Field.contr
 
 - Same output as the plugin with no API key saved: no AI-written prose.
 - If RubyLint changes, the next run rebuilds the bundle automatically. If the plugin renames its export functions (`generateMarkdownDocumentation`, `buildJsonExport`, `generateHandoffSpec`), update `run.mjs`.
+
+## Component descriptions
+
+`npm run descriptions -- [figma file link] [--dry-run]` writes each `## <Figma name>` section of `docs/components/DESCRIPTIONS.md` to that component's description in Figma, through the same bridge. Only complete components get a section (see the workflow in `docs/PROCESS.md`, step 9). Re-run `npm run rubylint` afterwards so the specs pick it up.
+
+`bridge.mjs` holds the shared bridge connection used by both scripts.
