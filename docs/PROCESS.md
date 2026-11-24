@@ -105,7 +105,7 @@ Still to do for the pilot: re-run RubyLint (manual, in Figma) to regenerate the 
 Repeat this for every new or changed component. Names in `<>` are placeholders.
 
 1. **Design in Figma.** Use token variables only (no raw colours or sizes). Follow the state standard: Default, Hover, Focus, Disabled, plus Error for form fields and Loading for buttons.
-2. **Audit with RubyLint** (manual, in Figma). Fix what it flags, then export the Markdown spec, the JSON contract and the Jira specification. Commit the exports (location still to be decided).
+2. **Audit with RubyLint.** Either in the Figma plugin, or from the terminal with `npm run rubylint -- "<component link>"` (see `scripts/rubylint/README.md`; no AI or REST API calls). Fix what it flags. Both give the Markdown spec, the JSON contract and the Jira specification. Commit the exports (location still to be decided).
 3. **Sync tokens if any variable changed.** Re-export the tokens with the plugin in `scripts/tokens/figma-plugin-token-json` into `scripts/tokens/tokens.json`, then run `npm run script:tokens` (add `--skip-rest-api` when using the plugin JSON). Review the `src/theme.css` diff.
 4. **Build or update the React component** in `src/ui/primitives/<Component>/`, following `src/AGENTS.md`. Props must match the Figma component properties. States map to CSS pseudo-classes, `disabled` and `aria-*`, not to extra components.
 5. **Update Code Connect** in `src/figma/primitives/<component>/<Component>.figma.ts`:
@@ -130,7 +130,7 @@ Remap status: all 97 URLs in `figma.config.json` now point at the local Figma fi
 
 ## Next session
 
-1. RubyLint (manual, in Figma): audit Input Field and Button, fix the Button description (still says 24 variants), export Markdown, JSON contract and Jira spec.
+1. RubyLint: run `npm run rubylint` on Input Field and Button, fix the Button description (still says 24 variants). Input Field audit flags a missing Filled state and 1.5:1 contrast.
 2. Decide where RubyLint exports live (`docs/components/` or Storybook MDX), then build the contract check script on the JSON.
 3. Roll the state standard out to the remaining interactive components.
 4. Distinct focus colour: `Border/Focus/Default` is still the same red as error.

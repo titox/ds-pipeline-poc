@@ -15,6 +15,7 @@
     "script:icons": "cd scripts/icons; node --env-file=../../.env app.mjs --skip-rest-api; cd -;",
     "script:icons:rest": "cd scripts/icons; node --env-file=../../.env app.mjs; cd -;",
     "lint:tokens": "node scripts/lint-tokens.mjs",
+    "rubylint": "node scripts/rubylint/run.mjs",
     "script:tokens": "cd scripts/tokens; node --env-file=../../.env app.mjs --skip-rest-api; cd -;",
     "script:tokens:rest": "cd scripts/tokens; node --env-file=../../.env app.mjs; cd -;"
   },
@@ -43,12 +44,14 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "eslint-plugin-storybook": "^10.6.8",
+    "playwright-core": "^1.65.1",
     "prettier-plugin-organize-imports": "^3.2.4",
     "react": "^18.2.0",
     "react-aria-components": "^1.10.1",
     "react-dom": "^18.2.0",
     "storybook": "^10.6.8",
     "typescript": "^5.0.2",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "ws": "^8.23.0"
   }
 }
