@@ -132,14 +132,15 @@ Remap status: all 97 URLs in `figma.config.json` now point at the local Figma fi
 
 Start: reopen the Desktop Bridge plugin in the Figma file, then `npm run rubylint -- <link>` and `npm run check:contracts` to see the current state.
 
-1. Roll the state standard out to the 11 incomplete components on the Inputs page, lowest score first (Select Field 65%, Search 78%). Per component: design missing states in Figma, update CSS, story, Code Connect, then write its description in `docs/components/DESCRIPTIONS.md` and run `npm run descriptions` and `npm run rubylint`.
-2. Review the 11 contract check warnings (unmapped Has Error / Has Label / Open / Value Type, Date fields without code or Code Connect, hard-coded strokes in Date Picker and Select).
-3. Export the other Figma pages with `npm run rubylint` (Buttons next; its description still says 24 variants).
-4. Contrast: 6 Inputs components have a lowest contrast of 1.5:1 (placeholder or disabled text, to check).
-5. Distinct focus colour: `Border/Focus/Default` is still the same red as error.
-6. Brand collection in Figma for the second brand; Supernova role in the flow; Jira connection to create tickets from the `.jira.md` specs.
+1. Rewrite the Input Field description in RubyLint's AI format: a 1 to 2 sentence summary, then `PURPOSE:`, `BEHAVIOUR:`, `COMPOSITION:`, `USAGE:`, `CODE GENERATION NOTES:` (same labels the plugin's prompt uses, see `src/core/component-analyzer.ts` in RubyLint). Check it against the code, Code Connect and Figma (Focus is a 2px border; State=Error and Has Error are separate Figma controls). Save in `docs/components/DESCRIPTIONS.md`, run `npm run descriptions`, then `npm run rubylint`. The exports split the labels into sections, so the Jira Summary matches the plugin without an API key. Use the same format for every component once it is complete.
+2. Roll the state standard out to the 11 incomplete components on the Inputs page, lowest score first (Select Field 65%, Search 78%). Per component: design missing states in Figma, update CSS, story, Code Connect, then write its description in `docs/components/DESCRIPTIONS.md` and run `npm run descriptions` and `npm run rubylint`.
+3. Review the 11 contract check warnings (unmapped Has Error / Has Label / Open / Value Type, Date fields without code or Code Connect, hard-coded strokes in Date Picker and Select).
+4. Export the other Figma pages with `npm run rubylint` (Buttons next; its description still says 24 variants).
+5. Contrast: 6 Inputs components have a lowest contrast of 1.5:1 (placeholder or disabled text, to check).
+6. Distinct focus colour: `Border/Focus/Default` is still the same red as error.
+7. Brand collection in Figma for the second brand; Supernova role in the flow; Jira connection to create tickets from the `.jira.md` specs.
 
-Done on 2026-11-24: Input Hover and Focus (code, story, Code Connect). Headless RubyLint runner (`npm run rubylint`), exports in `docs/components/`. Contract check in CI (`npm run check:contracts`). Description sync (`npm run descriptions`), Input Field described. Search Code Connect and Disabled border variable fixed.
+Done on 2026-11-24: Input Hover and Focus (code, story, Code Connect). Headless RubyLint runner (`npm run rubylint`), exports in `docs/components/`. Contract check in CI (`npm run check:contracts`). Description sync (`npm run descriptions`), Input Field described. Search Code Connect and Disabled border variable fixed. ESLint clean and in `npm run lint` and CI (fixed 7 dropped-prop bugs). `npm run lint` exists for the oneds plugin's Stop hook.
 
 ## 1. Clone SDS and publish to own GitHub
 
