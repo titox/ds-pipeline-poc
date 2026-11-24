@@ -130,13 +130,16 @@ Remap status: all 97 URLs in `figma.config.json` now point at the local Figma fi
 
 ## Next session
 
-1. RubyLint: run `npm run rubylint` on Input Field and Button, fix the Button description (still says 24 variants). Input Field audit flags a missing Filled state and 1.5:1 contrast.
-2. Review the 11 contract check warnings (unmapped Has Error / Has Label / Open / Value Type, Date fields without Code Connect, hard-coded strokes in Date Picker and Select). Export the other pages with `npm run rubylint`.
-3. Roll the state standard out to the remaining interactive components.
-4. Distinct focus colour: `Border/Focus/Default` is still the same red as error.
-5. Brand collection in Figma for the second brand; Supernova role in the flow.
+Start: reopen the Desktop Bridge plugin in the Figma file, then `npm run rubylint -- <link>` and `npm run check:contracts` to see the current state.
 
-Done: Input Hover and Focus in code (`input.css`), "Input States" story, Code Connect maps State=Error to `isInvalid` (published). Text input uses `--sds-font-body-base` (to confirm).
+1. Roll the state standard out to the 11 incomplete components on the Inputs page, lowest score first (Select Field 65%, Search 78%). Per component: design missing states in Figma, update CSS, story, Code Connect, then write its description in `docs/components/DESCRIPTIONS.md` and run `npm run descriptions` and `npm run rubylint`.
+2. Review the 11 contract check warnings (unmapped Has Error / Has Label / Open / Value Type, Date fields without code or Code Connect, hard-coded strokes in Date Picker and Select).
+3. Export the other Figma pages with `npm run rubylint` (Buttons next; its description still says 24 variants).
+4. Contrast: 6 Inputs components have a lowest contrast of 1.5:1 (placeholder or disabled text, to check).
+5. Distinct focus colour: `Border/Focus/Default` is still the same red as error.
+6. Brand collection in Figma for the second brand; Supernova role in the flow; Jira connection to create tickets from the `.jira.md` specs.
+
+Done on 2026-11-24: Input Hover and Focus (code, story, Code Connect). Headless RubyLint runner (`npm run rubylint`), exports in `docs/components/`. Contract check in CI (`npm run check:contracts`). Description sync (`npm run descriptions`), Input Field described. Search Code Connect and Disabled border variable fixed.
 
 ## 1. Clone SDS and publish to own GitHub
 
