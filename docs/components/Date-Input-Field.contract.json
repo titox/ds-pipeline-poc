@@ -1,0 +1,1013 @@
+{
+  "component": "Date Input Field",
+  "description": "input with 11 properties",
+  "readinessScore": 92,
+  "adoption": null,
+  "mcpScore": 100,
+  "metadata": {
+    "component": "Date Input Field",
+    "description": "input with 11 properties",
+    "props": [
+      {
+        "name": "Has Label",
+        "type": "BOOLEAN",
+        "values": [
+          "true",
+          "false"
+        ],
+        "default": "true",
+        "defaultValue": "true",
+        "required": false
+      },
+      {
+        "name": "Has Error",
+        "type": "BOOLEAN",
+        "values": [
+          "true",
+          "false"
+        ],
+        "default": "true",
+        "defaultValue": "true",
+        "required": false
+      },
+      {
+        "name": "Label",
+        "type": "TEXT",
+        "values": [
+          "Label"
+        ],
+        "default": "Label",
+        "defaultValue": "Label",
+        "required": false
+      },
+      {
+        "name": "Error",
+        "type": "TEXT",
+        "values": [
+          "Error"
+        ],
+        "default": "Error",
+        "defaultValue": "Error",
+        "required": false
+      },
+      {
+        "name": "Description",
+        "type": "TEXT",
+        "values": [
+          "Description"
+        ],
+        "default": "Description",
+        "defaultValue": "Description",
+        "required": false
+      },
+      {
+        "name": "Has Description",
+        "type": "BOOLEAN",
+        "values": [
+          "true",
+          "false"
+        ],
+        "default": "false",
+        "defaultValue": "false",
+        "required": false
+      },
+      {
+        "name": "Day",
+        "type": "TEXT",
+        "values": [
+          "DD"
+        ],
+        "default": "DD",
+        "defaultValue": "DD",
+        "required": false
+      },
+      {
+        "name": "Month",
+        "type": "TEXT",
+        "values": [
+          "MM"
+        ],
+        "default": "MM",
+        "defaultValue": "MM",
+        "required": false
+      },
+      {
+        "name": "Year",
+        "type": "TEXT",
+        "values": [
+          "YYYY"
+        ],
+        "default": "YYYY",
+        "defaultValue": "YYYY",
+        "required": false
+      },
+      {
+        "name": "State",
+        "type": "VARIANT",
+        "values": [
+          "Default",
+          "Error",
+          "Disabled"
+        ],
+        "default": "Default",
+        "defaultValue": "Default",
+        "required": false
+      },
+      {
+        "name": "Value Type",
+        "type": "VARIANT",
+        "values": [
+          "Default",
+          "Placeholder"
+        ],
+        "default": "Default",
+        "defaultValue": "Default",
+        "required": false
+      }
+    ],
+    "states": [
+      "Default",
+      "Error",
+      "Disabled"
+    ],
+    "variants": {
+      "State": [
+        "Default",
+        "Error",
+        "Disabled"
+      ],
+      "Value Type": [
+        "Default",
+        "Placeholder"
+      ]
+    },
+    "slots": [],
+    "tokens": {
+      "colors": [
+        "Text/Default/Default",
+        "Text/Default/Secondary",
+        "Background/Default/Default",
+        "Border/Default/Default",
+        "Text/Default/Tertiary",
+        "Border/Danger/Default",
+        "Text/Danger/Default",
+        "Text/Disabled/Default",
+        "Background/Disabled/Default",
+        "Border/Disabled/default"
+      ],
+      "spacing": [
+        "Space/200",
+        "Space/300",
+        "Space/400"
+      ],
+      "typography": [
+        "Body Base",
+        "Body/Font Family",
+        "Body/Font Weight Regular",
+        "Body/Size Medium",
+        "Single Line/Body Base"
+      ],
+      "effects": [],
+      "borders": [
+        "Stroke/Border",
+        "Radius/200"
+      ]
+    },
+    "accessibility": {},
+    "audit": {
+      "designIssues": [],
+      "tokenOpportunities": [],
+      "structureIssues": []
+    },
+    "propertyCheatSheet": [
+      "🎨 Variants: Value Type(2)",
+      "🔄 States: Default/Error/Disabled",
+      "⚙️ Other: Has Label: true/false, Has Error: true/false, Label: Label"
+    ],
+    "mcpReadiness": {
+      "strengths": [
+        "Has component description for better MCP/AI context",
+        "Has 11 configurable properties",
+        "Uses design tokens for consistency"
+      ],
+      "gaps": [],
+      "recommendations": []
+    }
+  },
+  "tokens": {
+    "colors": [
+      {
+        "name": "Text/Default/Default",
+        "value": "#1e1e1e",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Text/Default/Default token"
+      },
+      {
+        "name": "Text/Default/Secondary",
+        "value": "#757575",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Text/Default/Secondary token"
+      },
+      {
+        "name": "Background/Default/Default",
+        "value": "#ffffff",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Background/Default/Default token"
+      },
+      {
+        "name": "Border/Default/Default",
+        "value": "#d9d9d9",
+        "unit": "hex",
+        "type": "strokes-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Border/Default/Default token"
+      },
+      {
+        "name": "Text/Default/Tertiary",
+        "value": "#b3b3b3",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Text/Default/Tertiary token"
+      },
+      {
+        "name": "Border/Danger/Default",
+        "value": "#900b09",
+        "unit": "hex",
+        "type": "strokes-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Border/Danger/Default token"
+      },
+      {
+        "name": "Text/Danger/Default",
+        "value": "#900b09",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Text/Danger/Default token"
+      },
+      {
+        "name": "Text/Disabled/Default",
+        "value": "#b3b3b3",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Text/Disabled/Default token"
+      },
+      {
+        "name": "Background/Disabled/Default",
+        "value": "#d9d9d9",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Background/Disabled/Default token"
+      },
+      {
+        "name": "Border/Disabled/default",
+        "value": "#b3b3b3",
+        "unit": "hex",
+        "type": "strokes-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Border/Disabled/default token"
+      }
+    ],
+    "spacing": [
+      {
+        "name": "Space/200",
+        "value": "8px",
+        "unit": "px",
+        "type": "itemSpacing-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Space/200 token"
+      },
+      {
+        "name": "Space/300",
+        "value": "12px",
+        "unit": "px",
+        "type": "paddingTop-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Space/300 token"
+      },
+      {
+        "name": "Space/400",
+        "value": "16px",
+        "unit": "px",
+        "type": "paddingRight-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Space/400 token"
+      }
+    ],
+    "typography": [
+      {
+        "name": "Body Base",
+        "value": "Body Base",
+        "type": "text-style",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-style",
+        "recommendation": "Using Body Base token"
+      },
+      {
+        "name": "Body/Font Family",
+        "value": "Inter",
+        "type": "fontFamily-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Body/Font Family token"
+      },
+      {
+        "name": "Body/Font Weight Regular",
+        "value": "400",
+        "type": "fontWeight-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Body/Font Weight Regular token"
+      },
+      {
+        "name": "Body/Size Medium",
+        "value": "16px",
+        "unit": "px",
+        "type": "fontSize-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Body/Size Medium token"
+      },
+      {
+        "name": "Single Line/Body Base",
+        "value": "Single Line/Body Base",
+        "type": "text-style",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-style",
+        "recommendation": "Using Single Line/Body Base token"
+      }
+    ],
+    "effects": [],
+    "borders": [
+      {
+        "name": "Stroke/Border",
+        "value": "1px",
+        "unit": "px",
+        "type": "strokeTopWeight-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Stroke/Border token"
+      },
+      {
+        "name": "Radius/200",
+        "value": "8px",
+        "unit": "px",
+        "type": "topLeftRadius-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Radius/200 token"
+      }
+    ],
+    "summary": {
+      "totalTokens": 20,
+      "actualTokens": 20,
+      "hardCodedValues": 0,
+      "aiSuggestions": 0,
+      "byCategory": {
+        "colors": {
+          "total": 10,
+          "tokens": 10,
+          "hardCoded": 0,
+          "suggestions": 0
+        },
+        "spacing": {
+          "total": 3,
+          "tokens": 3,
+          "hardCoded": 0,
+          "suggestions": 0
+        },
+        "typography": {
+          "total": 5,
+          "tokens": 5,
+          "hardCoded": 0,
+          "suggestions": 0
+        },
+        "effects": {
+          "total": 0,
+          "tokens": 0,
+          "hardCoded": 0,
+          "suggestions": 0
+        },
+        "borders": {
+          "total": 2,
+          "tokens": 2,
+          "hardCoded": 0,
+          "suggestions": 0
+        }
+      }
+    }
+  },
+  "audit": {
+    "states": [
+      {
+        "name": "Default",
+        "found": true
+      },
+      {
+        "name": "Error",
+        "found": true
+      },
+      {
+        "name": "Disabled",
+        "found": true
+      }
+    ],
+    "componentReadiness": [
+      {
+        "check": "Property configuration",
+        "status": "pass",
+        "suggestion": "Component has configurable properties"
+      },
+      {
+        "check": "Component description",
+        "status": "pass",
+        "suggestion": "Component has description for MCP/AI context"
+      }
+    ],
+    "accessibility": [
+      {
+        "check": "Touch target size",
+        "status": "pass",
+        "suggestion": "Target size 240×70px meets recommended 44px minimum (smallest variant: \"State=Default, Value Type=Default\")"
+      },
+      {
+        "check": "Focus state",
+        "status": "warning",
+        "suggestion": "Add a visible focus state to support keyboard navigation (WCAG 2.4.7)"
+      },
+      {
+        "check": "Minimum font size",
+        "status": "pass",
+        "suggestion": "Smallest text is 16px, meets readability guidelines"
+      },
+      {
+        "check": "Color contrast",
+        "status": "fail",
+        "suggestion": "\"DD\" has 1.5:1 contrast, below WCAG AA minimum of 3:1. 14 text layers not measurable: \"Label\" (no solid fill behind the text), \"Description\" (no solid fill behind the text), \"Label\" (no solid fill behind the text), …. Check manually"
+      }
+    ],
+    "detachedInstances": [],
+    "platformGuidelines": {
+      "hig": {
+        "platform": "hig",
+        "score": {
+          "passed": 6,
+          "total": 9
+        },
+        "checks": [
+          {
+            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
+            "ruleId": "hig.contrast",
+            "status": "fail",
+            "suggestion": "12 text layers below contrast minimum: 'DD' 2.1:1, 'MM' 2.1:1, 'YYYY' 2.1:1, …",
+            "source": "local",
+            "nodeId": "4302:7516",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+          },
+          {
+            "check": "Body ≥ 17pt, nothing < 11pt",
+            "ruleId": "hig.min-text",
+            "status": "warning",
+            "suggestion": "Largest text is 16pt; iOS body text is 17pt",
+            "source": "local",
+            "nodeId": "4302:7507",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
+          },
+          {
+            "check": "Uses SF Pro (system font)",
+            "ruleId": "hig.font",
+            "status": "warning",
+            "suggestion": "26 text layers not using SF Pro: 'Label' Inter, 'DD' Inter, 'MM' Inter, …",
+            "source": "local",
+            "nodeId": "4302:7507",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
+          },
+          {
+            "check": "Pressed and Disabled states",
+            "ruleId": "hig.states",
+            "status": "warning",
+            "suggestion": "Missing state: Pressed",
+            "source": "local",
+            "nodeId": "4302:7505",
+            "missingStates": [
+              "Pressed"
+            ],
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/buttons"
+          },
+          {
+            "check": "No ALL-CAPS labels",
+            "ruleId": "hig.label-case",
+            "status": "warning",
+            "suggestion": "6 labels in ALL CAPS: 'YYYY' \"YYYY\", 'YYYY' \"YYYY\", 'YYYY' \"YYYY\", …",
+            "source": "local",
+            "nodeId": "4302:7596",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
+          },
+          {
+            "check": "Touch target ≥ 44×44pt",
+            "ruleId": "hig.touch-target",
+            "status": "pass",
+            "suggestion": "Hit area 240×70pt",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+          },
+          {
+            "check": "Font sizes on Dynamic Type scale",
+            "ruleId": "hig.type-scale",
+            "status": "pass",
+            "suggestion": "All sizes match Dynamic Type",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
+          },
+          {
+            "check": "Dark Mode appearance",
+            "ruleId": "hig.dark-mode",
+            "status": "pass",
+            "suggestion": "Dark appearance found",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/dark-mode"
+          },
+          {
+            "check": "Colours use variables or styles",
+            "ruleId": "hig.color-tokens",
+            "status": "pass",
+            "suggestion": "All colours are tokenised",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/color"
+          },
+          {
+            "check": "Layout margins ≥ 16pt",
+            "ruleId": "hig.margins",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/layout",
+            "status": "na",
+            "suggestion": "No container ≥ 320pt wide"
+          },
+          {
+            "check": "Icons 17–28pt (SF Symbols range)",
+            "ruleId": "hig.icon-size",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/sf-symbols",
+            "status": "na",
+            "suggestion": "No icons"
+          },
+          {
+            "check": "Standard control heights",
+            "ruleId": "hig.control-height",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/buttons",
+            "status": "na",
+            "suggestion": "Not a button, nav bar or tab bar"
+          }
+        ]
+      },
+      "m3": {
+        "platform": "m3",
+        "score": {
+          "passed": 8.5,
+          "total": 11
+        },
+        "checks": [
+          {
+            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
+            "ruleId": "m3.contrast",
+            "status": "fail",
+            "suggestion": "12 text layers below contrast minimum: 'DD' 2.1:1, 'MM' 2.1:1, 'YYYY' 2.1:1, …",
+            "source": "local",
+            "nodeId": "4302:7516",
+            "guidelineUrl": "https://m3.material.io/foundations/designing/color-contrast"
+          },
+          {
+            "check": "Hover, Focused, Pressed, Disabled states",
+            "ruleId": "m3.states",
+            "status": "fail",
+            "suggestion": "Missing state: Hover, Focused, Pressed",
+            "source": "local",
+            "nodeId": "4302:7505",
+            "missingStates": [
+              "Hover",
+              "Focus",
+              "Pressed"
+            ],
+            "guidelineUrl": "https://m3.material.io/foundations/interaction/states"
+          },
+          {
+            "check": "Labels in sentence case",
+            "ruleId": "m3.label-case",
+            "status": "warning",
+            "suggestion": "6 labels not in sentence case: 'YYYY' \"YYYY\", 'YYYY' \"YYYY\", 'YYYY' \"YYYY\", …",
+            "source": "local",
+            "nodeId": "4302:7596",
+            "guidelineUrl": "https://m3.material.io/foundations/content-design/style-guide/capitalization"
+          },
+          {
+            "check": "Touch target ≥ 48×48dp",
+            "ruleId": "m3.touch-target",
+            "status": "pass",
+            "suggestion": "Hit area 240×70dp",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/foundations/designing/structure"
+          },
+          {
+            "check": "Font sizes on M3 type scale",
+            "ruleId": "m3.type-scale",
+            "status": "pass",
+            "suggestion": "All sizes match the M3 type scale",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/styles/typography/type-scale-tokens"
+          },
+          {
+            "check": "Body ≥ 14sp, nothing < 11sp",
+            "ruleId": "m3.min-text",
+            "status": "pass",
+            "suggestion": "Text sizes are readable",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/styles/typography/applying-type"
+          },
+          {
+            "check": "Roboto or declared brand font",
+            "ruleId": "m3.font",
+            "status": "pass",
+            "suggestion": "Fonts are Roboto or the file's brand font",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/styles/typography/fonts"
+          },
+          {
+            "check": "Dark theme",
+            "ruleId": "m3.dark-theme",
+            "status": "pass",
+            "suggestion": "Dark theme found",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/styles/color/choosing-a-scheme"
+          },
+          {
+            "check": "Spacing and sizes on 4dp grid",
+            "ruleId": "m3.spacing-grid",
+            "status": "pass",
+            "suggestion": "Spacing and sizes follow the 4dp grid",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/foundations/designing/structure"
+          },
+          {
+            "check": "Colours use tokens",
+            "ruleId": "m3.color-tokens",
+            "status": "pass",
+            "suggestion": "All colours are tokenised",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/styles/color/roles"
+          },
+          {
+            "check": "Corner radius on shape scale",
+            "ruleId": "m3.shape-scale",
+            "status": "pass",
+            "suggestion": "Corner radii follow the M3 shape scale",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/styles/shape/corner-radius-scale"
+          },
+          {
+            "check": "Icons 24dp",
+            "ruleId": "m3.icon-size",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/styles/icons/designing-icons",
+            "status": "na",
+            "suggestion": "No icons"
+          }
+        ]
+      },
+      "web": {
+        "platform": "web",
+        "score": {
+          "passed": 10.5,
+          "total": 14
+        },
+        "checks": [
+          {
+            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
+            "ruleId": "web.contrast",
+            "status": "fail",
+            "suggestion": "12 text layers below contrast minimum: 'DD' 2.1:1, 'MM' 2.1:1, 'YYYY' 2.1:1, …",
+            "source": "local",
+            "nodeId": "4302:7516",
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
+          },
+          {
+            "check": "Hover, Focus and Disabled states",
+            "ruleId": "web.states",
+            "status": "fail",
+            "suggestion": "Missing state: Hover, Focus — a visible focus state is required (WCAG 2.4.7)",
+            "source": "local",
+            "nodeId": "4302:7505",
+            "missingStates": [
+              "Hover",
+              "Focus"
+            ],
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
+          },
+          {
+            "check": "Ruby font (Fira Sans)",
+            "ruleId": "web.font",
+            "status": "warning",
+            "suggestion": "26 text layers not using Fira Sans: 'Label' Inter, 'DD' Inter, 'MM' Inter, …",
+            "source": "local",
+            "nodeId": "4302:7507",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Labels in sentence case",
+            "ruleId": "web.label-case",
+            "status": "warning",
+            "suggestion": "6 labels not in sentence case: 'YYYY' \"YYYY\", 'YYYY' \"YYYY\", 'YYYY' \"YYYY\", …",
+            "source": "local",
+            "nodeId": "4302:7596",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Real copy, not placeholders",
+            "ruleId": "web.real-content",
+            "status": "warning",
+            "suggestion": "6 text layers use placeholder copy ('Label'). Use real words such as \"Save profile\" so examples read like the product",
+            "source": "local",
+            "nodeId": "4302:7507",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Target size ≥ 24×24px (44 preferred)",
+            "ruleId": "web.target-size",
+            "status": "pass",
+            "suggestion": "Target 240×70px",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html"
+          },
+          {
+            "check": "Body ≥ 16px, nothing < 12px",
+            "ruleId": "web.min-text",
+            "status": "pass",
+            "suggestion": "Text sizes are readable",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html"
+          },
+          {
+            "check": "Dark mode",
+            "ruleId": "web.dark-mode",
+            "status": "pass",
+            "suggestion": "Dark mode found",
+            "source": "local",
+            "guidelineUrl": "https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme"
+          },
+          {
+            "check": "Font sizes on Ruby type scale",
+            "ruleId": "web.type-scale",
+            "status": "pass",
+            "suggestion": "All sizes match the Ruby type scale",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Spacing on Ruby spacing scale",
+            "ruleId": "web.spacing",
+            "status": "pass",
+            "suggestion": "Padding and gaps use Ruby spacing tokens",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Corner radius on Ruby scale",
+            "ruleId": "web.radius",
+            "status": "pass",
+            "suggestion": "Corner radii use Ruby border-radius tokens",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Icon and control sizes on Ruby size scale",
+            "ruleId": "web.size",
+            "status": "pass",
+            "suggestion": "Icons and control heights use Ruby size tokens",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Colours use Ruby tokens",
+            "ruleId": "web.color-tokens",
+            "status": "pass",
+            "suggestion": "All colours are tokenised",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Accessible name (aria-label / label) available",
+            "ruleId": "web.aria-name",
+            "status": "pass",
+            "suggestion": "Label \"Label\" can be the <label>",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+          }
+        ]
+      }
+    },
+    "interactiveItems": [
+      {
+        "nodeId": "4302:7505",
+        "name": "Date Input Field",
+        "kind": "text-field",
+        "kindLabel": "Text field",
+        "found": [
+          "Disabled",
+          "Error"
+        ],
+        "designed": [
+          "Default",
+          "Error",
+          "Disabled"
+        ],
+        "canonical": {
+          "Error": "Error",
+          "Disabled": "Disabled"
+        },
+        "missing": [
+          {
+            "state": "Hover",
+            "why": "Pointer is over it (web, iPad, desktop) — a subtle fill or underline change shows it is clickable."
+          },
+          {
+            "state": "Focus",
+            "why": "Reached by keyboard or switch control — needs a clearly visible focus ring (WCAG 2.4.7)."
+          },
+          {
+            "state": "Filled",
+            "why": "Has a value — shows the entered text and how the label/placeholder moves."
+          }
+        ],
+        "aria": {
+          "element": "<input> + <label for>",
+          "role": "textbox (implicit)",
+          "states": [
+            {
+              "state": "Hover",
+              "attr": "CSS :hover only (no ARIA attribute)"
+            },
+            {
+              "state": "Focus",
+              "attr": "CSS :focus-visible ring (no ARIA attribute)"
+            },
+            {
+              "state": "Disabled",
+              "attr": "disabled"
+            },
+            {
+              "state": "Error",
+              "attr": "aria-invalid=\"true\" + aria-describedby → error message id"
+            },
+            {
+              "state": "Filled",
+              "attr": "value (no ARIA attribute)"
+            },
+            {
+              "state": "Required",
+              "attr": "required / aria-required=\"true\""
+            }
+          ],
+          "keyboard": "Standard text editing; Tab moves on",
+          "name": "<label for> or aria-labelledby (placeholder is not a label)",
+          "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/"
+        },
+        "isRoot": true
+      }
+    ]
+  },
+  "properties": [
+    {
+      "name": "Has Label",
+      "values": [
+        "true",
+        "false"
+      ],
+      "default": "true"
+    },
+    {
+      "name": "Has Error",
+      "values": [
+        "true",
+        "false"
+      ],
+      "default": "true"
+    },
+    {
+      "name": "Label",
+      "values": [
+        "Label"
+      ],
+      "default": "Label"
+    },
+    {
+      "name": "Error",
+      "values": [
+        "Error"
+      ],
+      "default": "Error"
+    },
+    {
+      "name": "Description",
+      "values": [
+        "Description"
+      ],
+      "default": "Description"
+    },
+    {
+      "name": "Has Description",
+      "values": [
+        "true",
+        "false"
+      ],
+      "default": "false"
+    },
+    {
+      "name": "Day",
+      "values": [
+        "DD"
+      ],
+      "default": "DD"
+    },
+    {
+      "name": "Month",
+      "values": [
+        "MM"
+      ],
+      "default": "MM"
+    },
+    {
+      "name": "Year",
+      "values": [
+        "YYYY"
+      ],
+      "default": "YYYY"
+    },
+    {
+      "name": "State",
+      "values": [
+        "Default",
+        "Error",
+        "Disabled"
+      ],
+      "default": "Default"
+    },
+    {
+      "name": "Value Type",
+      "values": [
+        "Default",
+        "Placeholder"
+      ],
+      "default": "Default"
+    }
+  ],
+  "namingIssues": null,
+  "existingDescription": "Keywords: dropdown",
+  "aiOpinions": {
+    "available": false,
+    "reason": "no API key saved"
+  },
+  "figmaUrl": "https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=4302-7505",
+  "exportedAt": "2026-11-24T11:47:13.000Z"
+}

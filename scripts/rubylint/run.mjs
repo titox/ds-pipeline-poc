@@ -25,7 +25,7 @@ import { build, RUBYLINT_DIR } from "./build.mjs";
 const args = process.argv.slice(2);
 const target = args.find((a) => !a.startsWith("--"));
 const outIdx = args.indexOf("--out");
-const outDir = outIdx >= 0 ? args[outIdx + 1] : "rubylint-out";
+const outDir = outIdx >= 0 ? args[outIdx + 1] : "docs/components";
 const keepRaw = args.includes("--raw");
 if (!target) {
   console.error("Usage: node scripts/rubylint/run.mjs <figma-url-or-node-id> [--out dir] [--raw]");
@@ -82,37 +82,60 @@ const { server, port } = await openServer();
 const wss = new WebSocketServer({ server });
 console.log(`Waiting for the Figma Desktop Bridge on port ${port} (it rescans every 10 s)...`);
 
-const result = await new Promise((resolve, reject) => {
-  const timer = setTimeout(() => reject(new Error("Timed out. Is the Desktop Bridge plugin open in the right file?")), TIMEOUT_MS);
-  let sent = false;
+// Wait for the bridge of the right file, then return a helper that runs code in Figma.
+const bridge = await new Promise((resolve, reject) => {
+  const timer = setTimeout(() => reject(new Error("Timed out. Is the Desktop Bridge plugin open in the right file?")), 60_000);
   wss.on("connection", (ws) => {
-    console.log("Bridge connected.");
+    const pending = new Map();
+    let seq = 0;
     ws.on("message", (buf) => {
       const msg = JSON.parse(buf.toString());
-      if (msg.type === "FILE_INFO" && !sent) {
+      if (msg.type === "FILE_INFO") {
         const info = msg.data || {};
         if (fileKey && info.fileKey && info.fileKey !== fileKey) return; // another open file
-        sent = true;
-        console.log(`Connected to "${info.fileName}". Running the audit on ${nodeId}...`);
-        ws.send(JSON.stringify({
-          id: "rubylint-1",
-          method: "EXECUTE_CODE",
-          params: { code: `${bundle}\nreturn await __rubylint.run(${JSON.stringify(nodeId)});`, timeout: TIMEOUT_MS - 10_000 },
-        }));
-      } else if (msg.id === "rubylint-1") {
         clearTimeout(timer);
-        if (msg.error) return reject(new Error(msg.error));
+        console.log(`Connected to "${info.fileName}".`);
+        resolve((code) => new Promise((res, rej) => {
+          const id = `rubylint-${++seq}`;
+          pending.set(id, { res, rej });
+          ws.send(JSON.stringify({ id, method: "EXECUTE_CODE", params: { code, timeout: TIMEOUT_MS } }));
+        }));
+      } else if (pending.has(msg.id)) {
+        const { res, rej } = pending.get(msg.id);
+        pending.delete(msg.id);
         const r = msg.result || {};
-        if (r.success === false) return reject(new Error(r.error || "Audit failed"));
-        resolve(r.result ?? r);
+        if (msg.error || r.success === false) rej(new Error(msg.error || r.error || "Bridge call failed"));
+        else res(r.result ?? r);
       }
     });
   });
-}).finally(() => {
+});
+
+const results = [];
+try {
+  // A page link audits every component on the page; a component link audits that component.
+  const targets = await bridge(`
+    const node = await figma.getNodeByIdAsync(${JSON.stringify(nodeId)});
+    if (!node) throw new Error("Node not found: ${nodeId}");
+    if (node.type !== "PAGE") return [{ id: node.id, name: node.name }];
+    await node.loadAsync();
+    return node.findAll((n) => n.type === "COMPONENT_SET" || (n.type === "COMPONENT" && n.parent.type !== "COMPONENT_SET"))
+      .map((n) => ({ id: n.id, name: n.name }));
+  `);
+  if (!targets.length) throw new Error("No components found at that link.");
+  for (const [i, t] of targets.entries()) {
+    console.log(`[${i + 1}/${targets.length}] Auditing ${t.name}...`);
+    try {
+      results.push(await bridge(`${bundle}\nreturn await __rubylint.run(${JSON.stringify(t.id)});`));
+    } catch (e) {
+      console.warn(`  skipped: ${e.message}`);
+    }
+  }
+} finally {
   for (const c of wss.clients) c.close(1000, "Manual disconnect");
   wss.close();
   server.close();
-});
+}
 
 // --- Exports through the plugin's own UI code ---------------------------------
 
@@ -120,26 +143,30 @@ const browser = await chromium.launch();
 const page = await browser.newPage();
 page.on("pageerror", () => {}); // the UI expects a Figma host; ignore its startup errors
 await page.goto(pathToFileURL(path.join(RUBYLINT_DIR, "ui-enhanced.html")).href);
-const exports = await page.evaluate((data) => {
-  window.dispatchEvent(new MessageEvent("message", { data: { pluginMessage: { type: "enhanced-analysis-result", data } } }));
-  // eslint-disable-next-line no-undef
-  const meta = currentMetadata;
-  if (!meta) throw new Error("The plugin UI did not accept the result");
-  return {
-    markdown: generateMarkdownDocumentation(meta), // eslint-disable-line no-undef
-    json: JSON.stringify(buildJsonExport(), null, 2), // eslint-disable-line no-undef
-    jira: generateHandoffSpec(meta), // eslint-disable-line no-undef
-  };
-}, result);
-await browser.close();
-
-const name = (result.analyzedNode?.name || nodeId).replace(/[^\w-]+/g, "-").replace(/^-|-$/g, "");
 mkdirSync(outDir, { recursive: true });
-const files = {
-  [`${name}.md`]: exports.markdown,
-  [`${name}.contract.json`]: exports.json + "\n",
-  [`${name}.jira.md`]: exports.jira,
-};
-if (keepRaw) files[`${name}.raw.json`] = JSON.stringify(result, null, 2) + "\n";
-for (const [file, body] of Object.entries(files)) writeFileSync(path.join(outDir, file), body);
-console.log(`Wrote ${Object.keys(files).map((f) => path.join(outDir, f)).join(", ")}`);
+
+for (const result of results) {
+  const exports = await page.evaluate((data) => {
+    window.dispatchEvent(new MessageEvent("message", { data: { pluginMessage: { type: "enhanced-analysis-result", data } } }));
+    // eslint-disable-next-line no-undef
+    const meta = currentMetadata;
+    if (!meta) throw new Error("The plugin UI did not accept the result");
+    return {
+      markdown: generateMarkdownDocumentation(meta), // eslint-disable-line no-undef
+      json: JSON.stringify(buildJsonExport(), null, 2), // eslint-disable-line no-undef
+      jira: generateHandoffSpec(meta), // eslint-disable-line no-undef
+    };
+  }, result);
+
+  const name = result.analyzedNode.name.replace(/[^\w-]+/g, "-").replace(/^-|-$/g, "");
+  const files = {
+    [`${name}.md`]: exports.markdown,
+    [`${name}.contract.json`]: exports.json + "\n",
+    [`${name}.jira.md`]: exports.jira,
+  };
+  if (keepRaw) files[`${name}.raw.json`] = JSON.stringify(result, null, 2) + "\n";
+  for (const [file, body] of Object.entries(files)) writeFileSync(path.join(outDir, file), body);
+  console.log(`  ${name}: ${JSON.parse(exports.json).readinessScore ?? "?"}% -> ${path.join(outDir, name)}.{md,contract.json,jira.md}`);
+}
+await browser.close();
+console.log(`Done: ${results.length} component(s) in ${outDir}/`);

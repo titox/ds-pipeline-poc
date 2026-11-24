@@ -1,0 +1,901 @@
+{
+  "component": "Switch Field",
+  "description": "input with 6 properties",
+  "readinessScore": 92,
+  "adoption": null,
+  "mcpScore": 100,
+  "metadata": {
+    "component": "Switch Field",
+    "description": "input with 6 properties",
+    "props": [
+      {
+        "name": "Description",
+        "type": "TEXT",
+        "values": [
+          "Description"
+        ],
+        "default": "Description",
+        "defaultValue": "Description",
+        "required": false
+      },
+      {
+        "name": "Has Label",
+        "type": "BOOLEAN",
+        "values": [
+          "true",
+          "false"
+        ],
+        "default": "true",
+        "defaultValue": "true",
+        "required": false
+      },
+      {
+        "name": "Label",
+        "type": "TEXT",
+        "values": [
+          "Label"
+        ],
+        "default": "Label",
+        "defaultValue": "Label",
+        "required": false
+      },
+      {
+        "name": "Has Description",
+        "type": "BOOLEAN",
+        "values": [
+          "true",
+          "false"
+        ],
+        "default": "true",
+        "defaultValue": "true",
+        "required": false
+      },
+      {
+        "name": "State",
+        "type": "VARIANT",
+        "values": [
+          "Disabled",
+          "Default"
+        ],
+        "default": "Default",
+        "defaultValue": "Default",
+        "required": false
+      },
+      {
+        "name": "Value Type",
+        "type": "VARIANT",
+        "values": [
+          "Unchecked",
+          "Checked"
+        ],
+        "default": "Checked",
+        "defaultValue": "Checked",
+        "required": false
+      }
+    ],
+    "states": [
+      "Disabled",
+      "Default"
+    ],
+    "variants": {
+      "State": [
+        "Disabled",
+        "Default"
+      ],
+      "Value Type": [
+        "Unchecked",
+        "Checked"
+      ]
+    },
+    "slots": [],
+    "tokens": {
+      "colors": [
+        "Text/Default/Default",
+        "Background/Brand/Default",
+        "Border/Brand/Default",
+        "Icon/Brand/On Brand",
+        "Text/Default/Secondary",
+        "Background/Default/Default",
+        "Border/Brand/Tertiary",
+        "Icon/Brand/Tertiary",
+        "Text/Disabled/Default",
+        "Background/Disabled/Default",
+        "Border/Disabled/default",
+        "Icon/Disabled/Default"
+      ],
+      "spacing": [
+        "Space/300"
+      ],
+      "typography": [
+        "Body Base",
+        "Body/Font Family",
+        "Body/Font Weight Regular",
+        "Body/Size Medium"
+      ],
+      "effects": [],
+      "borders": [
+        "Stroke/Border",
+        "Radius/Full"
+      ]
+    },
+    "accessibility": {},
+    "audit": {
+      "designIssues": [],
+      "tokenOpportunities": [],
+      "structureIssues": []
+    },
+    "propertyCheatSheet": [
+      "🎨 Variants: Value Type(2)",
+      "🔄 States: Disabled/Default",
+      "⚙️ Other: Description: Description, Has Label: true/false, Label: Label"
+    ],
+    "mcpReadiness": {
+      "strengths": [
+        "Has component description for better MCP/AI context",
+        "Has 6 configurable properties",
+        "Uses design tokens for consistency"
+      ],
+      "gaps": [],
+      "recommendations": []
+    }
+  },
+  "tokens": {
+    "colors": [
+      {
+        "name": "Text/Default/Default",
+        "value": "#1e1e1e",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Text/Default/Default token"
+      },
+      {
+        "name": "Background/Brand/Default",
+        "value": "#2c2c2c",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Background/Brand/Default token"
+      },
+      {
+        "name": "Border/Brand/Default",
+        "value": "#2c2c2c",
+        "unit": "hex",
+        "type": "strokes-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Border/Brand/Default token"
+      },
+      {
+        "name": "Icon/Brand/On Brand",
+        "value": "#f5f5f5",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Icon/Brand/On Brand token"
+      },
+      {
+        "name": "Text/Default/Secondary",
+        "value": "#757575",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Text/Default/Secondary token"
+      },
+      {
+        "name": "Background/Default/Default",
+        "value": "#ffffff",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Background/Default/Default token"
+      },
+      {
+        "name": "Border/Brand/Tertiary",
+        "value": "#757575",
+        "unit": "hex",
+        "type": "strokes-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Border/Brand/Tertiary token"
+      },
+      {
+        "name": "Icon/Brand/Tertiary",
+        "value": "#757575",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Icon/Brand/Tertiary token"
+      },
+      {
+        "name": "Text/Disabled/Default",
+        "value": "#b3b3b3",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Text/Disabled/Default token"
+      },
+      {
+        "name": "Background/Disabled/Default",
+        "value": "#d9d9d9",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Background/Disabled/Default token"
+      },
+      {
+        "name": "Border/Disabled/default",
+        "value": "#b3b3b3",
+        "unit": "hex",
+        "type": "strokes-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Border/Disabled/default token"
+      },
+      {
+        "name": "Icon/Disabled/Default",
+        "value": "#b3b3b3",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Icon/Disabled/Default token"
+      }
+    ],
+    "spacing": [
+      {
+        "name": "Space/300",
+        "value": "12px",
+        "unit": "px",
+        "type": "itemSpacing-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Space/300 token"
+      }
+    ],
+    "typography": [
+      {
+        "name": "Body Base",
+        "value": "Body Base",
+        "type": "text-style",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-style",
+        "recommendation": "Using Body Base token"
+      },
+      {
+        "name": "Body/Font Family",
+        "value": "Inter",
+        "type": "fontFamily-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Body/Font Family token"
+      },
+      {
+        "name": "Body/Font Weight Regular",
+        "value": "400",
+        "type": "fontWeight-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Body/Font Weight Regular token"
+      },
+      {
+        "name": "Body/Size Medium",
+        "value": "16px",
+        "unit": "px",
+        "type": "fontSize-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Body/Size Medium token"
+      }
+    ],
+    "effects": [],
+    "borders": [
+      {
+        "name": "Stroke/Border",
+        "value": "1px",
+        "unit": "px",
+        "type": "strokeTopWeight-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Stroke/Border token"
+      },
+      {
+        "name": "Radius/Full",
+        "value": "9999px",
+        "unit": "px",
+        "type": "topLeftRadius-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Radius/Full token"
+      }
+    ],
+    "summary": {
+      "totalTokens": 19,
+      "actualTokens": 19,
+      "hardCodedValues": 0,
+      "aiSuggestions": 0,
+      "byCategory": {
+        "colors": {
+          "total": 12,
+          "tokens": 12,
+          "hardCoded": 0,
+          "suggestions": 0
+        },
+        "spacing": {
+          "total": 1,
+          "tokens": 1,
+          "hardCoded": 0,
+          "suggestions": 0
+        },
+        "typography": {
+          "total": 4,
+          "tokens": 4,
+          "hardCoded": 0,
+          "suggestions": 0
+        },
+        "effects": {
+          "total": 0,
+          "tokens": 0,
+          "hardCoded": 0,
+          "suggestions": 0
+        },
+        "borders": {
+          "total": 2,
+          "tokens": 2,
+          "hardCoded": 0,
+          "suggestions": 0
+        }
+      }
+    }
+  },
+  "audit": {
+    "states": [
+      {
+        "name": "Disabled",
+        "found": true
+      },
+      {
+        "name": "Default",
+        "found": true
+      }
+    ],
+    "componentReadiness": [
+      {
+        "check": "Property configuration",
+        "status": "pass",
+        "suggestion": "Component has configurable properties"
+      },
+      {
+        "check": "Component description",
+        "status": "pass",
+        "suggestion": "Component has description for MCP/AI context"
+      }
+    ],
+    "accessibility": [
+      {
+        "check": "Touch target size",
+        "status": "pass",
+        "suggestion": "Target size 120×46px meets recommended 44px minimum (smallest variant: \"State=Default, Value Type=Checked\")"
+      },
+      {
+        "check": "Focus state",
+        "status": "warning",
+        "suggestion": "Add a visible focus state to support keyboard navigation (WCAG 2.4.7)"
+      },
+      {
+        "check": "Minimum font size",
+        "status": "pass",
+        "suggestion": "Smallest text is 16px, meets readability guidelines"
+      },
+      {
+        "check": "Color contrast",
+        "status": "warning",
+        "suggestion": "8 text layers not measurable: \"Label\" (no solid fill behind the text), \"Description\" (no solid fill behind the text), \"Label\" (no solid fill behind the text), …. Check manually"
+      }
+    ],
+    "detachedInstances": [],
+    "platformGuidelines": {
+      "hig": {
+        "platform": "hig",
+        "score": {
+          "passed": 8,
+          "total": 10
+        },
+        "checks": [
+          {
+            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
+            "ruleId": "hig.contrast",
+            "status": "warning",
+            "suggestion": "8 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "source": "local",
+            "nodeId": "280:13860",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+          },
+          {
+            "check": "Body ≥ 17pt, nothing < 11pt",
+            "ruleId": "hig.min-text",
+            "status": "warning",
+            "suggestion": "Largest text is 16pt; iOS body text is 17pt",
+            "source": "local",
+            "nodeId": "280:13860",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
+          },
+          {
+            "check": "Uses SF Pro (system font)",
+            "ruleId": "hig.font",
+            "status": "warning",
+            "suggestion": "8 text layers not using SF Pro: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
+            "source": "local",
+            "nodeId": "280:13860",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
+          },
+          {
+            "check": "Pressed and Disabled states",
+            "ruleId": "hig.states",
+            "status": "warning",
+            "suggestion": "Missing state: Pressed",
+            "source": "local",
+            "nodeId": "9762:1902",
+            "missingStates": [
+              "Pressed"
+            ],
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/buttons"
+          },
+          {
+            "check": "Touch target ≥ 44×44pt",
+            "ruleId": "hig.touch-target",
+            "status": "pass",
+            "suggestion": "Hit area 120×46pt",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+          },
+          {
+            "check": "Font sizes on Dynamic Type scale",
+            "ruleId": "hig.type-scale",
+            "status": "pass",
+            "suggestion": "All sizes match Dynamic Type",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
+          },
+          {
+            "check": "Dark Mode appearance",
+            "ruleId": "hig.dark-mode",
+            "status": "pass",
+            "suggestion": "Dark appearance found",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/dark-mode"
+          },
+          {
+            "check": "Icons 17–28pt (SF Symbols range)",
+            "ruleId": "hig.icon-size",
+            "status": "pass",
+            "suggestion": "Icon sizes fit SF Symbols scales",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/sf-symbols"
+          },
+          {
+            "check": "No ALL-CAPS labels",
+            "ruleId": "hig.label-case",
+            "status": "pass",
+            "suggestion": "Labels use title or sentence case",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
+          },
+          {
+            "check": "Colours use variables or styles",
+            "ruleId": "hig.color-tokens",
+            "status": "pass",
+            "suggestion": "All colours are tokenised",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/color"
+          },
+          {
+            "check": "Layout margins ≥ 16pt",
+            "ruleId": "hig.margins",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/layout",
+            "status": "na",
+            "suggestion": "No container ≥ 320pt wide"
+          },
+          {
+            "check": "Standard control heights",
+            "ruleId": "hig.control-height",
+            "source": "local",
+            "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/buttons",
+            "status": "na",
+            "suggestion": "Not a button, nav bar or tab bar"
+          }
+        ]
+      },
+      "m3": {
+        "platform": "m3",
+        "score": {
+          "passed": 9.5,
+          "total": 12
+        },
+        "checks": [
+          {
+            "check": "Hover, Focused, Pressed, Disabled states",
+            "ruleId": "m3.states",
+            "status": "fail",
+            "suggestion": "Missing state: Hover, Focused, Pressed",
+            "source": "local",
+            "nodeId": "9762:1902",
+            "missingStates": [
+              "Hover",
+              "Focus",
+              "Pressed"
+            ],
+            "guidelineUrl": "https://m3.material.io/foundations/interaction/states"
+          },
+          {
+            "check": "Touch target ≥ 48×48dp",
+            "ruleId": "m3.touch-target",
+            "status": "warning",
+            "suggestion": "Hit area 120×46dp is below 48×48dp",
+            "source": "local",
+            "nodeId": "9762:1903",
+            "guidelineUrl": "https://m3.material.io/foundations/designing/structure"
+          },
+          {
+            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
+            "ruleId": "m3.contrast",
+            "status": "warning",
+            "suggestion": "8 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "source": "local",
+            "nodeId": "280:13860",
+            "guidelineUrl": "https://m3.material.io/foundations/designing/color-contrast"
+          },
+          {
+            "check": "Icons 24dp",
+            "ruleId": "m3.icon-size",
+            "status": "warning",
+            "suggestion": "4 icons not 24dp: 'Knob' 18×18, 'Knob' 18×18, 'Knob' 18×18, …",
+            "source": "local",
+            "nodeId": "565:15573",
+            "guidelineUrl": "https://m3.material.io/styles/icons/designing-icons"
+          },
+          {
+            "check": "Font sizes on M3 type scale",
+            "ruleId": "m3.type-scale",
+            "status": "pass",
+            "suggestion": "All sizes match the M3 type scale",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/styles/typography/type-scale-tokens"
+          },
+          {
+            "check": "Body ≥ 14sp, nothing < 11sp",
+            "ruleId": "m3.min-text",
+            "status": "pass",
+            "suggestion": "Text sizes are readable",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/styles/typography/applying-type"
+          },
+          {
+            "check": "Roboto or declared brand font",
+            "ruleId": "m3.font",
+            "status": "pass",
+            "suggestion": "Fonts are Roboto or the file's brand font",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/styles/typography/fonts"
+          },
+          {
+            "check": "Dark theme",
+            "ruleId": "m3.dark-theme",
+            "status": "pass",
+            "suggestion": "Dark theme found",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/styles/color/choosing-a-scheme"
+          },
+          {
+            "check": "Spacing and sizes on 4dp grid",
+            "ruleId": "m3.spacing-grid",
+            "status": "pass",
+            "suggestion": "Spacing and sizes follow the 4dp grid",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/foundations/designing/structure"
+          },
+          {
+            "check": "Labels in sentence case",
+            "ruleId": "m3.label-case",
+            "status": "pass",
+            "suggestion": "Labels use sentence case",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/foundations/content-design/style-guide/capitalization"
+          },
+          {
+            "check": "Colours use tokens",
+            "ruleId": "m3.color-tokens",
+            "status": "pass",
+            "suggestion": "All colours are tokenised",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/styles/color/roles"
+          },
+          {
+            "check": "Corner radius on shape scale",
+            "ruleId": "m3.shape-scale",
+            "status": "pass",
+            "suggestion": "Corner radii follow the M3 shape scale",
+            "source": "local",
+            "guidelineUrl": "https://m3.material.io/styles/shape/corner-radius-scale"
+          }
+        ]
+      },
+      "web": {
+        "platform": "web",
+        "score": {
+          "passed": 11,
+          "total": 14
+        },
+        "checks": [
+          {
+            "check": "Hover, Focus and Disabled states",
+            "ruleId": "web.states",
+            "status": "fail",
+            "suggestion": "Missing state: Hover, Focus — a visible focus state is required (WCAG 2.4.7)",
+            "source": "local",
+            "nodeId": "9762:1902",
+            "missingStates": [
+              "Hover",
+              "Focus"
+            ],
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
+          },
+          {
+            "check": "Text contrast ≥ 4.5:1 (3:1 large)",
+            "ruleId": "web.contrast",
+            "status": "warning",
+            "suggestion": "8 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "source": "local",
+            "nodeId": "280:13860",
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
+          },
+          {
+            "check": "Ruby font (Fira Sans)",
+            "ruleId": "web.font",
+            "status": "warning",
+            "suggestion": "8 text layers not using Fira Sans: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
+            "source": "local",
+            "nodeId": "280:13860",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Icon and control sizes on Ruby size scale",
+            "ruleId": "web.size",
+            "status": "warning",
+            "suggestion": "4 sizes off the Ruby size scale: 'Knob' icon 18×18, 'Knob' icon 18×18, 'Knob' icon 18×18, …",
+            "source": "local",
+            "nodeId": "565:15573",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Real copy, not placeholders",
+            "ruleId": "web.real-content",
+            "status": "warning",
+            "suggestion": "4 text layers use placeholder copy ('Label'). Use real words such as \"Save profile\" so examples read like the product",
+            "source": "local",
+            "nodeId": "280:13860",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Target size ≥ 24×24px (44 preferred)",
+            "ruleId": "web.target-size",
+            "status": "pass",
+            "suggestion": "Target 120×46px",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html"
+          },
+          {
+            "check": "Body ≥ 16px, nothing < 12px",
+            "ruleId": "web.min-text",
+            "status": "pass",
+            "suggestion": "Text sizes are readable",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html"
+          },
+          {
+            "check": "Dark mode",
+            "ruleId": "web.dark-mode",
+            "status": "pass",
+            "suggestion": "Dark mode found",
+            "source": "local",
+            "guidelineUrl": "https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme"
+          },
+          {
+            "check": "Font sizes on Ruby type scale",
+            "ruleId": "web.type-scale",
+            "status": "pass",
+            "suggestion": "All sizes match the Ruby type scale",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Spacing on Ruby spacing scale",
+            "ruleId": "web.spacing",
+            "status": "pass",
+            "suggestion": "Padding and gaps use Ruby spacing tokens",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Corner radius on Ruby scale",
+            "ruleId": "web.radius",
+            "status": "pass",
+            "suggestion": "Corner radii use Ruby border-radius tokens",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Colours use Ruby tokens",
+            "ruleId": "web.color-tokens",
+            "status": "pass",
+            "suggestion": "All colours are tokenised",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Labels in sentence case",
+            "ruleId": "web.label-case",
+            "status": "pass",
+            "suggestion": "Labels use sentence case",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
+          },
+          {
+            "check": "Accessible name (aria-label / label) available",
+            "ruleId": "web.aria-name",
+            "status": "pass",
+            "suggestion": "Visible text can be the accessible name",
+            "source": "local",
+            "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+          }
+        ]
+      }
+    },
+    "interactiveItems": [
+      {
+        "nodeId": "9762:1902",
+        "name": "Switch Field",
+        "kind": "selection",
+        "kindLabel": "Checkbox / radio / switch",
+        "found": [
+          "Disabled"
+        ],
+        "designed": [
+          "Disabled",
+          "Default"
+        ],
+        "canonical": {
+          "Disabled": "Disabled"
+        },
+        "missing": [
+          {
+            "state": "Hover",
+            "why": "Pointer is over it (web, iPad, desktop) — a subtle fill or underline change shows it is clickable."
+          },
+          {
+            "state": "Focus",
+            "why": "Reached by keyboard or switch control — needs a clearly visible focus ring (WCAG 2.4.7)."
+          },
+          {
+            "state": "Pressed",
+            "why": "While tapped or clicked — immediate feedback that the press registered (HIG Pressed, M3 Pressed)."
+          },
+          {
+            "state": "Selected",
+            "why": "On / checked / current — must differ from unselected by more than colour (WCAG 1.4.1)."
+          }
+        ],
+        "aria": {
+          "element": "<input type=\"checkbox|radio\">",
+          "role": "checkbox, radio, or switch (role=\"switch\")",
+          "states": [
+            {
+              "state": "Hover",
+              "attr": "CSS :hover only (no ARIA attribute)"
+            },
+            {
+              "state": "Focus",
+              "attr": "CSS :focus-visible ring (no ARIA attribute)"
+            },
+            {
+              "state": "Selected",
+              "attr": "checked / aria-checked=\"true|false|mixed\""
+            },
+            {
+              "state": "Disabled",
+              "attr": "disabled"
+            }
+          ],
+          "keyboard": "Space toggles; radios move with arrow keys",
+          "name": "<label for> wrapping or pointing at the input",
+          "apg": "https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/"
+        },
+        "isRoot": true
+      }
+    ]
+  },
+  "properties": [
+    {
+      "name": "Description",
+      "values": [
+        "Description"
+      ],
+      "default": "Description"
+    },
+    {
+      "name": "Has Label",
+      "values": [
+        "true",
+        "false"
+      ],
+      "default": "true"
+    },
+    {
+      "name": "Label",
+      "values": [
+        "Label"
+      ],
+      "default": "Label"
+    },
+    {
+      "name": "Has Description",
+      "values": [
+        "true",
+        "false"
+      ],
+      "default": "true"
+    },
+    {
+      "name": "State",
+      "values": [
+        "Disabled",
+        "Default"
+      ],
+      "default": "Default"
+    },
+    {
+      "name": "Value Type",
+      "values": [
+        "Unchecked",
+        "Checked"
+      ],
+      "default": "Checked"
+    }
+  ],
+  "namingIssues": null,
+  "existingDescription": "Keywords: toggle",
+  "aiOpinions": {
+    "available": false,
+    "reason": "no API key saved"
+  },
+  "figmaUrl": "https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=9762-1902",
+  "exportedAt": "2026-11-24T11:47:13.048Z"
+}

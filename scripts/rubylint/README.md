@@ -1,6 +1,6 @@
 # RubyLint headless runner
 
-Runs the RubyLint audit on a Figma component from the terminal. It writes the same three exports as the plugin: Markdown spec, JSON contract and Jira spec.
+Runs the RubyLint audit on a Figma component, or on every component of a page, from the terminal. It writes the same three exports as the plugin: Markdown spec, JSON contract and Jira spec.
 
 No AI provider is called and no Figma REST API quota is used. The audit runs inside Figma through the Desktop Bridge plugin.
 
@@ -10,10 +10,10 @@ No AI provider is called and no Figma REST API quota is used. The audit runs ins
 npm run rubylint -- "<figma link to the component>"
 ```
 
-Get the link in Figma: right-click the component, Copy link to selection. A bare node id (`2136:2263`) also works.
+Get the link in Figma: right-click the component, Copy link to selection. A page link audits every component on that page. A bare node id (`2136:2263`) also works.
 
 Options:
-- `--out <dir>`: output folder (default `rubylint-out/`, git-ignored until the export location is decided).
+- `--out <dir>`: output folder (default `docs/components/`).
 - `--raw`: also write the raw audit result.
 
 Output for a component named "Input Field": `Input-Field.md`, `Input-Field.contract.json`, `Input-Field.jira.md`.

@@ -35,4 +35,3 @@ dist-ssr
 
 # RubyLint headless runner
 /scripts/rubylint/.build/
-/rubylint-out/

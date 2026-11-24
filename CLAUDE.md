@@ -26,7 +26,8 @@ Code Connect, with Supernova as source of truth. Based on figma/sds (remote: `up
   Markdown/JSON from Figma and commit to the repo. Keep the optional Southleft knowledge
   service off (it sends component names to a third party).
 - Supernova: not set up yet. TODO: workspace and token sync direction.
-- Docs destination for RubyLint exports: TODO (`docs/components/` vs Storybook MDX).
+- RubyLint exports live in `docs/components/` (`<Name>.md`, `<Name>.contract.json`, `<Name>.jira.md`).
+  Generate them with `npm run rubylint -- "<component or page link>"` (scripts/rubylint/README.md).
 
 - Demo flow: Figma → RubyLint (Figma docs, JSON contract, Jira spec) → code from spec →
   CI (contract check, token lint, tests) → Storybook → Supernova. Recorded video, not live.
