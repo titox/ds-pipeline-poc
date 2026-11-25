@@ -36,7 +36,7 @@ Alternative text for the illustrations. They are frames on the Figma page "Docs 
 |---|---|---|
 | Design | Ready | 15 variants in Figma. Readiness audit: 97%. |
 | React | Ready | Matches the 15 Figma variants in light and dark. |
-| Review | Known issues | Four of six criteria pass, 25 November 2026, round 3. Two fail on one design value: the Error border on a checked box has too little contrast. |
+| Review | Passed | All six criteria pass, 25 November 2026, round 4. |
 | Code Connect | Ready | Published on 25 November 2026. |
 | Screen reader | Not tested | See Code and accessibility. |
 
@@ -137,7 +137,7 @@ The description is aligned with the label, not with the box.
 | Hover | The box fill changes: `Background/Default/Default Hover` when unchecked, `Background/Brand/Hover` when checked or indeterminate. |
 | Focus | A 2px ring in `Border/Focus/Default` on the outer edge of the box. It replaces the border. It shows on keyboard focus. |
 | Disabled | Disabled fill, border and glyph colours on the box. The label uses the disabled text colour. The description is shown at 50% opacity. |
-| Error | A 1px border in `Border/Danger/Default` on the box. The error message shows when Has Error is on. |
+| Error | A 1px border in `Border/Danger/Default` on the outer edge of the box. The error message shows when Has Error is on. |
 
 There is no Pressed state.
 
@@ -198,7 +198,7 @@ sds-primitives-inputs--story-checkbox-field
 | `label` | string | | Text of the label. |
 | `description` | string | | Supporting text under the label. Leave it out to hide it. |
 | `isSelected`, `defaultSelected` | boolean | `false` | Checked or not, controlled or uncontrolled. |
-| `isIndeterminate` | boolean | `false` | Shows the Minus glyph when the checkbox is also selected. |
+| `isIndeterminate` | boolean | `false` | Shows the filled box with the Minus glyph. |
 | `isDisabled` | boolean | `false` | Blocks clicks and focus. |
 | `onChange` | function | | Called with the new selected value. |
 | `value` | string | | The value of the checkbox inside a Checkbox Group. |
@@ -226,7 +226,7 @@ CheckboxField also accepts the other props of the react-aria-components Checkbox
 
 - The description and the error message are shown by passing their text. Leave the prop out to hide the part.
 - The error message only appears while the field is invalid.
-- The Minus glyph only shows when the checkbox is both selected and indeterminate.
+- Indeterminate shows the Minus glyph whether or not the checkbox is selected.
 - CheckboxField is built from Checkbox and Description, with the Check and Minus icons. Reuse them; do not create new ones.
 
 ### Accessibility
@@ -260,15 +260,15 @@ Tested on 25 November 2026, in light and dark.
 | Glyph contrast on the checked fill | 12.81:1 in light, 15.29:1 in dark |
 | Focus ring contrast | 4.36:1 in light, 3.82:1 in dark against the page; 3.2:1 in light, 4:1 in dark against the checked fill |
 | Error message contrast | 9.38:1 in light, 12.23:1 in dark |
-| Error border contrast, unchecked | 9.38:1 in light, 12.23:1 in dark |
-| Error border contrast, checked and indeterminate | 1.49:1 in light, 1.25:1 in dark against the box fill. Below the 3:1 minimum. |
+| Error border contrast | 9.38:1 in light, 12.23:1 in dark against the page, for all value types |
 | Screen reader | Not tested |
 
 ### Known accessibility issues
 
-- The Error border on a checked or indeterminate box is below the minimum contrast in light and in dark. Without an error message it is the only error cue.
-- On an unchecked box, Error without a message is shown by colour alone.
-- Focus on a field with an error replaces the danger border with the focus ring. A disabled field with an error is not designed.
+- Error without a message is shown by the border colour alone. On a checked or indeterminate box the border has little contrast against the fill it touches (1.49:1 in light, 1.25:1 in dark), although it passes against the page. Turn Has Error on with State set to Error.
+- Focus on a field with an error replaces the danger border with the focus ring. Focus with Error, Hover with Error and Disabled with Error are not designed.
+- Hover is a faint change: the unchecked fill differs from Default by 1.09:1 in light and 1.42:1 in dark.
+- In Figma the error line can be shown in any state. In code it only shows while the field is invalid.
 - Disabled in light: the glyph and the border have a contrast of 1.49:1 against the disabled fill, so a disabled checked box is hard to tell from a disabled unchecked one. Disabled controls are exempt from the contrast minimum.
 - Without a description the clickable row is 22px high.
 
@@ -278,7 +278,7 @@ Tested on 25 November 2026, in light and dark.
 | Date | Version | Notes |
 |---|---|---|
 | 25 November 2026 | Unreleased | Documentation page written: usage, design, code and accessibility. |
-| 25 November 2026 | Unreleased | Hover has a look of its own: the box fill changes. New Error state: a danger border on the box, and an error message with the Has Error and Error properties. |
+| 25 November 2026 | Unreleased | Hover has a look of its own: the box fill changes. New Error state: a danger border on the outer edge of the box, and an error message with the Has Error and Error properties. |
 | 25 November 2026 | Unreleased | Aligned with Figma: the unchecked border uses `Border/Brand/Tertiary`; the focus ring sits on the edge of the box and uses `Border/Focus/Default`; there is no gap between label and description; when disabled, the description is shown at 50% opacity. |
 | 25 November 2026 | Unreleased | Figma: the label of the Disabled variants uses `Text/Disabled/Default`. The Hover and Focus variants are connected to the Label, Description and Has Description properties. |
 | 25 November 2026 | Unreleased | Accessibility: the description is linked to the checkbox with `aria-describedby`, the glyph is hidden from assistive technology, and the label is no longer a label inside a label. |

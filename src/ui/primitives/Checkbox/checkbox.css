@@ -27,8 +27,9 @@
   }
 }
 
-.checkbox[data-selected],
-.checkbox-field[data-selected] > .checkbox {
+/* Indeterminate counts as filled even when the checkbox is not selected. */
+.checkbox:is([data-selected], [data-indeterminate]),
+.checkbox-field:is([data-selected], [data-indeterminate]) > .checkbox {
   --checkbox-background: var(--sds-color-background-brand-default);
   --checkbox-border: var(--checkbox-background);
 }
@@ -37,13 +38,16 @@
 .checkbox-field[data-hovered] > .checkbox {
   --checkbox-background: var(--sds-color-background-default-default-hover);
 }
-.checkbox-field[data-selected][data-hovered] > .checkbox {
+.checkbox-field:is([data-selected], [data-indeterminate])[data-hovered] > .checkbox {
   --checkbox-background: var(--sds-color-background-brand-hover);
 }
 
-/* Error: a danger border on the box, as in the Figma Error variants. */
-.checkbox-field[data-invalid]:not([data-disabled]) > .checkbox {
-  --checkbox-border: var(--sds-color-border-danger-default);
+/* Error: a danger border on the outer edge of the box, as in the Figma Error
+   variants. Focus replaces it with the focus ring; Disabled keeps its own. */
+.checkbox-field[data-invalid]:not([data-disabled], [data-focus-visible])
+  > .checkbox {
+  box-shadow: 0 0 0 var(--sds-size-stroke-border)
+    var(--sds-color-border-danger-default);
 }
 
 .checkbox-field[data-selected]:not([data-indeterminate])
@@ -52,15 +56,13 @@
 .checkbox[data-selected]:not([data-indeterminate]) > .icon-selected {
   display: block;
 }
-.checkbox-field[data-selected][data-indeterminate]
-  > .checkbox
-  > .icon-indeterminate,
-.checkbox[data-selected][data-indeterminate] > .icon-indeterminate {
+.checkbox-field[data-indeterminate] > .checkbox > .icon-indeterminate,
+.checkbox[data-indeterminate] > .icon-indeterminate {
   display: block;
 }
 
-.checkbox[data-selected][data-disabled],
-.checkbox-field[data-selected][data-disabled] > .checkbox {
+.checkbox:is([data-selected], [data-indeterminate])[data-disabled],
+.checkbox-field:is([data-selected], [data-indeterminate])[data-disabled] > .checkbox {
   --checkbox-icon: var(--sds-color-icon-disabled-on-disabled);
 }
 
@@ -122,7 +124,7 @@
 
 .checkbox-field[data-disabled] {
   .checkbox,
-  &[data-selected] .checkbox {
+  &:is([data-selected], [data-indeterminate]) .checkbox {
     --checkbox-background: var(--sds-color-background-disabled-default);
     --checkbox-border: var(--sds-color-border-disabled-default);
     --checkbox-icon: var(--sds-color-icon-disabled-on-disabled);
