@@ -14,6 +14,8 @@ type StoryGroup = StoryObj<typeof CheckboxGroup>;
 export const StoryCheckboxField: Story = {
   name: "Checkbox Field",
   args: {
+    label: "Label",
+    description: "Description",
     isSelected: true,
     isIndeterminate: false,
     isDisabled: false,
@@ -26,21 +28,23 @@ export const StoryCheckboxField: Story = {
         isSelected={isSelected}
         isIndeterminate={args.isIndeterminate}
         onChange={() => updateArgs({ isSelected: !isSelected })}
-        label="This is a checkbox"
-        description="This is a checkbox description"
+        label={args.label}
+        description={args.description}
       />
     );
   },
 };
 
-export const StoryCheckboxGruop: StoryGroup = {
+export const StoryCheckboxGroup: StoryGroup = {
   name: "Checkbox Group",
-  args: {},
+  args: {
+    label: "Label",
+    description: "Description",
+    isDisabled: false,
+  },
   render: (args) => {
     return (
       <CheckboxGroup
-        label="Hello"
-        description="I am a description"
         {...args}
         onChange={console.log}
       >

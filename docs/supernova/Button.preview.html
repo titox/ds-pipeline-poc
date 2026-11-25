@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Button, documentation preview</title>
+<style>
+:root, [data-theme="light"] {
+  /* SDS token values, light (from the review scorecard) */
+  --bg-brand: #2c2c2c; --bg-brand-hover: #1e1e1e; --on-brand: #f5f5f5; --border-brand: #2c2c2c;
+  --bg-neutral: #e3e3e3; --bg-neutral-hover: #cdcdcd; --border-neutral: #767676;
+  --text-default: #1e1e1e; --text-neutral: #303030; --icon-default: #1e1e1e;
+  --border-default: #d9d9d9;
+  --bg-disabled: #d9d9d9; --border-disabled: #b3b3b3; --on-disabled: #b3b3b3;
+  --focus: #ec221f;
+  --marker: #ec221f;
+  /* page chrome */
+  --page: #ffffff; --surface: #f5f5f5; --text-2: #5a5a5a; --rule: #d9d9d9;
+  --ok-bg: #e3f3e7; --ok-fg: #14532d;
+  --wait-bg: #fff1c2; --wait-fg: #5c4300;
+  --none-bg: #e3e3e3; --none-fg: #303030;
+  --bad-bg: #fde3e0; --bad-fg: #8a1410;
+  --do: #14804a; --dont: #c00f0c;
+  --code-bg: #f5f5f5;
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  --bg-brand: #f5f5f5; --bg-brand-hover: #d9d9d9; --on-brand: #1e1e1e; --border-brand: #f5f5f5;
+  --bg-neutral: #303030; --bg-neutral-hover: #242424; --border-neutral: #949494;
+  --text-default: #ffffff; --text-neutral: #e3e3e3; --icon-default: #ffffff;
+  --border-default: #444444;
+  --bg-disabled: #383838; --border-disabled: #444444; --on-disabled: #b3b3b3;
+  --page: #1e1e1e; --surface: #2a2a2a; --text-2: #b8b8b8; --rule: #444444;
+  --ok-bg: #173d26; --ok-fg: #b8ebc8;
+  --wait-bg: #4a3600; --wait-fg: #ffe08a;
+  --none-bg: #383838; --none-fg: #e3e3e3;
+  --bad-bg: #4d1b18; --bad-fg: #ffc9c4;
+  --do: #5fd397; --dont: #ff8a80;
+  --code-bg: #2a2a2a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--page); color: var(--text-default);
+  font: 400 16px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+a { color: inherit; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+code, pre { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 14px; }
+code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+pre { background: var(--code-bg); padding: 16px; border-radius: 8px; overflow-x: auto; margin: 0 0 24px; line-height: 1.5; }
+pre code { background: none; padding: 0; }
+
+/* ---- preview notice ---- */
+.notice { background: var(--wait-bg); color: var(--wait-fg); font-size: 14px; padding: 8px 24px; }
+
+/* ---- shell ---- */
+.topbar {
+  display: flex; align-items: center; gap: 16px; padding: 12px 24px;
+  border-bottom: 1px solid var(--rule); position: sticky; top: 0; background: var(--page); z-index: 5;
+}
+.brand { font-weight: 600; margin-right: auto; }
+.search { border: 1px solid var(--rule); border-radius: 8px; padding: 6px 12px; color: var(--text-2); font-size: 14px; min-width: 200px; }
+.switch { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
+.chrome-btn {
+  font: inherit; font-size: 14px; color: inherit; background: none; cursor: pointer;
+  border: 1px solid var(--border-neutral); border-radius: 8px; padding: 6px 12px;
+}
+.shell { display: grid; grid-template-columns: 232px minmax(0, 1fr) 216px; max-width: 1360px; margin: 0 auto; }
+.tree { padding: 32px 16px 32px 24px; border-right: 1px solid var(--rule); font-size: 15px; position: sticky; top: 57px; align-self: start; height: calc(100vh - 57px); overflow-y: auto; }
+.tree h2 { font-size: 13px; font-weight: 600; color: var(--text-2); margin: 24px 0 8px; }
+.tree h2:first-child { margin-top: 0; }
+.tree ul { list-style: none; margin: 0; padding: 0; }
+.tree li { padding: 5px 10px; border-radius: 6px; color: var(--text-2); }
+.tree li[aria-current] { background: var(--surface); color: var(--text-default); font-weight: 600; }
+main { padding: 40px 48px 96px; min-width: 0; }
+.toc { padding: 40px 24px 32px 0; font-size: 14px; }
+.toc-inner { position: sticky; top: 84px; }
+.toc h2 { font-size: 13px; font-weight: 600; color: var(--text-2); margin: 0 0 8px; }
+.toc ul { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--rule); }
+.toc a { display: block; padding: 4px 12px; text-decoration: none; color: var(--text-2); }
+.toc a:hover { color: var(--text-default); }
+
+/* ---- page head ---- */
+.crumbs { font-size: 14px; color: var(--text-2); margin: 0 0 8px; }
+h1 { font-size: 44px; line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 12px; }
+.lede { font-size: 20px; line-height: 1.45; color: var(--text-2); margin: 0 0 28px; max-width: 34em; }
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--rule); margin-bottom: 32px; overflow-x: auto; }
+.tabs button {
+  font: inherit; color: var(--text-2); background: none; border: 0; cursor: pointer;
+  padding: 10px 14px; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap;
+}
+.tabs button[aria-selected="true"] { color: var(--text-default); border-bottom-color: var(--text-default); font-weight: 600; }
+.panel { max-width: 760px; }
+.panel[hidden] { display: none; }
+.panel h3 { font-size: 24px; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em; margin: 48px 0 12px; scroll-margin-top: 80px; }
+.panel h3:first-child { margin-top: 0; }
+.panel h4 { font-size: 16px; font-weight: 600; margin: 24px 0 8px; }
+.panel p { margin: 0 0 16px; }
+.panel ul, .panel ol { margin: 0 0 16px; padding-left: 22px; }
+.panel li { margin-bottom: 6px; }
+
+/* ---- tables ---- */
+.table-wrap { overflow-x: auto; margin: 0 0 24px; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th { text-align: left; font-weight: 600; color: var(--text-2); font-size: 14px; }
+th, td { padding: 10px 16px 10px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+td code { white-space: nowrap; }
+
+/* ---- status ---- */
+.pill { display: inline-block; font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 999px; white-space: nowrap; }
+.pill.ok { background: var(--ok-bg); color: var(--ok-fg); }
+.pill.wait { background: var(--wait-bg); color: var(--wait-fg); }
+.pill.none { background: var(--none-bg); color: var(--none-fg); }
+.status { display: grid; grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); gap: 0; border: 1px solid var(--rule); border-radius: 8px; margin: 0 0 24px; }
+.status div { padding: 14px 16px; border-right: 1px solid var(--rule); }
+.status div:last-child { border-right: 0; }
+.status dt { font-size: 14px; color: var(--text-2); margin-bottom: 6px; }
+.status dd { margin: 0; }
+.status small { display: block; font-size: 13px; color: var(--text-2); margin-top: 6px; line-height: 1.4; }
+
+/* ---- link cards ---- */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 0 0 24px; }
+.card { border: 1px solid var(--rule); border-radius: 8px; padding: 14px 16px; }
+.card strong { display: block; }
+.card span { font-size: 14px; color: var(--text-2); }
+
+/* ---- proposed ---- */
+.proposed-tag { display: inline-block; font-size: 12px; font-weight: 600; background: var(--prop-bg); color: var(--prop-fg); padding: 1px 8px; border-radius: 4px; margin-left: 8px; vertical-align: 2px; white-space: nowrap; }
+.proposed { background: linear-gradient(var(--prop-bg), var(--prop-bg)) left / 3px 100% no-repeat; padding-left: 12px; }
+li.proposed { list-style-position: outside; margin-left: -12px; }
+:root[data-proposed="off"] .proposed, :root[data-proposed="off"] .proposed-block { display: none; }
+
+/* ---- the SDS button, with token values ---- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font: 400 16px/1 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  border: 0; border-radius: 8px; padding: 12px; white-space: nowrap; cursor: pointer;
+  background: var(--b-bg); color: var(--b-fg); box-shadow: inset 0 0 0 1px var(--b-border);
+}
+.btn svg { width: 16px; height: 16px; stroke: var(--b-icon); stroke-width: 1.6; fill: none; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.btn.small { padding: 8px; }
+.btn.primary { --b-bg: var(--bg-brand); --b-border: var(--border-brand); --b-fg: var(--on-brand); --b-icon: var(--on-brand); }
+.btn.primary:hover, .btn.primary.is-hover { --b-bg: var(--bg-brand-hover); }
+.btn.neutral { --b-bg: var(--bg-neutral); --b-border: var(--border-neutral); --b-fg: var(--text-default); --b-icon: var(--icon-default); }
+.btn.neutral:hover, .btn.neutral.is-hover { --b-bg: var(--bg-neutral-hover); }
+.btn.subtle { --b-bg: transparent; --b-border: transparent; --b-fg: var(--text-neutral); --b-icon: var(--icon-default); }
+.btn.subtle:hover, .btn.subtle.is-hover { --b-border: var(--border-default); --b-fg: var(--text-default); }
+.btn:disabled, .btn.is-disabled { --b-bg: var(--bg-disabled); --b-border: var(--border-disabled); --b-fg: var(--on-disabled); --b-icon: var(--on-disabled); cursor: default; pointer-events: none; }
+.btn:focus-visible, .btn.is-focus { outline: 2px solid var(--focus); outline-offset: 0; --b-border: transparent; }
+.btn.is-loading { pointer-events: none; }
+
+.stage { background: var(--surface); border-radius: 8px; padding: 32px 24px; margin: 0 0 24px; }
+.stage-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+.stage figcaption, .caption { font-size: 14px; color: var(--text-2); margin-top: 16px; }
+figure { margin: 0; }
+
+/* states matrix */
+.matrix { display: grid; grid-template-columns: auto repeat(5, minmax(0, 1fr)); gap: 20px 12px; align-items: center; justify-items: start; }
+.matrix .head { font-size: 14px; color: var(--text-2); }
+
+/* anatomy */
+.anatomy { display: flex; justify-content: center; padding: 56px 24px 32px; }
+.anatomy .btn { position: relative; cursor: default; pointer-events: none; }
+.anatomy .part { position: relative; display: inline-flex; }
+.dot { position: absolute; left: 50%; bottom: calc(100% + 26px); transform: translateX(-50%); width: 24px; height: 24px; border-radius: 50%; background: var(--marker); color: #f5f5f5; font-size: 13px; font-weight: 600; display: grid; place-items: center; }
+.dot::after { content: ""; position: absolute; top: 100%; left: 50%; width: 1.5px; height: 14px; background: var(--marker); }
+.dot.edge { left: 0; bottom: auto; top: 50%; transform: translate(calc(-100% - 22px), -50%); }
+.dot.edge::after { top: 50%; left: 100%; width: 14px; height: 1px; }
+
+/* do and don't */
+.pairs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 0 24px; }
+.pair { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+.pair .demo { background: var(--surface); padding: 24px 16px; min-height: 96px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: center; }
+.pair .demo { min-height: 232px; align-items: center; }
+.scene { background: var(--page); border: 1px solid var(--rule); border-radius: 10px; padding: 16px; width: 100%; max-width: 300px; text-align: left; }
+.scene.mini { max-width: 132px; padding: 12px; }
+.scene-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.field { height: 32px; border: 1px solid var(--border-neutral); border-radius: 6px; padding: 0 10px; margin-bottom: 8px; display: flex; align-items: center; font-size: 13px; color: var(--text-2); }
+.field.filled { color: var(--text-default); }
+.line { height: 8px; border-radius: 4px; background: var(--rule); margin-bottom: 8px; }
+.line.w60 { width: 60%; } .line.w80 { width: 80%; }
+.foot { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
+.phone { width: 168px; background: var(--page); border: 2px solid var(--border-neutral); border-radius: 22px; padding: 22px 14px 12px; }
+.touch { position: relative; display: grid; place-items: center; height: 60px; margin-top: 18px; }
+.target { position: absolute; width: 92px; height: 44px; border-radius: 12px; border: 2px dashed var(--dont); pointer-events: none; }
+.note { font-size: 11px; line-height: 1.3; color: var(--text-2); text-align: center; }
+.pair .say { padding: 12px 16px; border-top: 3px solid; font-size: 15px; }
+.pair.do .say { border-color: var(--do); }
+.pair.dont .say { border-color: var(--dont); }
+.pair b { display: block; font-size: 14px; }
+.pair.do b { color: var(--do); }
+.pair.dont b { color: var(--dont); }
+
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 0 24px; }
+.two > div { border: 1px solid var(--rule); border-radius: 8px; padding: 16px 20px; }
+.two h4 { margin-top: 0; }
+.two ul { margin-bottom: 0; }
+
+/* playground */
+.play { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; margin: 0 0 24px; }
+.play .demo { background: var(--surface); padding: 40px 16px; display: grid; place-items: center; }
+.play .controls { display: flex; flex-wrap: wrap; gap: 16px 24px; padding: 14px 16px; font-size: 14px; border-top: 1px solid var(--rule); }
+.play label { display: inline-flex; align-items: center; gap: 8px; }
+.play select { font: inherit; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border-neutral); background: var(--page); color: inherit; }
+
+
+/* ---- top navigation ---- */
+.topnav { display: flex; gap: 4px; margin-right: auto; overflow-x: auto; }
+.topnav a { text-decoration: none; padding: 6px 12px; border-radius: 8px; font-size: 15px; color: var(--text-2); white-space: nowrap; }
+.topnav a[aria-current] { background: var(--bg-brand); color: var(--on-brand); }
+.brand { margin-right: 16px; white-space: nowrap; }
+.topnav { min-width: 0; }
+.contact-btn { font: inherit; font-size: 14px; text-decoration: none; background: var(--bg-brand); color: var(--on-brand); border-radius: 8px; padding: 7px 12px; white-space: nowrap; }
+.tree button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; width: 100%; text-align: left; }
+
+/* ---- link cards with icon ---- */
+.linkcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin: 0 0 24px; }
+.linkcard { display: block; text-decoration: none; border: 1px solid var(--rule); border-radius: 10px; padding: 20px; background: var(--page); }
+.linkcard:hover { border-color: var(--border-neutral); }
+.linkcard .logo { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 10px; margin-bottom: 20px; }
+.linkcard strong { display: block; font-weight: 500; font-size: 17px; }
+.linkcard span.sub { font-size: 14px; color: var(--text-2); }
+.linkcard.row { display: flex; align-items: center; gap: 16px; padding: 14px 16px; }
+.linkcard.row .logo { margin: 0; flex: none; }
+.logo.figma { background: #1e1e1e; } .logo.story { background: none; } .logo.code { background: var(--surface); border: 1px solid var(--rule); } .logo.teams { background: none; }
+.logo.story b, .logo.teams b { color: #fff; font-size: 26px; font-weight: 700; line-height: 1; }
+
+/* ---- callout ---- */
+.callout { background: var(--wait-bg); color: var(--wait-fg); border-radius: 8px; padding: 14px 16px; margin: 0 0 16px; }
+
+/* ---- in-page tabs ---- */
+.subtabs { display: inline-flex; gap: 4px; background: var(--surface); border-radius: 10px; padding: 4px; margin: 0 0 16px; }
+.subtabs button { font: inherit; font-size: 14px; color: var(--text-2); background: none; border: 0; border-radius: 7px; padding: 6px 14px; cursor: pointer; }
+.subtabs button[aria-selected="true"] { background: var(--page); color: var(--text-default); font-weight: 600; box-shadow: 0 0 0 1px var(--rule); }
+[data-subpanel][hidden] { display: none; }
+.stage[data-theme] { border: 1px solid var(--rule); color: var(--text-default); }
+
+/* ---- status board ---- */
+.pill.bad { background: var(--bad-bg); color: var(--bad-fg); }
+.board th, .board td { padding-right: 20px; white-space: nowrap; }
+.board td:first-child { font-weight: 600; }
+.reading li { margin-bottom: 10px; }
+
+@media (max-width: 1100px) { .shell { grid-template-columns: 200px minmax(0, 1fr); } .toc { display: none; } }
+@media (max-width: 760px) {
+  .topbar { flex-wrap: wrap; gap: 10px 12px; padding: 10px 20px; }
+  .topbar .brand { margin-right: auto; }
+  .topnav { order: 5; width: 100%; margin: 0; }
+  .tree { position: static; height: auto; }
+  .shell { grid-template-columns: minmax(0, 1fr); } .tree, .search { display: none; }
+  main { padding: 24px 20px 64px; } h1 { font-size: 34px; }
+  .pairs, .two { grid-template-columns: minmax(0, 1fr); }
+  .status div { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .matrix { grid-template-columns: auto repeat(5, max-content); overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+  <symbol id="i-loader" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></symbol>
+</svg>
+
+<div class="notice">Preview of the proposed Button page. This is a local mock-up, not Supernova. Nothing here is published.</div>
+
+<header class="topbar">
+  <span class="brand">SDS Design PoC</span>
+  <nav class="topnav" aria-label="Sections">
+    <a href="#">Get started</a><a href="#">Foundations</a><a href="#" aria-current="page">Components</a><a href="#">Patterns</a><a href="#">Accessibility</a><a href="#">Content</a>
+  </nav>
+  <span class="search" aria-hidden="true">Search</span>
+  <button class="chrome-btn" id="theme-toggle" type="button">Dark mode</button>
+  <a class="contact-btn" href="#contact">Contact the team</a>
+</header>
+
+<div class="shell">
+  <nav class="tree" aria-label="Documentation">
+    <h2>Foundations</h2>
+    <ul><li>Typography</li><li>Shadows</li><li>Blurs</li></ul>
+    <h2>Components</h2>
+    <ul><li id="nav-board"><button type="button">Overview</button></li><li>Accordion</li><li>Avatars</li><li id="nav-button" aria-current="page"><button type="button">Button</button></li><li>Card</li><li>Tag</li></ul>
+  </nav>
+
+  <main>
+    <div id="view-button">
+    <p class="crumbs">Components / Button</p>
+    <h1>Button</h1>
+    <p class="lede">Button triggers an action or submits a form.</p>
+
+    <div class="tabs" role="tablist" aria-label="Button documentation">
+      <button role="tab" id="t-usage" aria-controls="p-usage" aria-selected="true">Usage</button>
+      <button role="tab" id="t-design" aria-controls="p-design" aria-selected="false" tabindex="-1">Design</button>
+      <button role="tab" id="t-code" aria-controls="p-code" aria-selected="false" tabindex="-1">Code and accessibility</button>
+    </div>
+
+    <!-- ================= USAGE ================= -->
+    <section class="panel" role="tabpanel" id="p-usage" aria-labelledby="t-usage">
+      <figure class="stage">
+        <div class="stage-row" style="justify-content:center">
+          <button class="btn primary" type="button">Save changes</button>
+          <button class="btn neutral" type="button">Cancel</button>
+          <button class="btn subtle" type="button">Learn more</button>
+        </div>
+      </figure>
+
+      <h3>Status</h3>
+      <dl class="status">
+        <div><dt>Design</dt><dd><span class="pill ok">Ready</span><small>30 variants in Figma. Readiness audit: 94%.</small></dd></div>
+        <div><dt>React</dt><dd><span class="pill ok">Ready</span><small>Matches all 30 variants in light and dark.</small></dd></div>
+        <div><dt>Review</dt><dd><span class="pill ok">Passed</span><small>Six of six criteria, 24 November 2026.</small></dd></div>
+        <div><dt>Code Connect</dt><dd><span class="pill wait">Pending</span><small>Mapping is written. Not published yet.</small></dd></div>
+        <div><dt>Screen reader</dt><dd><span class="pill none">Not tested</span><small>See Code and accessibility.</small></dd></div>
+      </dl>
+
+      <h3>What it is</h3>
+      <p>Button is the standard way to trigger an action. It has three levels of emphasis, two sizes and five states. It holds a text label and can show one icon before the label and one after it.</p>
+
+      <h3>Links</h3>
+      <div class="linkcards">
+        <a class="linkcard" href="https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=4185-3778"><span class="logo figma"><svg width="22" height="33" viewBox="0 0 38 57" aria-hidden="true"><path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/><path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z"/><path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/><path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/><path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/></svg></span><strong>Button</strong><span class="sub">Figma component set</span></a>
+        <a class="linkcard" href="http://localhost:6006/?path=/story/sds-primitives-buttons--story-button"><span class="logo story"><img src="img/storybook.svg" alt="" width="48" height="48"></span><strong>Button</strong><span class="sub">Storybook</span></a>
+        <a class="linkcard" href="#"><span class="logo code" style="border:0;background:none"><img src="img/github.svg" alt="" width="48" height="48"></span><strong>Button.tsx</strong><span class="sub">Source code</span></a>
+      </div>
+
+      <h3>When to use it</h3>
+      <div class="two">
+        <div><h4>Use it for</h4><ul>
+          <li>Triggering an action: save, send, add, confirm.</li>
+          <li>Submitting a form.</li>
+        </ul></div>
+        <div><h4>Not for this</h4><ul>
+          <li>Going to another page. Use a link.</li>
+          <li>Destructive actions. Use Button Danger.</li>
+          <li>An action with no room for a label. Use Icon Button.</li>
+        </ul></div>
+      </div>
+
+      <h3>Button or link</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>Button</th><th>Link</th></tr></thead>
+        <tbody>
+          <tr><td>Purpose</td><td>Does something</td><td>Goes somewhere</td></tr>
+          <tr><td>Example</td><td>Save, Add to basket</td><td>View details, Read the terms</td></tr>
+          <tr><td>Keyboard</td><td>Enter and Space</td><td>Enter</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Choosing a variant</h3>
+      <ul>
+        <li>Use one Primary button per view, for the main action.</li>
+        <li>Use Neutral for the actions next to it.</li>
+        <li>Use Subtle where the button must sit quietly inside dense content.</li>
+      </ul>
+
+      <h3>Icons</h3>
+      <ul>
+        <li>Add an icon to add meaning, not decoration.</li>
+        <li>Use at most one icon before the label and one after it.</li>
+        <li>Do not use an icon without a label here. Use Icon Button.</li>
+      </ul>
+
+      <h3>Do and don't</h3>
+      <div class="pairs">
+        <div class="pair do"><div class="demo">
+          <div class="scene"><div class="scene-title">Edit profile</div><div class="field">Name</div><div class="field">Email</div><div class="foot"><span class="btn neutral">Cancel</span><span class="btn primary">Save changes</span></div></div>
+        </div><div class="say"><b>Do</b>Use one Primary button for the main action in a view.</div></div>
+        <div class="pair dont"><div class="demo">
+          <div class="scene"><div class="scene-title">Edit profile</div><div class="field">Name</div><div class="field">Email</div><div class="foot"><span class="btn primary">Cancel</span><span class="btn primary">Save changes</span></div></div>
+        </div><div class="say"><b>Don't</b>Place two Primary buttons side by side.</div></div>
+
+        <div class="pair do"><div class="demo">
+          <div class="scene"><div class="scene-title">Edit profile</div><div class="field filled">Alex Example</div><div class="field filled">alex@example.com</div><div class="foot"><span class="btn primary is-loading"><svg aria-hidden="true"><use href="#i-loader"/></svg>Saving</span></div></div>
+        </div><div class="say"><b>Do</b>Use Loading while an action is in progress.</div></div>
+        <div class="pair dont"><div class="demo">
+          <div class="phone"><div class="line w60"></div><div class="line"></div><div class="line w80"></div><div class="touch"><span class="btn primary small">Pay now</span><span class="target" aria-hidden="true"></span></div><div class="note">Dashed outline: 44px target height</div></div>
+        </div><div class="say"><b>Don't</b>Use Small as the only action on a touch screen.</div></div>
+      </div>
+
+
+      <h3>Related components</h3>
+      <div class="cards">
+        <div class="card"><strong>Button Danger</strong><span>For destructive actions, such as delete.</span></div>
+        <div class="card"><strong>Icon Button</strong><span>For an action shown by an icon alone.</span></div>
+        <div class="card"><strong>Button Group</strong><span>To lay out two or more buttons together.</span></div>
+      </div>
+
+      <h3>Related reading</h3>
+      <p class="caption" style="margin-top:0">Suggested from memory. Each title and address still needs checking before it is published.</p>
+      <ol class="reading">
+        <li><a href="https://www.nngroup.com/articles/button-states-communicate-interaction/">Button States: Communicate Interaction</a>, by Nielsen Norman Group <span class="pill wait">To verify</span></li>
+        <li><a href="https://www.nngroup.com/articles/ok-cancel-or-cancel-ok/">OK-Cancel or Cancel-OK? The Trouble With Buttons</a>, by Nielsen Norman Group <span class="pill wait">To verify</span></li>
+        <li><a href="https://www.smashingmagazine.com/2021/08/frustrating-design-patterns-disabled-buttons/">Frustrating Design Patterns: Disabled Buttons</a>, by Vitaly Friedman, Smashing Magazine <span class="pill wait">To verify</span></li>
+        <li><a href="https://lawsofux.com/fittss-law/">Fitts's Law</a>, Laws of UX <span class="pill wait">To verify</span></li>
+        <li>Button design: user interface components series, by Taras Bakusevych, UX Collective <span class="pill wait">To verify, address unknown</span></li>
+      </ol>
+
+      <h3 id="contact">Need help?</h3>
+      <p class="callout">Not sure which variant or size to use? Ask the design system team.</p>
+      <a class="linkcard row" href="#"><span class="logo teams"><img src="img/teams.png" alt="" width="48" height="48"></span><span><strong>Contact the design system team</strong><span class="sub">Microsoft Teams channel (placeholder link)</span></span></a>
+    </section>
+
+    <!-- ================= DESIGN ================= -->
+    <section class="panel" role="tabpanel" id="p-design" aria-labelledby="t-design" hidden>
+      <h3>Anatomy</h3>
+      <figure class="stage">
+        <div class="anatomy">
+          <span class="btn primary"><span class="dot edge">1</span>
+            <span class="part"><span class="dot">2</span><svg><use href="#i-star"/></svg></span>
+            <span class="part"><span class="dot">3</span>Button</span>
+            <span class="part"><span class="dot">4</span><svg><use href="#i-x"/></svg></span>
+          </span>
+        </div>
+      </figure>
+      <ol>
+        <li><strong>Container:</strong> carries the fill, the border and the padding.</li>
+        <li><strong>Start icon (optional):</strong> shown before the label. The spinner takes this place while loading.</li>
+        <li><strong>Label:</strong> the text of the button.</li>
+        <li><strong>End icon (optional):</strong> shown after the label. Hidden while loading.</li>
+      </ol>
+
+      <h3>Variants</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Variant</th><th>Example</th><th>Use it for</th></tr></thead>
+        <tbody>
+          <tr><td>Primary</td><td><button class="btn primary" type="button">Button</button></td><td>The single most important action in a view.</td></tr>
+          <tr><td>Neutral</td><td><button class="btn neutral" type="button">Button</button></td><td>Supporting actions beside the primary one.</td></tr>
+          <tr><td>Subtle</td><td><button class="btn subtle" type="button">Button</button></td><td>A quiet action inside dense content.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Sizes</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Size</th><th>Example</th><th>Height</th><th>Padding</th><th>Text and icon</th></tr></thead>
+        <tbody>
+          <tr><td>Medium (default)</td><td><button class="btn primary" type="button"><svg><use href="#i-star"/></svg>Button</button></td><td>40px</td><td>12px, <code>Space/300</code></td><td>16px</td></tr>
+          <tr><td>Small</td><td><button class="btn primary small" type="button"><svg><use href="#i-star"/></svg>Button</button></td><td>32px</td><td>8px, <code>Space/200</code></td><td>16px</td></tr>
+        </tbody>
+      </table></div>
+      <p>Small is 32px high. That meets the 24px minimum target size but is below the recommended 44px. Avoid Small as the main action on touch screens.</p>
+
+      <h3>States</h3>
+      <div class="subgroup">
+        <div class="subtabs" role="tablist" aria-label="Mode"><button type="button" role="tab" aria-selected="true" data-sub="light">Light</button><button type="button" role="tab" aria-selected="false" data-sub="dark">Dark</button></div>
+        <figure class="stage" data-theme="light" data-subpanel="light"><div class="matrix"></div></figure>
+        <figure class="stage" data-theme="dark" data-subpanel="dark" hidden><div class="matrix"></div></figure>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>State</th><th>What changes</th></tr></thead>
+        <tbody>
+          <tr><td>Default</td><td>Resting look.</td></tr>
+          <tr><td>Hover</td><td>Primary and Neutral get a darker fill. Subtle gains a 1px border and darker text.</td></tr>
+          <tr><td>Focus</td><td>A 2px ring on the edge of the button. It shows for keyboard users only.</td></tr>
+          <tr><td>Disabled</td><td>Grey fill, border, text and icon. The button cannot be pressed or focused.</td></tr>
+          <tr><td>Loading</td><td>A spinner shows before the label. The end icon is hidden. Presses are blocked.</td></tr>
+        </tbody>
+      </table></div>
+      <p>There is no Pressed state.</p>
+
+      <h3>Tokens</h3>
+      <div class="subgroup">
+        <div class="subtabs" role="tablist" aria-label="Token group"><button type="button" role="tab" aria-selected="true" data-sub="colour">Colour</button><button type="button" role="tab" aria-selected="false" data-sub="all">All variants</button></div>
+      <div class="table-wrap" data-subpanel="colour"><table>
+        <thead><tr><th>Part</th><th>Primary</th><th>Neutral</th><th>Subtle</th></tr></thead>
+        <tbody>
+          <tr><td>Fill</td><td><code>Background/Brand/Default</code></td><td><code>Background/Neutral/Tertiary</code></td><td>None</td></tr>
+          <tr><td>Fill on hover</td><td><code>Background/Brand/Hover</code></td><td><code>Background/Neutral/Tertiary Hover</code></td><td>None</td></tr>
+          <tr><td>Border</td><td><code>Border/Brand/Default</code></td><td><code>Border/Neutral/Secondary</code></td><td>None. <code>Border/Default/Default</code> on hover</td></tr>
+          <tr><td>Label</td><td><code>Text/Brand/On Brand</code></td><td><code>Text/Default/Default</code></td><td><code>Text/Neutral/Default</code>. <code>Text/Default/Default</code> on hover</td></tr>
+          <tr><td>Icon</td><td><code>Icon/Brand/On Brand</code></td><td><code>Icon/Default/Default</code></td><td><code>Icon/Default/Default</code></td></tr>
+        </tbody>
+      </table></div>
+      <div class="table-wrap" data-subpanel="all" hidden><table>
+        <thead><tr><th>Part</th><th>Token</th></tr></thead>
+        <tbody>
+          <tr><td>Disabled fill</td><td><code>Background/Disabled/Default</code></td></tr>
+          <tr><td>Disabled border</td><td><code>Border/Disabled/default</code></td></tr>
+          <tr><td>Disabled label and icon</td><td><code>Text/Disabled/On Disabled</code>, <code>Icon/Disabled/On Disabled</code></td></tr>
+          <tr><td>Focus ring</td><td><code>Border/Focus/Default</code>, <code>Stroke/Focus Ring</code> (2px)</td></tr>
+          <tr><td>Border width</td><td><code>Stroke/Border</code> (1px)</td></tr>
+          <tr><td>Corner radius</td><td><code>Radius/200</code> (8px)</td></tr>
+          <tr><td>Gap between icon and label</td><td><code>Space/200</code> (8px)</td></tr>
+          <tr><td>Label</td><td><code>Single Line/Body Base</code> (Inter, 16px, regular)</td></tr>
+        </tbody>
+      </table></div>
+      </div>
+      <p>The component uses 26 tokens and no hard-coded values. Each token has a light and a dark value, so the button follows the theme with no extra work.</p>
+    </section>
+
+    <!-- ================= CODE AND ACCESSIBILITY ================= -->
+    <section class="panel" role="tabpanel" id="p-code" aria-labelledby="t-code" hidden>
+      <h3>Try it</h3>
+      <div class="play">
+        <div class="demo"><button class="btn primary" id="play-btn" type="button">Save changes</button></div>
+        <div class="controls">
+          <label>Variant <select id="play-variant"><option>primary</option><option>neutral</option><option>subtle</option></select></label>
+          <label>Size <select id="play-size"><option>medium</option><option>small</option></select></label>
+          <label><input type="checkbox" id="play-disabled"> isDisabled</label>
+          <label><input type="checkbox" id="play-loading"> isLoading</label>
+        </div>
+      </div>
+      <pre><code id="play-code"></code></pre>
+      <p class="caption">In Supernova this block would be the embedded Storybook story "Button" with its controls.</p>
+
+      <h3>Import</h3>
+      <pre><code>import { Button } from "primitives";</code></pre>
+
+      <h3>Example</h3>
+      <pre><code>import { IconArrowLeft } from "icons";
+
+&lt;Button variant="primary" size="medium" onPress={save}&gt;
+  &lt;IconArrowLeft /&gt;
+  Save changes
+&lt;/Button&gt;</code></pre>
+
+      <h3>Props</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>variant</code></td><td>"primary", "neutral", "subtle"</td><td>"primary"</td><td>Level of emphasis.</td></tr>
+          <tr><td><code>size</code></td><td>"medium", "small"</td><td>"medium"</td><td>Height and padding.</td></tr>
+          <tr><td><code>isDisabled</code></td><td>boolean</td><td>false</td><td>Blocks presses and removes the button from the Tab order.</td></tr>
+          <tr><td><code>isLoading</code></td><td>boolean</td><td>false</td><td>Shows a spinner before the label and blocks presses.</td></tr>
+          <tr><td><code>type</code></td><td>"button", "submit", "reset"</td><td>"button"</td><td>Standard HTML button type.</td></tr>
+          <tr><td><code>onPress</code></td><td>function</td><td></td><td>Called on click, Enter or Space.</td></tr>
+          <tr><td><code>children</code></td><td>node</td><td></td><td>The label. Icons are passed here too, before or after the text.</td></tr>
+          <tr><td><code>href</code></td><td>string</td><td></td><td>Renders the button as a link. See the notes below.</td></tr>
+        </tbody>
+      </table></div>
+      <p>Button also accepts the press, focus and ARIA props of react-aria-components.</p>
+
+      <h3>From Figma to code</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Figma property</th><th>Code</th></tr></thead>
+        <tbody>
+          <tr><td>Variant</td><td><code>variant</code></td></tr>
+          <tr><td>Size</td><td><code>size</code></td></tr>
+          <tr><td>Label</td><td><code>children</code></td></tr>
+          <tr><td>Has Icon Start, Icon Start</td><td>An icon element before the label</td></tr>
+          <tr><td>Has Icon End, Icon End</td><td>An icon element after the label</td></tr>
+          <tr><td>State = Disabled</td><td><code>isDisabled</code></td></tr>
+          <tr><td>State = Loading</td><td><code>isLoading</code></td></tr>
+          <tr><td>State = Hover, Focus</td><td>Handled by the browser. No prop.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Notes</h3>
+      <ul>
+        <li>Icons are children, not props. Leave the icon out to hide it.</li>
+        <li>A loading submit button does not submit the form.</li>
+        <li><code>href</code> works, but the design guidance is to use a link for navigation. Whether Button keeps <code>href</code> is an open decision.</li>
+      </ul>
+
+      <h3>Accessibility</h3>
+      <div class="two">
+        <div><h4>The component handles</h4><ul>
+          <li>It renders a real <code>&lt;button&gt;</code>, so the role and keyboard behaviour are native.</li>
+          <li>Enter and Space activate it.</li>
+          <li>The focus ring shows for keyboard users only.</li>
+          <li>Disabled sets the <code>disabled</code> attribute. The button leaves the Tab order.</li>
+          <li>Loading keeps the button focusable, sets <code>aria-disabled="true"</code> and blocks presses.</li>
+        </ul></div>
+        <div><h4>You must do</h4><ul>
+          <li>Write a label that makes sense out of context.</li>
+          <li>Do not rely on an icon alone to carry the meaning.</li>
+          <li>When you use Loading, tell screen reader users that work is in progress. The component does not do this yet.</li>
+        </ul></div>
+      </div>
+
+      <h3>Accessibility test results</h3>
+      <p>Tested on 24 November 2026, in light and dark.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Check</th><th>Result</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td>Automated scan</td><td><span class="pill ok">Pass</span></td><td>axe-core 4.14: 0 serious or critical issues.</td></tr>
+          <tr><td>Keyboard</td><td><span class="pill ok">Pass</span></td><td>Tab order, Enter, Space, Disabled and Loading behave as described.</td></tr>
+          <tr><td>Label contrast</td><td><span class="pill ok">Pass</span></td><td>10.5:1 or higher in every variant, at rest and on hover.</td></tr>
+          <tr><td>Focus ring contrast</td><td><span class="pill ok">Pass</span></td><td>3.0:1 or higher against every surface.</td></tr>
+          <tr><td>Target size</td><td><span class="pill wait">Minimum</span></td><td>Medium 40px, Small 32px. Above the 24px minimum, below the recommended 44px.</td></tr>
+          <tr><td>Screen reader</td><td><span class="pill none">Not tested</span></td><td></td></tr>
+          <tr><td>Forced colours mode</td><td><span class="pill none">Not tested</span></td><td></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Known accessibility issues</h3>
+      <ul>
+        <li>Loading is not announced to screen readers, and the spinner does not move.</li>
+        <li>Disabled text has a contrast of 1.49:1 in light mode. Disabled controls are exempt from the contrast rule, but the label is hard to read.</li>
+        <li>The hover border of Subtle is faint (1.4:1 in light).</li>
+        <li>The focus ring is red, the same colour as errors. A distinct focus colour is planned.</li>
+      </ul>
+
+      <h3>Changelog</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Date</th><th>Version</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td style="white-space:nowrap">25 November 2026</td><td>Unreleased</td><td>Documentation page written: usage, design, code and accessibility.</td></tr>
+          <tr><td style="white-space:nowrap">24 November 2026</td><td>Unreleased</td><td>Loading hides the end icon. A Button used as a link can no longer be activated while loading.</td></tr>
+          <tr><td style="white-space:nowrap">24 November 2026</td><td>Unreleased</td><td>Subtle uses <code>Text/Neutral/Default</code> for its label in both sizes.</td></tr>
+          <tr><td style="white-space:nowrap">24 November 2026</td><td>Unreleased</td><td>Neutral, Disabled and Focus aligned with the Figma tokens. Small uses 16px text and icons.</td></tr>
+        </tbody>
+      </table></div>
+      <p class="caption">The package has no version numbers yet (it is at 0.0.0). The Version column fills in from the first release.</p>
+    </section>
+    </div>
+    <div id="view-board" hidden>
+      <p class="crumbs">Components / Overview</p>
+      <h1>Status board</h1>
+      <p class="lede">Where each component stands, from the Figma audit to published documentation.</p>
+      <div class="table-wrap"><table class="board">
+        <thead><tr><th>Component</th><th>Design audit</th><th>React</th><th>Review</th><th>Code Connect</th><th>Documentation</th></tr></thead>
+        <tbody>
+          <tr><td>Button</td><td><span class="pill ok">94%</span></td><td><span class="pill ok">Ready</span></td><td><span class="pill ok">Passed</span></td><td><span class="pill wait">Not published</span></td><td><span class="pill wait">Draft</span></td></tr>
+          <tr><td>Button Danger</td><td><span class="pill ok">93%</span></td><td><span class="pill wait">Built</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill none">Mapped</span></td><td><span class="pill none">None</span></td></tr>
+          <tr><td>Button Group</td><td><span class="pill wait">86%</span></td><td><span class="pill wait">Built</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill none">Mapped</span></td><td><span class="pill none">None</span></td></tr>
+          <tr><td>Icon Button</td><td><span class="pill ok">96%</span></td><td><span class="pill wait">Built</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill none">Mapped</span></td><td><span class="pill none">None</span></td></tr>
+          <tr><td>Checkbox Field</td><td><span class="pill ok">92%</span></td><td><span class="pill wait">Built</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill none">Mapped</span></td><td><span class="pill none">None</span></td></tr>
+          <tr><td>Checkbox Group</td><td><span class="pill wait">82%</span></td><td><span class="pill wait">Built</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill bad">Missing</span></td><td><span class="pill none">None</span></td></tr>
+          <tr><td>Date Input Field</td><td><span class="pill ok">96%</span></td><td><span class="pill bad">Missing</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill bad">Missing</span></td><td><span class="pill none">None</span></td></tr>
+          <tr><td>Date Picker Field</td><td><span class="pill ok">97%</span></td><td><span class="pill bad">Missing</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill bad">Missing</span></td><td><span class="pill none">None</span></td></tr>
+          <tr><td>Input Field</td><td><span class="pill ok">97%</span></td><td><span class="pill wait">Built</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill none">Mapped</span></td><td><span class="pill none">None</span></td></tr>
+          <tr><td>Radio Field</td><td><span class="pill ok">96%</span></td><td><span class="pill wait">Built</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill none">Mapped</span></td><td><span class="pill none">None</span></td></tr>
+          <tr><td>Radio Group</td><td><span class="pill ok">90%</span></td><td><span class="pill wait">Built</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill bad">Missing</span></td><td><span class="pill none">None</span></td></tr>
+          <tr><td>Search</td><td><span class="pill wait">88%</span></td><td><span class="pill wait">Built</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill none">Mapped</span></td><td><span class="pill none">None</span></td></tr>
+          <tr><td>Select Field</td><td><span class="pill ok">97%</span></td><td><span class="pill wait">Built</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill none">Mapped</span></td><td><span class="pill none">None</span></td></tr>
+          <tr><td>Slider Field</td><td><span class="pill ok">91%</span></td><td><span class="pill wait">Built</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill none">Mapped</span></td><td><span class="pill none">None</span></td></tr>
+          <tr><td>Switch Field</td><td><span class="pill ok">96%</span></td><td><span class="pill wait">Built</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill none">Mapped</span></td><td><span class="pill none">None</span></td></tr>
+          <tr><td>Textarea Field</td><td><span class="pill ok">93%</span></td><td><span class="pill wait">Built</span></td><td><span class="pill none">Not reviewed</span></td><td><span class="pill none">Mapped</span></td><td><span class="pill none">None</span></td></tr>
+        </tbody>
+      </table></div>
+      <p class="caption">Covers the 16 components of the Buttons and Inputs pages, the ones audited so far. Design audit is the readiness score of the manual audit; green from 90% is a threshold proposed for this mock-up, not an agreed rule. "Built" means the React component exists but has not been aligned with Figma and reviewed. Code Connect comes from the contract check of 25 November 2026.</p>
+    </div>
+  </main>
+
+  <aside class="toc" aria-label="On this page"><div class="toc-inner"><h2>On this page</h2><ul id="toc"></ul></div></aside>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var icon = function (n) { return '<svg aria-hidden="true"><use href="#i-' + n + '"/></svg>'; };
+
+  // theme
+  var themeBtn = document.getElementById('theme-toggle');
+  function setTheme(t) { root.dataset.theme = t; themeBtn.textContent = t === 'dark' ? 'Light mode' : 'Dark mode'; }
+  setTheme(matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  themeBtn.addEventListener('click', function () { setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'); });
+
+  // states matrix
+  var html = '<span></span>';
+  ['Default', 'Hover', 'Focus', 'Disabled', 'Loading'].forEach(function (s) { html += '<span class="head">' + s + '</span>'; });
+  ['primary', 'neutral', 'subtle'].forEach(function (v) {
+    html += '<span class="head">' + v.charAt(0).toUpperCase() + v.slice(1) + '</span>';
+    ['', 'is-hover', 'is-focus', 'is-disabled', 'is-loading'].forEach(function (s) {
+      html += '<span class="btn ' + v + ' ' + s + '" style="pointer-events:none">' + (s === 'is-loading' ? icon('loader') : '') + 'Button</span>';
+    });
+  });
+  [].forEach.call(document.querySelectorAll('.matrix'), function (m) { m.innerHTML = html; });
+
+  // in-page tabs
+  [].forEach.call(document.querySelectorAll('.subgroup'), function (g) {
+    var btns = g.querySelectorAll('[data-sub]');
+    [].forEach.call(btns, function (b) {
+      b.addEventListener('click', function () {
+        [].forEach.call(btns, function (x) { x.setAttribute('aria-selected', x === b); });
+        [].forEach.call(g.querySelectorAll('[data-subpanel]'), function (p) { p.hidden = p.dataset.subpanel !== b.dataset.sub; });
+      });
+    });
+  });
+
+  // views: component page and status board
+  function view(name) {
+    document.getElementById('view-button').hidden = name !== 'button';
+    document.getElementById('view-board').hidden = name !== 'board';
+    document.getElementById('nav-button').toggleAttribute('aria-current', name === 'button');
+    document.getElementById('nav-board').toggleAttribute('aria-current', name === 'board');
+    document.querySelector('.toc').style.visibility = name === 'button' ? '' : 'hidden';
+    window.scrollTo(0, 0);
+  }
+  document.querySelector('#nav-button button').addEventListener('click', function () { view('button'); });
+  document.querySelector('#nav-board button').addEventListener('click', function () { view('board'); });
+
+  // tabs + on this page
+  var tabs = [].slice.call(document.querySelectorAll('.tabs [role=tab]')), toc = document.getElementById('toc');
+  function select(tab, focus) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (focus) tab.focus();
+    var panel = document.getElementById(tab.getAttribute('aria-controls'));
+    toc.innerHTML = '';
+    [].forEach.call(panel.querySelectorAll('h3'), function (h, i) {
+      h.id = panel.id + '-h' + i;
+      var li = document.createElement('li'), a = document.createElement('a');
+      a.href = '#' + h.id; a.textContent = h.firstChild.textContent.trim();
+      li.appendChild(a); toc.appendChild(li);
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(t); });
+    t.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (d) select(tabs[(i + d + tabs.length) % tabs.length], true);
+    });
+  });
+  select(tabs[0]);
+
+  // playground
+  var b = document.getElementById('play-btn'), code = document.getElementById('play-code');
+  var v = document.getElementById('play-variant'), s = document.getElementById('play-size');
+  var dis = document.getElementById('play-disabled'), load = document.getElementById('play-loading');
+  function render() {
+    b.className = 'btn ' + v.value + (s.value === 'small' ? ' small' : '') + (load.checked && !dis.checked ? ' is-loading' : '');
+    b.disabled = dis.checked;
+    b.innerHTML = (load.checked ? icon('loader') : '') + 'Save changes';
+    var props = ' variant="' + v.value + '"' + (s.value === 'small' ? ' size="small"' : '') + (dis.checked ? ' isDisabled' : '') + (load.checked ? ' isLoading' : '');
+    code.textContent = '<Button' + props + ' onPress={save}>\n  Save changes\n</Button>';
+  }
+  [v, s, dis, load].forEach(function (el) { el.addEventListener('change', render); });
+  render();
+})();
+</script>
+</body>
+</html>

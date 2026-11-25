@@ -25,6 +25,8 @@ export const StoryIconButton: StoryObj<typeof IconButton> = {
       control: { type: "select" },
       options: ["primary", "neutral", "subtle"],
     },
+    // Figma has no Loading state for Icon Button, so the control is hidden.
+    isLoading: { table: { disable: true } },
   },
   render: ({ ...args }) => (
     <IconButton {...args}>
@@ -51,6 +53,7 @@ export const StoryDestructiveIconButton: StoryObj<
       control: { type: "select" },
       options: ["danger-primary", "danger-subtle"],
     },
+    isLoading: { table: { disable: true } },
   },
   render: ({ ...args }) => (
     <DestructiveIconButton {...args}>

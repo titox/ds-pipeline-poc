@@ -1,3 +1,4 @@
+import { useArgs } from "storybook/preview-api";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SwitchField, SwitchGroup } from "primitives";
 
@@ -11,15 +12,26 @@ export default meta;
 export const StorySwitchField: StoryObj<typeof SwitchField> = {
   name: "Switch Field",
   args: {
+    label: "Label",
+    description: "Description",
+    isSelected: true,
     isDisabled: false,
   },
-  render: (args) => (
-    <SwitchField
-      {...args}
-      label="Enable"
-      description="Allow others to embed your event details on their own site."
-    />
-  ),
+  argTypes: {
+    isSelected: { control: { type: "boolean" } },
+    placeholder: { table: { disable: true } },
+    errorMessage: { table: { disable: true } },
+  },
+  render: (args) => {
+    const [{ isSelected }, updateArgs] = useArgs();
+    return (
+      <SwitchField
+        {...args}
+        isSelected={isSelected}
+        onChange={(value) => updateArgs({ isSelected: value })}
+      />
+    );
+  },
 };
 
 export const StorySwitchGroup: StoryObj<typeof SwitchGroup> = {

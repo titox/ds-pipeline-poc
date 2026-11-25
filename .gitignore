@@ -35,3 +35,6 @@ dist-ssr
 
 # RubyLint headless runner
 /scripts/rubylint/.build/
+
+# Third-party logos used by the local documentation mock-up
+/docs/supernova/img/

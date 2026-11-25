@@ -12,7 +12,15 @@ type Story = StoryObj<typeof Search>;
 
 export const StorySearch: Story = {
   name: "Search",
-  args: {},
+  args: {
+    placeholder: "Search",
+    disabled: false,
+  },
+  argTypes: {
+    placeholder: { control: { type: "text" } },
+    disabled: { control: { type: "boolean" } },
+    results: { table: { disable: true } },
+  },
   render: (args) => {
     const [results, setResults] = useState<string[]>([]);
     function updateResults(term: string) {
