@@ -36,6 +36,15 @@ A run takes a while and the designer cannot see the work. At the start of each p
 
 Record the time each phase starts and ends. The run log at the end needs it.
 
+## Reminder at the start and at the end
+
+A run is long, and a session that already holds other work gives worse results: earlier details crowd out the ones that matter and the run gets slower. The designer may not know this, so tell them, once at each end. Use their language; the wording below is a model, not a script.
+
+- **At the start, before Phase 1:** "For the best results, run this in a clean session. If this conversation already has other work in it, type `/clear` and send the link again. Otherwise I will start now." Then start. Do not wait for an answer and do not clear anything yourself: it is their conversation. Skip the reminder only if the session is clearly new (nothing before this request).
+- **At the end, as the last line of the final summary:** "Before the next component, type `/clear` to start from a clean conversation. Everything from this run is saved in the repository, so nothing is lost."
+
+On a page of components, give the end reminder after each component's summary as well. The run can be picked up again from the files (see Resuming), so clearing between components is safe.
+
 ## Input: one component or a page
 
 The designer sends a Figma link.
@@ -95,6 +104,7 @@ Read `references/documentation.md` before this phase. It defines the neutral sou
     - What changed, grouped as Design, Code, Stories, Documentation.
     - What is still open and who it waits for.
     - Links: the Storybook story (local and published), the commit on GitHub, the Supernova page (`sn_admin_get_entity_url`), the scorecard and the neutral source file.
+    - Last line: the reminder to clear the conversation before the next component (see "Reminder at the start and at the end").
 
 ## Where the run stops for the designer
 
