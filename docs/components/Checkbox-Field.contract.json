@@ -1,7 +1,7 @@
 {
   "component": "Checkbox Field",
-  "description": "A checkbox with a label and an optional description line, published as 12 variants covering four states and three value types. PURPOSE: Lets people turn a single option on or off, or show a mixed selection, with supporting text underneath when the choice needs explaining. BEHAVIOUR: State controls the visual treatment across Default, Hover, Focus and Disabled. Focus applies the Border/Focus/Default colour with Stroke/Focus Ring. Value Type switches the box between empty, a Check glyph and a Minus glyph, with Background/Brand/Default filling the box when selected or indeterminate. Disabled variants swap to Background/Disabled/Default, Border/Disabled/default and Icon/Disabled/On Disabled. COMPOSITION: Each variant holds a Checkbox and Label row (the Checkbox frame with its glyph, plus a Label text layer) and a Description Row (a Space spacer plus a Description text layer). The Check and Minus icon instances are nested components. Code generators should look for existing Check and Minus icon components in the codebase before building new ones. USAGE: Use for independent on/off choices and for parent rows in a nested list, where Indeterminate signals that only some children are selected. Use a radio group when options are mutually exclusive, and a switch when the change applies immediately. Turn Has Description off when the label is self-explanatory. CODE GENERATION NOTES: Render as an input of type checkbox with a real label element rather than a styled div. Indeterminate cannot be set in HTML markup, so set the DOM property in script. Hover and Focus are visual states and should come from CSS pseudo-classes, not variant props. Link the description with aria-describedby. Disabled variants should set the disabled attribute so clicks and focus are blocked, and the whole row including the label should be clickable.",
-  "readinessScore": 92,
+  "description": "A checkbox with a label, an optional description line and an optional error line. Five states and three value types combine into fifteen variants. PURPOSE: Lets people turn a single option on or off, or show a mixed selection, with supporting text underneath when the choice needs explaining and an error line when the input fails validation. BEHAVIOUR: State controls the visual treatment across Default, Hover, Focus, Disabled and Error. Focus applies Border/Focus/Default with Stroke/Focus Ring. Hover swaps the box fill to Background/Brand/Hover when selected and Background/Default/Default Hover when empty. Error applies Border/Danger/Default to the box and Text/Danger/Default to the error line. Value Type switches the box between empty, a Check glyph and a Minus glyph, with Background/Brand/Default filling the box when selected or indeterminate. Disabled variants use Background/Disabled/Default, Border/Disabled/default, Icon/Disabled/On Disabled and Text/Disabled/Default. COMPOSITION: Each variant holds a Checkbox and Label row (the Checkbox frame with its glyph, plus a Label text layer), a Description Row and an Error Row, each made of a Space spacer and a text layer that aligns the text under the label. The Check and Minus icon instances are nested components. Code generators should look for existing Check and Minus icon components in the codebase before building new ones. USAGE: Use for independent on/off choices and for parent rows in a nested list, where Indeterminate signals that only some children are selected. Use a radio group when options are mutually exclusive, and a switch when the change applies immediately. Turn Has Description off when the label is self-explanatory, and turn Has Error on only while the field is invalid. CODE GENERATION NOTES: Render as an input of type checkbox with a real label element rather than a styled div. Indeterminate cannot be set in HTML markup, so set the DOM property in script. Hover, Focus and Error are visual states and should come from CSS pseudo-classes and validation state, not variant props. Link the description and the error text with aria-describedby and set aria-invalid when the error is shown. Disabled variants should set the disabled attribute so clicks and focus are blocked, and the whole row including the label should be clickable.",
+  "readinessScore": 97,
   "adoption": {
     "scores": {
       "reuse": 3,
@@ -20,10 +20,10 @@
     "total": 15,
     "decision": "Add to the design system"
   },
-  "mcpScore": 97,
+  "mcpScore": 100,
   "metadata": {
     "component": "Checkbox Field",
-    "description": "A checkbox with a label and an optional description line, published as 12 variants covering four states and three value types. PURPOSE: Lets people turn a single option on or off, or show a mixed selection, with supporting text underneath when the choice needs explaining. BEHAVIOUR: State controls the visual treatment across Default, Hover, Focus and Disabled. Focus applies the Border/Focus/Default colour with Stroke/Focus Ring. Value Type switches the box between empty, a Check glyph and a Minus glyph, with Background/Brand/Default filling the box when selected or indeterminate. Disabled variants swap to Background/Disabled/Default, Border/Disabled/default and Icon/Disabled/On Disabled. COMPOSITION: Each variant holds a Checkbox and Label row (the Checkbox frame with its glyph, plus a Label text layer) and a Description Row (a Space spacer plus a Description text layer). The Check and Minus icon instances are nested components. Code generators should look for existing Check and Minus icon components in the codebase before building new ones. USAGE: Use for independent on/off choices and for parent rows in a nested list, where Indeterminate signals that only some children are selected. Use a radio group when options are mutually exclusive, and a switch when the change applies immediately. Turn Has Description off when the label is self-explanatory. CODE GENERATION NOTES: Render as an input of type checkbox with a real label element rather than a styled div. Indeterminate cannot be set in HTML markup, so set the DOM property in script. Hover and Focus are visual states and should come from CSS pseudo-classes, not variant props. Link the description with aria-describedby. Disabled variants should set the disabled attribute so clicks and focus are blocked, and the whole row including the label should be clickable.",
+    "description": "A checkbox with a label, an optional description line and an optional error line. Five states and three value types combine into fifteen variants. PURPOSE: Lets people turn a single option on or off, or show a mixed selection, with supporting text underneath when the choice needs explaining and an error line when the input fails validation. BEHAVIOUR: State controls the visual treatment across Default, Hover, Focus, Disabled and Error. Focus applies Border/Focus/Default with Stroke/Focus Ring. Hover swaps the box fill to Background/Brand/Hover when selected and Background/Default/Default Hover when empty. Error applies Border/Danger/Default to the box and Text/Danger/Default to the error line. Value Type switches the box between empty, a Check glyph and a Minus glyph, with Background/Brand/Default filling the box when selected or indeterminate. Disabled variants use Background/Disabled/Default, Border/Disabled/default, Icon/Disabled/On Disabled and Text/Disabled/Default. COMPOSITION: Each variant holds a Checkbox and Label row (the Checkbox frame with its glyph, plus a Label text layer), a Description Row and an Error Row, each made of a Space spacer and a text layer that aligns the text under the label. The Check and Minus icon instances are nested components. Code generators should look for existing Check and Minus icon components in the codebase before building new ones. USAGE: Use for independent on/off choices and for parent rows in a nested list, where Indeterminate signals that only some children are selected. Use a radio group when options are mutually exclusive, and a switch when the change applies immediately. Turn Has Description off when the label is self-explanatory, and turn Has Error on only while the field is invalid. CODE GENERATION NOTES: Render as an input of type checkbox with a real label element rather than a styled div. Indeterminate cannot be set in HTML markup, so set the DOM property in script. Hover, Focus and Error are visual states and should come from CSS pseudo-classes and validation state, not variant props. Link the description and the error text with aria-describedby and set aria-invalid when the error is shown. Disabled variants should set the disabled attribute so clicks and focus are blocked, and the whole row including the label should be clickable.",
     "props": [
       {
         "name": "Has Description",
@@ -34,7 +34,7 @@
         ],
         "default": "true",
         "defaultValue": "true",
-        "description": "Shows or hides the Description Row below the label",
+        "description": "Shows or hides the Description Row under the label.",
         "required": false
       },
       {
@@ -45,7 +45,7 @@
         ],
         "default": "Description",
         "defaultValue": "Description",
-        "description": "Supporting text shown under the label",
+        "description": "The supporting line under the label.",
         "required": false
       },
       {
@@ -56,7 +56,30 @@
         ],
         "default": "Label",
         "defaultValue": "Label",
-        "description": "Text of the label next to the checkbox",
+        "description": "The label text sitting beside the box.",
+        "required": false
+      },
+      {
+        "name": "Has Error",
+        "type": "BOOLEAN",
+        "values": [
+          "true",
+          "false"
+        ],
+        "default": "false",
+        "defaultValue": "false",
+        "description": "Shows or hides the Error Row under the label.",
+        "required": false
+      },
+      {
+        "name": "Error",
+        "type": "TEXT",
+        "values": [
+          "Error"
+        ],
+        "default": "Error",
+        "defaultValue": "Error",
+        "description": "The validation message under the label.",
         "required": false
       },
       {
@@ -66,11 +89,12 @@
           "Default",
           "Disabled",
           "Hover",
-          "Focus"
+          "Focus",
+          "Error"
         ],
         "default": "Default",
         "defaultValue": "Default",
-        "description": "Visual interaction state of the checkbox and its text",
+        "description": "Visual treatment of the box, label and supporting text.",
         "required": false
       },
       {
@@ -83,7 +107,7 @@
         ],
         "default": "Checked",
         "defaultValue": "Checked",
-        "description": "Selection value shown in the box: empty, Check glyph or Minus glyph",
+        "description": "Whether the box is empty, shows the Check glyph or shows the Minus glyph for a mixed selection.",
         "required": false
       }
     ],
@@ -91,14 +115,16 @@
       "Default",
       "Disabled",
       "Hover",
-      "Focus"
+      "Focus",
+      "Error"
     ],
     "variants": {
       "State": [
         "Default",
         "Disabled",
         "Hover",
-        "Focus"
+        "Focus",
+        "Error"
       ],
       "Value Type": [
         "Unchecked",
@@ -113,13 +139,18 @@
         "Icon/Brand/On Brand",
         "Text/Default/Default",
         "Text/Default/Secondary",
+        "Text/Danger/Default",
         "Background/Default/Default",
         "Border/Brand/Tertiary",
         "Icon/Brand/Default",
         "Background/Disabled/Default",
         "Border/Disabled/default",
         "Icon/Disabled/On Disabled",
-        "Border/Focus/Default"
+        "Text/Disabled/Default",
+        "Background/Brand/Hover",
+        "Background/Default/Default Hover",
+        "Border/Focus/Default",
+        "Border/Danger/Default"
       ],
       "spacing": [
         "Space/300"
@@ -144,26 +175,21 @@
     "audit": {
       "designIssues": [],
       "tokenOpportunities": [],
-      "structureIssues": [
-        "Component lacks description - Add a description in component properties to help MCP and AI understand the component's purpose and usage"
-      ]
+      "structureIssues": []
     },
     "propertyCheatSheet": [
       "🎨 Variants: Value Type(3)",
-      "🔄 States: Default/Disabled/Hover/Focus",
+      "🔄 States: Default/Disabled/Hover/Focus/Error",
       "⚙️ Other: Has Description: true/false, Description: Description, Label: Label"
     ],
     "mcpReadiness": {
       "strengths": [
-        "Has 5 configurable properties",
+        "Has component description for better MCP/AI context",
+        "Has 7 configurable properties",
         "Uses design tokens for consistency"
       ],
-      "gaps": [
-        "Missing component description - AI cannot understand component purpose and intent"
-      ],
-      "recommendations": [
-        "Add a descriptive explanation in component properties to help AI understand the component's purpose, behavior, and usage patterns"
-      ]
+      "gaps": [],
+      "recommendations": []
     }
   },
   "tokens": {
@@ -207,6 +233,16 @@
         "isActualToken": true,
         "source": "figma-variable",
         "recommendation": "Using Text/Default/Secondary token"
+      },
+      {
+        "name": "Text/Danger/Default",
+        "value": "#900b09",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Text/Danger/Default token"
       },
       {
         "name": "Background/Default/Default",
@@ -269,6 +305,36 @@
         "recommendation": "Using Icon/Disabled/On Disabled token"
       },
       {
+        "name": "Text/Disabled/Default",
+        "value": "#b3b3b3",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Text/Disabled/Default token"
+      },
+      {
+        "name": "Background/Brand/Hover",
+        "value": "#1e1e1e",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Background/Brand/Hover token"
+      },
+      {
+        "name": "Background/Default/Default Hover",
+        "value": "#f5f5f5",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Background/Default/Default Hover token"
+      },
+      {
         "name": "Border/Focus/Default",
         "value": "#ec221f",
         "unit": "hex",
@@ -277,6 +343,16 @@
         "isActualToken": true,
         "source": "figma-variable",
         "recommendation": "Using Border/Focus/Default token"
+      },
+      {
+        "name": "Border/Danger/Default",
+        "value": "#900b09",
+        "unit": "hex",
+        "type": "strokes-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Border/Danger/Default token"
       }
     ],
     "spacing": [
@@ -364,14 +440,14 @@
       }
     ],
     "summary": {
-      "totalTokens": 19,
-      "actualTokens": 19,
+      "totalTokens": 24,
+      "actualTokens": 24,
       "hardCodedValues": 0,
       "aiSuggestions": 0,
       "byCategory": {
         "colors": {
-          "total": 11,
-          "tokens": 11,
+          "total": 16,
+          "tokens": 16,
           "hardCoded": 0,
           "suggestions": 0
         },
@@ -419,6 +495,10 @@
       {
         "name": "Focus",
         "found": true
+      },
+      {
+        "name": "Error",
+        "found": true
       }
     ],
     "componentReadiness": [
@@ -429,8 +509,8 @@
       },
       {
         "check": "Component description",
-        "status": "warning",
-        "suggestion": "Add a component description to help MCP and AI understand the component purpose and usage"
+        "status": "pass",
+        "suggestion": "Component has description for MCP/AI context"
       }
     ],
     "accessibility": [
@@ -452,7 +532,7 @@
       {
         "check": "Color contrast",
         "status": "warning",
-        "suggestion": "24 text layers not measurable: \"Label\" (no solid fill behind the text), \"Description\" (no solid fill behind the text), \"Label\" (no solid fill behind the text), …. Check manually"
+        "suggestion": "45 text layers not measurable: \"Label\" (no solid fill behind the text), \"Description\" (no solid fill behind the text), \"Error\" (no solid fill behind the text), …. Check manually"
       }
     ],
     "detachedInstances": [],
@@ -468,7 +548,7 @@
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "hig.contrast",
             "status": "warning",
-            "suggestion": "24 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "suggestion": "30 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
             "source": "local",
             "nodeId": "280:12941",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
@@ -486,7 +566,7 @@
             "check": "Uses SF Pro (system font)",
             "ruleId": "hig.font",
             "status": "warning",
-            "suggestion": "24 text layers not using SF Pro: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
+            "suggestion": "30 text layers not using SF Pro: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
             "source": "local",
             "nodeId": "280:12941",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
@@ -507,7 +587,7 @@
             "check": "Icons 17–28pt (SF Symbols range)",
             "ruleId": "hig.icon-size",
             "status": "warning",
-            "suggestion": "8 icons outside 17–28pt: 'Check' 16×16, 'Minus' 16×16, 'Check' 16×16, …",
+            "suggestion": "10 icons outside 17–28pt: 'Check' 16×16, 'Minus' 16×16, 'Check' 16×16, …",
             "source": "local",
             "nodeId": "565:14467",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/sf-symbols"
@@ -572,28 +652,28 @@
             "check": "Right control for the job",
             "ruleId": "hig.ai.control-choice",
             "status": "warning",
-            "suggestion": "On iOS, prefer a switch or a checkmark list row for settings and keep this checkbox for multi-select forms.",
+            "suggestion": "On iOS a settings row that applies immediately should use a switch, so document that this checkbox is for form submission only.",
             "source": "ai"
           },
           {
             "check": "Clear visual hierarchy",
             "ruleId": "hig.ai.hierarchy",
             "status": "pass",
-            "suggestion": "The label carries Text/Default/Default and the description Text/Default/Secondary, so the primary choice reads first.",
+            "suggestion": "The label leads with Text/Default/Default and the description sits back on Text/Default/Secondary, so the choice reads first.",
             "source": "ai"
           },
           {
             "check": "Uses iOS patterns",
             "ruleId": "hig.ai.native-patterns",
             "status": "pass",
-            "suggestion": "No Android-only patterns appear; keep hover as a pointer-only state since iOS touch has no hover.",
+            "suggestion": "No ripple, FAB or snackbar is present, so the row sits comfortably in an iOS form.",
             "source": "ai"
           },
           {
             "check": "Content-first, minimal chrome",
             "ruleId": "hig.ai.deference",
             "status": "pass",
-            "suggestion": "Decoration is limited to the box fill, border and focus ring, which keeps attention on the label text.",
+            "suggestion": "Decoration is limited to the box fill and border, leaving the text to carry the meaning.",
             "source": "ai"
           }
         ]
@@ -618,7 +698,7 @@
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "m3.contrast",
             "status": "warning",
-            "suggestion": "24 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "suggestion": "30 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
             "source": "local",
             "nodeId": "280:12941",
             "guidelineUrl": "https://m3.material.io/foundations/designing/color-contrast"
@@ -639,7 +719,7 @@
             "check": "Spacing and sizes on 4dp grid",
             "ruleId": "m3.spacing-grid",
             "status": "warning",
-            "suggestion": "12 layers off the 4dp grid: 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10, …",
+            "suggestion": "15 layers off the 4dp grid: 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10, …",
             "source": "local",
             "nodeId": "565:14466",
             "guidelineUrl": "https://m3.material.io/foundations/designing/structure"
@@ -648,7 +728,7 @@
             "check": "Icons 24dp",
             "ruleId": "m3.icon-size",
             "status": "warning",
-            "suggestion": "8 icons not 24dp: 'Check' 16×16, 'Minus' 16×16, 'Check' 16×16, …",
+            "suggestion": "10 icons not 24dp: 'Check' 16×16, 'Minus' 16×16, 'Check' 16×16, …",
             "source": "local",
             "nodeId": "565:14467",
             "guidelineUrl": "https://m3.material.io/styles/icons/designing-icons"
@@ -713,28 +793,28 @@
             "check": "Button emphasis hierarchy",
             "ruleId": "m3.ai.emphasis",
             "status": "pass",
-            "suggestion": "Filled box when selected and outlined when unselected matches M3 checkbox emphasis.",
+            "suggestion": "The filled selected box against the outlined empty box gives a clear selected and unselected pair.",
             "source": "ai"
           },
           {
             "check": "Colour roles used correctly",
             "ruleId": "m3.ai.color-roles",
             "status": "pass",
-            "suggestion": "Brand background with Icon/Brand/On Brand mirrors the primary and on-primary pairing M3 expects.",
+            "suggestion": "Brand fills the selected box and Danger is reserved for the error line, matching primary and error roles.",
             "source": "ai"
           },
           {
             "check": "Uses Android/M3 patterns",
             "ruleId": "m3.ai.native-patterns",
             "status": "pass",
-            "suggestion": "The checkbox, indeterminate minus and focus ring are standard M3 idioms with no iOS carry-overs.",
+            "suggestion": "The square box with a tick follows the M3 checkbox idiom rather than an iOS switch.",
             "source": "ai"
           },
           {
             "check": "Clear visual hierarchy",
             "ruleId": "m3.ai.hierarchy",
             "status": "pass",
-            "suggestion": "The filled box is the strongest element in the row, with the description held back as secondary text.",
+            "suggestion": "The box and label form the dominant row, with description and error subordinate beneath it.",
             "source": "ai"
           }
         ]
@@ -750,7 +830,7 @@
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "web.contrast",
             "status": "warning",
-            "suggestion": "24 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "suggestion": "30 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
             "source": "local",
             "nodeId": "280:12941",
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
@@ -759,7 +839,7 @@
             "check": "Ruby font (Fira Sans)",
             "ruleId": "web.font",
             "status": "warning",
-            "suggestion": "24 text layers not using Fira Sans: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
+            "suggestion": "30 text layers not using Fira Sans: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
             "source": "local",
             "nodeId": "280:12941",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -768,7 +848,7 @@
             "check": "Spacing on Ruby spacing scale",
             "ruleId": "web.spacing",
             "status": "warning",
-            "suggestion": "12 layers off the Ruby spacing scale: 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10, …",
+            "suggestion": "15 layers off the Ruby spacing scale: 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10, 'Checkbox' padding 0/0/0/0, gap 10, …",
             "source": "local",
             "nodeId": "565:14466",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -777,7 +857,7 @@
             "check": "Real copy, not placeholders",
             "ruleId": "web.real-content",
             "status": "warning",
-            "suggestion": "12 text layers use placeholder copy ('Label'). Use real words such as \"Save profile\" so examples read like the product",
+            "suggestion": "15 text layers use placeholder copy ('Label'). Use real words such as \"Save profile\" so examples read like the product",
             "source": "local",
             "nodeId": "280:12941",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -866,28 +946,28 @@
             "check": "Works at narrow widths",
             "ruleId": "web.ai.responsive",
             "status": "warning",
-            "suggestion": "Confirm the label and description wrap to multiple lines at 320px while the box stays fixed at the top of the row.",
+            "suggestion": "Confirm the label and description wrap to multiple lines at 320px rather than truncating beside the box.",
             "source": "ai"
           },
           {
             "check": "Clear headings and structure",
             "ruleId": "web.ai.structure",
             "status": "pass",
-            "suggestion": "Keep the reading order as box, label, then description and tie the description to the input with aria-describedby.",
+            "suggestion": "Box, label, description and error follow a logical top to bottom reading order for the field.",
             "source": "ai"
           },
           {
             "check": "Links vs buttons",
             "ruleId": "web.ai.link-vs-button",
             "status": "pass",
-            "suggestion": "This is a form control rather than navigation, so ensure the label text alone describes the choice.",
+            "suggestion": "No navigation elements appear in the row, so there is nothing to confuse with a link.",
             "source": "ai"
           },
           {
             "check": "Not colour alone",
             "ruleId": "web.ai.color-only",
             "status": "pass",
-            "suggestion": "Selection uses the Check and Minus glyphs as well as fill colour, so meaning is not carried by colour alone.",
+            "suggestion": "Selection is shown by the Check and Minus glyphs and errors by the Error Row text, not by colour alone.",
             "source": "ai"
           }
         ]
@@ -908,12 +988,14 @@
           "Default",
           "Disabled",
           "Hover",
-          "Focus"
+          "Focus",
+          "Error"
         ],
         "canonical": {
           "Disabled": "Disabled",
           "Hover": "Hover",
-          "Focus": "Focus"
+          "Focus": "Focus",
+          "Error": "Error"
         },
         "missing": [
           {
@@ -978,12 +1060,28 @@
       "default": "Label"
     },
     {
+      "name": "Has Error",
+      "values": [
+        "true",
+        "false"
+      ],
+      "default": "false"
+    },
+    {
+      "name": "Error",
+      "values": [
+        "Error"
+      ],
+      "default": "Error"
+    },
+    {
       "name": "State",
       "values": [
         "Default",
         "Disabled",
         "Hover",
-        "Focus"
+        "Focus",
+        "Error"
       ],
       "default": "Default"
     },
@@ -998,10 +1096,10 @@
     }
   ],
   "namingIssues": null,
-  "existingDescription": null,
+  "existingDescription": "A checkbox with a label and an optional description line, published as 12 variants covering four states and three value types. PURPOSE: Lets people turn a single option on or off, or show a mixed selection, with supporting text underneath when the choice needs explaining. BEHAVIOUR: State controls the visual treatment across Default, Hover, Focus and Disabled. Focus applies the Border/Focus/Default colour with Stroke/Focus Ring. Value Type switches the box between empty, a Check glyph and a Minus glyph, with Background/Brand/Default filling the box when selected or indeterminate. Disabled variants swap to Background/Disabled/Default, Border/Disabled/default and Icon/Disabled/On Disabled. COMPOSITION: Each variant holds a Checkbox and Label row (the Checkbox frame with its glyph, plus a Label text layer) and a Description Row (a Space spacer plus a Description text layer). The Check and Minus icon instances are nested components. Code generators should look for existing Check and Minus icon components in the codebase before building new ones. USAGE: Use for independent on/off choices and for parent rows in a nested list, where Indeterminate signals that only some children are selected. Use a radio group when options are mutually exclusive, and a switch when the change applies immediately. Turn Has Description off when the label is self-explanatory. CODE GENERATION NOTES: Render as an input of type checkbox with a real label element rather than a styled div. Indeterminate cannot be set in HTML markup, so set the DOM property in script. Hover and Focus are visual states and should come from CSS pseudo-classes, not variant props. Link the description with aria-describedby. Disabled variants should set the disabled attribute so clicks and focus are blocked, and the whole row including the label should be clickable.",
   "aiOpinions": {
     "available": true
   },
   "figmaUrl": "https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=9762-1441",
-  "exportedAt": "2026-11-24T20:30:42.406Z"
+  "exportedAt": "2026-11-25T17:04:39.653Z"
 }

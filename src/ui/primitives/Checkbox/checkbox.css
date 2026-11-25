@@ -33,6 +33,19 @@
   --checkbox-border: var(--checkbox-background);
 }
 
+/* Hover: only the fill changes, as in the Figma Hover variants. */
+.checkbox-field[data-hovered] > .checkbox {
+  --checkbox-background: var(--sds-color-background-default-default-hover);
+}
+.checkbox-field[data-selected][data-hovered] > .checkbox {
+  --checkbox-background: var(--sds-color-background-brand-hover);
+}
+
+/* Error: a danger border on the box, as in the Figma Error variants. */
+.checkbox-field[data-invalid]:not([data-disabled]) > .checkbox {
+  --checkbox-border: var(--sds-color-border-danger-default);
+}
+
 .checkbox-field[data-selected]:not([data-indeterminate])
   > .checkbox
   > .icon-selected,
@@ -88,6 +101,11 @@
   > .description {
     color: var(--checkbox-field-description-color);
     grid-row-start: 2;
+    grid-column-start: 2;
+  }
+
+  > .error-message {
+    grid-row-start: 3;
     grid-column-start: 2;
   }
 }

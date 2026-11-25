@@ -20,6 +20,11 @@ const isIndeterminate = instance.getEnum("Value Type", {
   Indeterminate: true,
 });
 const isDisabled = instance.getEnum("State", { Disabled: true });
+const isInvalid = instance.getEnum("State", { Error: true });
+const errorMessage = instance.getBoolean("Has Error", {
+  true: instance.getString("Error"),
+  false: undefined,
+});
 
 export default {
   id: "CheckboxField",
@@ -30,6 +35,8 @@ export default {
       ${rp("defaultSelected", defaultSelected)}
       ${rp("isIndeterminate", isIndeterminate)}
       ${rp("isDisabled", isDisabled)}
+      ${rp("isInvalid", isInvalid)}
+      ${rp("errorMessage", errorMessage)}
     />`,
   metadata: { nestable: true },
 };

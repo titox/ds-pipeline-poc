@@ -13,10 +13,10 @@ type Story = StoryObj<typeof CheckboxField>;
 type StoryGroup = StoryObj<typeof CheckboxGroup>;
 
 /**
- * Story-only control that mirrors a Figma property with no matching prop.
- * In code the description is shown by passing its text.
+ * Story-only controls that mirror Figma properties with no matching prop.
+ * In code the description and the error message are shown by passing their text.
  */
-type FigmaControls = { hasDescription?: boolean };
+type FigmaControls = { hasDescription?: boolean; hasError?: boolean };
 const storyControl = "Story control, not a prop. Mirrors the Figma property: ";
 
 export const StoryCheckboxField: StoryObj<
@@ -30,6 +30,9 @@ export const StoryCheckboxField: StoryObj<
     isSelected: true,
     isIndeterminate: false,
     isDisabled: false,
+    isInvalid: false,
+    hasError: false,
+    errorMessage: "Error",
   },
   argTypes: {
     label: { control: { type: "text" } },
@@ -39,6 +42,14 @@ export const StoryCheckboxField: StoryObj<
       description: storyControl + "shows the description.",
     },
     description: { control: { type: "text" } },
+    hasError: {
+      name: "Has Error",
+      control: { type: "boolean" },
+      description:
+        storyControl +
+        "shows the error message. In code the message only appears while the field is invalid.",
+    },
+    errorMessage: { control: { type: "text" } },
   },
   render: (args) => {
     const [{ isSelected }, updateArgs] = useArgs();
@@ -50,16 +61,18 @@ export const StoryCheckboxField: StoryObj<
         onChange={() => updateArgs({ isSelected: !isSelected })}
         label={args.label}
         description={args.hasDescription ? args.description : undefined}
+        isInvalid={args.isInvalid}
+        errorMessage={args.hasError ? args.errorMessage : undefined}
       />
     );
   },
 };
 
-const states = ["Default", "Hover", "Focus", "Disabled"] as const;
+const states = ["Default", "Hover", "Focus", "Error", "Disabled"] as const;
 const valueTypes = ["Unchecked", "Checked", "Indeterminate"] as const;
 
 /**
- * Mirrors the twelve Figma variants: `State` in columns, `Value Type` in rows.
+ * Mirrors the fifteen Figma variants: `State` in columns, `Value Type` in rows.
  * Hover and Focus are interaction states, so the play function hovers one
  * field and moves keyboard focus to another.
  */
@@ -82,6 +95,7 @@ export const StoryCheckboxStates: Story = {
             label={`${state}, ${valueType}`}
             description="Description"
             isDisabled={state === "Disabled"}
+            isInvalid={state === "Error"}
             isSelected={valueType !== "Unchecked"}
             isIndeterminate={valueType === "Indeterminate"}
             onChange={() => {}}

@@ -36,7 +36,10 @@ export function CheckboxGroup({
 }
 
 export type CheckboxFieldProps = RACCheckboxProps &
-  Omit<SharedFieldProps, "placeholder">;
+  Omit<SharedFieldProps, "placeholder" | "errorMessage"> & {
+    /** Shown under the description while `isInvalid` is set. */
+    errorMessage?: string;
+  };
 export function CheckboxField({
   children,
   className,
@@ -51,10 +54,16 @@ export function CheckboxField({
   const id = useId();
   const labelId = `${id}-label`;
   const descriptionId = `${id}-description`;
+  const errorId = `${id}-error`;
+  const showError = Boolean(props.isInvalid && errorMessage);
+  const describedBy =
+    [description && descriptionId, showError && errorId]
+      .filter(Boolean)
+      .join(" ") || undefined;
   return (
     <RACCheckbox
       aria-labelledby={labelText ? labelId : undefined}
-      aria-describedby={description ? descriptionId : undefined}
+      aria-describedby={describedBy}
       className={classNames}
       {...props}
     >
@@ -67,7 +76,11 @@ export function CheckboxField({
         {description && (
           <Description id={descriptionId}>{description}</Description>
         )}
-        <FieldError>{errorMessage}</FieldError>
+        {showError && (
+          <span className="error-message" id={errorId}>
+            {errorMessage}
+          </span>
+        )}
         {labelText !== children && children}
       </>
     </RACCheckbox>
