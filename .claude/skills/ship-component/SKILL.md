@@ -27,7 +27,7 @@ These exist because each one was a decision the designer made. Breaking one cost
 - **The audit is manual.** The designer runs RubyLint in the Figma plugin and exports by hand. Do not run `npm run rubylint`.
 - **Documentation text has a source.** Every sentence comes from Figma (description, properties, variables), the code, or the review scorecard. No guidance from general knowledge. If something useful has no source, list it for the designer as a suggestion; do not put it in the page.
 - **Design problems go back to design.** If the code matches Figma and Figma itself is wrong (low contrast, a missing state), report it. Do not change the look in code.
-- **No pass, no next step.** If the scorecard does not pass, the run does not go on to Phase 4. It waits until every error is fixed, design errors in Figma included, and a new review round passes. See the gate after step 11.
+- **No pass, no documentation.** If the scorecard does not pass, nothing is written to Storybook documentation, Supernova, Docusaurus or the documentation source, and the run does not go on to Phase 4. The designer gets a failure report that says what is failing and the steps to fix it. The run waits until every error is fixed, design errors in Figma included, and a new review round passes. No exceptions. See the gate after step 11.
 - **Anonymous repository.** Commit with `git -c user.name="DS PoC" -c user.email="noreply@users.noreply.github.com"` and no co-author line. No personal or client names anywhere.
 - **Unknowns stop the run.** If a fact is missing or two sources disagree, ask one question instead of choosing.
 
@@ -79,21 +79,49 @@ If a component is already aligned, this phase can be short. Say so rather than i
 10. **Storybook against Figma.** Compare properties, options, defaults and states on both sides. Fix what a story can fix, in story files only. List what needs a design or code decision. Method and report format: `references/consistency-check.md`.
 11. **Rubric review.** Start a fresh general-purpose subagent for each round, with no build context, told to follow `eval/reviewer-brief.md` for `<Name>` and `<Component>`, and not to read the previous scorecard before measuring. Give it what it cannot know: the story ids, the address of the running Storybook (it may measure there instead of building), a scratch folder outside the repository for its scripts, the Figma node and file key (with the reminder to pass `fileKey`), and that the live Figma file wins over the contract where they differ. Do not tell it what you changed or what you expect. It writes `eval/scorecards/<Name>.md`. A round takes about six minutes; use the time to draft the documentation source. Sort its findings before fixing: (a) plain code errors, fix them; (b) code and Figma disagree, or Figma disagrees with itself (layer data against the written description), ask the designer which side is right, all such questions together in one go, with a recommendation each; (c) the design itself fails a criterion, report it. Starting another round while (b) is open wastes it, because the same findings come back. Then run the next round. Three rounds in a row is the limit for code fixes: if code errors are still there after three, stop and report.
 
-**Gate: the scorecard must pass before Phase 4.** The designer decided this on 25 November 2026, after a run went on to documentation, Supernova and Code Connect with a failing scorecard and all three had to be redone when the design changed. If the verdict is not Pass:
+**Gate: the scorecard must pass before Phase 4.** The designer decided this on 25 November 2026, after a run went on to documentation, Supernova and Code Connect with a failing scorecard and all three had to be redone when the design changed. There is no exception and no waiver: if the designer asks to go on anyway, remind them of this rule and offer the fix steps instead.
 
-- Do not write documentation, do not write to Supernova, do not publish Code Connect and do not write the run log. Code and stories that already match Figma may be committed, so work is not lost.
-- Tell the designer exactly what must change in Figma for each failing criterion: the variant or layer (with its node id), the value now, the minimum or rule it misses, and one or two ways to fix it with variables that already exist. Check that a variable exists before naming it.
-- The fix is made in Figma, by the designer or by you after their yes (one yes, one change). Do not make a failing criterion pass by changing the look in code, by editing the rubric or by asking the reviewer to ignore it.
-- After the Figma fix: if a property, a variant or a token binding changed, ask for a new RubyLint export first (the contract check fails on an old one). Then bring the code in line and run a new review round with a fresh reviewer. Rounds after a Figma fix do not count towards the limit of three.
+While the verdict is not Pass, never write documentation anywhere:
+
+- not in Storybook (no documentation pages, no descriptive text written for readers; the stories the reviewer measures are part of the build and stay),
+- not in Supernova (no page, no status values, no draft),
+- not in Docusaurus or any later destination,
+- and not the neutral source `docs/pages/<Name>.md` or its preview either, because every destination is produced from it.
+
+Code Connect is not published and the run log is not written. Code and stories that already match Figma may be committed, so work is not lost.
+
+**Failure report.** Each time a round does not pass, send the designer this, in their language, before anything else. One block per failing criterion, worst first:
+
+```markdown
+## Scorecard: <n> of 6 pass. The run stops here until these are fixed.
+
+### <Criterion name>: Fail
+- **What is failing:** one plain sentence, no jargon.
+- **Where:** the Figma variant and layer, with its node id (or the file and line, for code).
+- **Measured:** the value now, and the minimum or rule it misses.
+- **Who fixes it:** design (in Figma) or code (I fix it now).
+- **Steps to fix:**
+  1. The exact change, naming variables that exist in the file (check before naming one).
+  2. A second way, if there is one.
+- **After the fix:** new RubyLint export needed, yes or no; then a new review round.
+```
+
+Close the report with one line saying what happens next and what is needed from the designer (a yes for a named Figma change, or "tell me when you have changed it"). Give a recommendation when there are two ways. Do not bury the report in a longer summary, and do not list passing criteria in detail.
+
+Then:
+
+- Code errors: fix them and run the next round, without asking.
+- Design errors: the fix is made in Figma, by the designer or by you after their yes (one yes, one change). Do not make a failing criterion pass by changing the look in code, by editing the rubric or by asking the reviewer to ignore it.
+- After a Figma fix: if a property, a variant or a token binding changed, ask for a new RubyLint export first (the contract check fails on an old one). Then bring the code in line and run a new review round with a fresh reviewer. Rounds after a Figma fix do not count towards the limit of three.
 - Repeat until the verdict is Pass. Only then start Phase 4.
-
-If the designer wants to go on with a failing scorecard anyway, that is their call to make, each time: ask, and record in the run log that the gate was waived and why.
 
 The reviewer is separate on purpose: whoever built the component should not mark it.
 
 ## Phase 4: Documentation
 
 Read `references/documentation.md` before this phase. It defines the neutral source file, the page template, the editable preview and how each block is written to each destination.
+
+Before any step of this phase, read the verdict line of `eval/scorecards/<Name>.md`. If it is not Pass, stop: go back to the gate after step 11.
 
 12. **Write the neutral source** `docs/pages/<Name>.md` from Figma, the code and the scorecard, following the template.
 13. **Preview.** Build `docs/pages/<Name>.preview.html`, start the `docs-preview` server and give the designer the link. They read it and edit the text directly in the page, then press Save.
