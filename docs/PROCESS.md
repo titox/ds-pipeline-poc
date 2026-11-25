@@ -137,7 +137,7 @@ Remap status: all 97 URLs in `figma.config.json` now point at the local Figma fi
 
 Start: reopen the Desktop Bridge plugin in the Figma file, start Storybook (`npm run storybook`), then `npm run lint` to see the current state. Last commit: `d9769bb`, pushed and deployed.
 
-**Done on 2026-11-25: the workflow skill (`ship-component`) is built and was run on Input Field. See "Done on 2026-11-25 (afternoon)" below. Next: decide how to free pages in Supernova, then run the skill on the rest of the Inputs page, and set up the second documentation platform (Docusaurus) from the same `docs/pages/` sources.**
+**Done on 2026-11-25: the workflow skill (`ship-component`) is built and was run on Input Field. See "Done on 2026-11-25 (afternoon)" below. Next: run the skill on the rest of the Inputs page, and set up the second documentation platform (Docusaurus) from the same `docs/pages/` sources.**
 
 The shape the skill was planned with:
 
@@ -185,9 +185,9 @@ Done on 2026-11-25 (afternoon), first run of the `ship-component` skill, on Inpu
 - Code Connect for Input Field: Has Error maps to `errorMessage`; a field without a label keeps `InputField` with `aria-label`; the value is written as `defaultValue`. Not published.
 - Figma, with the designer's yes: the Description layer was moved below the Input in the ten Input Field variants; the CODE GENERATION NOTES paragraph of its description was updated; a new page "Docs / Input Field" holds ten do and don't frames and one anatomy frame.
 - Review: round 1 failed four criteria, round 2 passes four of six. The two that fail (accessibility, themes) fail only on contrast values that come from the design: placeholder 2.1:1 in light and 3.78:1 in dark, default border 1.41:1 and 1.71:1. Scorecard in `eval/scorecards/Input-Field.md`.
-- Supernova: the Input Field page could not be created. The plan allows 20 pages and 20 exist; a component with three tabs counts as three. Nothing was written and no credits were spent. Open decision: remove older generated pages, or change the plan.
+- Supernova: the first attempt to create the Input Field page was refused, because the plan allows 20 pages and 20 existed (a component with three tabs counts as three). After the generated pages for Tag, Accordion and Avatars were removed, the page "Components / Input Field" was created as an unpublished draft from `docs/pages/Input-Field.md`: three tabs, eleven Figma illustrations, 10 credits including the status values (Status: Known issues, React: Ready, Code Connect: Not published, Documentation: Draft). Read back and confirmed: all sections and all eleven images are stored. Not yet seen: how the page looks in the Supernova app, in particular whether the tables show their first row as a header. Publishing stays with the designer.
 
-Still open for Input Field: the two contrast values and the red-on-red focus on an error field (design); the error message is not a live region (code); the RubyLint exports are from 24 November and older than the Figma changes above, so they need exporting again; Code Connect publish; the Supernova page.
+Still open for Input Field: the two contrast values and the red-on-red focus on an error field (design); the error message is not a live region (code); the RubyLint exports are from 24 November and older than the Figma changes above, so they need exporting again; Code Connect publish; publishing the Supernova site.
 
 Done on 2026-11-25:
 - Benchmark of eleven design system documentation sites received (made outside this project). It is kept outside the repo, because it holds screenshots of other companies' sites.

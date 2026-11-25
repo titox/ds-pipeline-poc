@@ -12,14 +12,39 @@
     "433d2be4-70f5-4bf4-915e-b2c838649e8e"
   ],
   "logos": {
-    "figma": { "resourceId": "88ada446-80b5-457b-b9ec-86c9559df544", "src": "https://studio-assets.supernova.io/design-systems/897722/79c248cd-3b83-4f5d-8243-9c49578d0b1b.svg" },
-    "storybook": { "resourceId": "8675257d-97bf-4290-93fc-0898f31dedc7", "src": "https://studio-assets.supernova.io/design-systems/897722/3a13ac7344753df5a7cd5b41a67e33966c1ae723f1e5e5128a6ed1bca1adc85a" },
-    "code": { "resourceId": "e8f53fd7-2c43-4f1b-bb05-442c318c7982", "src": "https://studio-assets.supernova.io/design-systems/897722/fb521b35-ff71-42b5-8bed-550176c0263c.svg" },
-    "teams": { "resourceId": "f653c94f-aefe-4331-8e2c-34f173cefcfd", "src": "https://studio-assets.supernova.io/design-systems/897722/0d2e464a36ceeb522a53dc748e71db2752be1c3499fe9d2c5b8a4787f3646160" }
+    "figma": {
+      "resourceId": "88ada446-80b5-457b-b9ec-86c9559df544",
+      "src": "https://studio-assets.supernova.io/design-systems/897722/79c248cd-3b83-4f5d-8243-9c49578d0b1b.svg"
+    },
+    "storybook": {
+      "resourceId": "8675257d-97bf-4290-93fc-0898f31dedc7",
+      "src": "https://studio-assets.supernova.io/design-systems/897722/3a13ac7344753df5a7cd5b41a67e33966c1ae723f1e5e5128a6ed1bca1adc85a"
+    },
+    "code": {
+      "resourceId": "e8f53fd7-2c43-4f1b-bb05-442c318c7982",
+      "src": "https://studio-assets.supernova.io/design-systems/897722/fb521b35-ff71-42b5-8bed-550176c0263c.svg"
+    },
+    "teams": {
+      "resourceId": "f653c94f-aefe-4331-8e2c-34f173cefcfd",
+      "src": "https://studio-assets.supernova.io/design-systems/897722/0d2e464a36ceeb522a53dc748e71db2752be1c3499fe9d2c5b8a4787f3646160"
+    }
   },
   "contactHref": "https://teams.microsoft.com/",
   "components": {
-    "Button": { "componentId": "6b1c4086-2984-402e-bd64-71eb957b6f5d", "storybookEntityId": "1201355" },
-    "Input-Field": { "componentId": "a09a59d8-e815-4f80-8c7e-df7e1fa753af", "storybookEntityId": "1201369" }
-  }
+    "Button": {
+      "componentId": "6b1c4086-2984-402e-bd64-71eb957b6f5d",
+      "storybookEntityId": "1201355"
+    },
+    "Input-Field": {
+      "componentId": "a09a59d8-e815-4f80-8c7e-df7e1fa753af",
+      "storybookEntityId": "1201369",
+      "tabGroupId": "2fbf2b3e-6197-4d23-b3b0-9a6e87cda6cd",
+      "tabPageIds": {
+        "Usage": "aea10c3f-249e-4e1b-90a6-337e0529cd27",
+        "Design": "007ffd3e-f7f1-4033-875c-3d616f412529",
+        "Code and accessibility": "300900a5-1f9c-4977-9e2d-efa734a58c27"
+      }
+    }
+  },
+  "pageLimit": 20
 }
