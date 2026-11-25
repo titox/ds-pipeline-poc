@@ -135,17 +135,46 @@ Remap status: all 97 URLs in `figma.config.json` now point at the local Figma fi
 
 ## Next session
 
-Start: reopen the Desktop Bridge plugin in the Figma file, start Storybook (`npm run storybook`), then `npm run lint` to see the current state.
+Start: reopen the Desktop Bridge plugin in the Figma file, start Storybook (`npm run storybook`), then `npm run lint` to see the current state. Last commit: `d9769bb`, pushed and deployed.
 
-0. Button passed the rubric in round 3 (`eval/scorecards/Button.md`). Still to do: commit, publish Code Connect, check the Pages deploy. Open items that need a design decision: how Loading is announced and whether the spinner moves, whether a Button should accept a link (`href`) at all, the faint Subtle hover border (1.4:1), disabled text contrast in light (1.49:1), the stale description (says 24 variants, there are 30), the Focus and Loading variants not connected to the component properties, and Button Danger focus still using `Icon/Danger/Tertiary`.
+**First task, agreed on 2026-11-25: build the workflow skill, then test it on the Input Field component in Figma.**
+
+The skill packages the whole workflow, so the next component runs the same steps with one command. Nothing of it is built yet. Its planned shape:
+
+1. The designer sends the Figma link of the component.
+2. The skill asks for the three manual exports: JSON contract, Markdown and Jira request. The audit itself stays manual.
+3. It runs the workflow (tokens, component, Code Connect, story, checks, review) and sends short progress notes on what it is doing.
+4. It checks Storybook against Figma: properties, options, defaults and states. It fixes the stories and lists what only a design or code change can fix. First run of this check: `docs/consistency-storybook-figma.md`.
+5. It writes the documentation from Figma, the code and the review only, and shows it as a local HTML preview. The designer can edit the text in that preview. The edited version is what goes to Supernova. First version of the preview, not yet editable: `docs/supernova/Button.preview.html`.
+6. It ends with a summary of every change and links to Storybook, GitHub and Supernova.
+
+Fixed rules inside the skill: a separate yes before any change in Figma; the credit cost stated before any write to Supernova; publishing stays with the designer.
+
+The documentation template the skill should produce, as agreed on the Button page: three tabs (Usage, Design, Code and accessibility); a health bar with the statuses behind it; links as cards with a logo; do and don't with illustrations made in Figma; an anatomy illustration; a changelog with date, version and notes; related reading; a contact card; and a row on the status board.
+
+**Open after today:**
+
+0. Button. Done: aligned with Figma, review passed, documented in Supernova, stories aligned with Figma. Still to do: publish Code Connect (`npx figma connect publish`), then set its status to "Published" in Supernova. Waiting for the stakeholder's feedback on the Button documentation. Open design decisions: how Loading is announced and whether the spinner moves, whether a Button should accept a link (`href`) at all, the faint Subtle hover border (1.4:1), disabled text contrast in light (1.49:1), the stale Figma description (says 24 variants, there are 30), the Focus and Loading variants not connected to the component properties, and Button Danger focus still using `Icon/Danger/Tertiary`.
+
+0a. Button documentation in Supernova, before it counts as final: verify or replace the five related reading links (they were suggested from memory); replace the placeholder Teams link; decide whether the links that contain the GitHub account name may stay; check that the hourly Storybook import has brought in the new stories (at the last check, 25 November, "Textarea States" had not arrived); set up the top bar sections in the Supernova app, which cannot be done from here.
+
+0b. From the Storybook and Figma check, needing a design or code decision: Date Input Field and Date Picker Field have no React component; Destructive Icon Button has no design in Figma; `orientation` on Checkbox Group and Radio Group is not supported by the code; Loading is accepted by Button Danger and Icon Button in code but not designed; four small inconsistencies inside Figma (listed at the end of the report).
+
+0c. To look at: `IconButton.tsx` passes its reference with `{...ref}` instead of `ref={ref}`. It looks like a bug and has not been tested.
+
+0d. Supernova housekeeping: the 16 registered components are not linked to their Figma components; status values on the board are set by hand and must follow each component's progress; two unused illustration frames remain on the Figma page "Docs / Button"; about 740 of 1,000 credits are left.
 
 1. Roll the state standard out to the 11 incomplete components on the Inputs page, lowest score first (Select Field 65%, Search 78%). Per component: design missing states in Figma, update CSS, story, Code Connect, then write its description in `docs/components/DESCRIPTIONS.md` (same labelled format as Input Field: summary, then `PURPOSE:`, `BEHAVIOUR:`, `COMPOSITION:`, `USAGE:`, `CODE GENERATION NOTES:`). When adding variants in Figma, bind their layers to the component properties (copy `componentPropertyReferences` from the Default variant) and run `npm run descriptions` and `npm run rubylint`.
+
 2. Review the 11 contract check warnings (unmapped Has Error / Has Label / Open / Value Type, Date fields without code or Code Connect, hard-coded strokes in Date Picker and Select).
+
 3. Other Figma pages: the designer audits and exports them by hand, as done for Buttons and Inputs. The Jira specifications in `docs/components/` are older than the manual exports and need exporting again.
+
 4. Contrast: 6 Inputs components have a lowest contrast of 1.5:1 (placeholder or disabled text, to check).
+
 5. Distinct focus colour: `Border/Focus/Default` is still the same red as error.
+
 6. Supernova tokens: the variables are in. Still to do: remove the old empty "Dark" theme, and run the plugin again after every variable change in Figma (it is a manual push). Brand collection in Figma for the second brand; Supernova role in the flow; Jira connection to create tickets from the `.jira.md` specs.
-7. Once Button and the Inputs components are through the workflow, package the whole workflow as a reusable skill, so the next component runs the same steps with one command. The manual audit and the yes before any Figma change stay as fixed steps. Planned shape, not built yet: the designer sends the Figma link of the component; the skill asks for the three manual exports (JSON contract, Markdown, Jira request); it runs the workflow and sends short progress notes on what it is doing; it ends with a summary of every change and links to Storybook, GitHub and Supernova. Added on 2026-11-25: before anything is written to Supernova, the skill shows the documentation page as a local HTML preview, and the designer can edit the text directly in that preview. The edited version is what goes to Supernova. A first, read-only version of this preview exists for Button (`docs/supernova/Button.preview.html`). Added the same day: a consistency step that compares each component's properties, options, defaults and states between Figma and Storybook, fixes the stories, and lists what only a design or code change can fix (first run: `docs/consistency-storybook-figma.md`).
 
 Done on 2026-11-25:
 - Benchmark of eleven design system documentation sites received (made outside this project). It is kept outside the repo, because it holds screenshots of other companies' sites.
