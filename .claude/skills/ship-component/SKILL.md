@@ -28,6 +28,7 @@ These exist because each one was a decision the designer made. Breaking one cost
 - **Documentation text has a source.** Every sentence comes from Figma (description, properties, variables), the code, or the review scorecard. No guidance from general knowledge. If something useful has no source, list it for the designer as a suggestion; do not put it in the page.
 - **Design problems go back to design.** If the code matches Figma and Figma itself is wrong (low contrast, a missing state), report it. Do not change the look in code.
 - **No pass, no documentation.** If the scorecard does not pass, nothing is written to Storybook documentation, Supernova, Docusaurus or the documentation source, and the run does not go on to Phase 4. The designer gets a failure report that says what is failing and the steps to fix it. The run waits until every error is fixed, design errors in Figma included, and a new review round passes. No exceptions. See the gate after step 11.
+- **No illustrations, no documentation.** Every documentation page has its do and don't illustrations and its anatomy illustration, as frames on the Figma page `Docs / <Component name>`. This step is never skipped, never postponed to "later" and never offered as optional. The designer decided this on 25 November 2026, after a run published a page without them. Creating the frames is a change in Figma, so the run stops for the yes (step 12a); it does not go on to the preview or to any destination until the frames exist and their node ids are in the source file. If the designer says no, the run waits there: remind them of this rule instead of shipping without images.
 - **Anonymous repository.** Commit with `git -c user.name="DS PoC" -c user.email="noreply@users.noreply.github.com"` and no co-author line. No personal or client names anywhere.
 - **Unknowns stop the run.** If a fact is missing or two sources disagree, ask one question instead of choosing.
 
@@ -124,9 +125,10 @@ Read `references/documentation.md` before this phase. It defines the neutral sou
 Before any step of this phase, read the verdict line of `eval/scorecards/<Name>.md`. If it is not Pass, stop: go back to the gate after step 11.
 
 12. **Write the neutral source** `docs/pages/<Name>.md` from Figma, the code and the scorecard, following the template.
+12a. **Illustrations (mandatory, see the rule above).** Check whether the Figma page `Docs / <Component name>` exists. If it does not, or it lacks a frame for a do and don't pair or for the anatomy, say exactly what will be created (page name, one frame per do and one per don't, one anatomy frame, the example texts) and wait for the yes. Then build them as `references/documentation.md` describes, look at a screenshot of the section, fix what is off, and put the node ids in the `do-dont` table, the anatomy `image` block and the `## Images` table of alternative texts. A source file that still says `none yet`, or has no anatomy `image` block, is not finished: do not start step 13.
 13. **Preview.** Build `docs/pages/<Name>.preview.html`, start the `docs-preview` server and give the designer the link. They read it and edit the text directly in the page, then press Save.
 14. **Apply the edits** from `docs/pages/<Name>.edits.json` to the neutral source, show the designer the list of changes, and delete the edits file. The source file is now the agreed text. **Stop here until the designer says the text is right.**
-15. **Publish to the destinations** from the neutral source, never from memory of the conversation. Today: Supernova, as an unpublished draft, after stating the credit cost. Then update the component's row on the Supernova status board. The second destination (Docusaurus) reads the same file; if it is not set up yet, say that it was skipped.
+15. **Publish to the destinations** from the neutral source, never from memory of the conversation. Before the first write, check the source once more: no `none yet` in a `do-dont` table and an anatomy `image` block with a node id. If either is missing, go back to step 12a. Today: Supernova, as an unpublished draft, after stating the credit cost. Then update the component's row on the Supernova status board. The second destination (Docusaurus) reads the same file; if it is not set up yet, say that it was skipped.
 
 ## Phase 5: Close
 
@@ -152,6 +154,7 @@ Before any step of this phase, read the verdict line of `eval/scorecards/<Name>.
 | Exports current? (Phase 1) | Only the designer knows if the design changed since the export. |
 | Any change in Figma | Their file. |
 | Scorecard not Pass (after any round) | The run does not go on until the errors are fixed in Figma and a new round passes. |
+| Illustrations in Figma (Phase 4, step 12a) | Their file. The run waits here; it never goes on without them. |
 | Text agreed in the preview (Phase 4) | They own the wording. |
 | Before the first Supernova write | It spends credits. |
 | Code Connect publish | It is visible to developers. |
@@ -160,4 +163,4 @@ Between stops, keep going. Do not ask for permission for things the workflow alr
 
 ## Resuming
 
-A run can stop for hours at a designer step. When asked to continue, work out where it is from the files, not from memory: exports present, `git status`, scorecard date and verdict (if it is not Pass, the run is at the gate after step 11, whatever else exists), `docs/pages/<Name>.md`, a pending `.edits.json`, the row in `docs/ship-log.md`. Say which step is next and carry on.
+A run can stop for hours at a designer step. When asked to continue, work out where it is from the files, not from memory: exports present, `git status`, scorecard date and verdict (if it is not Pass, the run is at the gate after step 11, whatever else exists), `docs/pages/<Name>.md` (if it still says `none yet` or has no anatomy image, the run is at step 12a), a pending `.edits.json`, the row in `docs/ship-log.md`. Say which step is next and carry on.

@@ -67,7 +67,16 @@ Keep the section order. Leave a section out only if there is nothing true to say
 
 Where each fact comes from: properties, variants and description from Figma; props, defaults and behaviour from the component source; mappings from the Code Connect file; measured values (contrast, sizes, axe result) from `eval/scorecards/<Name>.md`; token names from `docs/components/<Name>.contract.json`.
 
-Illustrations for do and don't and anatomy are frames in Figma on a page `Docs / <Component name>`, built from instances of the real component so they follow design changes. Creating them is a change in Figma: ask first. If the designer says no, the page ships without illustrations and says so in the summary.
+Illustrations for do and don't and anatomy are frames in Figma on a page `Docs / <Component name>`, built from instances of the real component so they follow design changes. They are mandatory: a page never ships without them (SKILL.md, rule "No illustrations, no documentation" and step 12a). Creating them is a change in Figma: say what will be created, ask, and wait for the yes; the run does not go on until they exist.
+
+How to build them (model: the pages `Docs / Checkbox Field` and `Docs / Radio Field`; read one live before building):
+
+- One section named `<Component name>: do and don't illustrations`, 1400 wide, white fill, at 0,0 on the new page. Check first that the page does not exist. Do not switch the designer's current page.
+- One frame per do and one per don't, 640 by 400, fill `Background/Default/Secondary`, content centred, in two columns (x 40 and 720, rows 440 apart from y 40). Name them `Do / <what it shows>` and `Don't / <what it shows>`.
+- Inside each, a "Card" frame 360 wide: vertical auto layout, gap 12, padding 24, fill `Background/Default/Default`, 1px stroke `Border/Default/Default`, radius 12. It holds instances of the real component with realistic labels set through the instance properties. All fills and strokes are bound to variables.
+- One frame `Anatomy / <Component name>`, same size and fill: one instance scaled three times, with every optional part switched on, and numbered markers (28px circles in `Background/Danger/Default`, numbers in `Text/Danger/On Danger`, Inter Semi Bold 14) joined to each part by a 1.5px line. Place the lines from the measured positions of the layers, not by eye.
+- Take a screenshot of the section and check it: nothing clipped, markers on the right parts, every example reads as the sentence it illustrates.
+- Each example shows only what its do or don't sentence says. The sentences come from the Figma description; the example labels are neutral placeholders (delivery options, sizes, notification channels).
 
 ## 3. Blocks
 

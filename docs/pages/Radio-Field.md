@@ -14,6 +14,19 @@ Sources: the Figma description and variants of node 9762:1412, Radio.tsx, radio.
 RadioField.figma.ts, the contract in docs/components/ and eval/scorecards/Radio-Field.md.
 -->
 
+## Images
+
+Alternative text for the illustrations. They are frames on the Figma page "Docs / Radio Field".
+
+| Node | Alt |
+|---|---|
+| 3179:22114 | Three radios for Standard delivery, Express delivery and Collect in store, with Standard delivery checked |
+| 3179:22149 | Three radios for Email updates, Text message updates and Updates by post, with only Email updates checked |
+| 3179:22184 | Three radios for Small, Medium and Large, with Medium checked |
+| 3179:22219 | A list of ten countries shown as radios, with Finland checked |
+| 3179:22331 | Two radios for Standard delivery and Express delivery, without descriptions |
+| 3179:22355 | Two radios for Standard delivery and Express delivery, each with a description that repeats its label |
+
 ## Tab: Usage
 
 ### Status
@@ -59,9 +72,9 @@ Not for this
 <!-- Sources: all three pairs from USAGE in the Figma description. -->
 | Do | Don't | Figma frame |
 |---|---|---|
-| Use it when only one option can be picked. | Use it when more than one answer can be picked. Use Checkbox Field. | none yet |
-| Use it when every option can stay visible. | Use it for a long list. Use Select Field. | none yet |
-| Turn the description off when the label is clear on its own. | Keep a description that adds nothing to the label. | none yet |
+| Use it when only one option can be picked. | Use it when more than one answer can be picked. Use Checkbox Field. | 3179:22114, 3179:22149 |
+| Use it when every option can stay visible. | Use it for a long list. Use Select Field. | 3179:22184, 3179:22219 |
+| Turn the description off when the label is clear on its own. | Keep a description that adds nothing to the label. | 3179:22331, 3179:22355 |
 
 ### Related components
 
@@ -83,6 +96,9 @@ Contact the design system team, Microsoft Teams channel, placeholder link
 ## Tab: Design
 
 ### Anatomy
+
+<!-- block: image -->
+A Radio Field with five numbered markers: 1 radio, 2 dot, 3 label, 4 description, 5 error message. Figma frame 3179:22379
 
 1. **Radio:** the circle. It carries the fill, the border and the dot.
 2. **Dot:** shown when the radio is checked.
@@ -254,6 +270,7 @@ Tested on 25 November 2026, in light and dark.
 <!-- block: changelog -->
 | Date | Version | Notes |
 |---|---|---|
+| 25 November 2026 | Unreleased | Illustrations added: six do and don't frames and an anatomy frame on the Figma page "Docs / Radio Field". |
 | 25 November 2026 | Unreleased | Code Connect published. |
 | 25 November 2026 | Unreleased | Documentation page written: usage, design, code and accessibility. |
 | 25 November 2026 | Unreleased | Figma: Hover has a look of its own, the circle fill changes. New error message with the Has Error and Error properties. The Hover, Focus and Error variants are connected to the Label, Description and Has Description properties. Disabled uses `Text/Disabled/Default` for label and description in both value types. |
