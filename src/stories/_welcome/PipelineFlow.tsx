@@ -82,10 +82,10 @@ const LANES: Lane[] = [
   {
     id: "truth",
     title: "Source of truth",
-    status: "planned",
+    status: "progress",
     what: "Supernova keeps the official record of tokens and components and shares it with everyone who needs it.",
     output: "One trusted place for the design system",
-    note: "Our account is connected, but it is not linked to the Figma file yet. Its exact role is still to be decided.",
+    note: "Supernova is connected to the Figma file, the variables and Storybook, and the documentation site is public. Button has a written page; the other component pages are still automatic drafts. Its exact role is still to be decided.",
   },
 ];
 
@@ -98,7 +98,7 @@ const NODES: Node[] = [
   { id: "github", lane: 3, x: 700, y: 430, logo: "github", label: "GitHub", sub: ["Repository"], status: "done" },
   { id: "storybook", lane: 4, x: 900, y: 170, logo: "storybook", label: "Storybook", sub: ["Live docs"], status: "done" },
   { id: "actions", lane: 4, x: 900, y: 430, logo: "actions", label: "GitHub Actions", sub: ["Checks"], status: "done" },
-  { id: "supernova", lane: 5, x: 1100, y: 300, logo: "supernova", label: "Supernova", sub: ["Source of truth"], status: "planned" },
+  { id: "supernova", lane: 5, x: 1100, y: 300, logo: "supernova", label: "Supernova", sub: ["Source of truth"], status: "progress" },
 ];
 
 // Vertical arrows start below the label of the tile above (or stop below it), so no arrow crosses text.

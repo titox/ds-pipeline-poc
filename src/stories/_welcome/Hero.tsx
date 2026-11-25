@@ -29,8 +29,8 @@ export function Hero() {
       <h1 className="hero-title">Design system pipeline PoC</h1>
       <p className="hero-lead">
         A proof of concept that takes a component from Figma to checked, published code. It uses
-        Figma, design tokens, RubyLint, Storybook and Code Connect, with Supernova planned as the
-        source of truth.
+        Figma, design tokens, RubyLint, Storybook and Code Connect, with Supernova for the
+        published documentation.
       </p>
       <ul className="hero-links">
         {LINKS.map((l) => {
