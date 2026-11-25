@@ -15,9 +15,9 @@ const LINKS: { label: string; note: string; href: string; logo: keyof typeof LOG
     logo: "figma",
   },
   {
-    label: "Supernova workspace",
-    note: "Sign-in required",
-    href: "https://app.supernova.io/832944-acme-ltd-u7pckvnl/897722-my-design-system/948367-shared-draft",
+    label: "Supernova documentation",
+    note: "Public documentation site",
+    href: "https://legal-chocolate-cat.supernova-docs.io/latest",
     logo: "supernova",
   },
 ];
