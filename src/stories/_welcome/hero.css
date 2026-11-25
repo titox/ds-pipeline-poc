@@ -65,8 +65,10 @@
   background: var(--sds-color-white-200);
   border: 1px solid var(--sds-color-white-500);
   border-radius: var(--sds-size-radius-200);
+  box-sizing: border-box;
   display: flex;
   gap: var(--sds-size-space-300);
+  height: 100%;
   padding: var(--sds-size-space-300) var(--sds-size-space-400);
   transition: background-color 150ms linear;
 }
