@@ -14,35 +14,35 @@ const value = instance.getEnum("Value Type", {
   Default: instance.getString("Value"),
 });
 const placeholder = instance.getEnum("Value Type", {
-  default: "I am a placeholder...",
   Placeholder: instance.getString("Value"),
 });
-const errorMessage = hasLabel
-  ? instance.getEnum("State", { Error: instance.getString("Error") })
-  : undefined;
+// Has Error shows the message; State=Error only sets the invalid look.
+const errorMessage = instance.getBoolean("Has Error", {
+  true: instance.getString("Error"),
+  false: undefined,
+});
 const label = hasLabel ? instance.getString("Label") : undefined;
-const description = hasLabel
-  ? instance.getBoolean("Has Description", {
-      true: instance.getString("Description"),
-      false: undefined,
-    })
-  : undefined;
+const description = instance.getBoolean("Has Description", {
+  true: instance.getString("Description"),
+  false: undefined,
+});
+
+// Without a visible label the field still needs an accessible name.
+const ariaLabel = hasLabel ? undefined : instance.getString("Label");
 
 const rp = figma.helpers.react.renderProp;
-const imports = hasLabel
-  ? ['import { InputField } from "primitives";']
-  : ['import { Input } from "primitives";'];
 
 export default {
   id: "InputField",
-  imports,
-  example: figma.code`<${hasLabel ? "InputField" : "Input"}
+  imports: ['import { InputField } from "primitives";'],
+  example: figma.code`<InputField
       ${rp("isDisabled", isDisabled)}
       ${rp("isInvalid", isInvalid)}
       ${rp("errorMessage", errorMessage)}
       ${rp("label", label)}
+      ${rp("aria-label", ariaLabel)}
       ${rp("description", description)}
-      ${rp("value", value)}
+      ${rp("defaultValue", value)}
       ${rp("placeholder", placeholder)}
     />`,
   metadata: { nestable: true },

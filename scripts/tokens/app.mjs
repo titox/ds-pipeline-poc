@@ -446,12 +446,16 @@ async function processStyleJSON(data, variablesLookup) {
         fontFamily,
         fontWeight,
         fontStyle = "normal",
+        lineHeight,
       } = style;
 
+      // The font shorthand resets line-height, so it has to carry it:
+      // "size/line-height". Without it the browser falls back to "normal".
+      const size = valueFromPossibleVariable(fontSize);
       const css = [
         valueFromPossibleVariable(fontStyle),
         valueFromPossibleVariable(fontWeight),
-        valueFromPossibleVariable(fontSize),
+        typeof lineHeight === "number" ? `${size}/${lineHeight}` : size,
         valueFromPossibleVariable(fontFamily),
       ].join(" ");
       text.push(

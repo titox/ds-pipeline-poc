@@ -74,6 +74,11 @@ function fileRESTResponseToStylesJSON(response) {
                 : node.style.italic
                   ? "italic"
                   : "normal",
+              // Unitless line height (1.4 for 140%). Not a variable in Figma.
+              lineHeight:
+                typeof node.style.lineHeightPercentFontSize === "number"
+                  ? Math.round(node.style.lineHeightPercentFontSize) / 100
+                  : undefined,
             };
           } else if (styleType === "effect") {
             styles[styleId].type = "EFFECT";

@@ -20,6 +20,7 @@ The designer asked for the Storybook side to be fixed. Only story files were cha
 | Select Field | Label and description controls now work. Controls for Disabled, Invalid and the error text were added. |
 | Switch Field | Label and description controls now work. An on/off control was added. It starts on, as in Figma. |
 | Textarea Field | New story "Textarea States" showing Default, Hover, Focus, Error and Disabled, like "Input States". |
+| Input Field (25 November, second pass, with the ship-component skill) | The story now starts from the Figma defaults: label "Label", value "Value", no description, no error. Story controls were added for Has Label, Has Description, Has Error and Value Type, next to label, description, error message, value, Disabled and Invalid. The `type` and `isRequired` defaults, which Figma does not have, were removed from the story. Result: Consistent. |
 
 Still different after this, because a story cannot fix it:
 
@@ -29,7 +30,10 @@ Still different after this, because a story cannot fix it:
 - **Loading** is hidden in the stories of Button Danger and Icon Button, but the code still accepts it.
 - **Select Field** has no control for the Figma "Open" property.
 - **Button Group** still defaults to Start in the code; only the story starts at Justify.
-- The default icons, the Input Field description default and the Slider range were left as they are.
+- The default icons and the Slider range were left as they are.
+- **Input Field, Has Error:** in Figma the error message can be shown in any state. In code it only appears while the field is invalid, so the Has Error control has no effect on its own.
+- **Input Field, error message colour:** the Error layer uses `Text/Danger/Default` only in the Error variants. In the other eight variants it uses `Text/Default/Default`.
+- **Input Field, disabled description:** in Figma the description keeps `Text/Default/Secondary` when the field is disabled. In code it turns to the disabled text colour, like the label.
 
 The tables below describe the state before these fixes.
 

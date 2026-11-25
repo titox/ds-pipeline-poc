@@ -1,0 +1,25 @@
+{
+  "note": "Ids of the Supernova design system used by the ship-component skill. Not secrets. Read again from Supernova if a write rejects one.",
+  "figmaFileKey": "huu1as0pMzvGdqqDpQ5JyE",
+  "storybookBase": "https://titox.github.io/ds-pipeline-poc/storybook",
+  "repoBase": "https://github.com/titox/ds-pipeline-poc/blob/main/",
+  "componentsGroupId": "20352d0b-bcaa-420e-a40a-893a1688858e",
+  "healthPropertyIds": [
+    "2cbedbc4-cbdf-4b12-a988-90b22bf6bc5a",
+    "6158ecf2-3b48-405c-bf77-d60d7ac316fb",
+    "144d8a94-fa85-4a59-9934-18dcefb479e1",
+    "25c3b6e8-f6f5-4c16-becc-256ea81ba9b6",
+    "433d2be4-70f5-4bf4-915e-b2c838649e8e"
+  ],
+  "logos": {
+    "figma": { "resourceId": "88ada446-80b5-457b-b9ec-86c9559df544", "src": "https://studio-assets.supernova.io/design-systems/897722/79c248cd-3b83-4f5d-8243-9c49578d0b1b.svg" },
+    "storybook": { "resourceId": "8675257d-97bf-4290-93fc-0898f31dedc7", "src": "https://studio-assets.supernova.io/design-systems/897722/3a13ac7344753df5a7cd5b41a67e33966c1ae723f1e5e5128a6ed1bca1adc85a" },
+    "code": { "resourceId": "e8f53fd7-2c43-4f1b-bb05-442c318c7982", "src": "https://studio-assets.supernova.io/design-systems/897722/fb521b35-ff71-42b5-8bed-550176c0263c.svg" },
+    "teams": { "resourceId": "f653c94f-aefe-4331-8e2c-34f173cefcfd", "src": "https://studio-assets.supernova.io/design-systems/897722/0d2e464a36ceeb522a53dc748e71db2752be1c3499fe9d2c5b8a4787f3646160" }
+  },
+  "contactHref": "https://teams.microsoft.com/",
+  "components": {
+    "Button": { "componentId": "6b1c4086-2984-402e-bd64-71eb957b6f5d", "storybookEntityId": "1201355" },
+    "Input-Field": { "componentId": "a09a59d8-e815-4f80-8c7e-df7e1fa753af", "storybookEntityId": "1201369" }
+  }
+}

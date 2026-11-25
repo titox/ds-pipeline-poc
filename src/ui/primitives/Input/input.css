@@ -11,8 +11,11 @@
   color: var(--input-text-color);
   display: flex;
   line-height: 1;
-  padding: calc(var(--sds-size-space-300) - var(--sds-size-stroke-border) * 2)
-    var(--sds-size-space-400);
+  /* Figma: Space/300 above and below one line of text (40px in total).
+     The height is set because browsers give a text input a taller line box. */
+  box-sizing: border-box;
+  height: calc(var(--sds-size-space-300) * 2 + 1em);
+  padding: var(--sds-size-space-300) var(--sds-size-space-400);
   position: relative;
   width: 100%;
 
@@ -22,7 +25,8 @@
 
   &[data-disabled] {
     --input-background-color: var(--sds-color-background-disabled-default);
-    --input-text-color: var(--sds-color-text-disabled-default);
+    --input-text-color: var(--sds-color-text-disabled-on-disabled);
+    --input-placeholder-color: var(--sds-color-text-disabled-on-disabled);
     --input-border-color: var(--sds-color-border-disabled-default);
   }
 

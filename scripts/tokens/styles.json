@@ -14,7 +14,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:66:10190"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1.2
   },
   {
     "type": "TEXT",
@@ -31,7 +32,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:58:8572"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1.2
   },
   {
     "type": "TEXT",
@@ -48,7 +50,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:66:10178"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1.2
   },
   {
     "type": "TEXT",
@@ -65,7 +68,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:66:10187"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1.2
   },
   {
     "type": "TEXT",
@@ -82,7 +86,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:2103:22310"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1.2
   },
   {
     "type": "TEXT",
@@ -99,7 +104,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:66:10181"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1.4
   },
   {
     "type": "TEXT",
@@ -116,7 +122,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:66:14844"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1.4
   },
   {
     "type": "TEXT",
@@ -132,7 +139,8 @@
     "fontStyle": {
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:66:14846"
-    }
+    },
+    "lineHeight": 1.4
   },
   {
     "type": "TEXT",
@@ -149,7 +157,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:66:10181"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1.4
   },
   {
     "type": "TEXT",
@@ -166,7 +175,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:66:10181"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1.4
   },
   {
     "type": "TEXT",
@@ -183,7 +193,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:66:14844"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1.4
   },
   {
     "type": "TEXT",
@@ -200,7 +211,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:66:10181"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1
   },
   {
     "type": "TEXT",
@@ -217,7 +229,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:66:10184"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1.3
   },
   {
     "type": "TEXT",
@@ -234,7 +247,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:66:14844"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1
   },
   {
     "type": "TEXT",
@@ -251,7 +265,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:9:11183"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1.4
   },
   {
     "type": "TEXT",
@@ -268,7 +283,8 @@
       "type": "VARIABLE_ALIAS",
       "id": "VariableID:9:11186"
     },
-    "fontStyle": "normal"
+    "fontStyle": "normal",
+    "lineHeight": 1.4
   },
   {
     "key": "41bfc984ba768095400f8a022edd454968162c94",
