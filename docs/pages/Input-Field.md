@@ -41,7 +41,7 @@ Alternative text for the illustrations. They are frames on the Figma page "Docs 
 | Design | Ready | 10 variants in Figma. Readiness audit: 97%. |
 | React | Ready | Matches the 10 Figma variants in light and dark. |
 | Review | Known issues | Four of six criteria pass, 25 November 2026. Two fail on contrast values that come from the design. |
-| Code Connect | Pending | Mapping is written. It is not published yet. |
+| Code Connect | Ready | Published on 25 November 2026. |
 | Screen reader | Not tested | See Code and accessibility. |
 
 ### What it is
@@ -276,5 +276,5 @@ Tested on 25 November 2026, in light and dark.
 | 25 November 2026 | Unreleased | Documentation page written: usage, design, code and accessibility. |
 | 25 November 2026 | Unreleased | The input is 40px high with 12px padding, as in Figma. Disabled value and placeholder use `Text/Disabled/On Disabled`. The description keeps its colour when the field is disabled. |
 | 25 November 2026 | Unreleased | Label, description and error message use the Body Base line height (140%). |
-| 25 November 2026 | Unreleased | Code Connect: Has Error maps to `errorMessage`. A field without a label keeps `InputField` with `aria-label`. |
+| 25 November 2026 | Unreleased | Code Connect published: Has Error maps to `errorMessage`. A field without a label keeps `InputField` with `aria-label`. |
 | 24 November 2026 | Unreleased | Hover and Focus states added. |
