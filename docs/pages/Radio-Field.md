@@ -24,7 +24,7 @@ RadioField.figma.ts, the contract in docs/components/ and eval/scorecards/Radio-
 | Design | Ready | 10 variants in Figma. Readiness audit: 97%. |
 | React | Ready | Matches the 10 Figma variants in light and dark. |
 | Review | Passed | All six criteria pass, 25 November 2026, round 2. |
-| Code Connect | Pending | Not published yet. |
+| Code Connect | Ready | Published on 25 November 2026. |
 | Screen reader | Not tested | See Code and accessibility. |
 
 ### What it is
@@ -254,6 +254,7 @@ Tested on 25 November 2026, in light and dark.
 <!-- block: changelog -->
 | Date | Version | Notes |
 |---|---|---|
+| 25 November 2026 | Unreleased | Code Connect published. |
 | 25 November 2026 | Unreleased | Documentation page written: usage, design, code and accessibility. |
 | 25 November 2026 | Unreleased | Figma: Hover has a look of its own, the circle fill changes. New error message with the Has Error and Error properties. The Hover, Focus and Error variants are connected to the Label, Description and Has Description properties. Disabled uses `Text/Disabled/Default` for label and description in both value types. |
 | 25 November 2026 | Unreleased | Aligned with Figma: checked fill, border and dot colours; the unchecked border uses `Border/Brand/Tertiary`; the focus ring replaces the border inside the circle; new Hover and Error looks; 10px dot; 12px gap; no gap between label and description. |
