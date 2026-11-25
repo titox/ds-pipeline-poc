@@ -1,7 +1,7 @@
 {
   "component": "Radio Field",
-  "description": "A single radio choice with a label and an optional description line, built as eight variants covering four states and two value types. Checked and Unchecked exist as a design-file property only; in code the state comes from the group value.\n\nPURPOSE: Lets a person pick one option from a set of mutually exclusive choices. Each instance is one option, with supporting description text underneath the label for extra context.\n\nBEHAVIOUR: Four states are drawn: Default, Hover, Focus and Disabled. Hover signals pointer targeting, Focus adds a focus ring using Stroke/Focus Ring and Border/Focus/Default, and Disabled swaps all fills, borders, icon and text to the disabled token set. Selection is not toggled by the component itself. Radio fields are grouped in code and the group value decides which one renders as checked.\n\nCOMPOSITION: No nested component instances were detected. Each variant is built from plain frames and text layers: a \"Checkbox and Label\" row holding the \"Radio\" frame and the \"Label\" text, then a \"Description Row\" holding a \"Space\" spacer frame and the \"Description\" text. AI code generators should still check the development codebase for an existing radio input, label and helper text primitive before writing new ones.\n\nUSAGE: Use for one-of-many selection where all options should be visible at once. Use a checkbox field when more than one choice can be selected, and a select or dropdown when the list is long. Turn Has Description off when the label alone is clear enough, so the spacer row does not add dead space.\n\nCODE GENERATION NOTES: Render a native input of type radio with a shared name attribute per group, and bind the label with a for or wrapping label element. Attach the description with aria-describedby. Do not model Checked as a prop on the field itself; derive it from the group value. Hover and Focus should come from CSS pseudo-classes rather than separate components, and Focus should use :focus-visible so the ring only shows for keyboard users. Disabled must set the disabled attribute, not just the disabled colour tokens. Arrow key roving focus within the group is standard radio behaviour and is not visible in the design file.",
-  "readinessScore": 96,
+  "description": "A single radio choice with a label, an optional description line and an optional error line, drawn as ten variants across five states and two value types. PURPOSE: Lets a person pick one option from a set of mutually exclusive choices. Each instance is one option in that set, with supporting text under the label when the label alone is not enough. BEHAVIOUR: Default, Hover, Focus, Disabled and Error are drawn. Hover changes the radio fill, using Background/Brand/Secondary Hover when checked and Background/Default/Default Hover when unchecked. Focus adds a ring built from Stroke/Focus Ring and Border/Focus/Default. Disabled swaps fill, border, icon and text to Background/Disabled/Default, Border/Disabled/default, Icon/Disabled/Default and Text/Disabled/Default. Error recolours the radio border with Border/Danger/Default, and the error line under the description uses Text/Danger/Default. Checked and Unchecked are a design-file property only. The component does not toggle its own selection. COMPOSITION: No nested component instances were detected. Each variant is plain frames and text: a \"Checkbox and Label\" row holding the \"Radio\" frame and the \"Label\" text, a \"Description Row\" holding a \"Space\" spacer and the \"Description\" text, and an \"Error Row\", hidden by default, holding a \"Space\" spacer and the \"Error\" text. AI code generators should still check the development codebase for an existing radio input, label and helper text primitive before writing new ones. USAGE: Use for one-of-many selection where every option stays visible. Use a checkbox field when more than one answer can be picked, and a select when the list runs long. Turn Has Description off when the label is clear on its own, so the spacer row does not leave dead space. CODE GENERATION NOTES: Render a native input of type radio with a shared name attribute per group, and bind the label with a for attribute or a wrapping label. Attach the description with aria-describedby. Do not model Checked as a prop on the field, derive it from the group value. Hover and Focus should come from CSS pseudo-classes, with :focus-visible so the ring only appears for keyboard users. Disabled must set the disabled attribute, not only the disabled colour tokens. Error sets aria-invalid and reveals the Error text when Has Error is on. Arrow key roving focus inside the group is standard radio behaviour and is not drawn in the file.",
+  "readinessScore": 97,
   "adoption": {
     "scores": {
       "reuse": 3,
@@ -23,7 +23,7 @@
   "mcpScore": 100,
   "metadata": {
     "component": "Radio Field",
-    "description": "A single radio choice with a label and an optional description line, built as eight variants covering four states and two value types. Checked and Unchecked exist as a design-file property only; in code the state comes from the group value.\n\nPURPOSE: Lets a person pick one option from a set of mutually exclusive choices. Each instance is one option, with supporting description text underneath the label for extra context.\n\nBEHAVIOUR: Four states are drawn: Default, Hover, Focus and Disabled. Hover signals pointer targeting, Focus adds a focus ring using Stroke/Focus Ring and Border/Focus/Default, and Disabled swaps all fills, borders, icon and text to the disabled token set. Selection is not toggled by the component itself. Radio fields are grouped in code and the group value decides which one renders as checked.\n\nCOMPOSITION: No nested component instances were detected. Each variant is built from plain frames and text layers: a \"Checkbox and Label\" row holding the \"Radio\" frame and the \"Label\" text, then a \"Description Row\" holding a \"Space\" spacer frame and the \"Description\" text. AI code generators should still check the development codebase for an existing radio input, label and helper text primitive before writing new ones.\n\nUSAGE: Use for one-of-many selection where all options should be visible at once. Use a checkbox field when more than one choice can be selected, and a select or dropdown when the list is long. Turn Has Description off when the label alone is clear enough, so the spacer row does not add dead space.\n\nCODE GENERATION NOTES: Render a native input of type radio with a shared name attribute per group, and bind the label with a for or wrapping label element. Attach the description with aria-describedby. Do not model Checked as a prop on the field itself; derive it from the group value. Hover and Focus should come from CSS pseudo-classes rather than separate components, and Focus should use :focus-visible so the ring only shows for keyboard users. Disabled must set the disabled attribute, not just the disabled colour tokens. Arrow key roving focus within the group is standard radio behaviour and is not visible in the design file.",
+    "description": "A single radio choice with a label, an optional description line and an optional error line, drawn as ten variants across five states and two value types. PURPOSE: Lets a person pick one option from a set of mutually exclusive choices. Each instance is one option in that set, with supporting text under the label when the label alone is not enough. BEHAVIOUR: Default, Hover, Focus, Disabled and Error are drawn. Hover changes the radio fill, using Background/Brand/Secondary Hover when checked and Background/Default/Default Hover when unchecked. Focus adds a ring built from Stroke/Focus Ring and Border/Focus/Default. Disabled swaps fill, border, icon and text to Background/Disabled/Default, Border/Disabled/default, Icon/Disabled/Default and Text/Disabled/Default. Error recolours the radio border with Border/Danger/Default, and the error line under the description uses Text/Danger/Default. Checked and Unchecked are a design-file property only. The component does not toggle its own selection. COMPOSITION: No nested component instances were detected. Each variant is plain frames and text: a \"Checkbox and Label\" row holding the \"Radio\" frame and the \"Label\" text, a \"Description Row\" holding a \"Space\" spacer and the \"Description\" text, and an \"Error Row\", hidden by default, holding a \"Space\" spacer and the \"Error\" text. AI code generators should still check the development codebase for an existing radio input, label and helper text primitive before writing new ones. USAGE: Use for one-of-many selection where every option stays visible. Use a checkbox field when more than one answer can be picked, and a select when the list runs long. Turn Has Description off when the label is clear on its own, so the spacer row does not leave dead space. CODE GENERATION NOTES: Render a native input of type radio with a shared name attribute per group, and bind the label with a for attribute or a wrapping label. Attach the description with aria-describedby. Do not model Checked as a prop on the field, derive it from the group value. Hover and Focus should come from CSS pseudo-classes, with :focus-visible so the ring only appears for keyboard users. Disabled must set the disabled attribute, not only the disabled colour tokens. Error sets aria-invalid and reveals the Error text when Has Error is on. Arrow key roving focus inside the group is standard radio behaviour and is not drawn in the file.",
     "props": [
       {
         "name": "Has Description",
@@ -34,7 +34,7 @@
         ],
         "default": "true",
         "defaultValue": "true",
-        "description": "Shows or hides the description row beneath the label.",
+        "description": "Shows or hides the Description Row under the label.",
         "required": false
       },
       {
@@ -45,7 +45,7 @@
         ],
         "default": "Description",
         "defaultValue": "Description",
-        "description": "Supporting text under the label, indented to align past the radio.",
+        "description": "Supporting text under the label.",
         "required": false
       },
       {
@@ -56,7 +56,30 @@
         ],
         "default": "Label",
         "defaultValue": "Label",
-        "description": "The option text sat beside the radio.",
+        "description": "The option text next to the radio.",
+        "required": false
+      },
+      {
+        "name": "Has Error",
+        "type": "BOOLEAN",
+        "values": [
+          "true",
+          "false"
+        ],
+        "default": "false",
+        "defaultValue": "false",
+        "description": "Shows or hides the Error Row under the description.",
+        "required": false
+      },
+      {
+        "name": "Error",
+        "type": "TEXT",
+        "values": [
+          "Error"
+        ],
+        "default": "Error",
+        "defaultValue": "Error",
+        "description": "The error message text shown when Has Error is on.",
         "required": false
       },
       {
@@ -66,11 +89,12 @@
           "Default",
           "Disabled",
           "Hover",
-          "Focus"
+          "Focus",
+          "Error"
         ],
         "default": "Default",
         "defaultValue": "Default",
-        "description": "Visual state of the field, including the focus ring and the disabled colour set.",
+        "description": "Visual state of the radio and its text, covering rest, pointer, keyboard focus, disabled and invalid.",
         "required": false
       },
       {
@@ -82,7 +106,7 @@
         ],
         "default": "Checked",
         "defaultValue": "Checked",
-        "description": "Whether the radio is drawn filled with the inner dot or empty. Design-file only; code derives this from the group value.",
+        "description": "Whether the radio is drawn filled or empty. A design-file switch only, since selection comes from the group value in code.",
         "required": false
       }
     ],
@@ -90,14 +114,16 @@
       "Default",
       "Disabled",
       "Hover",
-      "Focus"
+      "Focus",
+      "Error"
     ],
     "variants": {
       "State": [
         "Default",
         "Disabled",
         "Hover",
-        "Focus"
+        "Focus",
+        "Error"
       ],
       "Value Type": [
         "Unchecked",
@@ -112,6 +138,7 @@
         "Icon/Brand/On Brand Secondary",
         "Text/Default/Default",
         "Text/Default/Secondary",
+        "Text/Danger/Default",
         "Background/Default/Default",
         "Border/Brand/Tertiary",
         "Icon/Brand/On Brand",
@@ -119,7 +146,10 @@
         "Border/Disabled/default",
         "Icon/Disabled/Default",
         "Text/Disabled/Default",
-        "Border/Focus/Default"
+        "Background/Brand/Secondary Hover",
+        "Background/Default/Default Hover",
+        "Border/Focus/Default",
+        "Border/Danger/Default"
       ],
       "spacing": [
         "Space/300"
@@ -148,13 +178,13 @@
     },
     "propertyCheatSheet": [
       "🎨 Variants: Value Type(2)",
-      "🔄 States: Default/Disabled/Hover/Focus",
+      "🔄 States: Default/Disabled/Hover/Focus/Error",
       "⚙️ Other: Has Description: true/false, Description: Description, Label: Label"
     ],
     "mcpReadiness": {
       "strengths": [
         "Has component description for better MCP/AI context",
-        "Has 5 configurable properties",
+        "Has 7 configurable properties",
         "Uses design tokens for consistency"
       ],
       "gaps": [],
@@ -212,6 +242,16 @@
         "isActualToken": true,
         "source": "figma-variable",
         "recommendation": "Using Text/Default/Secondary token"
+      },
+      {
+        "name": "Text/Danger/Default",
+        "value": "#900b09",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Text/Danger/Default token"
       },
       {
         "name": "Background/Default/Default",
@@ -284,6 +324,26 @@
         "recommendation": "Using Text/Disabled/Default token"
       },
       {
+        "name": "Background/Brand/Secondary Hover",
+        "value": "#d9d9d9",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Background/Brand/Secondary Hover token"
+      },
+      {
+        "name": "Background/Default/Default Hover",
+        "value": "#f5f5f5",
+        "unit": "hex",
+        "type": "fills-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Background/Default/Default Hover token"
+      },
+      {
         "name": "Border/Focus/Default",
         "value": "#ec221f",
         "unit": "hex",
@@ -292,6 +352,16 @@
         "isActualToken": true,
         "source": "figma-variable",
         "recommendation": "Using Border/Focus/Default token"
+      },
+      {
+        "name": "Border/Danger/Default",
+        "value": "#900b09",
+        "unit": "hex",
+        "type": "strokes-variable",
+        "isToken": true,
+        "isActualToken": true,
+        "source": "figma-variable",
+        "recommendation": "Using Border/Danger/Default token"
       }
     ],
     "spacing": [
@@ -379,14 +449,14 @@
       }
     ],
     "summary": {
-      "totalTokens": 21,
-      "actualTokens": 21,
+      "totalTokens": 25,
+      "actualTokens": 25,
       "hardCodedValues": 0,
       "aiSuggestions": 0,
       "byCategory": {
         "colors": {
-          "total": 13,
-          "tokens": 13,
+          "total": 17,
+          "tokens": 17,
           "hardCoded": 0,
           "suggestions": 0
         },
@@ -434,6 +504,10 @@
       {
         "name": "Focus",
         "found": true
+      },
+      {
+        "name": "Error",
+        "found": true
       }
     ],
     "componentReadiness": [
@@ -467,7 +541,7 @@
       {
         "check": "Color contrast",
         "status": "warning",
-        "suggestion": "16 text layers not measurable: \"Label\" (no solid fill behind the text), \"Description\" (no solid fill behind the text), \"Label\" (no solid fill behind the text), …. Check manually"
+        "suggestion": "30 text layers not measurable: \"Label\" (no solid fill behind the text), \"Description\" (no solid fill behind the text), \"Error\" (no solid fill behind the text), …. Check manually"
       }
     ],
     "detachedInstances": [],
@@ -483,7 +557,7 @@
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "hig.contrast",
             "status": "warning",
-            "suggestion": "16 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "suggestion": "20 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
             "source": "local",
             "nodeId": "280:13742",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
@@ -501,7 +575,7 @@
             "check": "Uses SF Pro (system font)",
             "ruleId": "hig.font",
             "status": "warning",
-            "suggestion": "16 text layers not using SF Pro: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
+            "suggestion": "20 text layers not using SF Pro: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
             "source": "local",
             "nodeId": "280:13742",
             "guidelineUrl": "https://developer.apple.com/design/human-interface-guidelines/typography"
@@ -586,28 +660,28 @@
             "check": "Uses iOS patterns",
             "ruleId": "hig.ai.native-patterns",
             "status": "warning",
-            "suggestion": "On iOS, present one-of-many choices as a grouped list with a trailing checkmark rather than a circular radio dot.",
-            "source": "ai"
-          },
-          {
-            "check": "Right control for the job",
-            "ruleId": "hig.ai.control-choice",
-            "status": "warning",
-            "suggestion": "For a short iOS option set, consider a segmented control or checkmark list; keep the radio for web and cross-platform screens.",
+            "suggestion": "iOS usually shows one-of-many choice as a list with a checkmark on the selected row, so note where this web style radio is acceptable.",
             "source": "ai"
           },
           {
             "check": "Clear visual hierarchy",
             "ruleId": "hig.ai.hierarchy",
             "status": "pass",
-            "suggestion": "The label uses default text colour and the description uses secondary, so the choice itself leads.",
+            "suggestion": "The label leads with Text/Default/Default and the description sits quieter in Text/Default/Secondary, so the choice reads first.",
             "source": "ai"
           },
           {
             "check": "Content-first, minimal chrome",
             "ruleId": "hig.ai.deference",
             "status": "pass",
-            "suggestion": "Decoration is limited to the radio fill, border and focus ring, which keeps attention on the option text.",
+            "suggestion": "Decoration is limited to the radio fill and the focus ring, which keeps attention on the option text.",
+            "source": "ai"
+          },
+          {
+            "check": "Right control for the job",
+            "ruleId": "hig.ai.control-choice",
+            "status": "pass",
+            "suggestion": "A radio is the right control for mutually exclusive options, with a checkbox field reserved for multiple answers.",
             "source": "ai"
           }
         ]
@@ -632,7 +706,7 @@
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "m3.contrast",
             "status": "warning",
-            "suggestion": "16 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "suggestion": "20 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
             "source": "local",
             "nodeId": "280:13742",
             "guidelineUrl": "https://m3.material.io/foundations/designing/color-contrast"
@@ -725,28 +799,28 @@
             "check": "Button emphasis hierarchy",
             "ruleId": "m3.ai.emphasis",
             "status": "pass",
-            "suggestion": "Selected uses a filled brand treatment and unselected an outline, which matches M3 selection emphasis.",
+            "suggestion": "Selected uses the filled brand treatment and unselected stays outlined, which matches M3 selection emphasis.",
             "source": "ai"
           },
           {
             "check": "Colour roles used correctly",
             "ruleId": "m3.ai.color-roles",
             "status": "pass",
-            "suggestion": "Brand background and border for selection, default text for the label and secondary for the description all map sensibly.",
+            "suggestion": "Brand tokens carry selection, danger tokens carry error and disabled tokens carry the inactive state, each in its own role.",
             "source": "ai"
           },
           {
             "check": "Uses Android/M3 patterns",
             "ruleId": "m3.ai.native-patterns",
             "status": "pass",
-            "suggestion": "The circular radio with supporting text follows M3 list-and-radio conventions.",
+            "suggestion": "Nothing iOS-only appears here; the drawn states map to M3 radio behaviour.",
             "source": "ai"
           },
           {
             "check": "Clear visual hierarchy",
             "ruleId": "m3.ai.hierarchy",
             "status": "pass",
-            "suggestion": "The selected dot plus brand border makes the chosen option the clear focal point in a group.",
+            "suggestion": "Label, description and error form a clear top to bottom order within each option.",
             "source": "ai"
           }
         ]
@@ -762,7 +836,7 @@
             "check": "Text contrast ≥ 4.5:1 (3:1 large)",
             "ruleId": "web.contrast",
             "status": "warning",
-            "suggestion": "16 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
+            "suggestion": "20 text layers with unmeasurable contrast: 'Label' (no solid fill behind the text), 'Description' (no solid fill behind the text), 'Label' (no solid fill behind the text), … — not measurable, check manually",
             "source": "local",
             "nodeId": "280:13742",
             "guidelineUrl": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
@@ -771,7 +845,7 @@
             "check": "Ruby font (Fira Sans)",
             "ruleId": "web.font",
             "status": "warning",
-            "suggestion": "16 text layers not using Fira Sans: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
+            "suggestion": "20 text layers not using Fira Sans: 'Label' Inter, 'Description' Inter, 'Label' Inter, …",
             "source": "local",
             "nodeId": "280:13742",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -780,7 +854,7 @@
             "check": "Real copy, not placeholders",
             "ruleId": "web.real-content",
             "status": "warning",
-            "suggestion": "8 text layers use placeholder copy ('Label'). Use real words such as \"Save profile\" so examples read like the product",
+            "suggestion": "10 text layers use placeholder copy ('Label'). Use real words such as \"Save profile\" so examples read like the product",
             "source": "local",
             "nodeId": "280:13742",
             "guidelineUrl": "https://www.w3.org/WAI/design-develop/principles-and-practices/"
@@ -877,28 +951,28 @@
             "check": "Clear headings and structure",
             "ruleId": "web.ai.structure",
             "status": "warning",
-            "suggestion": "Document that these fields must sit inside a fieldset with a legend so the group question is announced before the options.",
+            "suggestion": "Add a group wrapper with a shared legend in the design file so reading order starts with the question, not the first option.",
             "source": "ai"
           },
           {
             "check": "Works at narrow widths",
             "ruleId": "web.ai.responsive",
             "status": "warning",
-            "suggestion": "Confirm the label and description wrap over multiple lines at 320px while staying aligned past the radio.",
+            "suggestion": "Confirm the label and description wrap onto several lines at 320px while the radio stays aligned to the first line.",
             "source": "ai"
           },
           {
             "check": "Links vs buttons",
             "ruleId": "web.ai.link-vs-button",
             "status": "pass",
-            "suggestion": "This is a form control rather than a link or button, and the label text names the choice directly.",
+            "suggestion": "No links or buttons are drawn, so there is nothing to confuse with the choice control.",
             "source": "ai"
           },
           {
             "check": "Not colour alone",
             "ruleId": "web.ai.color-only",
             "status": "pass",
-            "suggestion": "Selection is shown by the inner dot and focus by a visible ring, not by colour alone.",
+            "suggestion": "Error adds a written message under the description, so the red border is not the only signal.",
             "source": "ai"
           }
         ]
@@ -919,12 +993,14 @@
           "Default",
           "Disabled",
           "Hover",
-          "Focus"
+          "Focus",
+          "Error"
         ],
         "canonical": {
           "Disabled": "Disabled",
           "Hover": "Hover",
-          "Focus": "Focus"
+          "Focus": "Focus",
+          "Error": "Error"
         },
         "missing": [
           {
@@ -989,12 +1065,28 @@
       "default": "Label"
     },
     {
+      "name": "Has Error",
+      "values": [
+        "true",
+        "false"
+      ],
+      "default": "false"
+    },
+    {
+      "name": "Error",
+      "values": [
+        "Error"
+      ],
+      "default": "Error"
+    },
+    {
       "name": "State",
       "values": [
         "Default",
         "Disabled",
         "Hover",
-        "Focus"
+        "Focus",
+        "Error"
       ],
       "default": "Default"
     },
@@ -1008,10 +1100,10 @@
     }
   ],
   "namingIssues": null,
-  "existingDescription": "Checked / Unchecked is a property within the design file only. Coded Radio Fields are grouped and the value of the field indicates its state.",
+  "existingDescription": "A single radio choice with a label and an optional description line, drawn as ten variants across five states and two value types. Checked and Unchecked exist as a design-file property only; in code the selected option comes from the group value. PURPOSE: Lets a person pick one option from a set of mutually exclusive choices. Each instance is one option, with supporting description text under the label for extra context. BEHAVIOUR: Default, Hover, Focus, Disabled and Error are drawn. Hover changes the radio fill: Background/Brand/Secondary Hover when checked, Background/Default/Default Hover when unchecked. Focus adds a ring using Stroke/Focus Ring and Border/Focus/Default. Disabled swaps fills, border, icon and text to the disabled token set. Error recolours the radio border with Border/Danger/Default. An optional error message, switched on with Has Error and written in Error, sits under the description in Text/Danger/Default. The component does not toggle its own selection. COMPOSITION: No nested component instances were detected. Every variant is built from plain frames and text layers: a \"Checkbox and Label\" row holding the \"Radio\" frame and the \"Label\" text, then a \"Description Row\" holding a \"Space\" spacer frame and the \"Description\" text, and an \"Error Row\", hidden by default, holding a \"Space\" spacer frame and the \"Error\" text. AI code generators should still check the development codebase for an existing radio input, label and helper text primitive before writing new ones. USAGE: Use for one-of-many selection where all options stay visible. Use a checkbox field when more than one choice can be picked, and a select when the list is long. Turn Has Description off when the label alone is clear, so the spacer row does not leave dead space. CODE GENERATION NOTES: Render a native input of type radio with a shared name attribute per group, and bind the label with a for attribute or a wrapping label. Attach the description with aria-describedby. Do not model Checked as a prop on the field; derive it from the group value. Hover and Focus should come from CSS pseudo-classes, with :focus-visible so the ring only shows for keyboard users. Disabled must set the disabled attribute, not just the disabled colour tokens. Error sets aria-invalid and shows the Error text when Has Error is on. Arrow key roving focus inside the group is standard radio behaviour and is not drawn in the file.",
   "aiOpinions": {
     "available": true
   },
   "figmaUrl": "https://www.figma.com/design/huu1as0pMzvGdqqDpQ5JyE/?node-id=9762-1412",
-  "exportedAt": "2026-11-24T20:30:26.231Z"
+  "exportedAt": "2026-11-25T20:43:14.629Z"
 }

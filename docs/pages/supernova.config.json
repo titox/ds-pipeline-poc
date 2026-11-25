@@ -54,6 +54,16 @@
         "Design": "9f4dc381-d0af-471e-b9fd-f0db53eec614",
         "Code and accessibility": "5751280d-038e-48bb-8549-c794056f45fb"
       }
+    },
+    "Radio-Field": {
+      "componentId": "d850f932-9735-466d-abdd-b5fd8dbea36f",
+      "storybookEntityId": "1201377",
+      "tabGroupId": "7761e77d-7c9d-4cfc-98fa-36fd7122492f",
+      "tabPageIds": {
+        "Usage": "5cf55014-8310-405a-a8c1-10cee5677f84",
+        "Design": "0cd3c203-3504-49d8-b77d-1f958b958732",
+        "Code and accessibility": "1f7e3f62-30c4-4719-bb63-6f5295492964"
+      }
     }
   },
   "pageLimit": 20

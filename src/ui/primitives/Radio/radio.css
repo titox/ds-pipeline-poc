@@ -1,46 +1,59 @@
 .radio {
   --radio-background: var(--sds-color-background-default-default);
-  --radio-border: var(--sds-color-border-default-default);
-  --radio-icon: var(--sds-color-icon-brand-on-brand);
-  --radio-border-radius: var(--sds-size-space-400);
+  --radio-border: var(--sds-color-border-brand-tertiary);
+  --radio-border-width: var(--sds-size-stroke-border);
+  --radio-icon: var(--sds-color-icon-brand-on-brand-secondary);
   background: var(--radio-background);
-  box-shadow: inset 0 0 0 var(--sds-size-stroke-border) var(--radio-border);
-  border-radius: var(--radio-border-radius);
+  /* The Figma stroke sits inside the 16px circle in every state. */
+  box-shadow: inset 0 0 0 var(--radio-border-width) var(--radio-border);
+  border-radius: var(--sds-size-radius-full);
   height: var(--sds-size-space-400);
   position: relative;
   width: var(--sds-size-space-400);
 
   > .radio-check {
+    /* The Figma dot is 10px and has no size variable. */
+    --radio-check-size: calc(
+      var(--sds-size-space-400) - var(--sds-size-space-150)
+    );
     background: var(--radio-icon);
-    border-radius: var(--sds-size-space-200);
+    border-radius: var(--sds-size-radius-full);
     display: none;
     left: 50%;
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
-    height: var(--sds-size-space-200);
-    width: var(--sds-size-space-200);
+    height: var(--radio-check-size);
+    width: var(--radio-check-size);
   }
 }
 
-.radio-field[data-selected] .radio {
-  --radio-background: var(--sds-color-background-brand-default);
-  --radio-border: var(--radio-background);
+.radio-field[data-selected] > .radio {
+  --radio-background: var(--sds-color-background-brand-secondary);
+  --radio-border: var(--sds-color-border-brand-default);
   > .radio-check {
     display: block;
   }
 }
 
-.radio-field[data-focus-visible] .radio::before {
-  --offset: calc(var(--sds-size-stroke-border) * 2);
-  content: "";
-  border-radius: calc(var(--radio-border-radius) + var(--offset));
-  bottom: calc(-1 * var(--offset));
-  box-shadow: 0 0 0 var(--global-focus-ring-size) var(--global-focus-ring-color);
-  left: calc(-1 * var(--offset));
-  position: absolute;
-  right: calc(-1 * var(--offset));
-  top: calc(-1 * var(--offset));
+/* Hover: only the fill changes, as in the Figma Hover variants. */
+.radio-field[data-hovered] > .radio {
+  --radio-background: var(--sds-color-background-default-default-hover);
+}
+.radio-field[data-selected][data-hovered] > .radio {
+  --radio-background: var(--sds-color-background-brand-secondary-hover);
+}
+
+/* Error: a danger border, as in the Figma Error variants. */
+.radio-field[data-invalid] > .radio {
+  --radio-border: var(--sds-color-border-danger-default);
+}
+
+/* Focus: the border becomes the focus ring (Stroke/Focus Ring,
+   Border/Focus/Default), inside the circle as in the Figma Focus variants. */
+.radio-field[data-focus-visible] > .radio {
+  --radio-border: var(--sds-color-border-focus-default);
+  --radio-border-width: var(--sds-size-stroke-focus-ring);
 }
 
 .radio-group {
@@ -54,10 +67,9 @@
   --radio-field-description-color: var(--sds-color-text-default-secondary);
 
   align-items: center;
-  column-gap: var(--sds-size-space-400);
+  column-gap: var(--sds-size-space-300);
   display: grid;
-  grid-template-columns: var(--sds-size-space-300) 1fr;
-  row-gap: var(--sds-size-space-100);
+  grid-template-columns: var(--sds-size-space-400) 1fr;
   width: 100%;
 
   > .radio {
@@ -76,21 +88,22 @@
     grid-row-start: 2;
     grid-column-start: 2;
   }
+
+  > .error-message {
+    grid-row-start: 3;
+    grid-column-start: 2;
+  }
 }
 
-.radio-field[data-disabled] > .label {
-  --radio-field-label-color: var(--sds-color-text-disabled-default);
-}
-
-.radio-field[data-disabled] > .description {
-  --radio-field-description-color: var(--sds-color-text-disabled-default);
-}
-
+/* Disabled: label and description use the disabled text colour, and the
+   circle its disabled fill, border and dot, as in the Figma Disabled variants. */
 .radio-field[data-disabled] {
-  & .radio,
-  &[data-selected] .radio {
+  --radio-field-label-color: var(--sds-color-text-disabled-default);
+  --radio-field-description-color: var(--sds-color-text-disabled-default);
+
+  > .radio {
     --radio-background: var(--sds-color-background-disabled-default);
     --radio-border: var(--sds-color-border-disabled-default);
-    --radio-icon: var(--sds-color-icon-disabled-on-disabled);
+    --radio-icon: var(--sds-color-icon-disabled-default);
   }
 }
