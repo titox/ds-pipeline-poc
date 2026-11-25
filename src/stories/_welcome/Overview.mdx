@@ -2,11 +2,14 @@ import { Markdown, Meta } from "@storybook/addon-docs/blocks";
 import process from "../../../docs/PROCESS.md?raw";
 import { Hero } from "./Hero";
 import { PipelineFlow } from "./PipelineFlow";
+import { SkillFlow } from "./SkillFlow";
 
 <Meta title="SDS/Overview" />
 
 <Hero />
 
 <PipelineFlow />
+
+<SkillFlow />
 
 <Markdown>{process.replace(/^# .*\n/, "")}</Markdown>

@@ -13,6 +13,13 @@ export const LOGOS: Record<string, Logo> = {
   backlog: { title: "Backlog", color: "currentColor", path: "M3.5 4.5h3v3h-3zM9 5.5h11.5v1.5H9zM3.5 10.5h3v3h-3zM9 11.5h11.5V13H9zM3.5 16.5h3v3h-3zM9 17.5h11.5V19H9z" },
   // Custom mark: a cut gem for RubyLint.
   rubylint: { title: "RubyLint", color: "#E0115F", path: "M6.5 3h11L22 9l-10 12L2 9zM4.8 9 12 17.7 19.2 9l-2.9-4.2H7.7zM8 9h8l-4 4.8z" },
+  // Custom mark: a simplified pixel drawing of the orange Claude Code mascot, built from squares on a 2px grid.
+  // It is not the official asset (replace with the official SVG when available).
+  claude: {
+    title: "Claude",
+    color: "#D97757",
+    path: "M3 4h18v12H3zM7 8v2h2V8zM15 8v2h2V8zM1 10h2v2H1zM21 10h2v2h-2zM5 16h2v4H5zM9 16h2v4H9zM13 16h2v4h-2zM17 16h2v4h-2z",
+  },
   // Placeholder mark: a four-point star for Supernova (replace with the official SVG when available).
   supernova: { title: "Supernova", color: "#7C5CFF", path: "M12 1.5l2.4 7.4 7.6 3.1-7.6 3.1L12 22.5l-2.4-7.4L2 12l7.6-3.1z" },
 };

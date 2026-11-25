@@ -1,0 +1,457 @@
+/* Motion profile: documentation. Fast and informative; transform, opacity and stroke only.
+   Timing values are the same as in pipeline-flow.css.
+   Storybook docs reset margins on div, p, ol and li, hence the !important on those. */
+.sf {
+  --sf-fast: 150ms;
+  --sf-base: 250ms;
+  --sf-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --sf-ink: var(--sds-color-text-default-default);
+  --sf-muted: var(--sds-color-text-default-secondary);
+  --sf-line: var(--sds-color-border-default-default);
+  --sf-accent: var(--sds-color-background-brand-default);
+  --sf-on-accent: var(--sds-color-text-brand-on-brand);
+  --sf-surface: var(--sds-color-background-default-default);
+  --sf-well: var(--sds-color-background-default-secondary);
+  background: var(--sf-surface);
+  border: var(--sds-size-stroke-border) solid var(--sf-line);
+  border-radius: var(--sds-size-radius-400);
+  color: var(--sf-ink);
+  margin: var(--sds-size-space-600) 0;
+  padding: var(--sds-size-space-600);
+}
+/* The diagram has its own light and dark mode. Each one sets the same semantic colours that
+   theme.css gives to that mode, so the switch works whatever the system setting is. */
+.sf[data-mode="light"] {
+  --sf-ink: var(--sds-color-gray-900);
+  --sf-muted: var(--sds-color-gray-500);
+  --sf-line: var(--sds-color-gray-300);
+  --sf-accent: var(--sds-color-brand-800);
+  --sf-on-accent: var(--sds-color-brand-100);
+  --sf-surface: var(--sds-color-white-1000);
+  --sf-well: var(--sds-color-gray-100);
+}
+.sf[data-mode="dark"] {
+  --sf-ink: var(--sds-color-white-1000);
+  --sf-muted: var(--sds-color-white-500);
+  --sf-line: var(--sds-color-gray-600);
+  --sf-accent: var(--sds-color-brand-100);
+  --sf-on-accent: var(--sds-color-brand-900);
+  --sf-surface: var(--sds-color-gray-900);
+  --sf-well: var(--sds-color-gray-800);
+}
+.sf-top {
+  align-items: flex-start;
+  display: flex;
+  gap: var(--sds-size-space-400);
+  justify-content: space-between;
+}
+.sf-mode {
+  align-items: center;
+  background: var(--sf-surface);
+  border: var(--sds-size-stroke-border) solid var(--sf-line);
+  border-radius: var(--sds-size-radius-full);
+  color: var(--sf-ink);
+  cursor: pointer;
+  display: inline-flex;
+  flex: none;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  gap: var(--sds-size-space-200);
+  min-height: 44px;
+  padding: 0 var(--sds-size-space-400);
+}
+.sf-mode:hover {
+  background: var(--sf-well);
+}
+/* Icons take the colour of their button. */
+.sf .icon {
+  --svg-stroke-color: currentColor;
+  flex: none;
+}
+
+.sf h2.sf-title {
+  border: 0;
+  color: var(--sf-ink);
+  font-family: inherit;
+  font-size: 1.5rem;
+  margin: 0 0 var(--sds-size-space-200);
+  padding: 0;
+}
+.sf p.sf-lede {
+  color: var(--sf-muted);
+  margin: 0 0 var(--sds-size-space-600);
+}
+
+/* Stage: the drawing on a dotted well. */
+.sf-stage {
+  background-color: var(--sf-well);
+  background-image: radial-gradient(var(--sf-line) 1px, transparent 1px);
+  background-size: var(--sds-size-space-600) var(--sds-size-space-600);
+  border-radius: var(--sds-size-radius-400);
+  padding: var(--sds-size-space-400);
+}
+.sf-scroll {
+  overflow-x: auto;
+}
+.sf-canvas {
+  aspect-ratio: 1000 / 460;
+  margin: 0 auto !important;
+  min-width: 760px;
+  position: relative;
+}
+.sf-svg {
+  display: block;
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  width: 100%;
+}
+
+/* Connectors. While a step or a plugin is explained, the lines in use light up and their dashes move.
+   While a tool is explained, every line stays quiet. */
+.sf-edge,
+.sf-tether {
+  fill: none;
+  opacity: 0.8;
+  stroke: var(--sf-line);
+  /* Round caps on zero-length dashes draw dots. */
+  stroke-dasharray: 0 7;
+  stroke-linecap: round;
+  stroke-width: 2;
+  transition:
+    opacity var(--sf-base) linear,
+    stroke var(--sf-base) linear;
+}
+.sf-edge[data-dir="in"],
+.sf-edge[data-dir="out"],
+.sf-tether[data-on="true"] {
+  opacity: 1;
+  stroke: var(--sf-accent);
+}
+/* Paths are drawn from the tool to the hub, so a falling offset moves the dashes towards the hub. */
+.sf-edge[data-dir="in"] {
+  animation: sf-march 600ms linear infinite;
+}
+.sf-edge[data-dir="out"] {
+  animation: sf-march 600ms linear infinite reverse;
+}
+/* The tether is drawn from Figma to the plugins; its dashes run back to Figma. */
+.sf-tether[data-on="true"] {
+  animation: sf-march 600ms linear infinite reverse;
+}
+@keyframes sf-march {
+  from {
+    stroke-dashoffset: 7;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Hub: the design system. It never changes; only the ring answers each step. */
+.sf-hub {
+  align-items: center;
+  aspect-ratio: 1;
+  background: var(--sf-accent);
+  border-radius: var(--sds-size-radius-full);
+  box-sizing: border-box;
+  color: var(--sf-on-accent);
+  display: flex;
+  font-size: 1.125rem;
+  font-weight: 700;
+  justify-content: center;
+  left: 50%;
+  line-height: 1.3;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16%;
+}
+.sf-hub-ring {
+  animation: sf-ring 500ms var(--sf-ease) both;
+  border: 2px solid var(--sf-accent);
+  border-radius: var(--sds-size-radius-full);
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+@keyframes sf-ring {
+  from {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+}
+
+/* Tool pills */
+.sf-pill {
+  align-items: center;
+  background: var(--sf-surface);
+  border: var(--sds-size-stroke-border) solid var(--sf-line);
+  border-radius: var(--sds-size-radius-full);
+  box-sizing: border-box;
+  color: var(--sf-ink);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-weight: 600;
+  gap: var(--sds-size-space-200);
+  min-height: 44px;
+  opacity: 0.7;
+  padding: 0 var(--sds-size-space-400);
+  position: absolute;
+  transform: translate(-50%, -50%);
+  transition:
+    opacity var(--sf-base) linear,
+    border-color var(--sf-base) linear;
+  white-space: nowrap;
+}
+.sf-pill:hover,
+.sf-pill[data-on="true"],
+.sf-pill[aria-pressed="true"] {
+  opacity: 1;
+}
+.sf-pill[data-on="true"],
+.sf-pill[aria-pressed="true"] {
+  border-color: var(--sf-accent);
+  box-shadow: 0 0 0 var(--sds-size-stroke-border) var(--sf-accent);
+}
+.sf-pill[aria-pressed="true"] {
+  background: var(--sf-accent);
+  color: var(--sf-on-accent);
+}
+.sf-pill:focus-visible,
+.sf-mode:focus-visible,
+.sf-step-head:focus-visible {
+  outline: 2px solid var(--global-focus-ring-color);
+  outline-offset: 2px;
+}
+
+/* Figma plugins: a group tethered to Figma, in the free corner of the drawing. */
+.sf-plugins {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-200);
+  position: absolute;
+  right: 0;
+  top: 53%;
+}
+.sf-plugins-label {
+  color: var(--sf-muted);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.sf-plugin {
+  border-style: dashed;
+  font-size: 0.8125rem;
+  min-height: 36px;
+  padding: 0 var(--sds-size-space-300);
+  position: static;
+  transform: none;
+}
+
+@keyframes sf-swap {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Steps: one row under the drawing. */
+.sf ol.sf-steps {
+  display: flex;
+  gap: var(--sds-size-space-200);
+  list-style: none;
+  margin: var(--sds-size-space-600) 0 0 !important;
+  padding: 0 !important;
+}
+.sf li.sf-step {
+  flex: 1 1 0;
+  margin: 0 !important;
+  min-width: 0;
+  padding: 0 !important;
+  position: relative;
+  transition: opacity var(--sf-base) linear;
+}
+/* The last step takes only its own width, so the line runs to the right edge. */
+.sf li.sf-step:last-child {
+  flex: 0 0 auto;
+}
+.sf li.sf-step:last-child .sf-step-head {
+  padding-right: 0;
+}
+.sf li.sf-step[data-used="false"] {
+  opacity: 0.4;
+}
+/* The line that joins a step to the next one. */
+.sf li.sf-step:not(:last-child)::after {
+  background: var(--sf-line);
+  content: "";
+  height: 2px;
+  left: calc(28px + var(--sds-size-space-200));
+  position: absolute;
+  right: 0;
+  top: calc(var(--sds-size-space-200) + 13px);
+}
+.sf li.sf-step[data-done="true"]::after {
+  background: var(--sf-accent);
+}
+.sf-step-head {
+  align-items: flex-start;
+  background: transparent;
+  border: 0;
+  color: var(--sf-muted);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  gap: var(--sds-size-space-200);
+  min-height: 44px;
+  padding: var(--sds-size-space-200) var(--sds-size-space-200) var(--sds-size-space-200) 0;
+  text-align: left;
+  width: 100%;
+}
+.sf-step[data-active="true"] .sf-step-head,
+.sf-step[data-done="true"] .sf-step-head {
+  color: var(--sf-ink);
+}
+.sf-step-num {
+  align-items: center;
+  background: var(--sf-surface);
+  border: 2px solid var(--sf-line);
+  border-radius: var(--sds-size-radius-full);
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: none;
+  font-size: 0.8125rem;
+  height: 28px;
+  justify-content: center;
+  position: relative;
+  transition:
+    background-color var(--sf-base) linear,
+    border-color var(--sf-base) linear;
+  width: 28px;
+  z-index: 1;
+}
+.sf-step[data-done="true"] .sf-step-num {
+  border-color: var(--sf-accent);
+}
+.sf-step[data-active="true"] .sf-step-num {
+  background: var(--sf-accent);
+  border-color: var(--sf-accent);
+  color: var(--sf-on-accent);
+}
+
+/* Detail of the selected step, or of the selected tool. */
+.sf-detail {
+  margin-top: var(--sds-size-space-400) !important;
+  min-height: 12rem;
+  overflow: hidden;
+  padding-bottom: var(--sds-size-space-300);
+  position: relative;
+}
+.sf-detail-body {
+  animation: sf-swap var(--sf-base) var(--sf-ease) both;
+}
+.sf h3.sf-detail-title {
+  color: var(--sf-ink);
+  font-family: inherit;
+  font-size: 1.25rem;
+  margin: 0 0 var(--sds-size-space-200) !important;
+}
+.sf .sf-detail-body p {
+  color: var(--sf-ink);
+  margin: 0 0 var(--sds-size-space-400) !important;
+  max-width: 68ch;
+}
+/* Parts inside a step. */
+.sf-parts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sds-size-space-200);
+  margin-bottom: var(--sds-size-space-400) !important;
+}
+.sf-part {
+  background: var(--sf-surface);
+  border: var(--sds-size-stroke-border) solid var(--sf-line);
+  border-radius: var(--sds-size-radius-full);
+  color: var(--sf-ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  min-height: 36px;
+  padding: 0 var(--sds-size-space-400);
+}
+.sf-part:hover {
+  background: var(--sf-well);
+}
+.sf-part[aria-pressed="true"] {
+  background: var(--sf-accent);
+  border-color: var(--sf-accent);
+  color: var(--sf-on-accent);
+}
+.sf-part:focus-visible {
+  outline: 2px solid var(--global-focus-ring-color);
+  outline-offset: 2px;
+}
+.sf-list {
+  margin-bottom: var(--sds-size-space-300) !important;
+}
+.sf-list-heading {
+  color: var(--sf-muted);
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  margin-bottom: var(--sds-size-space-100);
+}
+.sf .sf-list ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sds-size-space-100);
+  list-style: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.sf .sf-list li {
+  border: var(--sds-size-stroke-border) solid var(--sf-line);
+  border-radius: var(--sds-size-radius-full);
+  color: var(--sf-ink);
+  font-size: 0.8125rem;
+  margin: 0 !important;
+  padding: var(--sds-size-space-050) var(--sds-size-space-300);
+}
+.sf {
+  container-type: inline-size;
+}
+@container (max-width: 620px) {
+  .sf-step-title {
+    display: none;
+  }
+}
+
+/* Reduced motion: nothing travels; state changes are instant. */
+@media (prefers-reduced-motion: reduce) {
+  .sf *,
+  .sf *::before,
+  .sf *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+  .sf-hub-ring {
+    display: none;
+  }
+}
