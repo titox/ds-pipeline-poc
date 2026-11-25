@@ -5,10 +5,17 @@ export type IconProps = {
   children?: React.ReactNode;
   className?: string;
   size?: IconSize;
+  "aria-hidden"?: boolean | "true" | "false";
 };
-export function Icon({ size = "16", children, className }: IconProps) {
+export function Icon({
+  size = "16",
+  children,
+  className,
+  "aria-hidden": ariaHidden,
+}: IconProps) {
   return (
     <svg
+      aria-hidden={ariaHidden}
       className={clsx(className, "icon", `icon-size-${size}`)}
       width={size}
       height={size}

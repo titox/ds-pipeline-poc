@@ -44,6 +44,16 @@
         "Design": "007ffd3e-f7f1-4033-875c-3d616f412529",
         "Code and accessibility": "300900a5-1f9c-4977-9e2d-efa734a58c27"
       }
+    },
+    "Checkbox-Field": {
+      "componentId": "bf3ac1e4-55d7-476d-a7c2-c197686c0d2b",
+      "storybookEntityId": "1201358",
+      "tabGroupId": "8925d6bb-6cac-423f-a13f-1a18bf8cf9a5",
+      "tabPageIds": {
+        "Usage": "5b68443f-7580-41fc-ad56-d3f59b13469f",
+        "Design": "9f4dc381-d0af-471e-b9fd-f0db53eec614",
+        "Code and accessibility": "5751280d-038e-48bb-8549-c794056f45fb"
+      }
     }
   },
   "pageLimit": 20

@@ -1,6 +1,7 @@
 import { clsx } from "clsx";
 import { IconCheck, IconMinus } from "icons";
 import { Description, FieldError, Label, SharedFieldProps } from "primitives";
+import { useId } from "react";
 import {
   Checkbox as RACCheckbox,
   CheckboxGroup as RACCheckboxGroup,
@@ -34,7 +35,8 @@ export function CheckboxGroup({
   );
 }
 
-export type CheckboxFieldProps = RACCheckboxProps & SharedFieldProps;
+export type CheckboxFieldProps = RACCheckboxProps &
+  Omit<SharedFieldProps, "placeholder">;
 export function CheckboxField({
   children,
   className,
@@ -46,12 +48,25 @@ export function CheckboxField({
   const classNames = clsx(className, "checkbox-field");
   const labelText: string | undefined =
     label || (typeof children === "string" ? children : undefined);
+  const id = useId();
+  const labelId = `${id}-label`;
+  const descriptionId = `${id}-description`;
   return (
-    <RACCheckbox className={classNames} {...props}>
+    <RACCheckbox
+      aria-labelledby={labelText ? labelId : undefined}
+      aria-describedby={description ? descriptionId : undefined}
+      className={classNames}
+      {...props}
+    >
       <>
-        <Label>{labelText}</Label>
+        {/* A span, not a label: RACCheckbox already renders the label element. */}
+        <span className="label" id={labelId}>
+          {labelText}
+        </span>
         <Checkbox />
-        {description && <Description>{description}</Description>}
+        {description && (
+          <Description id={descriptionId}>{description}</Description>
+        )}
         <FieldError>{errorMessage}</FieldError>
         {labelText !== children && children}
       </>

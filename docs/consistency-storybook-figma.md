@@ -21,6 +21,7 @@ The designer asked for the Storybook side to be fixed. Only story files were cha
 | Switch Field | Label and description controls now work. An on/off control was added. It starts on, as in Figma. |
 | Textarea Field | New story "Textarea States" showing Default, Hover, Focus, Error and Disabled, like "Input States". |
 | Input Field (25 November, second pass, with the ship-component skill) | The story now starts from the Figma defaults: label "Label", value "Value", no description, no error. Story controls were added for Has Label, Has Description, Has Error and Value Type, next to label, description, error message, value, Disabled and Invalid. The `type` and `isRequired` defaults, which Figma does not have, were removed from the story. Result: Consistent. |
+| Checkbox Field (25 November, second pass, with the ship-component skill) | A story control was added for Has Description, next to label, description, Checked, Indeterminate and Disabled. A new story "Checkbox States" shows the twelve Figma variants: Default, Hover, Focus and Disabled for Unchecked, Checked and Indeterminate. Result: Consistent. Not fixable in a story: the Hover variants in Figma look the same as Default, and the code can show an error message that Figma has no variant for. |
 
 Still different after this, because a story cannot fix it:
 

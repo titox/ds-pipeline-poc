@@ -137,7 +137,7 @@ Remap status: all 97 URLs in `figma.config.json` now point at the local Figma fi
 
 Start: reopen the Desktop Bridge plugin in the Figma file, start Storybook (`npm run storybook`), then `npm run lint` to see the current state. Last commit: `d9769bb`, pushed and deployed.
 
-**Done on 2026-11-25: the workflow skill (`ship-component`) is built and was run on Input Field. See "Done on 2026-11-25 (afternoon)" below. Next: run the skill on the rest of the Inputs page, and set up the second documentation platform (Docusaurus) from the same `docs/pages/` sources.**
+**Done on 2026-11-25: the workflow skill (`ship-component`) is built and was run on Input Field. See "Done on 2026-11-25 (afternoon)" below. Checkbox Field followed the same evening. Next: run the skill on the rest of the Inputs page, and set up the second documentation platform (Docusaurus) from the same `docs/pages/` sources.**
 
 The shape the skill was planned with:
 
@@ -175,6 +175,18 @@ The documentation template the skill should produce, as agreed on the Button pag
 5. Distinct focus colour: `Border/Focus/Default` is still the same red as error.
 
 6. Supernova tokens: the variables are in. Still to do: remove the old empty "Dark" theme, and run the plugin again after every variable change in Figma (it is a manual push). Brand collection in Figma for the second brand; Supernova role in the flow; Jira connection to create tickets from the `.jira.md` specs.
+
+Done on 2026-11-25 (evening), second run of the `ship-component` skill, on Checkbox Field:
+- Code aligned with the 12 Figma variants: the unchecked border uses `Border/Brand/Tertiary`; the focus ring sits on the edge of the box in `Border/Focus/Default`; no gap between label and description; gap and column tokens corrected; the disabled description is shown at 50% opacity.
+- Accessibility fixes from the review: the description is linked with `aria-describedby`, the label is a span inside the one label element, `Icon` now passes `aria-hidden` to its svg (this affects every icon that sets it), and `placeholder` is no longer a prop of CheckboxField.
+- Stories: a Has Description control and a new story "Checkbox States" with the twelve variants.
+- Decisions by the designer: Checkbox Field has no hover look on purpose; the `errorMessage` prop stays in code and an Error variant will be designed later; the disabled label uses `Text/Disabled/Default`.
+- Figma, with the designer's yes: the label of the three Disabled variants is bound to `Text/Disabled/Default`; the six Hover and Focus variants are connected to Label, Description and Has Description; the four Indeterminate description rows use the same gap setup as the others; a new page "Docs / Checkbox Field" holds six do and don't frames and one anatomy frame.
+- Review: round 1 passed two of six, round 2 passes four of six. The two that fail are design decisions (Hover, Error). Scorecard in `eval/scorecards/Checkbox-Field.md`.
+- Documentation: `docs/pages/Checkbox-Field.md`, agreed in the preview without edits. Supernova page "Components / Checkbox Field" created as an unpublished draft with three tabs and seven Figma illustrations (10 credits with the status values; 17 of 20 pages are now used, so one more three-tab component fits). The Usage tab was read back; Design and Code were confirmed by block count only.
+- Code Connect for Checkbox Field published, this file only.
+
+Still open for Checkbox Field: an Error variant and a decision on whether the rubric allows "no hover" (design); `errorMessage` shows nothing on a single checkbox until then (code); the Figma description still says State changes the look across Hover and does not mention the disabled label; the RubyLint exports are from 24 November and older than the Figma changes; disabled checked and unchecked are hard to tell apart in light (1.49:1); publishing the Supernova site.
 
 Done on 2026-11-25 (afternoon), first run of the `ship-component` skill, on Input Field:
 - The skill exists and is in the repository under `.claude/skills/ship-component/`. Claude Code loads it from there; start it with `/ship-component` and the Figma link of the component. It runs the workflow in five phases: inputs, build, check, documentation, close. It has three scripts: a preview builder, a preview server that saves text edits, and a converter from the documentation source to Supernova page bodies. Each run adds a row to `docs/ship-log.md`.

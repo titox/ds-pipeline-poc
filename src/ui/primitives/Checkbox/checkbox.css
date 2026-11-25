@@ -1,6 +1,6 @@
 .checkbox {
   --checkbox-background: var(--sds-color-background-default-default);
-  --checkbox-border: var(--sds-color-border-default-default);
+  --checkbox-border: var(--sds-color-border-brand-tertiary);
   --checkbox-icon: var(--sds-color-icon-brand-on-brand);
   --checkbox-border-radius: var(--sds-size-radius-100);
   align-items: center;
@@ -48,19 +48,14 @@
 
 .checkbox[data-selected][data-disabled],
 .checkbox-field[data-selected][data-disabled] > .checkbox {
-  --checkbox-icon: var(--sds-color-icon-disabled-default);
+  --checkbox-icon: var(--sds-color-icon-disabled-on-disabled);
 }
 
-.checkbox-field[data-focus-visible] .checkbox::before {
-  --offset: calc(var(--sds-size-stroke-border) * 2);
-  content: "";
-  border-radius: calc(var(--checkbox-border-radius) + var(--offset));
-  bottom: calc(-1 * var(--offset));
-  box-shadow: 0 0 0 var(--global-focus-ring-size) var(--global-focus-ring-color);
-  left: calc(-1 * var(--offset));
-  position: absolute;
-  right: calc(-1 * var(--offset));
-  top: calc(-1 * var(--offset));
+/* Focus: a ring on the outer edge of the box that replaces the border,
+   as in the Figma Focus variants (Stroke/Focus Ring, Border/Focus/Default). */
+.checkbox-field[data-focus-visible] > .checkbox {
+  box-shadow: 0 0 0 var(--sds-size-stroke-focus-ring)
+    var(--sds-color-border-focus-default);
 }
 
 .checkbox-group {
@@ -74,10 +69,9 @@
   --checkbox-field-description-color: var(--sds-color-text-default-secondary);
 
   align-items: center;
-  column-gap: var(--sds-size-space-400);
+  column-gap: var(--sds-size-space-300);
   display: grid;
-  grid-template-columns: var(--sds-size-space-300) 1fr;
-  row-gap: var(--sds-size-space-100);
+  grid-template-columns: var(--sds-size-space-400) 1fr;
   width: 100%;
 
   > .checkbox {
@@ -98,12 +92,14 @@
   }
 }
 
+/* Disabled: the label uses the disabled text colour and the description is
+   shown at half opacity, as in the Figma Disabled variants. */
 .checkbox-field[data-disabled] > .label {
   --checkbox-field-label-color: var(--sds-color-text-disabled-default);
 }
 
 .checkbox-field[data-disabled] > .description {
-  --checkbox-field-description-color: var(--sds-color-text-disabled-default);
+  opacity: 0.5;
 }
 
 .checkbox-field[data-disabled] {
