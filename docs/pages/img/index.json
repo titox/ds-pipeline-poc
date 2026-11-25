@@ -1,0 +1,165 @@
+{
+  "note": "Illustrations exported from Figma as PNG at 4x (frames are 640 by 400, files 2560 by 1600). Regenerate with export-illustrations.mjs after a design change.",
+  "images": {
+    "3126:12407": {
+      "file": "img/Button/do-one-primary-button.png",
+      "frame": "Do / One Primary button",
+      "scale": 4
+    },
+    "3126:12427": {
+      "file": "img/Button/dont-two-primary-buttons.png",
+      "frame": "Don't / Two Primary buttons",
+      "scale": 4
+    },
+    "3126:12447": {
+      "file": "img/Button/do-loading-while-in-progress.png",
+      "frame": "Do / Loading while in progress",
+      "scale": 4
+    },
+    "3126:12461": {
+      "file": "img/Button/dont-small-as-only-action-on-touch.png",
+      "frame": "Don't / Small as only action on touch",
+      "scale": 4
+    },
+    "3126:12475": {
+      "file": "img/Button/do-same-variant-across-screens.png",
+      "frame": "Do / Same variant across screens",
+      "scale": 4
+    },
+    "3126:12498": {
+      "file": "img/Button/dont-disabled-with-no-reason.png",
+      "frame": "Don't / Disabled with no reason",
+      "scale": 4
+    },
+    "3145:12896": {
+      "file": "img/Button/anatomy-button.png",
+      "frame": "Anatomy / Button",
+      "scale": 4
+    },
+    "3161:12920": {
+      "file": "img/Input-Field/do-visible-label.png",
+      "frame": "Do / Visible label",
+      "scale": 4
+    },
+    "3161:12928": {
+      "file": "img/Input-Field/dont-placeholder-as-the-only-label.png",
+      "frame": "Don't / Placeholder as the only label",
+      "scale": 4
+    },
+    "3161:12936": {
+      "file": "img/Input-Field/do-one-line-of-free-text.png",
+      "frame": "Do / One line of free text",
+      "scale": 4
+    },
+    "3161:12944": {
+      "file": "img/Input-Field/dont-several-lines-of-text.png",
+      "frame": "Don't / Several lines of text",
+      "scale": 4
+    },
+    "3161:12952": {
+      "file": "img/Input-Field/do-description-for-extra-help.png",
+      "frame": "Do / Description for extra help",
+      "scale": 4
+    },
+    "3161:12960": {
+      "file": "img/Input-Field/dont-help-in-the-placeholder.png",
+      "frame": "Don't / Help in the placeholder",
+      "scale": 4
+    },
+    "3161:12968": {
+      "file": "img/Input-Field/do-error-message-says-what-to-fix.png",
+      "frame": "Do / Error message says what to fix",
+      "scale": 4
+    },
+    "3161:12976": {
+      "file": "img/Input-Field/dont-error-border-with-no-message.png",
+      "frame": "Don't / Error border with no message",
+      "scale": 4
+    },
+    "3161:12984": {
+      "file": "img/Input-Field/do-select-field-for-a-fixed-list.png",
+      "frame": "Do / Select Field for a fixed list",
+      "scale": 4
+    },
+    "3161:12999": {
+      "file": "img/Input-Field/dont-typing-a-value-from-a-fixed-list.png",
+      "frame": "Don't / Typing a value from a fixed list",
+      "scale": 4
+    },
+    "3161:13007": {
+      "file": "img/Input-Field/anatomy-input-field.png",
+      "frame": "Anatomy / Input Field",
+      "scale": 4
+    },
+    "3167:13059": {
+      "file": "img/Checkbox-Field/do-independent-on-and-off-choices.png",
+      "frame": "Do / Independent on and off choices",
+      "scale": 4
+    },
+    "3167:13085": {
+      "file": "img/Checkbox-Field/dont-checkboxes-for-mutually-exclusive-options.png",
+      "frame": "Don't / Checkboxes for mutually exclusive options",
+      "scale": 4
+    },
+    "3167:13099": {
+      "file": "img/Checkbox-Field/do-switch-field-for-an-immediate-change.png",
+      "frame": "Do / Switch Field for an immediate change",
+      "scale": 4
+    },
+    "3167:13116": {
+      "file": "img/Checkbox-Field/dont-checkbox-for-an-immediate-change.png",
+      "frame": "Don't / Checkbox for an immediate change",
+      "scale": 4
+    },
+    "3167:13133": {
+      "file": "img/Checkbox-Field/do-description-when-the-choice-needs-explaining.png",
+      "frame": "Do / Description when the choice needs explaining",
+      "scale": 4
+    },
+    "3167:13150": {
+      "file": "img/Checkbox-Field/dont-description-when-the-label-is-self-explanatory.png",
+      "frame": "Don't / Description when the label is self-explanatory",
+      "scale": 4
+    },
+    "3167:13158": {
+      "file": "img/Checkbox-Field/anatomy-checkbox-field.png",
+      "frame": "Anatomy / Checkbox Field",
+      "scale": 4
+    },
+    "3179:22114": {
+      "file": "img/Radio-Field/do-one-option-from-a-set.png",
+      "frame": "Do / One option from a set",
+      "scale": 4
+    },
+    "3179:22149": {
+      "file": "img/Radio-Field/dont-radios-when-several-answers-can-be-picked.png",
+      "frame": "Don't / Radios when several answers can be picked",
+      "scale": 4
+    },
+    "3179:22184": {
+      "file": "img/Radio-Field/do-every-option-stays-visible.png",
+      "frame": "Do / Every option stays visible",
+      "scale": 4
+    },
+    "3179:22219": {
+      "file": "img/Radio-Field/dont-radios-for-a-long-list.png",
+      "frame": "Don't / Radios for a long list",
+      "scale": 4
+    },
+    "3179:22331": {
+      "file": "img/Radio-Field/do-no-description-when-the-label-is-clear.png",
+      "frame": "Do / No description when the label is clear",
+      "scale": 4
+    },
+    "3179:22355": {
+      "file": "img/Radio-Field/dont-description-that-adds-nothing.png",
+      "frame": "Don't / Description that adds nothing",
+      "scale": 4
+    },
+    "3179:22379": {
+      "file": "img/Radio-Field/anatomy-radio-field.png",
+      "frame": "Anatomy / Radio Field",
+      "scale": 4
+    }
+  }
+}

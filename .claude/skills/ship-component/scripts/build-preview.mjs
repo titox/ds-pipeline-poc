@@ -17,6 +17,20 @@ if (!src) {
 const name = path.basename(src, ".md");
 const text = fs.readFileSync(src, "utf8").replace(/\r\n/g, "\n");
 
+// Exported illustrations (export-illustrations.mjs): node id -> file, and the
+// alternative texts from the "## Images" table of the source.
+const imgIndexPath = path.join(path.dirname(src), "img", "index.json");
+const imgIndex = fs.existsSync(imgIndexPath) ? JSON.parse(fs.readFileSync(imgIndexPath, "utf8")).images : {};
+const alts = Object.fromEntries([...text.matchAll(/^\|\s*(\d+:\d+)\s*\|\s*(.+?)\s*\|\s*$/gm)].map((m) => [m[1], m[2]]));
+const illustration = (node, alt) => {
+  const id = (node || "").trim();
+  const hit = imgIndex[id];
+  const a = (alt || alts[id] || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+  return hit
+    ? `<img class="illustration" src="${hit.file}" alt="${a}" loading="lazy">`
+    : `<div class="placeholder">Illustration not exported yet: Figma frame ${id || "missing"}</div>`;
+};
+
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
@@ -111,12 +125,13 @@ function renderTable({ head, rows }, type) {
   }
   if (type === "do-dont") {
     return rows
-      .map(
-        (r) =>
-          `<div class="dodont"><div class="do"><span class="tag">Do</span>${inline(r[0], "p")}</div>` +
-          `<div class="dont"><span class="tag">Don't</span>${inline(r[1], "p")}</div></div>` +
-          (r[2] && r[2] !== "none yet" ? `<p class="note">Illustration: Figma frame ${esc(r[2])}</p>` : `<p class="note">No illustration yet.</p>`),
-      )
+      .map((r) => {
+        const [doNode, dontNode] = r[2] && r[2] !== "none yet" ? r[2].split(",").map((x) => x.trim()) : [];
+        return (
+          `<div class="dodont"><div class="do">${illustration(doNode)}<span class="tag">Do</span>${inline(r[0], "p")}</div>` +
+          `<div class="dont">${illustration(dontNode)}<span class="tag">Don't</span>${inline(r[1], "p")}</div></div>`
+        );
+      })
       .join("");
   }
   const statusCol = type === "status" ? head.findIndex((h) => h.toLowerCase() === "status") : -1;
@@ -205,7 +220,9 @@ while (i < lines.length) {
     const url = `${storybook}/iframe.html?viewMode=story&id=${encodeURIComponent(t)}`;
     push(`<figure class="story"><iframe src="${url}" title="Storybook story" loading="lazy"></iframe><figcaption>Live story from Storybook: <code>${esc(t)}</code></figcaption></figure>`);
   } else if (pending === "image") {
-    push(`<figure class="image"><div class="placeholder">Illustration from Figma</div><figcaption>${esc(t)}</figcaption></figure>`);
+    const node = (t.match(/Figma frame (\d+:\d+)/) || [])[1];
+    const alt = t.replace(/\s*Figma frame \d+:\d+.*$/, "").replace(/\.$/, "");
+    push(`<figure class="image">${illustration(node, alt)}<figcaption>${esc(alt)}</figcaption></figure>`);
   } else if (pending === "callout") {
     push(`<div class="callout">${inline(t, "p")}</div>`);
   } else if (pending === "contact") {
@@ -256,6 +273,7 @@ th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px sol
 .do{border-top-color:var(--ok)!important}.dont{border-top-color:var(--bad)!important}.tag{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em}.dodont p{margin:6px 0 0}
 .note{color:var(--muted);font-size:13px}.callout{border-left:4px solid var(--accent);background:var(--surface);border-radius:0 8px 8px 0;padding:12px 16px;margin:8px 0}.callout p{margin:0}
 figure{margin:8px 0 16px}figcaption{color:var(--muted);font-size:13px;margin-top:6px}
+.illustration{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--rule);margin-bottom:10px}figure.image .illustration{max-width:640px}
 .placeholder{border:1px dashed var(--rule);border-radius:8px;height:160px;display:grid;place-items:center;color:var(--muted);background:var(--surface)}
 .story iframe{width:100%;height:220px;border:1px solid var(--rule);border-radius:8px;background:var(--bg)}
 .theme{font:inherit;font-size:14px;background:none;color:var(--text);border:1px solid var(--rule);border-radius:8px;padding:6px 12px;cursor:pointer;white-space:nowrap}
