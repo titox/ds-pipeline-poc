@@ -1,5 +1,5 @@
 const KEY_PREFIX_COLLECTION = `@`;
-const NAMESPACE = "org.sds";
+const NAMESPACE = "com.figma.sds";
 
 exportToJSON();
 

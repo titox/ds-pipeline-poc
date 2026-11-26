@@ -126,6 +126,63 @@ Repeat this for every new or changed component. Names in `<>` are placeholders.
 
 Remap status: all 97 URLs in `figma.config.json` now point at the local Figma file. Verifying that every node ID exists in that file is pending (needs the Figma bridge).
 
+## Workflow: a token changes its value
+
+Use this when an existing token gets a new value and nothing else changes. Example used here: the focus ring, `Border/Focus/Default`, goes from red (Red 500) to blue (Blue 500). Adding, renaming or removing a token is not covered.
+
+### Who does what
+
+| Step | What happens | Who | Proof it worked |
+|---|---|---|---|
+| 1. Decide | Find every component that uses the token and check the new colour is readable on light and dark backgrounds (3:1 at least for a focus ring). | Designer | A list of affected components and two contrast figures |
+| 2. Change in Figma | Point the token at the new colour, in the Light and the Dark mode. Change the token, never the base colour it points at. | Designer | Focus variants in Figma show the new colour |
+| 3. Bring it to code | Export the variables from Figma and regenerate the stylesheet. No component file is edited. | Developer | A two-line change in `src/theme.css` |
+| 4. Check | Run the automated checks, then look at the affected components in Storybook, in light and dark. | Developer | Checks pass and the ring shows the new colour |
+| 5. Refresh the documents | Regenerate the specifications that print the colour value, correct the sentences that name the colour, and export the illustrations again. | Designer | No document still shows the old value |
+| 6. Publish | Commit and deploy. Push the variables to Supernova and replace the illustrations there. | Developer, then designer | Storybook online and Supernova show the new colour |
+
+### Rehearsal on 26 November 2026
+
+The change was run for real, from the Figma variable to Storybook, and then undone. Steps marked "not rehearsed" are written from how the pipeline works and still need one real run.
+
+| Step | Result |
+|---|---|
+| 1. Decide | Done. In Figma the token is bound to 26 layers in 11 components: Button, Checkbox Field, Date Input Field, Date Picker Field, Input Field, Radio Field, Search, Select Field, Slider Field, Switch Field and Textarea Field. In code it feeds the global focus ring (`src/index.css`), Input, Checkbox and Radio. Contrast of Blue 500 (`#3f81ea`): 3.79:1 on white, 4.40:1 on the dark background (`#1e1e1e`). Red 500 was 4.36:1 and 3.82:1. |
+| 2. Change in Figma | Done. `Border/Focus/Default` was pointed at `Blue/500` in SDS Light and SDS Dark. Every focus variant changed at once; the Button focus stroke read `rgb(63, 129, 234)`. |
+| 3. Bring it to code | Done, with one gap. All 348 Figma variables were compared with `scripts/tokens/tokens.json` through the Figma bridge: 347 identical, and only this token different. Its three references were then changed from Red 500 to Blue 500 and `npm run script:tokens` changed exactly two lines of `src/theme.css`, one per mode. The gap: the export plugin was not run from its own window in Figma (see below). |
+| 4. Check | Done. `lint:tokens`: 0 errors. `check:contracts`: 0 errors. In Storybook the focused Button showed a 2px ring in `rgb(63, 129, 234)`, the same value as the Figma stroke, and the focused Input a blue border. |
+| 5. Refresh the documents | Not rehearsed, but the stale places were found (see below). |
+| 6. Publish | Not rehearsed. |
+| Undo | Done. The Figma variable points at `Red/500` again in both modes and `git checkout -- scripts/tokens/tokens.json src/theme.css` restored the code. |
+
+What the rehearsal showed:
+
+- **The checks do not notice a value change.** Both pass with red and with blue, including while 24 files in `docs/components/` still print `#ec221f`. They catch a missing token, not a different value. The review is the `theme.css` diff and Storybook.
+- **The colour value is copied into documents.** The RubyLint specifications (`*.md`, `*.contract.json`, `*.jira.md`) print the value next to the token name. Hand-written sentences name the colour: `docs/supernova/Button.md` ("The focus ring is red"), `docs/pages/Input-Field.md`, `docs/pages/Radio-Field.md`. `docs/supernova/Button.preview.html` has its own `--focus: #ec221f`.
+- **A colour change can remove a problem that is written down.** Two pages list "focus and error are both red" as a known issue. With a blue ring those lines are deleted, not reworded.
+- **No component code changes.** Every component reads the token, so the two lines in `theme.css` are the whole code change.
+- **Figma gives the full list of affected components, the code does not.** A search of the code finds four files, because most components take the ring from one global rule. Figma finds eleven components.
+- **The token file is in step with Figma.** The earlier note about a third colour mode no longer applies: nothing else differed.
+- **The export plugin did not fit the script; now fixed.** `scripts/tokens/figma-plugin-token-json/code.js` wrote its data under the name `org.sds` while `scripts/tokens/app.mjs` reads `com.figma.sds`. The plugin now uses `com.figma.sds`. Its export logic was run through the Figma bridge and compared with `tokens.json`: five of the six collections are identical character for character, and the Color collection has the same 137 tokens with the focus token in a different position (it was added to the file by hand). Still to do once: run the plugin from its own window in Figma. Expect `tokens.json` to show entries that moved and `src/theme.css` to show no change.
+
+### Commands
+
+1. Find the uses:
+   `grep -rn "border-focus-default" src --include="*.css" --include="*.tsx"`
+   In Figma, select the variable and look at where it is used, to get the full list of components.
+2. In Figma, open the Color collection, select `Border/Focus/Default` and set SDS Light and SDS Dark to `Blue/500`.
+3. In Figma, run the plugin in `scripts/tokens/figma-plugin-token-json` (Plugins, Development, Import plugin from manifest) and paste the first text box over `scripts/tokens/tokens.json`. Then:
+   `npm run script:tokens`
+   `git diff src/theme.css`
+   Expect one changed line per mode and nothing else. The first export from the plugin will also move entries inside `tokens.json`; that is order only.
+4. `npm run lint:tokens` and `npm run check:contracts`, then `npm run storybook` and press Tab on the Button States and Input States stories, in light and dark.
+5. Find the stale documents:
+   `grep -rln -i "ec221f" docs | xargs grep -l "Border/Focus/Default"`
+   Run RubyLint again for those components, correct the hand-written sentences, and export the focus illustrations again from Figma.
+6. Commit, push and check the Pages deploy. In Figma, run the Supernova Variables Sync plugin (a manual push), then replace the changed illustrations in the Supernova pages.
+
+To undo before committing: `git checkout -- scripts/tokens/tokens.json src/theme.css` and set the Figma variable back.
+
 ## Tooling upgrades
 
 - Storybook upgraded from 8.6 to 10.6.8 (`npx storybook@latest upgrade`), with `@storybook/addon-mcp` added. Leftover v8 packages removed. Build passes.
