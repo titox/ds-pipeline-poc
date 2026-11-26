@@ -1,6 +1,6 @@
 ---
 name: ship-component
-description: Takes a design system component from its Figma link to checked, published code and documentation in this repository (tokens, React component, Code Connect, Storybook stories, automated checks, Storybook-versus-Figma consistency, rubric review, documentation preview, Supernova draft, commit and deploy). Use it whenever the designer sends a Figma link to a component or to a page of components and wants it shipped, built, aligned, updated, documented or "run through the workflow", and for requests such as "ship Input Field", "pasa este componente por el pipeline", "do the same for the Inputs page" or "the component changed in Figma, update everything". Also use it to resume a run that stopped part way.
+description: Takes a design system component from its Figma link to checked, published code and documentation in this repository (tokens, React component, Code Connect, Storybook stories, automated checks, Storybook-versus-Figma consistency, rubric review, design check, documentation preview, Supernova draft, commit and deploy). Use it whenever the designer sends a Figma link to a component or to a page of components and wants it shipped, built, aligned, updated, documented or "run through the workflow", and for requests such as "ship Input Field", "pasa este componente por el pipeline", "do the same for the Inputs page" or "the component changed in Figma, update everything". Also use it to resume a run that stopped part way.
 ---
 
 # Ship a component
@@ -12,6 +12,14 @@ Before starting, read `CLAUDE.md` and `src/AGENTS.md`. They hold the project rul
 The repository is the folder that holds `package.json`, `src/` and `docs/` (named `sds` inside the designer's workspace). Every path and command in this skill is relative to it, so change into that folder first if the session started one level above.
 
 Talk to the designer in the language they write in. Everything written to the repository, Figma or Supernova is in British English.
+
+## Who owns each part
+
+The stakeholders asked for this on 26 November 2026; the full table is in `docs/PROCESS.md` ("Who owns what").
+
+- **Design system side (the designer):** the Figma component, the RubyLint audit, the specification, the documentation text and its illustrations.
+- **Development team:** the code, Code Connect, the stories and the release (Phase 2, Phase 3 up to the scorecard, and the commit in Phase 5). In this PoC the skill does that part so the demo shows the whole path. Say so in the first progress note and in the final summary, so nobody reads the run as "design now writes the code".
+- **Design system lead:** approves the documentation draft before it is published. In the PoC the designer may stand in for the lead; ask who is reviewing.
 
 ## Names used below
 
@@ -30,6 +38,8 @@ These exist because each one was a decision the designer made. Breaking one cost
 - **No pass, no documentation.** If the scorecard does not pass, nothing is written to Storybook documentation, Supernova, Docusaurus or the documentation source, and the run does not go on to Phase 4. The designer gets a failure report that says what is failing and the steps to fix it. The run waits until every error is fixed, design errors in Figma included, and a new review round passes. No exceptions. See the gate after step 11.
 - **No illustrations, no documentation.** Every documentation page has its do and don't illustrations and its anatomy illustration, as frames on the Figma page `Docs / <Component name>`. This step is never skipped, never postponed to "later" and never offered as optional. The designer decided this on 25 November 2026, after a run published a page without them. Creating the frames is a change in Figma, so the run stops for the yes (step 12a); it does not go on to the preview or to any destination until the frames exist and their node ids are in the source file. If the designer says no, the run waits there: remind them of this rule instead of shipping without images.
 - **No preview seen, no publishing.** Nothing is written to Supernova, Docusaurus or any other destination until the designer has had the editable HTML preview open in front of them and has said the text is right, for the version of the source that is about to be written. The designer decided this on 25 November 2026. See steps 13 to 15.
+- **No design check, no documentation.** After the scorecard passes, the designer looks at the built component in Storybook next to Figma and says it is right (step 11a). The automated review does not replace this. In the real process this is the designer's approval on the library pull request.
+- **No lead review, no publishing.** A documentation draft is published only after the design system lead has reviewed it (step 15a). Writing the unpublished draft does not need the lead; publishing does.
 - **Anonymous repository.** Commit with `git -c user.name="DS PoC" -c user.email="noreply@users.noreply.github.com"` and no co-author line. No personal or client names anywhere.
 - **Unknowns stop the run.** If a fact is missing or two sources disagree, ask one question instead of choosing.
 
@@ -65,6 +75,8 @@ The designer often has other Figma files open with the plugin running, and the a
 2. Ask for the three manual RubyLint exports of this component: the JSON contract, the Markdown and the Jira request. If `docs/components/<Name>.contract.json` already exists, say when it was exported (`exportedAt`) and ask whether it is still current or a new export is coming. A stale contract makes every later check compare against the wrong design.
 3. Copy new exports into `docs/components/` as `<Name>.contract.json`, `<Name>.md` and `<Name>.jira.md`.
 4. Compare the contract with what Figma says now (property names, options, defaults, state list). If they differ, the export is stale: stop and ask for a new one.
+
+4a. **Hand-off package for Jira.** The specification goes to the development team as a Jira story that carries the JSON contract and the Markdown. Check that `<Name>.jira.md`, `<Name>.contract.json` and `<Name>.md` all come from the same export (compare the dates). If the Jira file is older, ask for a new Jira export with the other two; if the designer says to go on without it, record it as open in the final summary. There is no Jira connection in the PoC: name the three files as the package to attach, and do not create or edit any Jira story.
 
 ## Phase 2: Build
 
@@ -119,6 +131,8 @@ Then:
 
 The reviewer is separate on purpose: whoever built the component should not mark it.
 
+11a. **Design check by the designer.** Once the verdict is Pass, open the component's states story in the app's browser pane and bring it into view, give the Figma link of the component beside it, and ask the designer to compare the two. Ask one question, "Does the built component match your design?", with no reply button that approves it. If they report a difference, sort it as in step 11 (code error, disagreement, design problem), fix it and show it again; a change to the code after a Pass needs a new review round. The run waits here. Record the date of the check in the run log, without a name.
+
 ## Phase 4: Documentation
 
 Read `references/documentation.md` before this phase. It defines the neutral source file, the page template, the editable preview and how each block is written to each destination.
@@ -130,6 +144,8 @@ Before any step of this phase, read the verdict line of `eval/scorecards/<Name>.
 13. **Preview (mandatory, shown, never only linked).** Build `docs/pages/<Name>.preview.html` and start the `docs-preview` server. Then put the page in front of the designer: open it in the app's browser pane and bring that pane into view (navigate the browser tab to `http://localhost:6100/pages/<Name>.preview.html`, then show the preview pane), check that the tabs open and the illustrations load, and say in one line that the editable page is open beside the conversation and how to use it (click any outlined text, then "Save edits"). A link in a message is not enough: on 25 November 2026 a run gave only the link, the designer answered from a button without having seen the page, and the text went to Supernova unreviewed. Ask one question, "Have you read the three tabs in the preview?", and do not offer a reply button that approves the text; the designer answers in their own words or after saving edits. The run waits here.
 14. **Apply the edits** from `docs/pages/<Name>.edits.json` to the neutral source, show the designer the list of changes, and delete the edits file. The source file is now the agreed text. **Stop here until the designer says, after seeing the preview, that the text is right.** If the source changes after that (new illustrations, a changed status, new changelog lines, any reworded sentence), the agreement no longer covers it: rebuild the preview, show it again as in step 13, say what changed, and wait again before writing to any destination.
 15. **Publish to the destinations** from the neutral source, never from memory of the conversation. Before the first write, check the source once more: no `none yet` in a `do-dont` table and an anatomy `image` block with a node id. If either is missing, go back to step 12a. Check too that the designer has seen the preview of exactly this version of the source (step 13 and 14); if not, show it first. This holds for every later write of the run as well, not only the first. Today: Supernova, as an unpublished draft, after stating the credit cost. Then update the component's row on the Supernova status board. The second destination (Docusaurus) reads the same file; if it is not set up yet, say that it was skipped.
+
+15a. **Review of the draft by the design system lead.** Set the component's Documentation status to "Ready for review" (in Supernova, on the status board; the approval workflow of Supernova itself needs a plan the PoC does not have, so the status board stands in for it). Give the designer the link to the draft (`sn_admin_get_entity_url`) to pass to the lead, and ask who is reviewing: the lead, or the designer standing in. Changes the lead asks for are made in `docs/pages/<Name>.md`, shown again in the preview (step 13) and written again. The site is published only after the lead's yes, by the designer, and in the real process together with the library release. The run does not wait for the lead: go on to Phase 5 and list "draft waiting for the design system lead" as open in the final summary. In Docusaurus the same review is a pull request with the lead as reviewer.
 
 ## Phase 5: Close
 
@@ -144,7 +160,8 @@ Before any step of this phase, read the verdict line of `eval/scorecards/<Name>.
 19. **Update `docs/PROCESS.md`**: the component's status, and anything new under "Next session".
 20. **Final summary** for the designer, short:
     - What changed, grouped as Design, Code, Stories, Documentation.
-    - What is still open and who it waits for.
+    - What is still open and who it waits for (designer, development team or design system lead).
+    - One line on ownership: the code in this run was written for the demo; in the real process it belongs to the development team.
     - Links: the Storybook story (local and published), the commit on GitHub, the Supernova page (`sn_admin_get_entity_url`), the scorecard and the neutral source file.
     - Last line: the reminder to clear the conversation before the next component (see "Reminder at the start and at the end").
 
@@ -156,12 +173,14 @@ Before any step of this phase, read the verdict line of `eval/scorecards/<Name>.
 | Any change in Figma | Their file. |
 | Scorecard not Pass (after any round) | The run does not go on until the errors are fixed in Figma and a new round passes. |
 | Illustrations in Figma (Phase 4, step 12a) | Their file. The run waits here; it never goes on without them. |
+| Design check in Storybook (step 11a) | Only the designer can say the build matches their design. |
 | Text agreed in the preview (Phase 4) | They own the wording. The preview is opened in front of them, and shown again after any later change to the source, before anything is written to a destination. |
 | Before the first Supernova write | It spends credits. |
 | Code Connect publish | It is visible to developers. |
+| Publishing the documentation | Needs the design system lead's yes (step 15a). The run does not wait for it; it is listed as open. |
 
 Between stops, keep going. Do not ask for permission for things the workflow already covers (editing code, stories, running checks, committing).
 
 ## Resuming
 
-A run can stop for hours at a designer step. When asked to continue, work out where it is from the files, not from memory: exports present, `git status`, scorecard date and verdict (if it is not Pass, the run is at the gate after step 11, whatever else exists), `docs/pages/<Name>.md` (if it still says `none yet` or has no anatomy image, the run is at step 12a), a pending `.edits.json`, the row in `docs/ship-log.md`. Say which step is next and carry on.
+A run can stop for hours at a designer step. When asked to continue, work out where it is from the files, not from memory: exports present, `git status`, scorecard date and verdict (if it is not Pass, the run is at the gate after step 11, whatever else exists), whether the designer has done the design check of step 11a (if the conversation does not show it, ask), `docs/pages/<Name>.md` (if it still says `none yet` or has no anatomy image, the run is at step 12a), a pending `.edits.json`, the row in `docs/ship-log.md`. Say which step is next and carry on.
