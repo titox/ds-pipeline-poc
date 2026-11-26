@@ -17,7 +17,8 @@ Talk to the designer in the language they write in. Everything written to the re
 
 The stakeholders asked for this on 26 November 2026; the full table is in `docs/PROCESS.md` ("Who owns what").
 
-- **Design system side (the designer):** the Figma component, the RubyLint audit, the specification, the documentation text and its illustrations.
+- **Design system side (the designer):** the Figma component, the RubyLint audit, the specification, the documentation text and its illustrations. The do and don't frames and the anatomy diagram are design work, made in Figma with the component (step 1 of the process), never by the development team.
+- **Two parts of the documentation.** In the real process the Usage and Design tabs are drafted before the build and the Code and accessibility tab after the library is released, because it needs the code and Storybook. This skill builds the code first, so it writes the three tabs together.
 - **Development team:** the code, Code Connect, the stories and the release (Phase 2, Phase 3 up to the scorecard, and the commit in Phase 5). In this PoC the skill does that part so the demo shows the whole path. Say so in the first progress note and in the final summary, so nobody reads the run as "design now writes the code".
 - **Design system lead:** approves the documentation draft before it is published. In the PoC the designer may stand in for the lead; ask who is reviewing.
 
@@ -77,6 +78,8 @@ The designer often has other Figma files open with the plugin running, and the a
 4. Compare the contract with what Figma says now (property names, options, defaults, state list). If they differ, the export is stale: stop and ask for a new one.
 
 4a. **Hand-off package for Jira.** The specification goes to the development team as a Jira story that carries the JSON contract and the Markdown. Check that `<Name>.jira.md`, `<Name>.contract.json` and `<Name>.md` all come from the same export (compare the dates). If the Jira file is older, ask for a new Jira export with the other two; if the designer says to go on without it, record it as open in the final summary. There is no Jira connection in the PoC: name the three files as the package to attach, and do not create or edit any Jira story.
+
+4b. **Illustrations, first look.** They belong to the design step, so check now whether the Figma page `Docs / <Component name>` exists with its do and don't frames and its anatomy frame. If it does, say so. If not, tell the designer now that they are missing and will be needed before the documentation: they can draw them while the build runs, or give the yes for you to build them at step 12a. Do not wait here and do not create anything yet.
 
 ## Phase 2: Build
 

@@ -15,32 +15,37 @@ Click a step in the diagram above, or press Play to walk through it. The table h
 | Step | What happens | Owner | Quality check | What comes out |
 |---|---|---|---|---|
 | 1. Planning | Work starts in the backlog: a new component, or a change to an existing one. The backlog can be Jira or any other project management tool. | Product owner | None | A backlog item |
-| 2. Design | A component is created or changed in Figma, using shared colour and size tokens instead of loose values. | Designer | The RubyLint audit in step 3 | A Figma component with all its states |
-| 3. Audit and hand-off | RubyLint audits the component for tokens, states, accessibility and naming, and generates the specification and the first draft of the documentation. The specification goes to Jira with the JSON contract and the Markdown attached. | Designer | The plugin audits the design. The designer reviews the first documentation draft. | Markdown specification, a JSON contract, a Jira story and an unpublished documentation draft |
+| 2. Design | A component is created or changed in Figma, using shared colour and size tokens instead of loose values. The designer also draws the documentation illustrations in Figma: the do and don't frames and the anatomy diagram. | Designer | The RubyLint audit in step 3 | A Figma component with all its states, and its illustrations |
+| 3. Audit and hand-off | RubyLint audits the component for tokens, states, accessibility and naming, and generates the specification and the first draft of the documentation (the Usage and Design parts, which need no code). The specification goes to Jira with the JSON contract and the Markdown attached. | Designer | The plugin audits the design. The designer reviews the first documentation draft. | Markdown specification, a JSON contract, a Jira story and an unpublished documentation draft |
 | 4. Build | The React component is written to match the specification and the existing code style. Tokens come from Figma and Code Connect links the code to the design. | Development team (in this PoC we do it ourselves, for the demo only) | Automated checks | A pull request in the component library |
 | 5. Check and review | Automated checks run. A developer reviews the code and the designer checks the built component against Figma, both on the pull request. The merge releases a new library version and rebuilds Storybook. | Development team for the code, designer for the design check | Code review and design check, both required before the merge | A new library version and a live Storybook page |
-| 6. Source of truth | The documentation draft is approved and published with the new library version. Supernova keeps the official record of tokens and components. | Design system team | The design system lead approves the draft before it is published | Published documentation that matches the released code |
+| 6. Source of truth | The code part of the documentation is written from the released library and Storybook. The complete page is then approved and published. Supernova keeps the official record of tokens and components. | Design system team | The design system lead approves the draft before it is published | Published documentation that matches the released code |
+
+The documentation is written in two parts because the code part cannot exist before the code does. See "Where the documentation sits".
 
 ## Who owns what
 
 Agreed with the stakeholders on 26 November 2026. The table above is the short version; this is the full process, with the development team's own flow in the middle.
 
-**What the PoC does differently.** In the PoC we write the code ourselves (steps 6 to 8 below), so the demo can show the whole path. In the real process that part belongs to the development teams. They do it with their own coding and code review agents, in their own repositories. Nothing in the PoC changes who owns it.
+**What the PoC does differently.** In the PoC we write the code ourselves (steps 7 and 8 below), so the demo can show the whole path. In the real process that part belongs to the development teams. They do it with their own coding and code review agents, in their own repositories. Nothing in the PoC changes who owns it.
 
 | # | Step | Owner | Done by | In the PoC |
 |---|---|---|---|---|
-| 1 | The component is created or changed in Figma. | Designer | Person | Same |
+| 1 | The component is created or changed in Figma. The designer also draws the do and don't illustrations and the anatomy diagram, on the Figma page `Docs / <Component name>`. | Designer | Person | Same; the assistant can build the frames after the designer's yes |
 | 2 | The design is audited with RubyLint and the designer fixes what it flags. | Designer | Person, with the plugin | Same |
 | 3 | The plugin generates the Markdown specification, the JSON contract and the first documentation draft. The designer reviews the draft. | Designer | Plugin, then person | Same |
 | 4 | A daily process detects the change in Figma and creates a Jira story. The story carries the specification: the JSON contract and the Markdown. | Design system team owns the content, development team owns the story | Automated | By hand: the Jira export from the plugin, no Jira connection |
-| 5 | The documentation draft is created in Supernova or Docusaurus from the agreed text. It stays unpublished. | Design system team | Assistant, then person | Same |
+| 5 | The design part of the documentation is drafted in Supernova or Docusaurus: the Usage and Design tabs, with the illustrations. Everything in it comes from Figma and the specification. It stays unpublished. | Design system team | Assistant, then person | See the note below the table |
 | 6 | The team prioritises the story. | Development team | Person | Not shown |
 | 7 | The story is implemented in the component library by the team's coding agent and checked by its code review agent. | Development team | AI | We do it, for the demo only |
 | 8 | The pull request is reviewed. A developer reviews the code. The designer checks the built component against Figma. The merge releases a new library version and updates Storybook. | Development team for the code, designer for the design check | Person | We do it, for the demo only |
-| 9 | The design system lead approves the documentation draft and it is published with the new library version. | Design system lead | Person | The designer stands in for the lead |
-| 10 | A Jira story is created to use the component in the application. | Development team | Person now, automated later | Not shown |
-| 11 | The story is implemented in the application by the coding agent and the code review agent. | Development team | AI | Not shown |
-| 12 | The pull request is reviewed. The merge puts the change in the integration environment, and it reaches production in the next release window. | Development team | Person | Not shown |
+| 9 | The code part of the documentation is added to the draft: the Code and accessibility tab, with the properties, the examples, the Storybook links and the accessibility results. It is written from the released library and the published Storybook. | Design system team writes it, development team confirms the facts | Assistant, then person | See the note below the table |
+| 10 | The design system lead approves the complete draft and it is published. | Design system lead | Person | The designer stands in for the lead |
+| 11 | A Jira story is created to use the component in the application. | Development team | Person now, automated later | Not shown |
+| 12 | The story is implemented in the application by the coding agent and the code review agent. | Development team | AI | Not shown |
+| 13 | The pull request is reviewed. The merge puts the change in the integration environment, and it reaches production in the next release window. | Development team | Person | Not shown |
+
+Note on steps 5 and 9 in the PoC: the `ship-component` skill builds the code before it writes any documentation, so it writes the three tabs in one go. The split only matters in the real process, where the build is done later and by another team.
 
 ### Quality checks
 
@@ -50,12 +55,22 @@ Agreed with the stakeholders on 26 November 2026. The table above is the short v
 | 2 | First documentation draft | After the plugin generates it (step 3) | The designer who made the component | Reads and edits the draft in the preview |
 | 3 | Code review | On the library pull request (step 8) | Developer | The team's normal review, after its code review agent |
 | 4 | Design check of the built component | On the library pull request, before the merge (step 8) | Designer | Compares the Storybook page with Figma. A required approval |
-| 5 | Documentation draft | Before it is published (step 9) | Design system lead | Supernova approval workflow, or a pull request in Docusaurus |
-| 6 | Application pull request | Step 12 | Developer | The team's normal review |
+| 5 | Documentation draft | Before it is published (step 10) | Design system lead | Supernova approval workflow, or a pull request in Docusaurus |
+| 6 | Application pull request | Step 13 | Developer | The team's normal review |
 
 ### Where the documentation sits
 
-The draft is written early and published late. It is drafted on the design side as soon as the text is agreed (step 5), so the developers can read it while they build. It is published when the library pull request is merged (step 9), so the documentation and the new library version go live together and neither describes something the other does not have.
+The documentation is written in two parts, because each part needs different things to exist.
+
+| Part | Needs | Written | Who |
+|---|---|---|---|
+| Illustrations: do and don't frames, anatomy diagram | The Figma component | With the design (step 1) | Designer |
+| Usage and Design tabs | Figma and the specification | Before the build (step 5) | Design system team |
+| Code and accessibility tab | The released library and the published Storybook | After the merge (step 9) | Design system team, facts confirmed by the development team |
+
+The developers can read the Usage and Design draft while they build. The page is published after step 9, so it goes live shortly after the library version, not at the same moment. If the pull request had a preview build of Storybook, the code part could be written before the merge and both would go live together.
+
+The illustrations are design work. They are drawn by a designer in Figma, never by a developer, and they are not part of the development team's flow.
 
 ### Review workflow in each documentation tool
 
@@ -96,7 +111,8 @@ The draft is written early and published late. It is drafted on the design side 
 - **Finished code is scored by someone who did not write it.** A reviewer with no knowledge of the build conversation scores each component against a written rubric. It needs evidence for every pass.
 - **The Figma file belongs to the designer.** Nothing is changed in Figma without a clear yes for that specific change.
 - **Each step has one owner.** Design, audit, specification and documentation belong to the design system side. Building and releasing the code belong to the development teams. The PoC writes the code only so the demo can show the whole path.
-- **Documentation is drafted early and published on the merge.** The draft is ready while the developers build, and it goes live with the library version it describes.
+- **Documentation is written in two parts.** Usage and Design are drafted before the build, from Figma. The code part is added after the merge, from the released library and Storybook. Then the page is published.
+- **Illustrations are part of the design.** The designer draws the do and don't frames and the anatomy diagram in Figma with the component. Developers do not make them.
 - **Two people check the documentation.** The designer who made the component reviews the first draft. The design system lead approves the draft before it is published.
 - **The designer checks the built component on the pull request.** Problems are found before a library version is released, not after.
 - **Supernova's place is still open.** It could read from Figma and feed the code, or it could sit at the end as a publishing portal. We have not chosen yet.
@@ -246,7 +262,7 @@ To undo before committing: `git checkout -- scripts/tokens/tokens.json src/theme
 
 Start: reopen the Desktop Bridge plugin in the Figma file, start Storybook (`npm run storybook`), then `npm run lint` to see the current state. Last commit: `d9769bb`, pushed and deployed.
 
-**Done on 2026-11-26: stakeholder feedback added to the process. Each step now has an owner, there are six quality checks, the specification goes to Jira with the JSON contract and the Markdown, and the documentation is drafted early and published on the library merge. See "Who owns what". The `ship-component` skill has two new stops (design check, design system lead review) and a hand-off step. Four points are open, listed under "Open points from the meeting".**
+**Done on 2026-11-26: stakeholder feedback added to the process. Each step now has an owner, there are six quality checks, the specification goes to Jira with the JSON contract and the Markdown, and the documentation is written in two parts (design part before the build, code part after the merge). The illustrations are drawn by the designer with the component. See "Who owns what". The `ship-component` skill has two new stops (design check, design system lead review) and a hand-off step. Four points are open, listed under "Open points from the meeting".**
 
 **Done on 2026-11-25: the workflow skill (`ship-component`) is built and was run on Input Field. See "Done on 2026-11-25 (afternoon)" below. Checkbox Field followed the same evening. Next: run the skill on the rest of the Inputs page, and set up the second documentation platform (Docusaurus) from the same `docs/pages/` sources.**
 
@@ -456,7 +472,8 @@ A Figma plugin that audits components (tokens, states, accessibility, naming) an
 | Demo scenarios | Update an existing component and create a new one | Update shows drift and change propagation; create shows the full path |
 | Contract check | Script in CI comparing RubyLint JSON to code | Otherwise "tested" only means "it renders" |
 | Ownership | Design system side owns design, audit, specification and documentation; development teams own the code | Asked for by the stakeholders on 26 November 2026; the PoC builds the code for the demo only |
-| Documentation timing | Drafted with the specification, published on the library merge | Documentation and library version go live together |
+| Documentation timing | Usage and Design drafted before the build; code part added after the merge; then published | The code part needs the released code and Storybook |
+| Illustrations | Drawn by the designer in Figma, with the component | Design work, outside the development team's flow |
 | Documentation review | Designer reviews the first draft, design system lead approves before publishing | Two pairs of eyes, the second one independent |
 | Design check of the code | Designer approves on the library pull request | Found before a version is released |
 | Audit | Manual, in the Figma plugin | The designer sees the component and reads the result; more judgement and precision than an unattended run |
