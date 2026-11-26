@@ -67,7 +67,7 @@ Keep the section order. Leave a section out only if there is nothing true to say
 
 Where each fact comes from: properties, variants and description from Figma; props, defaults and behaviour from the component source; mappings from the Code Connect file; measured values (contrast, sizes, axe result) from `eval/scorecards/<Name>.md`; token names from `docs/components/<Name>.contract.json`.
 
-Illustrations for do and don't and anatomy are frames in Figma on a page `Docs / <Component name>`, built from instances of the real component so they follow design changes. They are mandatory: a page never ships without them (SKILL.md, rule "No illustrations, no documentation" and step 12a). Creating them is a change in Figma: say what will be created, ask, and wait for the yes; the run does not go on until they exist.
+Illustrations for do and don't and anatomy are frames in Figma on a page `Docs / <Component name>`, built from instances of the real component so they follow design changes. They are mandatory: a page never ships without them (SKILL.md, rule "No illustrations, no documentation, no hand-off" and steps 4a, 4b and 12a). They are generated in step 4a without asking: the designer gave a standing yes on 26 November 2026 for frames on this page only. The designer reviews them in step 4b. The do and don't pairs come from the plugin's Markdown and the Figma description, each with its source.
 
 How to build them (model: the pages `Docs / Checkbox Field` and `Docs / Radio Field`; read one live before building):
 

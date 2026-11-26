@@ -378,62 +378,6 @@
   max-width: 68ch;
 }
 /* Parts inside a step. */
-.sf-parts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sds-size-space-200);
-  margin-bottom: var(--sds-size-space-400) !important;
-}
-.sf-part {
-  background: var(--sf-surface);
-  border: var(--sds-size-stroke-border) solid var(--sf-line);
-  border-radius: var(--sds-size-radius-full);
-  color: var(--sf-ink);
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.875rem;
-  font-weight: 600;
-  min-height: 36px;
-  padding: 0 var(--sds-size-space-400);
-}
-.sf-part:hover {
-  background: var(--sf-well);
-}
-.sf-part[aria-pressed="true"] {
-  background: var(--sf-accent);
-  border-color: var(--sf-accent);
-  color: var(--sf-on-accent);
-}
-.sf-part:focus-visible {
-  outline: 2px solid var(--global-focus-ring-color);
-  outline-offset: 2px;
-}
-.sf-list {
-  margin-bottom: var(--sds-size-space-300) !important;
-}
-.sf-list-heading {
-  color: var(--sf-muted);
-  display: block;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  margin-bottom: var(--sds-size-space-100);
-}
-.sf .sf-list ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sds-size-space-100);
-  list-style: none;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-.sf .sf-list li {
-  border: var(--sds-size-stroke-border) solid var(--sf-line);
-  border-radius: var(--sds-size-radius-full);
-  color: var(--sf-ink);
-  font-size: 0.8125rem;
-  margin: 0 !important;
-  padding: var(--sds-size-space-050) var(--sds-size-space-300);
-}
 .sf {
   container-type: inline-size;
 }
@@ -454,4 +398,151 @@
   .sf-hub-ring {
     display: none;
   }
+}
+
+/* Facts of a step as rows: the label on the left, the text on the right. */
+.sf .sf-rows {
+  border-top: var(--sds-size-stroke-border) solid var(--sf-line);
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  margin: 0 !important;
+  max-width: 68ch;
+}
+.sf .sf-rows dt,
+.sf .sf-rows dd {
+  align-items: center;
+  border-bottom: var(--sds-size-stroke-border) solid var(--sf-line);
+  display: flex;
+  font-size: 0.875rem;
+  font-style: normal;
+  margin: 0 !important;
+  padding: var(--sds-size-space-200) 0;
+}
+.sf .sf-rows dt {
+  color: var(--sf-muted);
+  font-weight: 600;
+  padding-right: var(--sds-size-space-300);
+}
+.sf .sf-rows dd {
+  color: var(--sf-ink);
+}
+
+/* Chips: one colour for each owner, and one for a quality check. Same shape for all. */
+.sf {
+  --sf-chip-designer-bg: var(--sds-color-pink-200);
+  --sf-chip-designer-ink: var(--sds-color-pink-1000);
+  --sf-chip-ds-team-bg: var(--sds-color-blue-200);
+  --sf-chip-ds-team-ink: var(--sds-color-blue-1000);
+  --sf-chip-dev-team-bg: var(--sds-color-yellow-200);
+  --sf-chip-dev-team-ink: var(--sds-color-yellow-1000);
+  --sf-chip-ds-lead-bg: var(--sds-color-slate-200);
+  --sf-chip-ds-lead-ink: var(--sds-color-slate-1000);
+  --sf-chip-check-bg: var(--sds-color-green-200);
+  --sf-chip-check-ink: var(--sds-color-green-1000);
+}
+.sf[data-mode="dark"] {
+  --sf-chip-designer-bg: var(--sds-color-pink-900);
+  --sf-chip-designer-ink: var(--sds-color-pink-100);
+  --sf-chip-ds-team-bg: var(--sds-color-blue-900);
+  --sf-chip-ds-team-ink: var(--sds-color-blue-100);
+  --sf-chip-dev-team-bg: var(--sds-color-yellow-900);
+  --sf-chip-dev-team-ink: var(--sds-color-yellow-100);
+  --sf-chip-ds-lead-bg: var(--sds-color-slate-700);
+  --sf-chip-ds-lead-ink: var(--sds-color-slate-100);
+  --sf-chip-check-bg: var(--sds-color-green-900);
+  --sf-chip-check-ink: var(--sds-color-green-100);
+}
+.sf-chips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--sds-size-space-100);
+}
+.sf-chip {
+  border-radius: var(--sds-size-radius-100);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  padding: 0 var(--sds-size-space-200);
+  white-space: nowrap;
+}
+.sf-chip[data-owner="designer"] {
+  background: var(--sf-chip-designer-bg);
+  color: var(--sf-chip-designer-ink);
+}
+.sf-chip[data-owner="ds-team"] {
+  background: var(--sf-chip-ds-team-bg);
+  color: var(--sf-chip-ds-team-ink);
+}
+.sf-chip[data-owner="dev-team"] {
+  background: var(--sf-chip-dev-team-bg);
+  color: var(--sf-chip-dev-team-ink);
+}
+.sf-chip[data-owner="ds-lead"] {
+  background: var(--sf-chip-ds-lead-bg);
+  color: var(--sf-chip-ds-lead-ink);
+}
+.sf-chip[data-kind="check"] {
+  background: var(--sf-chip-check-bg);
+  color: var(--sf-chip-check-ink);
+}
+.sf h3.sf-detail-title {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sds-size-space-300);
+}
+.sf-acc-num {
+  color: var(--sf-muted);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  min-width: 2rem;
+}
+/* The parts of a step, as an accordion. */
+.sf-acc {
+  border-top: var(--sds-size-stroke-border) solid var(--sf-line);
+  margin-top: var(--sds-size-space-400) !important;
+  max-width: 68ch;
+}
+.sf-acc-item {
+  border-bottom: var(--sds-size-stroke-border) solid var(--sf-line);
+}
+.sf-acc-head {
+  align-items: center;
+  background: none;
+  border: 0;
+  color: var(--sf-ink);
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  gap: var(--sds-size-space-200);
+  min-height: 44px;
+  padding: var(--sds-size-space-100) 0;
+  text-align: left;
+  width: 100%;
+}
+.sf-acc-head:hover {
+  background: var(--sf-well);
+}
+.sf-acc-head:focus-visible {
+  outline: var(--sds-size-stroke-focus-ring) solid var(--sf-accent);
+  outline-offset: 2px;
+}
+.sf-acc-title {
+  flex: 1;
+}
+.sf-acc-head svg {
+  flex: none;
+  transition: transform var(--sf-fast) var(--sf-ease);
+}
+.sf-acc-item[data-open="true"] .sf-acc-head svg {
+  transform: rotate(180deg);
+}
+.sf-acc-panel {
+  animation: sf-swap var(--sf-base) var(--sf-ease) both;
+  padding: 0 0 var(--sds-size-space-400) calc(2rem + var(--sds-size-space-200));
+}
+.sf .sf-acc-panel p:last-child {
+  margin-bottom: 0 !important;
 }

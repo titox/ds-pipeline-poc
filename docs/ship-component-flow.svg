@@ -12,7 +12,7 @@ rect{fill:#f4f4f2;stroke:#888}
 <line x1="200" y1="84" x2="200" y2="114" class="arr" marker-end="url(#arrow)"/>
 <g class="node c-purple"><rect x="60" y="124" width="280" height="56" rx="8" stroke-width="0.5"/><text class="th" x="200" y="142" text-anchor="middle" dominant-baseline="central">1. Inputs</text><text class="ts" x="200" y="162" text-anchor="middle" dominant-baseline="central">Exports, illustrations, Jira hand-off</text></g>
 <line x1="200" y1="180" x2="200" y2="210" class="arr" marker-end="url(#arrow)"/>
-<g class="node c-amber"><rect x="420" y="124" width="220" height="56" rx="8" stroke-width="0.5"/><text class="th" x="530" y="142" text-anchor="middle" dominant-baseline="central">Exports current?</text><text class="ts" x="530" y="162" text-anchor="middle" dominant-baseline="central">Designer: or a new RubyLint export</text></g>
+<g class="node c-amber"><rect x="420" y="124" width="220" height="56" rx="8" stroke-width="0.5"/><text class="th" x="530" y="142" text-anchor="middle" dominant-baseline="central">Exports and images</text><text class="ts" x="530" y="162" text-anchor="middle" dominant-baseline="central">Designer: current? images right?</text></g>
 <line x1="420" y1="152" x2="350" y2="152" class="arr" marker-end="url(#arrow)"/>
 <g class="node c-blue"><rect x="60" y="220" width="280" height="56" rx="8" stroke-width="0.5"/><text class="th" x="200" y="238" text-anchor="middle" dominant-baseline="central">2. Build</text><text class="ts" x="200" y="258" text-anchor="middle" dominant-baseline="central">Tokens, React, Code Connect, stories</text></g>
 <line x1="200" y1="276" x2="200" y2="306" class="arr" marker-end="url(#arrow)"/>
