@@ -88,6 +88,8 @@ The illustrations belong to the design side and are not part of the development 
 | Other components | In progress | The same set of states still has to be added to the rest of the interactive components. |
 | RubyLint documentation | Done for Buttons and Inputs | The designer audits each component by hand in the Figma plugin. The exports for all 16 components on the Buttons and Inputs pages are in the repository. |
 | Automated checks | Done | A token check, a contract check and code quality rules run on every change and compare the code with the Figma specification. |
+| Component status | Done | One generated table, `docs/components.md`, says where each of the 16 components stands. It is calculated from the files of the repository (`npm run status`), never typed. |
+| Contrast of the colour tokens | Done | `npm run contrast` measures the text, icon and border tokens against their backgrounds, in light and dark, and writes `docs/contrast.md`. Run for one component, it shows design contrast problems before anything is built. |
 | Component review (rubric) | In progress | An independent reviewer scores each coded component against six criteria. Button passed in the third round. The other components are next. |
 | Supernova | In progress | Connected. It is linked to the Figma file and to the Storybook, and now holds the Figma variables with their Light and Dark values. Its data is current as of 24 November. It has no documented components yet. Its place in the flow is still undecided. |
 | iOS and Android | Out of scope | Not part of this test. |
@@ -136,18 +138,20 @@ The rest of this page is for designers and developers who need to repeat or exte
 | 4 | Update the welcome story | Done |
 | 5 | Read the Figma system | Done |
 | 6 | Project rules (`CLAUDE.md`) | Done |
-| 7 | Token lint | Next |
-| 8 | Repoint Code Connect to the modified Figma file | Planned |
+| 7 | Token lint | Done (`npm run lint:tokens`, runs in CI) |
+| 8 | Repoint Code Connect to the modified Figma file | Done |
 | 9 | Fix type errors (`Button.tsx`, `Tag.figma.ts`) | Planned |
 | 10 | Multi-theming: Brand collection, `data-brand` + `data-theme`, Storybook switches | Planned |
-| 11 | RubyLint documentation export | Planned (destination TODO) |
-| 12 | Contract check: RubyLint JSON vs code props and tokens, run in CI | Planned |
+| 11 | RubyLint documentation export | Done for the 16 components of the Buttons and Inputs pages (manual exports in `docs/components/`) |
+| 12 | Contract check: RubyLint JSON vs code props and tokens, run in CI | Done (`npm run check:contracts`) |
 | 13 | Demo scenarios: update an existing component and create a new one | Planned |
 | 14 | Record the demo as a video (no live demo) | Planned |
 | 15 | Supernova as source of truth | In progress: workspace connected and linked to Figma and Storybook; token import incomplete; position in the flow undecided |
 
 | 5b | Improve the Figma file first: audit every component with RubyLint, add missing states, regenerate documentation | In progress |
 | 16 | Later, once everything else is done: improve Figma, Storybook, Code Connect and add interactive prototyping | Parked |
+
+This table is about the steps of the project. Where each component stands is in `docs/components.md`, which is generated (`npm run status`).
 
 ## Figma improvement pilot (Button, Input Field)
 
@@ -171,7 +175,8 @@ Repeat this for every new or changed component. Names in `<>` are placeholders.
 
 1. **Design in Figma.** Use token variables only (no raw colours or sizes). Follow the state standard: Default, Hover, Focus, Disabled, plus Error for form fields and Loading for buttons.
 2. **Audit with RubyLint, by hand.** The designer runs the plugin in Figma, reviews the result and fixes what it flags. Export the Markdown spec and the JSON contract for each component into one folder (file names `<component-name>-markdown.md` and `<component-name>-json.json`). They are then copied into `docs/components/` as `<Name>.md` and `<Name>.contract.json` and committed. A terminal runner exists (`npm run rubylint`, see `scripts/rubylint/README.md`) but it is not used for audits: the manual run is the standard.
-3. **Sync tokens if any variable changed.** Re-export the tokens with the plugin in `scripts/tokens/figma-plugin-token-json` into `scripts/tokens/tokens.json`, then run `npm run script:tokens` (add `--skip-rest-api` when using the plugin JSON). Review the `src/theme.css` diff.
+2b. **Check the contrast of the component's colours, before anything is built.** `npm run contrast -- <Name>` measures the text, icon and border tokens named in the contract against the backgrounds named in it, in light and dark (text 4.5:1, icons and borders 3:1, disabled exempt). The pairs come from the token names, so confirm each failing pair in Figma before reporting it. A real failure is a design problem: it is cheaper to fix it in Figma now than after a failed review round.
+3. **Sync tokens if any variable changed.** Re-export the tokens with the plugin in `scripts/tokens/figma-plugin-token-json` into `scripts/tokens/tokens.json`, then run `npm run script:tokens` (add `--skip-rest-api` when using the plugin JSON). Review the `src/theme.css` diff, then run `npm run contrast` to bring `docs/contrast.md` up to date.
 4. **Build or update the React component** in `src/ui/primitives/<Component>/`, following `src/AGENTS.md`. Props must match the Figma component properties. States map to CSS pseudo-classes, `disabled` and `aria-*`, not to extra components.
 5. **Update Code Connect** in `src/figma/primitives/<component>/<Component>.figma.ts`:
    - New component: add a `<FIGMA_..._...>` entry with the Figma URL and node ID in `figma.config.json`, and reference it in the template header (`url=`).
@@ -183,7 +188,7 @@ Repeat this for every new or changed component. Names in `<>` are placeholders.
 8. **Publish Code Connect:** `npx figma connect publish` (needs a Figma API token with the Code Connect write scope; set it locally, never commit it). Verify in Figma Dev Mode that the code snippet shows for the component.
 9. **Write the component description, only once the component is complete** (all states of the standard, React component, Code Connect). Add a `## <Figma name>` section to `docs/components/DESCRIPTIONS.md`, run `npm run descriptions -- <figma file link>` to write it to Figma, then re-run `npm run rubylint` so the Markdown and Jira specs show it. Incomplete components keep no description. Dev resources: `npm run script:dev-resources` (REST API only).
 10. **Commit and push** with the neutral identity (`DS PoC`), then check the Pages deploy. Re-run it if it fails with "No artifacts named github-pages".
-11. **Update this runbook** if the process changed, and record the component in the status table.
+11. **Update this runbook** if the process changed. The status of the component is not typed anywhere: run `npm run status` before the commit of step 10 and commit `docs/components.md` with it. CI fails if that file is out of date (`npm run status -- --check`).
 
 Remap status: all 97 URLs in `figma.config.json` now point at the local Figma file. Verifying that every node ID exists in that file is pending (needs the Figma bridge).
 
@@ -236,7 +241,7 @@ What the rehearsal showed:
    `npm run script:tokens`
    `git diff src/theme.css`
    Expect one changed line per mode and nothing else. The first export from the plugin will also move entries inside `tokens.json`; that is order only.
-4. `npm run lint:tokens` and `npm run check:contracts`, then `npm run storybook` and press Tab on the Button States and Input States stories, in light and dark.
+4. `npm run lint:tokens`, `npm run check:contracts` and `npm run contrast` (the new value appears in `docs/contrast.md` with its ratio in both modes), then `npm run storybook` and press Tab on the Button States and Input States stories, in light and dark.
 5. Find the stale documents:
    `grep -rln -i "ec221f" docs | xargs grep -l "Border/Focus/Default"`
    Run RubyLint again for those components, correct the hand-written sentences, and export the focus illustrations again from Figma.
@@ -247,13 +252,18 @@ To undo before committing: `git checkout -- scripts/tokens/tokens.json src/theme
 ## Tooling upgrades
 
 - Storybook upgraded from 8.6 to 10.6.8 (`npx storybook@latest upgrade`), with `@storybook/addon-mcp` added. Leftover v8 packages removed. Build passes.
+- Figma bridge: a local-only copy of the Desktop Bridge plugin and its server is documented in the Storybook under Plugins / Figma Desktop Bridge (added 2026-11-28). It is cloned to `~/figma-desktop-bridge-local` and is not in use yet; the assistant still runs the official `figma-console-mcp@2.0.0`.
 - MCP endpoint: `http://localhost:6006/mcp`, only while `npm run storybook` runs. Not registered in Claude Code yet (`claude mcp add --transport http storybook http://localhost:6006/mcp`).
 - Playwright installed (`@playwright/test`, `playwright.config.ts`, example spec in `tests/`). Not used yet. Plan: add `@storybook/addon-vitest` (peer of the MCP addon) and axe checks once Button and Input stories have the new states.
 - Registry note: always install with `npm_config_registry=https://registry.npmjs.org/`, otherwise a corporate registry URL ends up in `package-lock.json`.
 
 ## Next session
 
+**Done on 2026-11-28: the local-only copy of the Figma Desktop Bridge was read, checked and documented.** The repository (`<account>/figma-desktop-bridge-local`) is a copy of figma-console-mcp 2.1.1, plugin and server, with Cloud Mode removed. A scan of every file found one outside address the server can call, `api.figma.com`, and only when both `FIGMA_ACCESS_TOKEN` and `FIGMA_ALLOW_REST=1` are set; the plugin manifest allows `localhost` only. The repository is cloned to `~/figma-desktop-bridge-local`. The Storybook has a new last section, Plugins / Figma Desktop Bridge, with four pages: Overview, Set up and run, Tools (145 tools named in 11 toolsets, 144 registered) and In our workflow. Sources are in `src/stories/plugins/`; the sidebar order is set by `storySort` in `.storybook/preview.tsx`. Not done: the server is not installed, the assistant still runs the official `figma-console-mcp@2.0.0`, Figma still has the official plugin, and nothing was tested against the Figma file. The tools the workflow could use instead of hand comparisons (`figma_export_tokens`, `figma_check_design_parity`, `figma_audit_code_adherence`, `figma_generate_component_doc`) are proposals and have not been tried. Not committed or deployed. **Next: decide whether to switch to the local build; if yes, install it, re-import the plugin from the local manifest and repeat the `border.focus.default` token comparison as a first test.**
+
 Start: reopen the Desktop Bridge plugin in the Figma file, start Storybook (`npm run storybook`), then `npm run lint` to see the current state. Last commit: `d9769bb`, pushed and deployed.
+
+**Done on 2026-11-27: three additions to the workflow, taken from a comparison with an external course on design systems built with an assistant.** (1) `npm run contrast` (`scripts/contrast.mjs`, rules in `scripts/contrast-pairs.json`): contrast of the colour tokens in light and dark, written to `docs/contrast.md`; `npm run contrast -- <Name>` limits it to the colours of one component and is now a step of the skill before the build (step 4-contrast). Checked against the Input Field scorecard: it gives the same four figures the reviewer measured in the browser (placeholder 2.10:1 and 3.78:1, default border 1.41:1 and 1.71:1). Across the whole token set, 37 of 356 pairs are below the minimum; many of them may not be used by any component. It reports and does not fail the build unless run with `--strict`. (2) `npm run status` (`scripts/component-status.mjs`): `docs/components.md`, one generated row per component with a calculated status (Audited, In build, Built, Reviewed, Documented). First result: 3 documented, 9 built, 4 audited. It also flags Input Field (a documentation page without a passing review) and Button (documentation source still in `docs/supernova/`). CI runs `npm run status -- --check`. (3) `CLAUDE.md` no longer says Supernova is not set up or that exports are generated with the headless runner. Not done, by choice: an eval that measures how well an assistant uses the library, with and without the contracts (one brief, three attempts each side), which would give the closing report a measured figure; documentation blocks that read the contract at build time, left for the Docusaurus test. **Next: run the skill on one new component to try the two new steps.**
 
 **Done on 2026-11-26: stakeholder feedback added to the process. Each step now has an owner, the quality checks are a column of the process table (design audit, draft and image review, code review, design check, documentation approval), the specification goes to Jira with the JSON contract and the Markdown, and the documentation is written in two parts (design part before the build, code part after the merge). The do and don't and anatomy illustrations are generated automatically after the plugin export and reviewed by the designer; the Jira story carries the JSON contract, the Markdown and the images (hand-off folder built by `build-handoff.mjs`). See "Who owns what". The `ship-component` skill has two new stops (design check, design system lead review) and a hand-off step. Four points are open, listed under "Open points from the meeting".**
 
@@ -282,7 +292,7 @@ The documentation template the skill should produce, as agreed on the Button pag
 
 0c. To look at: `IconButton.tsx` passes its reference with `{...ref}` instead of `ref={ref}`. It looks like a bug and has not been tested.
 
-0d. Supernova housekeeping: the 16 registered components are not linked to their Figma components; status values on the board are set by hand and must follow each component's progress; two unused illustration frames remain on the Figma page "Docs / Button"; about 740 of 1,000 credits are left.
+0d. Supernova housekeeping: the 16 registered components are not linked to their Figma components; status values on the board are set by hand and must follow each component's progress (`docs/components.md` is now the calculated record in the repository; the board repeats it and costs credits per write); two unused illustration frames remain on the Figma page "Docs / Button"; about 740 of 1,000 credits are left.
 
 1. Roll the state standard out to the 11 incomplete components on the Inputs page, lowest score first (Select Field 65%, Search 78%). Per component: design missing states in Figma, update CSS, story, Code Connect, then write its description in `docs/components/DESCRIPTIONS.md` (same labelled format as Input Field: summary, then `PURPOSE:`, `BEHAVIOUR:`, `COMPOSITION:`, `USAGE:`, `CODE GENERATION NOTES:`). When adding variants in Figma, bind their layers to the component properties (copy `componentPropertyReferences` from the Default variant) and run `npm run descriptions` and `npm run rubylint`.
 
@@ -290,7 +300,9 @@ The documentation template the skill should produce, as agreed on the Button pag
 
 3. Other Figma pages: the designer audits and exports them by hand, as done for Buttons and Inputs. The Jira specifications in `docs/components/` are older than the manual exports and need exporting again.
 
-4. Contrast: 6 Inputs components have a lowest contrast of 1.5:1 (placeholder or disabled text, to check).
+4. Contrast: 6 Inputs components have a lowest contrast of 1.5:1 (placeholder or disabled text, to check). `npm run contrast -- <Name>` now gives the figures per component without a review round.
+
+4a. Checkbox Group and Radio Group show as "Audited" in `docs/components.md` although `CheckboxGroup.figma.ts` and `RadioGroup.figma.ts` exist: those files point at nodes `9762:1426` and `624:23642`, the contracts at `3119:10423` and `3119:10470`. One side is out of date; which one is not known.
 
 5. Distinct focus colour: `Border/Focus/Default` is still the same red as error.
 
@@ -422,9 +434,11 @@ Why: the PoC is public, so it must not expose client or personal details.
 The diagram is user-triggered (Play), animates only `transform`, `opacity` and stroke, and honours `prefers-reduced-motion`.
 Logos for Figma, Jira, GitHub, Storybook, React and GitHub Actions come from the Simple Icons set (CC0). RubyLint and Supernova use simple custom marks, because they are not in that set. Replace the Supernova mark with the official SVG when available.
 
+The Storybook also has a Plugins section, last in the sidebar (`storySort` in `.storybook/preview.tsx`). Its pages are in `src/stories/plugins/`: each `.mdx` file renders a Markdown file of the same name through the `Markdown` block, because plain Markdown tables do not render in `.mdx` files here. The tools tables are built by `ToolsReference.tsx` from `figma-desktop-bridge.tools.json`.
+
 ## 5. Read the Figma system
 
-Connection: Figma console MCP with the Desktop Bridge plugin open in the target file.
+Connection: Figma console MCP with the Desktop Bridge plugin open in the target file. The plugin and its tools are described in the Storybook under Plugins / Figma Desktop Bridge.
 
 Findings:
 - 347 variables in 6 collections: Color Primitives, Color (SDS Light / SDS Dark), Typography Primitives, Responsive (Desktop / Mobile / Tablet), Size, Typography.

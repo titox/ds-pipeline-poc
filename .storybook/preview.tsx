@@ -8,6 +8,12 @@ const preview: Preview = {
     docs: {
       theme: theme,
     },
+    options: {
+      // Plugins goes last in the sidebar; everything else keeps its order.
+      storySort: {
+        order: ["SDS", "*", "Plugins"],
+      },
+    },
   },
 
   tags: [],

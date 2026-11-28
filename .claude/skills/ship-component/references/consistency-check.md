@@ -6,7 +6,7 @@ The first full run, with the report format to follow, is `docs/consistency-story
 
 ## Read both sides live
 
-**Figma** (read only, through the Desktop Bridge, `figma_execute` or `figma_get_component_details`). For the component set:
+**Figma** (read only, through the Desktop Bridge, `figma_execute` or `figma_get_component_details`). Since figma-console 2.0.0 `figma_get_component_details` is hidden by default: call `figma_enable_toolsets` with `["inspect"]` first, and if the tool still does not appear, run it through `figma_call`. `figma_execute` needs no toolset. For the component set:
 
 - each component property: name, type (variant, boolean, text, instance swap), options, default value;
 - the list of variants, which gives the states.

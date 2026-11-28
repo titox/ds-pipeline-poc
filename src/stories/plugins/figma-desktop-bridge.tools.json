@@ -1,0 +1,1085 @@
+[
+  {
+    "id": "core",
+    "description": "always on: find, build, bind and audit",
+    "tools": [
+      {
+        "name": "figma_get_status",
+        "summary": "Check connection status to Figma Desktop.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_diagnose",
+        "summary": "Designer-readable health check for this server.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_list_open_files",
+        "summary": "List all Figma files currently connected via the Desktop Bridge plugin.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_navigate",
+        "summary": "Switch the active file among files where the Desktop Bridge is running (it doesn't open files; see figma_list_open_files).",
+        "registered": true,
+        "kind": "session",
+        "rest": "no"
+      },
+      {
+        "name": "figma_reconnect",
+        "summary": "Force a complete reconnection to Figma Desktop.",
+        "registered": true,
+        "kind": "session",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_selection",
+        "summary": "Get the currently selected nodes in Figma.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_capture_screenshot",
+        "summary": "Screenshot a node (or the current page) from the live plugin state, so it reflects changes made a moment ago.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_execute",
+        "summary": "Run JavaScript in the Figma plugin context (full figma API) for anything other tools don't cover.",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_design_system_summary",
+        "summary": "Get a compact overview of the design system.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_search_components",
+        "summary": "Search components by name, category or description; returns keys and node IDs to instantiate.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_resolve_components",
+        "summary": "Before building from a design system, map each UI element the request needs (plain words, e.g.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_instantiate_component",
+        "summary": "Place an instance of a component.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_set_instance_properties",
+        "summary": "Set an instance's component properties (TEXT, BOOLEAN, INSTANCE_SWAP, VARIANT) by name u2014 the way to change content inside an instance, since editing its text layers directly fails silently.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_create_child",
+        "summary": "Create a new child node inside a parent container.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_clone_node",
+        "summary": "Duplicate a node. The clone is placed at a slight offset from the original.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_move_node",
+        "summary": "Move a node to a new position within its parent.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_resize_node",
+        "summary": "Resize a node to specific dimensions.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_rename_node",
+        "summary": "Rename a node in the layer panel.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_delete_node",
+        "summary": "Delete a node from the canvas.",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "no"
+      },
+      {
+        "name": "figma_set_layout",
+        "summary": "Set a frame's auto layout or grid layout in one call, and place its children.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_set_fills",
+        "summary": "Set the fill colors on a node.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_set_strokes",
+        "summary": "Set the stroke (border) on a node.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_set_text",
+        "summary": "Set a text node's content and optionally its font size, family/style ('Semi Bold'; no-space forms are auto-corrected), wrap style (BALANCE, PRETTY) and variable-font axes.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_bind_tokens",
+        "summary": "Bind a node's spacing, radius, size, stroke weight, opacity and typography to EXISTING variables, and apply a text or effect style, by name or id.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_variables",
+        "summary": "Read the file's variables (design tokens): collections, modes and values.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_text_styles",
+        "summary": "Get all local text styles in the current file.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_audit_adherence",
+        "summary": "Check a built frame against the design system: hand-built look-alikes of components and new components (errors), hand-drawn vectors, values not bound to variables or styles, instance style overrides,",
+        "registered": true,
+        "kind": "read",
+        "rest": "partly"
+      },
+      {
+        "name": "figma_lint_design",
+        "summary": "Check a node tree (or the current page) for WCAG 2.2 problems — contrast, non-text contrast, color-only meaning, focus indicators, target size, alt text, headings, reflow, reading order, disabled cont",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_enable_toolsets",
+        "summary": "Switch on more tools when a task needs them (the core set covers finding, building, binding, auditing).",
+        "registered": true,
+        "kind": "session",
+        "rest": "no"
+      },
+      {
+        "name": "figma_call",
+        "summary": "Run a tool from an enabled toolset by name, if your tool list didn't refresh after figma_enable_toolsets.",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "no"
+      }
+    ]
+  },
+  {
+    "id": "inspect",
+    "description": "file data, component dev specs and CSS, styles, library components/variables, where an asset is used",
+    "tools": [
+      {
+        "name": "figma_get_file_data",
+        "summary": "Get full file structure and document tree.",
+        "registered": true,
+        "kind": "read",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_get_file_for_plugin",
+        "summary": "Get file data optimized for plugin development with filtered properties (IDs, structure, plugin data, component relationships).",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_component",
+        "summary": "Get a single component's metadata or reconstruction specification.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_component_details",
+        "summary": "Get full details for a specific component including all variants, properties, and keys needed for instantiation.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_component_image",
+        "summary": "Render a specific component or node as an image (PNG, JPG, SVG, PDF).",
+        "registered": true,
+        "kind": "read",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_get_component_for_development",
+        "summary": "Get component data optimized for high-fidelity UI implementation.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_component_for_development_deep",
+        "summary": "Get a deeply nested component tree with full visual properties, resolved design token names, instance references, prototype interactions, and annotations at every level.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_analyze_component_set",
+        "summary": "Analyze a Figma COMPONENT_SET to extract variant state machine and cross-variant diffs for code generation.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_styles",
+        "summary": "Get all styles (color, text, effects, grids) from a Figma file with optional code exports.",
+        "registered": true,
+        "kind": "read",
+        "rest": "partly"
+      },
+      {
+        "name": "figma_get_token_values",
+        "summary": "Get actual values for design tokens (colors, spacing, etc).",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_browse_tokens",
+        "summary": "Open an interactive browser to explore design tokens (variables) from a Figma file.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no",
+        "note": "Needs ENABLE_MCP_APPS=true"
+      },
+      {
+        "name": "figma_take_screenshot",
+        "summary": "Export an image of the current Figma page or specific node.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_design_changes",
+        "summary": "Get recent document changes detected in Figma.",
+        "registered": true,
+        "kind": "session",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_design_system_kit",
+        "summary": "PREFERRED TOOL for design system extraction — replaces separate figma_get_styles, figma_get_variables, and figma_get_component calls.",
+        "registered": true,
+        "kind": "read",
+        "rest": "partly"
+      },
+      {
+        "name": "figma_get_library_components",
+        "summary": "Discover published components from a shared/team library file.",
+        "registered": true,
+        "kind": "read",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_get_library_component_by_key",
+        "summary": "Get full property definitions, variants, and visual specs for a SINGLE published library component using only its component key.",
+        "registered": true,
+        "kind": "read",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_get_library_variables",
+        "summary": "List all variables from team libraries the current file has subscribed.",
+        "registered": true,
+        "kind": "read",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_import_library_variable",
+        "summary": "Import a single variable from a subscribed team library into the current file.",
+        "registered": true,
+        "kind": "update",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_set_image_fill",
+        "summary": "Set an image fill on one or more Figma nodes.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_find_usages",
+        "summary": "Where is a style, variable or component used in this file?",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      }
+    ]
+  },
+  {
+    "id": "variables",
+    "description": "edit variables/collections/modes; extended collections (create from a library or local collection, reset overrides); import/export tokens (DTCG, CSS, Tailwind)",
+    "tools": [
+      {
+        "name": "figma_create_variable",
+        "summary": "Create a single Figma variable.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_create_variable_collection",
+        "summary": "Create an empty variable collection.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_batch_create_variables",
+        "summary": "Create multiple variables in one operation.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_setup_design_tokens",
+        "summary": "Create a complete design token structure in one operation: collection, modes, and all variables.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_add_mode",
+        "summary": "Add a new mode to an existing Figma variable collection.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_update_variable",
+        "summary": "Update a single variable's value and/or its description.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_batch_update_variables",
+        "summary": "Update multiple variable values in one operation.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_rename_variable",
+        "summary": "Rename an existing Figma variable.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_rename_mode",
+        "summary": "Rename an existing mode in a Figma variable collection.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_delete_variable",
+        "summary": "Delete a Figma variable.",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "no"
+      },
+      {
+        "name": "figma_delete_variable_collection",
+        "summary": "Delete a Figma variable collection and ALL its variables.",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "no"
+      },
+      {
+        "name": "figma_import_tokens",
+        "summary": "Push design tokens from your codebase into Figma as variables.",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "no"
+      },
+      {
+        "name": "figma_export_tokens",
+        "summary": "Export Figma variables to design token files in your codebase.",
+        "registered": true,
+        "kind": "file",
+        "rest": "no"
+      },
+      {
+        "name": "figma_extend_library_collection",
+        "summary": "Create an extended collection (Enterprise): it inherits every variable of a library collection (collectionKey) or of one of this file's own collections (collectionId), and overrides values per mode, e.g.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_reset_variable_override",
+        "summary": "Put a variable in an extended collection back to the value it inherits, removing the extension's override.",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "no"
+      }
+    ]
+  },
+  {
+    "id": "components",
+    "description": "author component sets, variants, properties, slots; dev resource links",
+    "tools": [
+      {
+        "name": "figma_create_component_set",
+        "summary": "Create a component set with variants in one call — replaces hand-written figma.combineAsVariants scripts.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_arrange_component_set",
+        "summary": "Organize a component set with Figma's native purple dashed visualization.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_add_component_property",
+        "summary": "Add a new component property to a component or component set.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_edit_component_property",
+        "summary": "Edit an existing component property.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_delete_component_property",
+        "summary": "Delete a component property.",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "no"
+      },
+      {
+        "name": "figma_set_description",
+        "summary": "Set the description text on a component, component set, or style.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_slots",
+        "summary": "List SlotNode children on a component, component set, or instance.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_create_slot",
+        "summary": "Create a SlotNode inside a component using createSlot().",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_add_slot_property",
+        "summary": "Manually add a SLOT component property and bind it to an existing frame (alternative to figma_create_slot).",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_append_to_slot",
+        "summary": "Add content to a slot on a component instance.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_reset_slot",
+        "summary": "Reset a slot on a component instance to its default (empty) state from the main component.",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "no"
+      },
+      {
+        "name": "figma_manage_dev_resources",
+        "summary": "List, add, edit or delete the dev resources on components: the links to their code, Storybook or docs that Dev Mode shows.",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "no"
+      }
+    ]
+  },
+  {
+    "id": "parity",
+    "description": "design↔code parity, code adherence and accessibility audits, DS health reports, library analytics",
+    "tools": [
+      {
+        "name": "figma_check_library_parity",
+        "summary": "Library-level parity between a Figma component library and its code counterpart: which components exist on both sides, which are only in Figma, and which are only in code.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_check_design_parity",
+        "summary": "Compare a Figma component's design specs against code-side data to find discrepancies.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_audit_code_adherence",
+        "summary": "Check generated CODE against the design system — the code-side twin of figma_audit_adherence and the evidence for an independent grader.",
+        "registered": true,
+        "kind": "read",
+        "rest": "partly"
+      },
+      {
+        "name": "figma_audit_component_accessibility",
+        "summary": "Deep accessibility audit for a specific component or component set.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_scan_code_accessibility",
+        "summary": "Scan HTML code for accessibility violations using axe-core (Deque).",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_audit_design_system_report",
+        "summary": "Run the design-system health audit and return the scored report as data (no UI required).",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_audit_design_system",
+        "summary": "Analyze the health and AI-readiness of a Figma file's design system.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no",
+        "note": "Needs ENABLE_MCP_APPS=true"
+      },
+      {
+        "name": "figma_get_library_analytics",
+        "summary": "How a published library is used across the organization: instances per component/style/variable and which are unused (usages), or insertions and detachments over time — high detach rates point at comp",
+        "registered": true,
+        "kind": "read",
+        "rest": "yes"
+      }
+    ]
+  },
+  {
+    "id": "docs",
+    "description": "component docs, version history, changelogs, comments, annotations",
+    "tools": [
+      {
+        "name": "figma_generate_component_doc",
+        "summary": "Generate AI-complete component documentation from a Figma component.",
+        "registered": true,
+        "kind": "file",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_file_versions",
+        "summary": "List a Figma file's version history with metadata (label, description, author, timestamp).",
+        "registered": true,
+        "kind": "read",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_get_file_at_version",
+        "summary": "Fetch a Figma file (or specific nodes) as it existed at a past version_id.",
+        "registered": true,
+        "kind": "read",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_diff_versions",
+        "summary": "Diff two versions of a Figma file.",
+        "registered": true,
+        "kind": "read",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_get_changes_since_version",
+        "summary": "Convenience wrapper for figma_diff_versions: compares a given version against the current HEAD.",
+        "registered": true,
+        "kind": "read",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_generate_changelog",
+        "summary": "Generate a human-readable markdown changelog between two versions.",
+        "registered": true,
+        "kind": "read",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_blame_node",
+        "summary": "Find the version that introduced a specific change to a node — answers 'who/when added this'.",
+        "registered": true,
+        "kind": "read",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_get_comments",
+        "summary": "Get comment threads on a Figma file.",
+        "registered": true,
+        "kind": "read",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_post_comment",
+        "summary": "Post a comment on a Figma file, optionally pinned to a specific design node.",
+        "registered": true,
+        "kind": "create",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_delete_comment",
+        "summary": "Delete a comment from a Figma file by its comment ID.",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "yes"
+      },
+      {
+        "name": "figma_get_annotations",
+        "summary": "Read annotations from a Figma node.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_annotation_categories",
+        "summary": "List available annotation categories in the current Figma file.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_set_annotations",
+        "summary": "Write or clear annotations on a Figma node.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      }
+    ]
+  },
+  {
+    "id": "debug",
+    "description": "plugin console, reload/pairing, code across files",
+    "tools": [
+      {
+        "name": "figma_get_console_logs",
+        "summary": "Retrieve console logs captured by the Desktop Bridge plugin: console output from code run through it (figma_execute and the other write tools) and from the bridge itself.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_watch_console",
+        "summary": "Stream console logs captured by the Desktop Bridge plugin in real-time for a specified duration (max 5 minutes).",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_clear_console",
+        "summary": "Clear the console log buffer.",
+        "registered": true,
+        "kind": "session",
+        "rest": "no"
+      },
+      {
+        "name": "figma_reload_plugin",
+        "summary": "Reload the current Figma page/plugin to test code changes.",
+        "registered": true,
+        "kind": "session",
+        "rest": "no"
+      },
+      {
+        "name": "figma_pair_plugin",
+        "summary": "Cloud pairing. Named in the toolset list but not registered in this local build.",
+        "registered": false,
+        "kind": "session",
+        "rest": "no"
+      },
+      {
+        "name": "figma_execute_across_files",
+        "summary": "Run the same JavaScript against multiple Figma files connected via the Desktop Bridge plugin, IN PARALLEL, without touching the active file or target lock.",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "no"
+      }
+    ]
+  },
+  {
+    "id": "motion",
+    "description": "animations, shaders, code layers",
+    "tools": [
+      {
+        "name": "figma_get_animations",
+        "summary": "Read a node's Motion animations: applied animation styles (Figma presets and custom styles, with their entries), manual keyframe tracks, timelines and the playhead.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_apply_animation",
+        "summary": "Animate a node with Figma Motion.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_remove_animation",
+        "summary": "Remove animations from a node: one applied animation style (appliedId, from figma_get_animations), one manual keyframe track, or everything (all: true).",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "no"
+      },
+      {
+        "name": "figma_manage_animation_styles",
+        "summary": "Manage reusable Motion animation styles, the motion layer of a design system.",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "no"
+      },
+      {
+        "name": "figma_export_animation",
+        "summary": "Export an animated frame as MP4, GIF or WebM.",
+        "registered": true,
+        "kind": "file",
+        "rest": "no"
+      },
+      {
+        "name": "figma_list_shaders",
+        "summary": "List shaders: the ones applied in this file (fills, strokes and effects), with each property's name, type and default, and the layers using them; plus shaders from the user's libraries (figma.listAvailableShaders).",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_apply_shader",
+        "summary": "Apply a shader to a node's fills, strokes or effects, or change the properties of one already applied.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_code_layers",
+        "summary": "Find code layers (Figma's React code layers, node type CODE_INSTANCE) on the current page or across the file, with position, size, page, and any dev resources or related links (e.g.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      }
+    ]
+  },
+  {
+    "id": "figjam",
+    "description": "FigJam boards",
+    "tools": [
+      {
+        "name": "figjam_get_board_contents",
+        "summary": "Read all content from a FigJam board.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figjam_get_connections",
+        "summary": "Read the connection graph from a FigJam board.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figjam_create_sticky",
+        "summary": "Create a sticky note on a FigJam board.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figjam_create_stickies",
+        "summary": "Batch create multiple sticky notes on a FigJam board (max ).",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figjam_create_connector",
+        "summary": "Connect two nodes with a connector line in FigJam.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figjam_create_shape_with_text",
+        "summary": "Create a labeled shape on a FigJam board with optional size, colors, and font control.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figjam_create_section",
+        "summary": "Create a section on a FigJam board.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figjam_create_table",
+        "summary": "Create a table on a FigJam board with optional cell data.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figjam_create_code_block",
+        "summary": "Create a code block on a FigJam board.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figjam_auto_arrange",
+        "summary": "Arrange nodes on a FigJam board in a grid, horizontal row, or vertical column layout.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      }
+    ]
+  },
+  {
+    "id": "slides",
+    "description": "Figma Slides",
+    "tools": [
+      {
+        "name": "figma_list_slides",
+        "summary": "List all slides in the current Figma Slides presentation with their IDs, names, grid positions, and skip status.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_slide_content",
+        "summary": "Get the content tree of a specific slide including all text, shapes, and frames.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_slide_grid",
+        "summary": "Get the 2D slide grid layout showing how slides are organized in rows and columns.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_slide_transition",
+        "summary": "Get the current transition settings for a slide (style, duration, easing curve, timing).",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_get_focused_slide",
+        "summary": "Get the slide currently focused in single-slide view.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_create_slide",
+        "summary": "Create a new blank slide in the Figma Slides presentation.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_duplicate_slide",
+        "summary": "Duplicate an existing slide.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_add_text_to_slide",
+        "summary": "Add a new text element to a specific slide.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_add_shape_to_slide",
+        "summary": "Add a rectangle or ellipse shape to a specific slide with optional fill color.",
+        "registered": true,
+        "kind": "create",
+        "rest": "no"
+      },
+      {
+        "name": "figma_set_slide_transition",
+        "summary": "Set the transition effect for a slide (style, duration, easing curve).",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_set_slide_background",
+        "summary": "Set the background color of a slide.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_skip_slide",
+        "summary": "Toggle whether a slide is skipped during presentation mode.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_reorder_slides",
+        "summary": "Reorder slides by providing a new 2D array of slide IDs.",
+        "registered": true,
+        "kind": "update",
+        "rest": "no"
+      },
+      {
+        "name": "figma_focus_slide",
+        "summary": "Navigate to and focus a specific slide in single-slide view.",
+        "registered": true,
+        "kind": "session",
+        "rest": "no"
+      },
+      {
+        "name": "figma_set_slides_view_mode",
+        "summary": "Toggle the Figma Slides viewport between grid view and single-slide view.",
+        "registered": true,
+        "kind": "session",
+        "rest": "no"
+      },
+      {
+        "name": "figma_delete_slide",
+        "summary": "Delete a slide from the presentation.",
+        "registered": true,
+        "kind": "destructive",
+        "rest": "no"
+      }
+    ]
+  },
+  {
+    "id": "extraction",
+    "description": "extract a design system from app code (figma_ds_*)",
+    "tools": [
+      {
+        "name": "figma_ds_analyze",
+        "summary": "Analyze one or more production app codebases as the first step of design system extraction.",
+        "registered": true,
+        "kind": "file",
+        "rest": "no"
+      },
+      {
+        "name": "figma_ds_extract_tokens",
+        "summary": "Extract design tokens from analyzed codebases into canonical DTCG JSON (plus optional CSS variables / Tailwind / SCSS / TypeScript projections).",
+        "registered": true,
+        "kind": "file",
+        "rest": "no"
+      },
+      {
+        "name": "figma_ds_scaffold",
+        "summary": "Generate the design-system package skeleton at outDir from a completed analysis + token extraction: package.json (app framework as peer deps), src/components layout, token files via the shared formatt",
+        "registered": true,
+        "kind": "file",
+        "rest": "no"
+      },
+      {
+        "name": "figma_ds_setup_storybook",
+        "summary": "Wire a freshly-initialized Storybook workshop to the extracted design system — run AFTER `npm create storybook@latest` inside outDir.",
+        "registered": true,
+        "kind": "file",
+        "rest": "no"
+      },
+      {
+        "name": "figma_ds_extract_component",
+        "summary": "Deep-extract ONE component from the inventory for porting into the design system: returns its source (capped), local import closure (relative imports to follow), prop contract, observed call-site vari",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_ds_verify",
+        "summary": "Run the deterministic fidelity evals on an extracted design system package — the governance gate before handing off or pushing to Figma.",
+        "registered": true,
+        "kind": "read",
+        "rest": "no"
+      },
+      {
+        "name": "figma_ds_status",
+        "summary": "Read or update design-system extraction porting progress (persisted in <outDir>/.extraction/status.json so long engagements survive session boundaries).",
+        "registered": true,
+        "kind": "file",
+        "rest": "no"
+      }
+    ]
+  }
+]

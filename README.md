@@ -46,6 +46,7 @@ The full step-by-step for a new or changed component is in [docs/PROCESS.md](./d
 | `src/theme.css` | Generated tokens |
 | `src/figma/` | Code Connect files |
 | `src/stories/` | Storybook stories |
+| `src/stories/plugins/` | Storybook pages about the Figma Desktop Bridge plugin |
 | `scripts/` | Token, icon and dev resource scripts |
 | `docs/` | Process notes and component docs |
 | `figma.config.json` | Figma URLs used by Code Connect |

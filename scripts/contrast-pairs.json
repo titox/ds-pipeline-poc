@@ -1,0 +1,21 @@
+{
+  "note": "Rules for npm run contrast. Pairs are built from token names, not listed one by one, so a new token falls into its rule by its name. Edit the lists here, never docs/contrast.md.",
+  "minimums": { "text": 4.5, "icon": 3, "border": 3 },
+  "surfaces": ["background-default-default", "background-default-secondary"],
+  "exempt": ["disabled"],
+  "skip": ["utilities"],
+  "rules": [
+    {
+      "id": "on-colour",
+      "what": "Text and icon tokens named <role>-on-<role>, with or without -secondary or -tertiary, against the background of the same role and level, and its hover."
+    },
+    {
+      "id": "on-surface",
+      "what": "Every other text and icon token against each surface."
+    },
+    {
+      "id": "border-on-surface",
+      "what": "Every border token against each surface. The 3:1 minimum applies where the border is the only thing that marks a control (a field, a checkbox). A decorative border may fail it."
+    }
+  ]
+}

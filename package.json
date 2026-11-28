@@ -17,6 +17,8 @@
     "lint": "npm run -s app:lint && npm run -s lint:tokens && npm run -s check:contracts",
     "lint:tokens": "node scripts/lint-tokens.mjs",
     "check:contracts": "node scripts/contract-check.mjs",
+    "contrast": "node scripts/contrast.mjs",
+    "status": "node scripts/component-status.mjs",
     "rubylint": "node scripts/rubylint/run.mjs",
     "descriptions": "node scripts/rubylint/descriptions.mjs",
     "script:tokens": "cd scripts/tokens; node --env-file=../../.env app.mjs --skip-rest-api; cd -;",

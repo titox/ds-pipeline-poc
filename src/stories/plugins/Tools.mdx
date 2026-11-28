@@ -1,0 +1,17 @@
+import { Markdown, Meta } from "@storybook/addon-docs/blocks";
+import intro from "./tools-intro.md?raw";
+import guide from "./tools-guide.md?raw";
+import source from "./tools-source.md?raw";
+import { ToolTotals, ToolsReference } from "./ToolsReference";
+
+<Meta title="Plugins/Figma Desktop Bridge/Tools" />
+
+<Markdown>{intro}</Markdown>
+
+<ToolTotals />
+
+<Markdown>{guide}</Markdown>
+
+<ToolsReference />
+
+<Markdown>{source}</Markdown>
